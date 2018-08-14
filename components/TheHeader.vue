@@ -45,6 +45,7 @@ export default {
 .header {
   background: #FFFFFF;
   box-shadow: 0 2px 4px 0 rgba(184,184,184,0.50);
+  z-index: 1;
 }
 
 .container {
@@ -85,6 +86,8 @@ export default {
 
 .search-wrapper {
   position: relative;
+  margin-left: 20px;
+  max-width: 200px;
 }
 
 .search {
@@ -92,8 +95,10 @@ export default {
   border-radius: 3px;
   font-size: 16px;
   letter-spacing: 0;
-  padding: 5px 15px;
+  padding: 5px 30px 5px 10px;
   outline: none;
+  display: block;
+  width: 100%;
 
   &::placeholder {
     color: #7198BA;
@@ -108,5 +113,6 @@ export default {
   right: 10px;
   top: 50%;
   transform: translateY(-50%);
+  cursor: pointer;
 }
 </style>

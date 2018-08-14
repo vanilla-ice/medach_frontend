@@ -1,6 +1,17 @@
 import axios from 'axios'
 
-export const simpleRequest = (url, method, data, headers) => {
+const BASE_URL = process.env.BASE_URL;
+
+console.log('BASE_URL', BASE_URL)
+
+const axiosInstance = axios.create({
+  baseURL: 'http://localhost:8080',
+  timeout: 10000,
+  headers: {},
+  withCredentials: false
+})
+
+const simpleRequest = (url, method, data, headers) => {
   const requestObj = {
     url,
     method,
@@ -10,15 +21,21 @@ export const simpleRequest = (url, method, data, headers) => {
     }
   };
 
-  return axios(requestObj);
+  return axiosInstance.request(requestObj)
 }
 
-export const get = (url, headers = {}) => {
+const get = (url, headers = {}) => {
   return simpleRequest(url, "get", null, headers);
 }
 
-export const post = (url, data, headers = {}) => {
+const post = (url, data, headers = {}) => {
   return simpleRequest(url, "post", data, headers);
+}
+
+export const getMainPageConfig = () => {
+  return get(`/api/main_page_config`)
+    .then(response => response.data)
+    .catch(error => console.log('mainPageConfig request error', error))
 }
 
 export const getArticles = (page) => {
@@ -150,14 +167,7 @@ export const tagsMostUsed = () => {
   })
 }
 
-export const mainPageConfig = () => {
-  return new Promise((resolve, reject) => {
-    axios.get(`/api/main_page_config`)
-      .then(response => {
-        resolve(response)
-      }).catch(error => reject(error))
-  })
-}
+
 
 export const blogsPageConfig = () => {
   return new Promise((resolve, reject) => {

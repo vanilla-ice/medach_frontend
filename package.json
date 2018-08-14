@@ -5,7 +5,7 @@
   "author": "vanilla-ice <valeraerohin97@mail.ru>",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev": "BASE_URL=http://localhost:8080 nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
@@ -13,6 +13,8 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "date-fns": "^1.29.0",
     "node-sass": "^4.9.3",
     "normalize.css": "^8.0.0",
     "nuxt": "^1.0.0",
