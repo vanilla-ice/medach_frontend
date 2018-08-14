@@ -104,23 +104,15 @@ export const getBlogPost = (id) => {
 }
 
 export const getNewsPost = (id) => {
-  return new Promise((resolve, reject) => {
-    get(`/api/news/${id}`)
-      .then(response => {
-        resolve(response)
-      })
-      .catch(reject)
-  })
+  return get(`/api/news/${id}`)
+      .then(response => response.data)
+      .catch(error => console.log('getNewsPost error', error))
 }
 
 export const getMediaPost = (id) => {
-  return new Promise((resolve, reject) => {
-    get(`/api/media/${id}`)
-      .then(response => {
-        resolve(response)
-      })
-      .catch(reject)
-  })
+  return get(`/api/media/${id}`)
+    .then(response => response.data)
+    .catch(error => console.log('getMediaPost error', error))
 }
 
 export const getPostsByTag = (id, query) => {
