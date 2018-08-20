@@ -34,6 +34,9 @@ module.exports = {
         })
       }
     }
-  }
+  },
+  plugins: [
+    { src: '~/plugins/vue-carousel', ssr: false }
+  ]
 }
 

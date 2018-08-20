@@ -1,24 +1,24 @@
 <template lang="pug">
 .wrapper
-  .slider
-    transition-group(name="TheSlider")
-      .slide(
-        v-for="(slide, index) in slides",
-        :key="slide.id",
-        :style="{background: `url(http://localhost:8080${slide.coverImage.url}) no-repeat center / cover`}"
-        v-if="currentSlide === index"
-      )
-        .content
-          .title
-            | {{ slide.title }}
-          .bottom
-            .date
-              | {{ formatDate(slide.publicationDate) }}
+  carousel.slider(
+    :perPage="1"
+  )
+    slide.slide(
+      v-for="(slide, index) in slides",
+      :key="slide.id",
+      :style="{background: `url(http://localhost:8080${slide.coverImage.url}) no-repeat center / cover`}"
+    )
+      .content
+        .title
+          | {{ slide.title }}
+        .bottom
+          .date
+            | {{ formatDate(slide.publicationDate) }}
 
-            .author
-              | Автор:
-              span
-                | {{ slide.author }}
+          .author
+            | Автор:
+            span
+              | {{ slide.author }}
 
 </template>
 
@@ -45,15 +45,25 @@ export default {
 }
 </script>
 
-<style>
-
-.TheSlider-enter-active, .TheSlider-leave-active {
-  transition: opacity .5s;
-}
-.TheSlider-enter, .TheSlider-leave-to /* .fade-leave-active до версии 2.1.8 */ {
-  opacity: 0;
+<style lang="scss">
+.VueCarousel-wrapper {
+  height: 100%;
 }
 
+.VueCarousel-inner {
+  height: 100%;
+}
+
+.VueCarousel-pagination {
+  position: absolute;
+  bottom: 20px;
+  left: 40px;
+  width: auto !important;
+
+  li:first-child {
+    padding-left: 0 !important;
+  }
+}
 </style>
 
 <style scoped lang="scss">
@@ -61,15 +71,14 @@ export default {
   height: 680px;
   position: relative;
 }
-.slide {
-  display: flex;
-  position: absolute;
-  top: 0;
-  left: 0;
+.slider {
   height: 100%;
-  width: 100%;
-  background: #ccc;
-  padding: 40px;
+}
+
+.slide {
+  height: 100%;
+  padding: 40px 40px 84px 40px;
+  display: flex;
 }
 
 .content {
