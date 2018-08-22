@@ -45,12 +45,15 @@ export const getters = {
 
 export const actions = {
   fetchMainPageConfig({commit}) {
-    getMainPageConfig().then(data => {
+    console.log('main page config fetch')
+    return getMainPageConfig().then(data => {
       commit('setSliderPosts', data.slider)
       commit('setNewsPosts', data.news)
       commit('setBlogsArticles', data.blogs)
       commit('setPinnedArticles', data.pinned)
       commit('setPromotedArticles', data.promoted)
+
+      return true
     })
   }
 }

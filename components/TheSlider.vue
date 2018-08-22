@@ -1,5 +1,5 @@
 <template lang="pug">
-.wrapper
+.wrapper(v-if="showCarousel")
   carousel.slider(
     :perPage="1"
   )
@@ -34,8 +34,12 @@ export default {
   data () {
     return {
       currentSlide: 0,
-      slidesCount: this.slides.length
+      slidesCount: this.slides.length,
+      showCarousel: false
     }
+  },
+  mounted() {
+    this.showCarousel = true
   },
   methods: {
     formatDate(date) {
@@ -82,11 +86,12 @@ export default {
 }
 
 .content {
-  max-width: 850px;
+  max-width: 65%;
   flex: 1 1 auto;
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-end;
+  padding-right: 50px;
 }
 
 .title {

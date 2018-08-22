@@ -1,9 +1,5 @@
 import axios from 'axios'
 
-const BASE_URL = process.env.BASE_URL;
-
-console.log('BASE_URL', BASE_URL)
-
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:8080',
   timeout: 10000,

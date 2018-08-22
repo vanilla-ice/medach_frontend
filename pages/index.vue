@@ -1,40 +1,47 @@
 <template lang="pug">
 .wrapper
   .slider-section
-    the-slider(:slides="slides")
+    .slider-wrapper
+      the-slider(:slides="slides")
+    .news-wrapper
+      the-hot-news(:news="news")
 </template>
 
 <script>
 import TheSlider from '~/components/TheSlider'
+import TheHotNews from '~/components/TheHotNews'
 import { mapGetters } from 'vuex'
 
 export default {
   components: {
-    TheSlider
+    TheSlider,
+    TheHotNews
   },
 
-  fetch({store}) {
+  async fetch({store}) {
     return store.dispatch('mainPage/fetchMainPageConfig')
   },
 
-  created() {
-    this.$store.dispatch('mainPage/fetchMainPageConfig')
-  },
-
-  mounted() {
-    console.log(this.$store, this)
-  },
-
   computed: {
-    slides() {
-      console.log('slides', this.$store.state.mainPage.slider)
-      return this.$store.state.mainPage.slider
-    }
+    ...mapGetters({
+      slides: 'mainPage/slides',
+      news: 'mainPage/news'
+    }),
   }
 }
 </script>
 
 <style scoped lang="scss">
+.slider-section {
+  position: relative;
+}
 
+.news-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 35%;
+  height: 100%;
+}
 </style>
 
