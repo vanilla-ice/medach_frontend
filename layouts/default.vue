@@ -56,6 +56,16 @@ export default {
 	font-style: normal;
 }
 
+@font-face {
+	font-family: 'PTSerif';
+	src: url('~/assets/fonts/PTSerif-Regular.eot');
+	src: url('~/assets/fonts/PTSerif-Regular.eot?#iefix') format('embedded-opentype'),
+		url('~/assets/fonts/PTSerif-Regular.woff') format('woff'),
+		url('~/assets/fonts/PTSerif-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
 html {
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
@@ -78,6 +88,11 @@ html {
   max-width: 1420px;
   padding: 0 30px;
   margin: 0 auto;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
 }
 </style>
 

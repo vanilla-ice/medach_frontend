@@ -6,8 +6,8 @@
     .news-wrapper
       the-hot-news(:news="news")
   
-  .grid-section
-    .container
+  .container
+    .grid-section
       .top-articles
         .article(
           v-for="article in topPosts",
@@ -24,18 +24,24 @@
             
             .title
               | {{article.title}}
+    
+    .blogs-section
+      the-blogs(:articles="blogs")
+
 
 </template>
 
 <script>
 import TheSlider from '~/components/TheSlider'
 import TheHotNews from '~/components/TheHotNews'
+import TheBlogs from '~/components/TheBlogs'
 import { mapGetters } from 'vuex'
 
 export default {
   components: {
     TheSlider,
-    TheHotNews
+    TheHotNews,
+    TheBlogs
   },
 
   async fetch({store}) {
@@ -43,18 +49,19 @@ export default {
   },
 
   mounted() {
-    console.log('top posts', this.topPosts)
+    console.log('top posts', this.blogs)
   },
 
   updated() {
-    console.log('top posts', this.topPosts)
+    console.log('top posts', this.blogs)
   },
 
   computed: {
     ...mapGetters({
       slides: 'mainPage/slides',
       news: 'mainPage/news',
-      topPosts: 'mainPage/topPosts'
+      topPosts: 'mainPage/topPosts',
+      blogs: 'mainPage/blogs'
     }),
   }
 }
