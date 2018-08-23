@@ -7,41 +7,50 @@
       the-hot-news(:news="news")
   
   .container
-    .grid-section
-      .top-articles
-        .article(
-          v-for="article in topPosts",
-          :key="article.id",
-          :style="{background: `url(${`http://localhost:8080${article.coverImage.url}`}) no-repeat center / cover`}"
-        )
-          .gradient
+    .top-articles
+      .article(
+        v-for="article in topPosts",
+        :key="article.id",
+        :style="{background: `url(${`http://localhost:8080${article.coverImage.url}`}) no-repeat center / cover`}"
+      )
+        .gradient
 
-          .content
-
-            .tag
-              span(v-if="article.tags[0] && article.tags[0] !== ''")
-                | {{ article.tags[0] }}
-            
-            .title
-              | {{article.title}}
+        .content
+          .tag
+            span(v-if="article.tags[0] && article.tags[0] !== ''")
+              | {{ article.tags[0] }}
+          
+          .title
+            | {{article.title}}
     
     .blogs-section
       the-blogs(:articles="blogs")
 
-
+    .middle-articles
+      .article-wrapper(v-for="article in middlePosts" :key="article.id")
+        media-card(
+          :name="article.title"
+          :tags="article.tags"
+          :image="article.coverImage.url"
+          :id="article.id"
+        )
+      
 </template>
 
 <script>
 import TheSlider from '~/components/TheSlider'
 import TheHotNews from '~/components/TheHotNews'
 import TheBlogs from '~/components/TheBlogs'
+import MediaCard from '~/components/cards/MediaCard'
+
 import { mapGetters } from 'vuex'
 
 export default {
   components: {
     TheSlider,
     TheHotNews,
-    TheBlogs
+    TheBlogs,
+    MediaCard
   },
 
   async fetch({store}) {
@@ -49,11 +58,11 @@ export default {
   },
 
   mounted() {
-    console.log('top posts', this.blogs)
+    console.log('top posts', this.middlePosts)
   },
 
   updated() {
-    console.log('top posts', this.blogs)
+    console.log('top posts', this.middlePosts)
   },
 
   computed: {
@@ -61,7 +70,8 @@ export default {
       slides: 'mainPage/slides',
       news: 'mainPage/news',
       topPosts: 'mainPage/topPosts',
-      blogs: 'mainPage/blogs'
+      blogs: 'mainPage/blogs',
+      middlePosts: 'mainPage/postsBottom'
     }),
   }
 }
@@ -135,6 +145,26 @@ export default {
     letter-spacing: 0;
     display: inline-block;
     padding: 4px 8px;
+  }
+}
+
+.middle-articles {
+  display: flex;
+  flex-flow: row wrap; 
+  margin-top: 20px;
+}
+
+.article-wrapper {
+  flex: 1 1 calc(50% - 10px);
+  box-shadow: 0 2px 4px 0 rgba(184,184,184,0.50);
+
+
+  &:nth-child(2) {
+    margin-left: 20px;
+  }
+
+  &:nth-child(3) {
+    margin-top: 20px;
   }
 }
 

@@ -72,7 +72,7 @@ export default {
 
   background: #FDFDFD;
   box-shadow: 0 2px 4px 0 rgba(184,184,184,0.50);
-  border-radius: 8px;
+  border-radius: 3px;
 }
 
 .blogs__wrapper {
