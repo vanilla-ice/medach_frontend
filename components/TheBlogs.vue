@@ -84,10 +84,10 @@ export default {
 .blogs-tag {
   display: inline-block;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 16px;
   color: #AFB09A;
   letter-spacing: 0;
-  border: 1px solid #AFB09A;
+  border: 2px solid #AFB09A;
   border-radius: 3px;
   padding: 4px 8px;
 }

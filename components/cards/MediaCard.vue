@@ -7,7 +7,7 @@ nuxt-link.card-wrapper(
   .gradient
   .content
     .tags
-      .tag(v-for="tag in tags")
+      .tag(v-for="tag in tags" :key="`${id}-${tag}`")
         | {{ tag }}
     .name
       | {{ name }}
@@ -60,5 +60,33 @@ export default {
   letter-spacing: 0;
   line-height: 32px;
   font-weight: 600;
+}
+
+.tags {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+  margin-bottom: 25px;
+}
+
+.tag {
+  font-size: 12px;
+  color: #7198BA;
+  letter-spacing: 0;
+  font-weight: 500;
+  padding: 4px 8px;
+  border: 1px solid #7198BA;
+  border-radius: 3px;
+
+  &:not(:first-child) {
+    margin-left: 10px;
+  }
+
+  &:first-child {
+    font-size: 16px;
+    color: #AFB09A;
+    letter-spacing: 0;
+    border: 2px solid #AFB09A;
+  }
 }
 </style>
