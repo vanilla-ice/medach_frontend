@@ -20,7 +20,7 @@
             span(v-if="article.tags[0] && article.tags[0] !== ''")
               | {{ article.tags[0] }}
           
-          .title
+          .name
             | {{article.title}}
     
     .blogs-section
@@ -45,7 +45,22 @@
           :publicationDate="article.publicationDate"
           :isBigCard="false"
         )
-      
+    
+    .subscribe-section
+      .inner
+        .left
+          .title
+            | Подпишитесь на новости
+          .text
+            |Оставьте ваш e-mail, чтобы получать наш научный дайджест
+        .right
+          .input-wrapper
+            form.form
+              input(placeholder="medach@gmail.com")
+              .send
+          .text
+            | Предоставляя адрес электронной почты, вы принимаете условия соглашения о персональных данных.
+
 </template>
 
 <script>
@@ -143,7 +158,7 @@ export default {
   background: linear-gradient(-180deg, rgba(0,0,0,0.00) 0%, rgba(0,0,0,0.90) 76%);
 }
 
-.title {
+.name {
   font-size: 24px;
   color: #FFFFFF;
   line-height: 29px;
@@ -187,7 +202,8 @@ export default {
   flex-flow: row nowrap;
   justify-content: space-between;
   margin-top: 20px;
-  padding-bottom: 100px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid #DBDBDB;
 }
 
 .promoted-article {
@@ -200,5 +216,82 @@ export default {
   }
 }
 
+.subscribe-section {
+  margin-top: 40px;
+  padding-bottom: 40px;
+}
+
+.right {
+  margin-left: 40px;
+}
+
+.inner {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 24px;
+  color: #7198BA;
+  letter-spacing: 0;
+  line-height: 31px;
+  font-weight: 500;
+  max-width: 181px;
+}
+
+.text {
+  font-family: 'PTSerif', serif;
+  font-size: 16px;
+  color: #5B5B5B;
+  letter-spacing: 0;
+  line-height: 24px;
+  margin-top: 16px;
+}
+
+.form {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrapper {
+  background: #F2F3EC;
+  border-radius: 3px;
+  padding: 17px 16px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+
+  input {
+    font-size: 24px;
+    color: #5B5B5B;
+    letter-spacing: 0;
+    border: none;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    display: block;
+    flex: 1 1 auto;
+    outline: none;
+    margin-left: 15px;
+  }
+
+  &::before {
+    content: '';
+    width: 24px;
+    height: 19px;
+    background: url('~/assets/images/mail.svg') no-repeat center / contain;
+  }
+}
+
+.send {
+  width: 16px;
+  height: 18px;
+  cursor: pointer;
+  background: url('~/assets/images/send.svg') no-repeat center / contain;
+}
 </style>
 
