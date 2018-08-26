@@ -21,10 +21,7 @@ export default {
     image: String,
     id: String
   },
-  name: 'MediaCard',
-  mounted() {
-    console.log('tags', this.tags, this.name, this.image, this.id)
-  }
+  name: 'MediaCard'
 }
 </script>
 

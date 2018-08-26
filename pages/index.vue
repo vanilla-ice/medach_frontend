@@ -34,6 +34,17 @@
           :image="article.coverImage.url"
           :id="article.id"
         )
+    
+    .promoted-articles
+      .promoted-article(v-for="article in promotedPosts" :key="article.id")
+        article-card(
+          :name="article.title"
+          :tags="article.tags"
+          :image="article.coverImage.url"
+          :id="article.id"
+          :publicationDate="article.publicationDate"
+          :isBigCard="false"
+        )
       
 </template>
 
@@ -42,6 +53,7 @@ import TheSlider from '~/components/TheSlider'
 import TheHotNews from '~/components/TheHotNews'
 import TheBlogs from '~/components/TheBlogs'
 import MediaCard from '~/components/cards/MediaCard'
+import ArticleCard from '~/components/cards/ArticleCard'
 
 import { mapGetters } from 'vuex'
 
@@ -50,7 +62,8 @@ export default {
     TheSlider,
     TheHotNews,
     TheBlogs,
-    MediaCard
+    MediaCard,
+    ArticleCard
   },
 
   async fetch({store}) {
@@ -71,7 +84,8 @@ export default {
       news: 'mainPage/news',
       topPosts: 'mainPage/topPosts',
       blogs: 'mainPage/blogs',
-      middlePosts: 'mainPage/postsBottom'
+      middlePosts: 'mainPage/postsBottom',
+      promotedPosts: 'mainPage/promoted'
     }),
   }
 }
@@ -168,6 +182,23 @@ export default {
   }
 }
 
+.promoted-articles {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding-bottom: 100px;
+}
+
+.promoted-article {
+  flex: 1 1 33.3%;
+  overflow: hidden;
+  border-radius: 3px;
+
+  &:nth-child(2) {
+    margin: 0 20px;
+  }
+}
 
 </style>
 
