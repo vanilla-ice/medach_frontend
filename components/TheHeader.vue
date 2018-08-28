@@ -18,7 +18,7 @@
         .category
           nuxt-link.category-name(to="/media") Медиа
         .category
-          nuxt-link.category-name(to="/blogs") Блоги
+          nuxt-link.category-name(to="/categories/blogs") Блоги
         .category
           nuxt-link.category-name(to="/news") Новости
         .search-wrapper

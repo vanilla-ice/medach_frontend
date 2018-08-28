@@ -85,14 +85,6 @@ export default {
     return store.dispatch('mainPage/fetchMainPageConfig')
   },
 
-  mounted() {
-    console.log('top posts', this.middlePosts)
-  },
-
-  updated() {
-    console.log('top posts', this.middlePosts)
-  },
-
   computed: {
     ...mapGetters({
       slides: 'mainPage/slides',

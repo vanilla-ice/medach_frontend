@@ -34,6 +34,12 @@ export const getMainPageConfig = () => {
     .catch(error => console.log('mainPageConfig request error', error))
 }
 
+export const getBlogsInOrder = (page, perPage) => {
+  return get(`/api/blogs?page=${page}&page_page=${perPage}`)
+    .then(response => response.data)
+    .catch(error => console.log('getBlogsInOrder error', error))
+}
+
 export const getArticles = (page) => {
   return axios.get(`/api/articles`, {
       params: {
@@ -72,16 +78,6 @@ export const getIndexInOrder = (page) => {
     })
     .then(response => response.data)
     .catch(error => console.log('getIndexInOrder error', error))
-}
-
-export const getBlogsInOrder = (page) => {
-  return axios.get(`/api/blogs`, {
-      params: {
-        page: page
-      }
-    })
-    .then(response => response.data)
-    .catch(error => console.log('getBlogsInOrder error', error))
 }
 
 export const getAllTags = () => {

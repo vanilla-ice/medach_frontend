@@ -45,7 +45,7 @@ export default {
 
   methods: {
     currentDate(date) {
-    if (date) {
+      if (date) {
         let result = format(date, 'MMMM D, YYYY', { locale: ru });
         return result[0].toUpperCase() + result.slice(1);
       }
