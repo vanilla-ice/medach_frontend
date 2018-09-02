@@ -4,7 +4,7 @@
     article-card(
       :name="article.title"
       :id="article.id"
-      :image="article.small_cover_image.url"
+      :image="article.cover_image.url"
       :publicationDate="article.publish_on"
       :tags="article.tags"
       :author="article.author"

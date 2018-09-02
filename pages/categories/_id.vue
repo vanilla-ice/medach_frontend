@@ -26,6 +26,10 @@
 
   .load-more(@click="getNextPage")
     | Больше статей
+
+  .interested-wrapper
+    .container
+      interested-articles(:articles="interested")
 </template>
 
 <script>
@@ -34,16 +38,20 @@ const ARTICLES_PER_PAGE_GRID = 4
 
 import ListArticlesView from '~/components/ListArticlesView'
 import GridArticlesView from '~/components/GridArticlesView'
+import InterestedArticles from '~/components/InterestedArticles'
+
 import { mapGetters } from 'vuex'
 
 export default {
   components: {
     ListArticlesView,
-    GridArticlesView
+    GridArticlesView,
+    InterestedArticles
   },
   async fetch({store, params}) {
     if (params.id === 'blogs') {
       return store.dispatch('categoryPage/fetchBlogsInOrder', { page: 1, perPage: ARTICLES_PER_PAGE_LIST })
+        .then(() => store.dispatch('interestedArticles/fetchInterestedArticles'))
     }
   },
   data() {
@@ -56,6 +64,7 @@ export default {
    computed: {
     ...mapGetters({
       articles: 'categoryPage/articles',
+      interested: 'interestedArticles/articles'
     }),
     perPage() {
       return this.isList ? ARTICLES_PER_PAGE_LIST : ARTICLES_PER_PAGE_GRID
@@ -175,6 +184,10 @@ export default {
   margin-top: 60px;
   cursor: pointer;
   user-select: none;
+}
+
+.interested-wrapper {
+  padding: 40px 0;
 }
 </style>
 

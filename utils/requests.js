@@ -41,9 +41,10 @@ export const getBlogsInOrder = (page, perPage) => {
 }
 
 export const getInterestedArticles = () => {
+  console.log('get interested articles')
   return get(`/api/articles/show_random`)
     .then(response => response.data)
-    .catch(error => console.log('getMaybeInterestedArticles error', error))
+    .catch(error => console.log('getInterestedArticles error', error))
 }
 
 export const getArticles = (page) => {
