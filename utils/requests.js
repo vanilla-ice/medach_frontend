@@ -35,9 +35,15 @@ export const getMainPageConfig = () => {
 }
 
 export const getBlogsInOrder = (page, perPage) => {
-  return get(`/api/blogs?page=${page}&page_page=${perPage}`)
+  return get(`/api/blogs?page=${page}&per_page=${perPage}`)
     .then(response => response.data)
     .catch(error => console.log('getBlogsInOrder error', error))
+}
+
+export const getInterestedArticles = () => {
+  return get(`/api/articles/show_random`)
+    .then(response => response.data)
+    .catch(error => console.log('getMaybeInterestedArticles error', error))
 }
 
 export const getArticles = (page) => {

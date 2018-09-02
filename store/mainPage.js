@@ -45,7 +45,6 @@ export const getters = {
 
 export const actions = {
   fetchMainPageConfig({commit}) {
-    console.log('fetch')
     return getMainPageConfig().then(data => {
       commit('setSliderPosts', data.slider)
       commit('setNewsPosts', data.news)

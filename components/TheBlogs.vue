@@ -12,7 +12,7 @@
             | {{ firstArticle.shortDescription }}
         .footer
           .date
-            | {{ currentDate(firstArticle.publicationDate) }}  
+            | {{ currentDate(firstArticle.publish_on) }}  
           .author
             | Автор:
             span
@@ -27,7 +27,7 @@
             | {{ article.title }}
           .footer
             .date
-              | {{ currentDate(article.publicationDate) }}
+              | {{ currentDate(article.publish_on) }}
             .author
               | Автор:
               span

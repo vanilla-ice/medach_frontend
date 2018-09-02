@@ -42,7 +42,7 @@
           :tags="article.tags"
           :image="article.coverImage.url"
           :id="article.id"
-          :publicationDate="article.publicationDate"
+          :publicationDate="article.pubslish_on"
           :isBigCard="false"
         )
     

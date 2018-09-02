@@ -28,7 +28,7 @@ export default {
     image: String,
     tags: Array,
     publicationDate: String,
-    id: String,
+    id: [Number, String],
     name: String,
     author: String,
     isGridCard: Boolean,

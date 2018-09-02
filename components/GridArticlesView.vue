@@ -4,8 +4,8 @@
     article-card(
       :name="article.title"
       :id="article.id"
-      :image="article.coverImage.url"
-      :publicationDate="article.publicationDate"
+      :image="article.small_cover_image.url"
+      :publicationDate="article.publish_on"
       :tags="article.tags"
       :author="article.author"
       isGridCard
@@ -23,16 +23,6 @@ export default {
   },
   components: {
     ArticleCard
-  },
-  data() {
-    return {
-    }
-  },
-  mounted() {
-    console.log('grid', this.articles)
-  },
-  updated() {
-    console.log('grid')
   }
 }
 </script>
@@ -41,6 +31,7 @@ export default {
 .articles-wrapper {
   display: flex;
   flex-flow: row wrap;
+  margin-top: 40px;
 }
 
 .article-wrapper {
