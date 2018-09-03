@@ -1,6 +1,5 @@
 import {
-  getBlogsInOrder,
-  getTranslatedArticles,
+  getBlogs,
   getNews
 } from '~/utils/requests'
 
@@ -29,34 +28,31 @@ export const getters = {
 }
 
 export const actions = {
-  fetchBlogsInOrder({commit}, {perPage}) {
-    return getBlogsInOrder(1, perPage).then(data => {
-      commit('setArticles', {articles: data.collection, nextPage: data.meta.next_page})
-    })
+  fetchCategory({commit}, {perPage, category, isSortByPopular, page}) {
+    switch(category) {
+      case 'blogs':
+        return getBlogs(page, perPage, isSortByPopular).then(data => {
+          commit('setArticles', { articles: data.collection, nextPage: data.meta.next_page })
+        })
+      case 'news':
+        return getNews(page, perPage, isSortByPopular).then(data => {
+          commit('setArticles', { articles: data.collection, nextPage: data.meta.next_page })
+        })
+      default: 
+        console.log('fetch next page default')
+        break;
+    }
   },
 
-  fetchTranslatedInOrder({commit}, {perPage}) {
-    return getTranslatedArticles(1, perPage).then(data => {
-      commit('setArticles', {articles: data.collection, nextPage: data.meta.next_page})
-    })
-  },
-
-  fetchNews({commit}, {perPage}) {
-    return getNews(1, perPage).then(data => {
-      console.log('data', data)
-      commit('setArticles', {articles: data.collection, nextPage: data.meta.next_page})
-    })
-  },
-
-  fetchNextPage({commit, state}, {perPage, category}) {
+  fetchNextPage({commit, state}, {perPage, category, isSortByPopular}) {
     if (state.nextPage) {
       switch(category) {
         case 'blogs':
-          return getBlogsInOrder(state.nextPage, perPage).then(data => {
+          return getBlogs(state.nextPage, perPage, isSortByPopular).then(data => {
             commit('updateArticles', {articles: data.collection, nextPage: data.meta.next_page})
           })
         case 'news':
-          return getNews(state.nextPage, perPage).then(data => {
+          return getNews(state.nextPage, perPage, isSortByPopular).then(data => {
             commit('updateArticles', {articles: data.collection, nextPage: data.meta.next_page})
           })
         default: 

@@ -50,19 +50,14 @@ export default {
     InterestedArticles,
     ThePopularAuthors
   },
-  async fetch({store, params}) {
-    switch(params.id) {
-      case 'blogs':
-        return store.dispatch('categoryPage/fetchBlogsInOrder', { page: 1, perPage: ARTICLES_PER_PAGE_LIST })
-          .then(() => store.dispatch('interestedArticles/fetchInterestedArticles'))
-      case 'translated':
-        return store.dispatch('categoryPage/fetchTranslatedInOrder', { page: 1, perPage: ARTICLES_PER_PAGE_LIST })
-          .then(() => store.dispatch('interestedArticles/fetchInterestedArticles'))
-      case 'news':
-        return store.dispatch('categoryPage/fetchNews', { page: 1, perPage: ARTICLES_PER_PAGE_LIST })
-          .then(() => store.dispatch('interestedArticles/fetchInterestedArticles'))
-    }
-    
+  fetch({store, params}) {
+    return store.dispatch('categoryPage/fetchCategory', { 
+      page: 1, 
+      perPage: ARTICLES_PER_PAGE_LIST, 
+      isSortByPopular: false,
+      category: params.id
+    })
+      .then(() => store.dispatch('interestedArticles/fetchInterestedArticles'))
   },
   data() {
     return {
@@ -107,26 +102,47 @@ export default {
     switchView() {
       this.isList = !this.isList
 
-      switch(this.currentCategory) {
-        case 'blogs':
-          return this.$store.dispatch('categoryPage/fetchBlogsInOrder', { page: 1, perPage: this.perPage })
-        case 'translated':
-          return this.$store.dispatch('categoryPage/fetchTranslatedInOrder', { page: 1, perPage: this.perPage })
-        case 'news':
-          return this.$store.dispatch('categoryPage/fetchNews', { page: 1, perPage: this.perPage })
-      }
+      return this.$store.dispatch('categoryPage/fetchCategory', { 
+        page: 1, 
+        perPage: this.perPage, 
+        isSortByPopular: this.isPopular,
+        category: this.currentCategory
+      })
     },
 
     sortByDate() {
-      this.isPopular = false
+      if (this.isPopular) {
+        this.isPopular = false
+
+        return this.$store.dispatch('categoryPage/fetchCategory', { 
+          page: 1, 
+          perPage: this.perPage, 
+          isSortByPopular: this.isPopular,
+          category: this.currentCategory
+        })
+      }
     },
 
     sortByPopular() {
-      this.isPopular = true
+      if (!this.isPopular) {
+        this.isPopular = true
+
+        return this.$store.dispatch('categoryPage/fetchCategory', { 
+          page: 1, 
+          perPage: this.perPage, 
+          isSortByPopular: this.isPopular,
+          category: this.currentCategory
+        })
+      }
     },
 
     getNextPage() {
-      return this.$store.dispatch('categoryPage/fetchNextPage', { perPage: this.perPage, category: this.currentCategory })
+      return this.$store.dispatch('categoryPage/fetchNextPage', {
+        page: this.nextPage,
+        perPage: this.perPage, 
+        category: this.currentCategory,
+        isSortByPopular: this.isPopular
+      })
     }
   }
 }

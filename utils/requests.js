@@ -20,8 +20,19 @@ const simpleRequest = (url, method, data, headers) => {
   return axiosInstance.request(requestObj)
 }
 
-const get = (url, headers = {}) => {
-  return simpleRequest(url, "get", null, headers);
+const get = (url, params = {}, headers = {}) => {
+  const requestObj = {
+    url,
+    method: 'get',
+    params: {
+      ...params
+    },
+    headers: {
+      ...headers
+    }
+  };
+
+  return axiosInstance.request(requestObj);
 }
 
 const post = (url, data, headers = {}) => {
@@ -34,10 +45,24 @@ export const getMainPageConfig = () => {
     .catch(error => console.log('mainPageConfig request error', error))
 }
 
-export const getBlogsInOrder = (page, perPage) => {
-  return get(`/api/blogs?page=${page}&per_page=${perPage}`)
+export const getBlogs = (page, per_page, isSortByPopular) => {
+  return get(`/api/blogs`, {
+    page,
+    per_page,
+    'sort[col]': isSortByPopular ? 'impressions_count' : 'publish_on'
+  })
     .then(response => response.data)
     .catch(error => console.log('getBlogsInOrder error', error))
+}
+
+export const getNews = (page, per_page, isSortByPopular) => {
+  return get(`/api/news`, {
+    page,
+    per_page,
+    'sort[col]': isSortByPopular ? 'impressions_count' : 'publish_on'
+  })
+    .then(response => response.data)
+    .catch(error => console.log('getNews error', error))
 }
 
 export const getInterestedArticles = () => {
@@ -50,12 +75,6 @@ export const getTranslatedArticles = (page, perPage) => {
   return get(`/api/articles/translated?page=${page}&per_page=${perPage}`)
     .then(response => response.data)
     .catch(error => console.log('getTranslatedArticles error', error))
-}
-
-export const getNews = (page, perPage) => {
-  return get(`/api/news?page=${page}&per_page=${perPage}`)
-    .then(response => response.data)
-    .catch(error => console.log('getNews error', error))
 }
 
 export const getArticles = (page) => {
