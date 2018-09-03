@@ -5,7 +5,7 @@
       .header
         .top
           .search-wrapper
-            input(type="text" placeholder="Поиск по тегам и ключевым словам…")
+            input(type="text" placeholder="Поиск по тегам и ключевым словам…" v-model="searchQuery")
         .bottom
           .left
             .sort-button(:class="{'active': isPopular }" @click="sortByPopular")
@@ -24,8 +24,9 @@
     .promo-wrapper
       the-popular-authors(:articles="dummyAuthors")
 
-  .load-more(v-if="nextPage" @click="getNextPage")
-    | Больше статей
+  .load-more-wrapper
+    .load-more(v-if="nextPage" @click="getNextPage")
+      | Больше статей
 
   .interested-wrapper
     .container
@@ -35,6 +36,10 @@
 <script>
 const ARTICLES_PER_PAGE_LIST = 2
 const ARTICLES_PER_PAGE_GRID = 3
+
+const SEARCH_INTERVAL = 300
+
+import { debounce } from 'lodash'
 
 import ListArticlesView from '~/components/ListArticlesView'
 import GridArticlesView from '~/components/GridArticlesView'
@@ -63,6 +68,7 @@ export default {
     return {
       isList: true,
       isPopular: false,
+      searchQuery: '',
       dummyAuthors: [
         {
           publicationDate: new Date(),
@@ -85,7 +91,10 @@ export default {
       ]
     }
   },
-   computed: {
+  created() {
+    this.debouncedSearch = debounce(this.getSearchResults, SEARCH_INTERVAL)
+  },
+  computed: {
     ...mapGetters({
       articles: 'categoryPage/articles',
       interested: 'interestedArticles/articles',
@@ -111,6 +120,7 @@ export default {
     },
 
     sortByDate() {
+      this.searchQuery = ''
       if (this.isPopular) {
         this.isPopular = false
 
@@ -124,6 +134,7 @@ export default {
     },
 
     sortByPopular() {
+      this.searchQuery = ''
       if (!this.isPopular) {
         this.isPopular = true
 
@@ -143,6 +154,32 @@ export default {
         category: this.currentCategory,
         isSortByPopular: this.isPopular
       })
+    },
+
+    getSearchResults() {
+      return this.$store.dispatch('categoryPage/fetchCategory', { 
+        page: 1, 
+        perPage: this.perPage, 
+        isSortByPopular: this.isPopular,
+        category: this.currentCategory,
+        query: this.searchQuery
+      })
+    }
+  },
+
+  watch: {
+    searchQuery: function(e) {
+      if (e !== '') {
+        this.debouncedSearch()
+      }
+      else {
+        return this.$store.dispatch('categoryPage/fetchCategory', { 
+          page: 1, 
+          perPage: this.perPage, 
+          isSortByPopular: this.isPopular,
+          category: this.currentCategory
+        })
+      }
     }
   }
 }
@@ -227,17 +264,21 @@ export default {
   }
 }
 
+.load-more-wrapper {
+  margin-top: 60px;
+}
+
 .load-more {
   font-weight: 600;
   font-size: 16px;
   color: #FFFFFF;
-  padding: 24px;
   background: #7198BA;
   box-shadow: 0 2px 4px 0 rgba(184,184,184,0.50);
   text-align: center;
-  margin-top: 60px;
   cursor: pointer;
   user-select: none;
+  padding: 24px;
+
 }
 
 .interested-wrapper {

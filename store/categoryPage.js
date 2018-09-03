@@ -28,14 +28,14 @@ export const getters = {
 }
 
 export const actions = {
-  fetchCategory({commit}, {perPage, category, isSortByPopular, page}) {
+  fetchCategory({commit}, {perPage, category, isSortByPopular, page, query}) {
     switch(category) {
       case 'blogs':
-        return getBlogs(page, perPage, isSortByPopular).then(data => {
+        return getBlogs(page, perPage, isSortByPopular, query).then(data => {
           commit('setArticles', { articles: data.collection, nextPage: data.meta.next_page })
         })
       case 'news':
-        return getNews(page, perPage, isSortByPopular).then(data => {
+        return getNews(page, perPage, isSortByPopular, query).then(data => {
           commit('setArticles', { articles: data.collection, nextPage: data.meta.next_page })
         })
       default: 

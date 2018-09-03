@@ -45,21 +45,23 @@ export const getMainPageConfig = () => {
     .catch(error => console.log('mainPageConfig request error', error))
 }
 
-export const getBlogs = (page, per_page, isSortByPopular) => {
+export const getBlogs = (page, per_page, isSortByPopular, query) => {
   return get(`/api/blogs`, {
     page,
     per_page,
-    'sort[col]': isSortByPopular ? 'impressions_count' : 'publish_on'
+    'sort[col]': isSortByPopular ? 'impressions_count' : 'publish_on',
+    query
   })
     .then(response => response.data)
     .catch(error => console.log('getBlogsInOrder error', error))
 }
 
-export const getNews = (page, per_page, isSortByPopular) => {
+export const getNews = (page, per_page, isSortByPopular, query) => {
   return get(`/api/news`, {
     page,
     per_page,
-    'sort[col]': isSortByPopular ? 'impressions_count' : 'publish_on'
+    'sort[col]': isSortByPopular ? 'impressions_count' : 'publish_on',
+    query
   })
     .then(response => response.data)
     .catch(error => console.log('getNews error', error))
