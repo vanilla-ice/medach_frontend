@@ -1,7 +1,6 @@
 <template lang="pug">
-
 .wrapper
-  .container
+  .container.row
     .articles
       .header
         .top
@@ -23,8 +22,9 @@
         grid-articles-view(v-else :articles="articles" key="grid-view")
     
     .promo-wrapper
+      the-popular-authors(:articles="dummyAuthors")
 
-  .load-more(@click="getNextPage")
+  .load-more(v-if="nextPage" @click="getNextPage")
     | Больше статей
 
   .interested-wrapper
@@ -34,11 +34,12 @@
 
 <script>
 const ARTICLES_PER_PAGE_LIST = 2
-const ARTICLES_PER_PAGE_GRID = 4
+const ARTICLES_PER_PAGE_GRID = 3
 
 import ListArticlesView from '~/components/ListArticlesView'
 import GridArticlesView from '~/components/GridArticlesView'
 import InterestedArticles from '~/components/InterestedArticles'
+import ThePopularAuthors from '~/components/ThePopularAuthors'
 
 import { mapGetters } from 'vuex'
 
@@ -46,38 +47,74 @@ export default {
   components: {
     ListArticlesView,
     GridArticlesView,
-    InterestedArticles
+    InterestedArticles,
+    ThePopularAuthors
   },
   async fetch({store, params}) {
-    if (params.id === 'blogs') {
-      return store.dispatch('categoryPage/fetchBlogsInOrder', { page: 1, perPage: ARTICLES_PER_PAGE_LIST })
-        .then(() => store.dispatch('interestedArticles/fetchInterestedArticles'))
+    switch(params.id) {
+      case 'blogs':
+        return store.dispatch('categoryPage/fetchBlogsInOrder', { page: 1, perPage: ARTICLES_PER_PAGE_LIST })
+          .then(() => store.dispatch('interestedArticles/fetchInterestedArticles'))
+      case 'translated':
+        return store.dispatch('categoryPage/fetchTranslatedInOrder', { page: 1, perPage: ARTICLES_PER_PAGE_LIST })
+          .then(() => store.dispatch('interestedArticles/fetchInterestedArticles'))
+      case 'news':
+        return store.dispatch('categoryPage/fetchNews', { page: 1, perPage: ARTICLES_PER_PAGE_LIST })
+          .then(() => store.dispatch('interestedArticles/fetchInterestedArticles'))
     }
+    
   },
   data() {
     return {
       isList: true,
       isPopular: false,
-      currentPage: 1
+      dummyAuthors: [
+        {
+          publicationDate: new Date(),
+          title: 'Владимир Владимирович',
+          author: 'Владимирович',
+          id: 1
+        },
+        {
+          publicationDate: new Date(),
+          title: 'Много Много',
+          author: 'Подливы',
+          id: 2
+        },
+        {
+          publicationDate: new Date(),
+          title: 'Владимирович Путин',
+          author: 'Владимир',
+          id: 3
+        }
+      ]
     }
   },
    computed: {
     ...mapGetters({
       articles: 'categoryPage/articles',
-      interested: 'interestedArticles/articles'
+      interested: 'interestedArticles/articles',
+      nextPage: 'categoryPage/nextPage'
     }),
     perPage() {
       return this.isList ? ARTICLES_PER_PAGE_LIST : ARTICLES_PER_PAGE_GRID
+    },
+    currentCategory() {
+      return this.$route.params.id || null
     }
   },
   methods: {
     switchView() {
       this.isList = !this.isList
 
-      return this.$store.dispatch('categoryPage/fetchBlogsInOrder', {
-        page: 1,
-        perPage: this.perPage
-      })
+      switch(this.currentCategory) {
+        case 'blogs':
+          return this.$store.dispatch('categoryPage/fetchBlogsInOrder', { page: 1, perPage: this.perPage })
+        case 'translated':
+          return this.$store.dispatch('categoryPage/fetchTranslatedInOrder', { page: 1, perPage: this.perPage })
+        case 'news':
+          return this.$store.dispatch('categoryPage/fetchNews', { page: 1, perPage: this.perPage })
+      }
     },
 
     sortByDate() {
@@ -89,7 +126,7 @@ export default {
     },
 
     getNextPage() {
-      return this.$store.dispatch('categoryPage/fetchNextPage', {perPage: this.perPage})
+      return this.$store.dispatch('categoryPage/fetchNextPage', { perPage: this.perPage, category: this.currentCategory })
     }
   }
 }
@@ -111,6 +148,7 @@ export default {
 
 .articles {
   max-width: 880px;
+  flex: 1 1 auto;
 }
 
 .header {
@@ -188,6 +226,19 @@ export default {
 
 .interested-wrapper {
   padding: 40px 0;
+}
+
+.row {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+}
+
+.promo-wrapper {
+  margin-left: 80px;
+  max-width: 400px;
+  flex: 1 1 auto;
+  margin-top: 24px;
 }
 </style>
 

@@ -1,5 +1,7 @@
 import {
-  getBlogsInOrder
+  getBlogsInOrder,
+  getTranslatedArticles,
+  getNews
 } from '~/utils/requests'
 
 export const state = () => ({
@@ -9,12 +11,12 @@ export const state = () => ({
 })
 
 export const mutations = {
-  setBlogsArticles(state, {articles, nextPage}) {
+  setArticles(state, {articles, nextPage}) {
     state.nextPage = nextPage
     state.articles = articles
   },
 
-  updateBlogsArticles(state, {articles, nextPage}) {
+  updateArticles(state, {articles, nextPage}) {
     state.nextPage = nextPage
     state.articles = [...state.articles, ...articles]
   }
@@ -29,15 +31,39 @@ export const getters = {
 export const actions = {
   fetchBlogsInOrder({commit}, {perPage}) {
     return getBlogsInOrder(1, perPage).then(data => {
-      commit('setBlogsArticles', {articles: data.collection, nextPage: data.meta.next_page})
+      commit('setArticles', {articles: data.collection, nextPage: data.meta.next_page})
     })
   },
 
-  fetchNextPage({commit, state}, {perPage}) {
+  fetchTranslatedInOrder({commit}, {perPage}) {
+    return getTranslatedArticles(1, perPage).then(data => {
+      commit('setArticles', {articles: data.collection, nextPage: data.meta.next_page})
+    })
+  },
+
+  fetchNews({commit}, {perPage}) {
+    return getNews(1, perPage).then(data => {
+      console.log('data', data)
+      commit('setArticles', {articles: data.collection, nextPage: data.meta.next_page})
+    })
+  },
+
+  fetchNextPage({commit, state}, {perPage, category}) {
     if (state.nextPage) {
-      return getBlogsInOrder(state.nextPage, perPage).then(data => {
-        commit('updateBlogsArticles', {articles: data.collection, nextPage: data.meta.next_page})
-      })
+      switch(category) {
+        case 'blogs':
+          return getBlogsInOrder(state.nextPage, perPage).then(data => {
+            commit('updateArticles', {articles: data.collection, nextPage: data.meta.next_page})
+          })
+        case 'news':
+          return getNews(state.nextPage, perPage).then(data => {
+            commit('updateArticles', {articles: data.collection, nextPage: data.meta.next_page})
+          })
+        default: 
+          console.log('fetch next page default')
+          break;
+      }
+      
     }
   }
 }

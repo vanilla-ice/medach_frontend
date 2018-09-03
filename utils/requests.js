@@ -41,10 +41,21 @@ export const getBlogsInOrder = (page, perPage) => {
 }
 
 export const getInterestedArticles = () => {
-  console.log('get interested articles')
   return get(`/api/articles/show_random`)
     .then(response => response.data)
     .catch(error => console.log('getInterestedArticles error', error))
+}
+
+export const getTranslatedArticles = (page, perPage) => {
+  return get(`/api/articles/translated?page=${page}&per_page=${perPage}`)
+    .then(response => response.data)
+    .catch(error => console.log('getTranslatedArticles error', error))
+}
+
+export const getNews = (page, perPage) => {
+  return get(`/api/news?page=${page}&per_page=${perPage}`)
+    .then(response => response.data)
+    .catch(error => console.log('getNews error', error))
 }
 
 export const getArticles = (page) => {
@@ -55,16 +66,6 @@ export const getArticles = (page) => {
     })
     .then(response => response.data)
     .catch(error => console.log('get articles error', error))
-}
-
-export const getTranslatedArticles = (page) => {
-  return axios.get(`/api/articles/translated`, {
-      params: {
-        page: page
-      }
-    })
-    .then(response => response.data)
-    .catch(error => console.log('getTranslatedArticles error', error))
 }
 
 export const getMedia = (page) => {
@@ -91,16 +92,6 @@ export const getAllTags = () => {
   return get(`/api/tags`)
     .then(response => response.data)
     .catch(error => console.log('getAllTags error', error))
-}
-
-export const getNews = (page) => {
-  return get(`/api/news`, {
-      params: {
-        page: page
-      }
-    })
-    .then(response => response.data)
-    .catch(error => console.log('getNews error', error))
 }
 
 export const getPost = (id) => {
