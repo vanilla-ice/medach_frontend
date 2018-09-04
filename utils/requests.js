@@ -67,16 +67,30 @@ export const getNews = (page, per_page, isSortByPopular, query) => {
     .catch(error => console.log('getNews error', error))
 }
 
+export const getMedia = (page, per_page, query) => {
+  return get(`/api/media`, {
+      page,
+      per_page,
+      query
+    })
+    .then(response => response.data)
+    .catch(error => console.log('getMedia error', error))
+}
+
+export const getTranslatedArticles = (page, per_page, query) => {
+  return get(`/api/articles/translated`, {
+    page,
+    per_page,
+    query
+  })
+    .then(response => response.data)
+    .catch(error => console.log('getTranslatedArticles error', error))
+}
+
 export const getInterestedArticles = () => {
   return get(`/api/articles/show_random`)
     .then(response => response.data)
     .catch(error => console.log('getInterestedArticles error', error))
-}
-
-export const getTranslatedArticles = (page, perPage) => {
-  return get(`/api/articles/translated?page=${page}&per_page=${perPage}`)
-    .then(response => response.data)
-    .catch(error => console.log('getTranslatedArticles error', error))
 }
 
 export const getArticles = (page) => {
@@ -87,16 +101,6 @@ export const getArticles = (page) => {
     })
     .then(response => response.data)
     .catch(error => console.log('get articles error', error))
-}
-
-export const getMedia = (page) => {
-  return axios.get(`/api/media`, {
-      params: {
-        page: page
-      }
-    })
-    .then(response => response.data)
-    .catch(error => console.log('getMedia error', error))
 }
 
 export const getIndexInOrder = (page) => {

@@ -278,7 +278,6 @@ export default {
   cursor: pointer;
   user-select: none;
   padding: 24px;
-
 }
 
 .interested-wrapper {

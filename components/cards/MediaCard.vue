@@ -19,7 +19,7 @@ export default {
     name: String,
     tags: Array,
     image: String,
-    id: String
+    id: [String, Number]
   },
   name: 'MediaCard'
 }

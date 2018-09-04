@@ -59,7 +59,6 @@ export const actions = {
           console.log('fetch next page default')
           break;
       }
-      
     }
   }
 }
