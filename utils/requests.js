@@ -77,10 +77,11 @@ export const getMedia = (page, per_page, query) => {
     .catch(error => console.log('getMedia error', error))
 }
 
-export const getTranslatedArticles = (page, per_page, query) => {
+export const getTranslatedArticles = (page, per_page, isSortByPopular, query) => {
   return get(`/api/articles/translated`, {
     page,
     per_page,
+    'sort[col]': isSortByPopular ? 'impressions_count' : 'publish_on',
     query
   })
     .then(response => response.data)
@@ -93,7 +94,7 @@ export const getInterestedArticles = () => {
     .catch(error => console.log('getInterestedArticles error', error))
 }
 
-export const getArticles = (page) => {
+export const getArticle = (page) => {
   return axios.get(`/api/articles`, {
       params: {
         page: page
@@ -126,19 +127,15 @@ export const getPost = (id) => {
 }
 
 export const getBlogPost = (id) => {
-  return new Promise((resolve, reject) => {
-    get(`/api/blogs/${id}`)
-      .then(response => {
-        resolve(response)
-      })
-      .catch(reject)
-  })
+  return get(`/api/blogs/${id}`)
+    .then(response => response.data)
+    .catch(error => console.log('getPost error', error))
 }
 
 export const getNewsPost = (id) => {
   return get(`/api/news/${id}`)
-      .then(response => response.data)
-      .catch(error => console.log('getNewsPost error', error))
+    .then(response => response.data)
+    .catch(error => console.log('getNewsPost error', error))
 }
 
 export const getMediaPost = (id) => {
@@ -176,17 +173,6 @@ export const searchRequest = (id, query) => {
 export const tagsMostUsed = () => {
   return new Promise((resolve, reject) => {
     axios.get(`/api/tags/most_used`)
-      .then(response => {
-        resolve(response)
-      }).catch(error => reject(error))
-  })
-}
-
-
-
-export const blogsPageConfig = () => {
-  return new Promise((resolve, reject) => {
-    axios.get(`/api/blogs_page_config`)
       .then(response => {
         resolve(response)
       }).catch(error => reject(error))

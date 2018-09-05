@@ -1,6 +1,7 @@
 import {
   getBlogs,
-  getNews
+  getNews,
+  getTranslatedArticles
 } from '~/utils/requests'
 
 export const state = () => ({
@@ -38,22 +39,30 @@ export const actions = {
         return getNews(page, perPage, isSortByPopular, query).then(data => {
           commit('setArticles', { articles: data.collection, nextPage: data.meta.next_page })
         })
+      case 'translated':
+        return getTranslatedArticles(page, perPage, isSortByPopular, query).then(data => {
+          commit('setArticles', { articles: data.collection, nextPage: data.meta.next_page })
+        })
       default: 
         console.log('fetch next page default')
         break;
     }
   },
 
-  fetchNextPage({commit, state}, {perPage, category, isSortByPopular}) {
+  fetchNextPage({commit, state}, {perPage, category, isSortByPopular, query}) {
     if (state.nextPage) {
       switch(category) {
         case 'blogs':
-          return getBlogs(state.nextPage, perPage, isSortByPopular).then(data => {
+          return getBlogs(state.nextPage, perPage, isSortByPopular, query).then(data => {
             commit('updateArticles', {articles: data.collection, nextPage: data.meta.next_page})
           })
         case 'news':
-          return getNews(state.nextPage, perPage, isSortByPopular).then(data => {
+          return getNews(state.nextPage, perPage, isSortByPopular, query).then(data => {
             commit('updateArticles', {articles: data.collection, nextPage: data.meta.next_page})
+          })
+        case 'translated':
+          return getTranslatedArticles(state.nextPage, perPage, isSortByPopular, query).then(data => {
+            commit('setArticles', { articles: data.collection, nextPage: data.meta.next_page })
           })
         default: 
           console.log('fetch next page default')

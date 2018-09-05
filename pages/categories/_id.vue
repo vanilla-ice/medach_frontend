@@ -152,7 +152,8 @@ export default {
         page: this.nextPage,
         perPage: this.perPage, 
         category: this.currentCategory,
-        isSortByPopular: this.isPopular
+        isSortByPopular: this.isPopular,
+        query: this.searchQuery === '' ? null : this.searchQuery
       })
     },
 
@@ -162,7 +163,7 @@ export default {
         perPage: this.perPage, 
         isSortByPopular: this.isPopular,
         category: this.currentCategory,
-        query: this.searchQuery
+        query: this.searchQuery === '' ? null : this.searchQuery
       })
     }
   },

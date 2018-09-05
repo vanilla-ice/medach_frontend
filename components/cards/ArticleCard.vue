@@ -1,15 +1,15 @@
 <template lang="pug">
 .card-wrapper(:class="{'grid-card-wrapper': isGridCard, 'list-card-wrapper': isListCard}")
-  nuxt-link.image-wrapper(:style="{height: isListCard ? '300px' : '240px'}" :to="'/'")
+  nuxt-link.image-wrapper(:style="{height: isListCard ? '300px' : '240px'}" :to="`/articles/${id}`")
     image-component(:src="image")
   .content
     .top
-      nuxt-link.name(:to="'/'")
+      nuxt-link.name(:to="`/articles/${id}`")
         | {{ name }}
 
     .bottom
       .tags
-        nuxt-link.tag(v-for="tag in tags" :key="`${id}-${tag}`" :to="'/'")
+        nuxt-link.tag(v-for="tag in tags" :key="`${id}-${tag}`" :to="`/articles/${id}`")
           | {{ tag }}
       .footer(v-if="isMetaVisible")
         .author
