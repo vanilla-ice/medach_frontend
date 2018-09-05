@@ -34,8 +34,8 @@
 </template>
 
 <script>
-const ARTICLES_PER_PAGE_LIST = 2
-const ARTICLES_PER_PAGE_GRID = 3
+const ARTICLES_PER_PAGE_LIST = 5
+const ARTICLES_PER_PAGE_GRID = 12
 
 const SEARCH_INTERVAL = 300
 

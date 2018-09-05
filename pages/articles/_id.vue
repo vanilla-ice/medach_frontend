@@ -1,16 +1,36 @@
 <template lang="pug">
 .wrapper
-  interested-articles(:articles="interested")
+  .container
+    .title
+      | {{article.title}}
+    .tags
+      .tag(v-for="tag in article.tags" :key="`${article.id}-${article.tag}`")
+        | {{ tag }}
+    .image-wrapper
+      img(:src="`http://localhost:8080${article.coverImage.url}`")
+
+    .article-wrapper
+      .article.content-article-wrapper(v-html="article.body")
+      .promo
+        the-popular-authors
+
+
+    .interested-wrapper
+      interested-articles(:articles="interested")
 </template>
 
 <script>
 import InterestedArticles from '~/components/InterestedArticles'
+import ImageComponent from '~/components/ImageComponent'
+import ThePopularAuthors from '~/components/ThePopularAuthors'
 
 import { mapGetters } from 'vuex'
 
 export default {
   components: {
-    InterestedArticles
+    InterestedArticles,
+    ImageComponent,
+    ThePopularAuthors
   },
   fetch({store, params}) {
     return store.dispatch('articlePage/fetchArticle', {
@@ -30,10 +50,76 @@ export default {
   },
   methods: {
   },
+
+  mounted() {
+    console.log('article', this.article)
+  }
 }
 </script>
 
 <style scoped lang="scss">
+.title {
+  font-family: 'PTSerif', serif;
+  font-size: 54px;
+  color: #5B5B5B;
+  letter-spacing: 0;
+  margin-top: 36px;
+}
 
+.tags {
+  margin-top: 39px;
+}
+
+.tag {
+  font-size: 12px;
+  color: #7198BA;
+  letter-spacing: 0;
+  font-weight: 500;
+  border: 1px solid #7198BA;
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 3px;
+  margin-left: 10px;
+
+  &:first-child {
+    border-color: #A3A3A3;
+    color: #A3A3A3;
+    margin: 0;
+  }
+}
+
+.image-wrapper {
+  margin-top: 40px;
+}
+
+.article-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+}
+
+.article {
+  font-family: 'PTSerif', serif;
+  max-width: 800px;
+  margin-left: 80px;
+}
+
+.promo {
+  flex: 1 1 auto;
+  margin-left: 80px;
+}
+
+</style>
+
+<style lang="scss">
+.content-article-wrapper {
+  p {
+    font-size: 20px;
+    color: #5B5B5B;
+    letter-spacing: 0;
+    line-height: 29px;
+    margin-top: 24px;
+  }
+}
 </style>
 

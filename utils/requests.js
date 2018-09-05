@@ -88,46 +88,11 @@ export const getLongreadArticles = (page, per_page, isSortByPopular, query) => {
     .catch(error => console.log('get articles error', error))
 }
 
-export const getTranslatedArticles = (page, per_page, isSortByPopular, query) => {
-  return get(`/api/articles/translated`, {
-    page,
-    per_page,
-    'sort[col]': isSortByPopular ? 'impressions_count' : 'publish_on',
-    query
-  })
-    .then(response => response.data)
-    .catch(error => console.log('getTranslatedArticles error', error))
-}
-
-export const getInterestedArticles = () => {
-  return get(`/api/articles/show_random`)
-    .then(response => response.data)
-    .catch(error => console.log('getInterestedArticles error', error))
-}
-
-export const getPost = (id) => {
+export const getLongreadPost = (id) => {
   return get(`/api/articles/${id}`)
     .then(response => response.data)
     .catch(error => console.log('getPost error', error))
 }
-
-export const getIndexInOrder = (page) => {
-  return axios.get(`/api/all_articles`, {
-      params: {
-        page: page
-      }
-    })
-    .then(response => response.data)
-    .catch(error => console.log('getIndexInOrder error', error))
-}
-
-export const getAllTags = () => {
-  return get(`/api/tags`)
-    .then(response => response.data)
-    .catch(error => console.log('getAllTags error', error))
-}
-
-
 
 export const getBlogPost = (id) => {
   return get(`/api/blogs/${id}`)
@@ -146,6 +111,40 @@ export const getMediaPost = (id) => {
     .then(response => response.data)
     .catch(error => console.log('getMediaPost error', error))
 }
+
+export const getTranslatedArticles = (page, per_page, isSortByPopular, query) => {
+  return get(`/api/articles/translated`, {
+    page,
+    per_page,
+    'sort[col]': isSortByPopular ? 'impressions_count' : 'publish_on',
+    query
+  })
+    .then(response => response.data)
+    .catch(error => console.log('getTranslatedArticles error', error))
+}
+
+export const getInterestedArticles = () => {
+  return get(`/api/articles/show_random`)
+    .then(response => response.data)
+    .catch(error => console.log('getInterestedArticles error', error))
+}
+
+export const getIndexInOrder = (page) => {
+  return axios.get(`/api/all_articles`, {
+      params: {
+        page: page
+      }
+    })
+    .then(response => response.data)
+    .catch(error => console.log('getIndexInOrder error', error))
+}
+
+export const getAllTags = () => {
+  return get(`/api/tags`)
+    .then(response => response.data)
+    .catch(error => console.log('getAllTags error', error))
+}
+
 
 export const getPostsByTag = (id, query) => {
   return new Promise((resolve, reject) => {

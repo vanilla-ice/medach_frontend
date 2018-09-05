@@ -1,5 +1,5 @@
 import {
-  getPost,
+  getLongreadPost,
   getMediaPost,
   getBlogPost,
   getNewsPost
@@ -21,7 +21,7 @@ export const getters = {
 
 export const actions = {
   fetchArticle({commit}, {id, type}) {
-    return getBlogPost(id).then(data => {
+    return getLongreadPost(id).then(data => {
       commit('setArticle', data)
     })
   }
