@@ -12,7 +12,7 @@
         .category
           nuxt-link.category-name(to="/categories/guides") Руководства 
         .category
-          nuxt-link.category-name(to="/categories/posts") Авторские статьи
+          nuxt-link.category-name(to="/categories/longread") Авторские статьи
         .category
           nuxt-link.category-name(to="/categories/translated") Переводы
         .category
