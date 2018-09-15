@@ -1,5 +1,6 @@
 <template lang="pug">
 .wrapper
+  the-header
   .slider-section
     .slider-wrapper
       the-slider(:slides="slides")
@@ -69,6 +70,7 @@ import TheHotNews from '~/components/TheHotNews'
 import TheBlogs from '~/components/TheBlogs'
 import MediaCard from '~/components/cards/MediaCard'
 import ArticleCard from '~/components/cards/ArticleCard'
+import TheHeader from '~/components/TheHeader'
 
 import { mapGetters } from 'vuex'
 
@@ -78,7 +80,8 @@ export default {
     TheHotNews,
     TheBlogs,
     MediaCard,
-    ArticleCard
+    ArticleCard,
+    TheHeader
   },
 
   async fetch({store}) {

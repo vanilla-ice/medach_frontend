@@ -1,5 +1,6 @@
 <template lang="pug">
 .wrapper
+  the-header
   .container
     .title
       | {{article.title}}
@@ -23,6 +24,7 @@
 import InterestedArticles from '~/components/InterestedArticles'
 import ImageComponent from '~/components/ImageComponent'
 import ThePopularAuthors from '~/components/ThePopularAuthors'
+import TheHeader from '~/components/TheHeader'
 
 import { mapGetters } from 'vuex'
 
@@ -30,7 +32,8 @@ export default {
   components: {
     InterestedArticles,
     ImageComponent,
-    ThePopularAuthors
+    ThePopularAuthors,
+    TheHeader
   },
   fetch({store, params}) {
     return store.dispatch('articlePage/fetchArticle', {
@@ -58,6 +61,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.wrapper {
+  padding-bottom: 40px;
+}
+
 .title {
   font-family: 'PTSerif', serif;
   font-size: 54px;
@@ -96,6 +103,7 @@ export default {
   display: flex;
   flex-flow: row nowrap;
   align-items: flex-start;
+  margin-top: 40px;
 }
 
 .article {

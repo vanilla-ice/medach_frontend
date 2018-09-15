@@ -1,18 +1,15 @@
 <template lang="pug">
   .wrapper
-    the-header
     nuxt
     the-footer
 </template>
 
 <script>
 import 'normalize.css'
-import TheHeader from '~/components/TheHeader'
 import TheFooter from '~/components/TheFooter'
 
 export default {
   components: {
-		TheHeader,
 		TheFooter
   }
 }

@@ -1,5 +1,6 @@
 <template lang="pug">
 .wrapper
+  the-header
   .container
     .buttons
       .button-wrapper(@click="choose('подкасты')")
@@ -53,13 +54,15 @@ const PER_PAGE = 12
 
 import MediaCard from '~/components/cards/MediaCard'
 import interestedArticles from '~/components/InterestedArticles'
+import TheHeader from '~/components/TheHeader'
 
 import { mapGetters } from 'vuex'
 
 export default {
   components: {
     MediaCard,
-    interestedArticles
+    interestedArticles,
+    TheHeader
   },
 
   async fetch({store}) {

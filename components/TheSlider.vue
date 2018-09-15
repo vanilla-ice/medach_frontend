@@ -68,6 +68,19 @@ export default {
     padding-left: 0 !important;
   }
 }
+
+.VueCarousel-dot {
+  .VueCarousel-dot-button {
+    background: #ffffff !important;
+    opacity: .3;
+  }
+  
+
+  &--active .VueCarousel-dot-button {
+    background: #ffffff !important;
+    opacity: 1;
+  }
+}
 </style>
 
 <style scoped lang="scss">

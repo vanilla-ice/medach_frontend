@@ -1,8 +1,9 @@
 <template lang="pug">
 .wrapper
+  the-header
   .container.row
     .articles
-      .header
+      .heading
         .top
           .search-wrapper
             input(type="text" placeholder="Поиск по тегам и ключевым словам…" v-model="searchQuery")
@@ -45,6 +46,7 @@ import ListArticlesView from '~/components/ListArticlesView'
 import GridArticlesView from '~/components/GridArticlesView'
 import InterestedArticles from '~/components/InterestedArticles'
 import ThePopularAuthors from '~/components/ThePopularAuthors'
+import TheHeader from '~/components/TheHeader'
 
 import { mapGetters } from 'vuex'
 
@@ -53,7 +55,8 @@ export default {
     ListArticlesView,
     GridArticlesView,
     InterestedArticles,
-    ThePopularAuthors
+    ThePopularAuthors,
+    TheHeader
   },
   fetch({store, params}) {
     return store.dispatch('categoryPage/fetchCategory', { 
@@ -205,10 +208,6 @@ export default {
   flex: 1 1 auto;
 }
 
-.header {
-  margin-top: 24px;
-}
-
 .switch-grid {
   cursor: pointer;
   user-select: none;
@@ -219,6 +218,10 @@ export default {
   flex-flow: row nowrap;
   align-items: center;
   justify-content: space-between;
+  margin-top: 24px;
+}
+
+.heading {
   margin-top: 24px;
 }
 

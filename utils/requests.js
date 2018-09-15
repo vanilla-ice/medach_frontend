@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:8080',
-  timeout: 10000,
+  timeout: 50000,
   headers: {},
   withCredentials: false
 })
@@ -78,7 +78,7 @@ export const getMedia = (page, per_page, query) => {
 }
 
 export const getLongreadArticles = (page, per_page, isSortByPopular, query) => {
-  return get(`/api/articles`, {
+  return get(`/api/longread_articles`, {
     page,
     per_page,
     'sort[col]': isSortByPopular ? 'impressions_count' : 'publish_on',
