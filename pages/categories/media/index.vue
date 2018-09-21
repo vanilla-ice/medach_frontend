@@ -3,7 +3,7 @@
   the-header
   .container
     .buttons
-      .button-wrapper(@click="choose('подкасты')")
+      nuxt-link.button-wrapper(:to="`/categories/media/подкасты`")
         .flag
           span
             | Подкасты
@@ -12,7 +12,7 @@
             img(src="~/assets/images/podcasts.svg")
           .text
             | Слушайте наши подкасты на soundcloud
-      .button-wrapper(@click="choose('инфографика')")
+      nuxt-link.button-wrapper(:to="`/categories/media/инфографика`")
         .flag
           span
             | Инфографика
@@ -21,7 +21,7 @@
             img(src="~/assets/images/infographic.svg")
           .text
             | Сложные схемы простым языком
-      .button-wrapper(@click="choose('видео')")
+      nuxt-link.button-wrapper(:to="`/categories/media/видео`")
         .flag
           span
             | Видеоматериалы

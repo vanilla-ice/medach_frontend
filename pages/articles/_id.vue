@@ -71,6 +71,7 @@ export default {
   color: #5B5B5B;
   letter-spacing: 0;
   margin-top: 36px;
+  max-width: 900px;
 }
 
 .tags {
@@ -110,6 +111,7 @@ export default {
   font-family: 'PTSerif', serif;
   max-width: 800px;
   margin-left: 80px;
+  width: 100%;
 }
 
 .promo {
