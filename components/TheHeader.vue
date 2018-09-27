@@ -37,6 +37,11 @@ export default {
       query: '',
       isOpen: true
     }
+  },
+  methods: {
+    search() {
+      this.$router.push(`/search?query=${this.query}`)
+    },
   }
 }
 </script>
@@ -60,11 +65,26 @@ export default {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  
+  .nuxt-link-active {
+    color: #7198BA;
+
+    &::after {
+      content: '';
+      height: 2px;
+      width: calc(100% - 40px);
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      background: #7198BA;
+      transform: translateX(-50%);
+    }
+  }
 }
 
 .logo {
   font-size: 24px;
-  color: #A3A3A3;
+  color: #A3A3A3 !important;
   letter-spacing: 2px;
   font-weight: 700;
   text-decoration: none;
@@ -78,6 +98,7 @@ export default {
   padding: 25px 20px;
   display: inline-block;
   transition: color .2s ease;
+  position: relative;
 
   &:hover {
     color: #7198BA;
@@ -115,4 +136,5 @@ export default {
   transform: translateY(-50%);
   cursor: pointer;
 }
+
 </style>

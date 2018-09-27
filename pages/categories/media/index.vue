@@ -84,10 +84,6 @@ export default {
     }
   },
 
-  mounted() {
-    console.log('this.articles', this.articles)
-  },
-
   methods: {
     getNextPage() {
       return this.$store.dispatch('mediaPage/fetchNextPage', {

@@ -1,6 +1,6 @@
 <template lang="pug">
 .wrapper
-  the-header
+  the-header(:currentCategory="currentCategory")
   .container.row
     .articles
       .heading

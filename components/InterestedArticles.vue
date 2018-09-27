@@ -23,14 +23,6 @@ export default {
   },
   components: {
     ArticleCard
-  },
-
-  mounted() {
-    console.log('articles', this.articles)
-  },
-
-  updated() {
-    console.log('articles', this.articles)
   }
 }
 </script>

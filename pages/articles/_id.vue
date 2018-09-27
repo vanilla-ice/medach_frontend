@@ -52,10 +52,6 @@ export default {
     })
   },
   methods: {
-  },
-
-  mounted() {
-    console.log('article', this.article)
   }
 }
 </script>

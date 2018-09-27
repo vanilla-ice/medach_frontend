@@ -5,7 +5,7 @@
       :name="article.title"
       :id="article.id"
       :image="article.cover_image.url"
-      :publicationDate="article.publish_on"
+      :publicationDate="article.publication_date"
       :tags="article.tags"
       :author="article.author"
       isGridCard

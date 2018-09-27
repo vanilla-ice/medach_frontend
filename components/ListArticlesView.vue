@@ -4,8 +4,8 @@
     article-card(
       :name="article.title"
       :id="article.id"
-      :image="article.coverImage ? article.coverImage.url : null "
-      :publicationDate="article.publish_on"
+      :image="article.cover_image ? article.cover_image.url : null "
+      :publicationDate="article.publication_date"
       :author="article.author"
       :tags="article.tags"
       isMetaVisible
@@ -23,9 +23,6 @@ export default {
   },
   components: {
     ArticleCard
-  },
-  mounted() {
-    console.log(this.articles)
   }
 }
 </script>

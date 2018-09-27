@@ -1,8 +1,15 @@
 import {
   getBlogs,
   getNews,
-  getLongreadArticles
+  getLongreadArticles,
+  getPostsByTag
 } from '~/utils/requests'
+
+const translatedCategories = {
+  cases: 'кейсы',
+  guides: 'руководства',
+  translated: 'переводы'
+}
 
 export const state = () => ({
   articles: [],
@@ -57,8 +64,12 @@ export const actions = {
         })
 
       default: 
-        console.log('fetch next page default')
-        break;
+        return getPostsByTag(translatedCategories[category], page, perPage, isSortByPopular, query).then(data => {
+          commit('setArticles', { 
+            articles: data.collection,
+            nextPage: data.meta.next_page
+          })
+        })
     }
   },
 
@@ -91,8 +102,12 @@ export const actions = {
           })
 
         default: 
-          console.log('fetch next page default')
-          break;
+          return getPostsByTag(translatedCategories[category], state.nextPage, perPage, isSortByPopular, query).then(data => {
+            commit('updateArticles', { 
+              articles: data.collection,
+              nextPage: data.meta.next_page
+            })
+          })
       }
     }
   }

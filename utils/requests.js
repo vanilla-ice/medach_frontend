@@ -112,6 +112,18 @@ export const getMediaPost = (id) => {
     .catch(error => console.log('getMediaPost error', error))
 }
 
+export const getPostsByTag = (tag, page, per_page, isSortByPopular, query) => {
+  return get(`/api/all_articles`, {
+    tag,
+    page,
+    per_page,
+    'sort[col]': isSortByPopular ? 'impressions_count' : 'publish_on',
+    query
+  })
+    .then(response => response.data)
+    .catch(error => console.log('get posts by tag error', error))
+}
+
 export const getTranslatedArticles = (page, per_page, isSortByPopular, query) => {
   return get(`/api/articles/translated`, {
     page,
@@ -129,54 +141,12 @@ export const getInterestedArticles = () => {
     .catch(error => console.log('getInterestedArticles error', error))
 }
 
-export const getIndexInOrder = (page) => {
-  return axios.get(`/api/all_articles`, {
-      params: {
-        page: page
-      }
-    })
+export const searchRequest = (page, per_page, query) => {
+  return get(`/api/all_articles`, {
+    query,
+    page,
+    per_page
+  })
     .then(response => response.data)
-    .catch(error => console.log('getIndexInOrder error', error))
-}
-
-export const getAllTags = () => {
-  return get(`/api/tags`)
-    .then(response => response.data)
-    .catch(error => console.log('getAllTags error', error))
-}
-
-
-export const getPostsByTag = (id, query) => {
-  return new Promise((resolve, reject) => {
-    axios.get(`/api/all_articles`, {
-      params: {
-        tag: query,
-        page: id
-      }
-    }).then(response => {
-        resolve(response)
-      }).catch(reject)
-  })
-}
-
-export const searchRequest = (id, query) => {
-  return new Promise((resolve, reject) => {
-    axios.get(`/api/all_articles`, {
-      params: {
-        query: query,
-        page: id
-      }
-    }).then(response => {
-      resolve(response)
-    }).catch(reject)
-  })
-}
-
-export const tagsMostUsed = () => {
-  return new Promise((resolve, reject) => {
-    axios.get(`/api/tags/most_used`)
-      .then(response => {
-        resolve(response)
-      }).catch(error => reject(error))
-  })
+    .catch(error => console.log('searchRequest error', error))
 }
