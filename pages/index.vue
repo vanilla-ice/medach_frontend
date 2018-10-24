@@ -9,9 +9,10 @@
   
   .container
     .top-articles
-      .article(
-        v-for="article in topPosts",
-        :key="article.id",
+      nuxt-link.article(
+        v-for="article in topPosts"
+        :to="`articles/${article.id}`"
+        :key="article.id"
         :style="{background: `url(${`http://localhost:8080${article.coverImage.url}`}) no-repeat center / cover`}"
       )
         .gradient

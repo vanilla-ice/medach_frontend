@@ -124,17 +124,6 @@ export const getPostsByTag = (tag, page, per_page, isSortByPopular, query) => {
     .catch(error => console.log('get posts by tag error', error))
 }
 
-export const getTranslatedArticles = (page, per_page, isSortByPopular, query) => {
-  return get(`/api/articles/translated`, {
-    page,
-    per_page,
-    'sort[col]': isSortByPopular ? 'impressions_count' : 'publish_on',
-    query
-  })
-    .then(response => response.data)
-    .catch(error => console.log('getTranslatedArticles error', error))
-}
-
 export const getInterestedArticles = () => {
   return get(`/api/articles/show_random`)
     .then(response => response.data)
@@ -149,4 +138,10 @@ export const searchRequest = (page, per_page, query) => {
   })
     .then(response => response.data)
     .catch(error => console.log('searchRequest error', error))
+}
+
+export const getUserProfile = (id) => {
+  return get(`/api/users/${id}`)
+    .then(response => response.data)
+    .catch(error => console.log('getUserProfile error', error))
 }

@@ -8,7 +8,7 @@
       :key="slide.id",
       :style="{background: `url(http://localhost:8080${slide.coverImage.url}) no-repeat center / cover`}"
     )
-      .content
+      nuxt-link.content(:to="`/articles/${slide.id}`")
         .title
           | {{ slide.title }}
         .bottom

@@ -5,9 +5,10 @@
       | Новости
     .flag
   .inner
-    .news-item(
-      v-for="item in news",
+    nuxt-link.news-item(
+      v-for="item in news"
       :key="item.id"
+      :to="`/articles/${item.id}`"
     )
       .name
         | {{ item.title }}
@@ -66,6 +67,7 @@ export default {
 
 .news-item {
   padding: 40px 0;
+  display: block;
 
   &:not(:last-child) {
     border-bottom: 1px solid rgba(151,151,151,0.4);

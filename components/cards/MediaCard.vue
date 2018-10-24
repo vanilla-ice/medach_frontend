@@ -1,6 +1,6 @@
 <template lang="pug">
 nuxt-link.card-wrapper(
-  :to="'/'"
+  :to="`/articles/${id}`"
   :style="{background: `url(http://localhost:8080${image}) no-repeat center / cover`}"
 )
 

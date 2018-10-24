@@ -335,6 +335,20 @@ export default {
   display: flex;
   flex-flow: row nowrap;
   margin-top: 24px;
+
+  .nuxt-link-active {
+    transition: background .2s ease;
+
+    background: #DBDCD5;
+
+    .flag {
+      min-width: 65%;
+
+      &::before {
+        background: #DBDCD5;
+      }
+    }
+  }
 }
 
 .button-wrapper {
@@ -345,6 +359,7 @@ export default {
   padding: 24px 0;
   cursor: pointer;
   min-height: 150px;
+  transition: background .2s ease;
 
   &:last-child {
     .flag {

@@ -1,6 +1,23 @@
 <template lang="pug">
 .wrapper
   the-header
+  .profile-img
+
+  .container
+    .profile-info
+      .avatar
+      .info
+        .name
+          | Dental Jedi
+        .social
+          | social
+
+    .about
+      .left-text
+        | On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.
+      .right-text
+        | On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.
+  
   .container.row
     .articles
       .heading
@@ -59,11 +76,8 @@ export default {
     TheHeader
   },
   fetch({store, params}) {
-    return store.dispatch('categoryPage/fetchCategory', { 
-      page: 1, 
-      perPage: ARTICLES_PER_PAGE_LIST, 
-      isSortByPopular: false,
-      category: params.id
+    return store.dispatch('profilePage/fetchProfile', { 
+      id: params.id
     })
       .then(() => store.dispatch('interestedArticles/fetchInterestedArticles'))
   },
@@ -299,6 +313,11 @@ export default {
   max-width: 400px;
   flex: 1 1 auto;
   margin-top: 24px;
+}
+
+.profile-img {
+  min-height: 320px;
+  background: url('~/assets/images/profile.jpg') no-repeat center / cover;
 }
 </style>
 

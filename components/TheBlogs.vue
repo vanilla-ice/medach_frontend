@@ -4,7 +4,7 @@
     .blogs-tag
       | Блоги
     .blogs__articles-wrapper
-      router-link(:to=" 'blog-post/' + firstArticle.id ").blogs__articles-big
+      nuxt-link(:to=" 'articles/' + firstArticle.id ").blogs__articles-big
         .top
           .blogs__articles-big-text
             | {{ firstArticle.title }}
@@ -18,10 +18,10 @@
             span
               | {{ firstArticle.author }}
       .blogs__articles-min-wrapper
-        router-link(
+        nuxt-link(
           v-for="(article, id) in otherArticles"
           :key="article.id" 
-          :to=" 'blog-post/' + article.id "
+          :to=" 'articles/' + article.id "
         ).blogs__articles-min-item
           .blogs__articles-min-item-text
             | {{ article.title }}

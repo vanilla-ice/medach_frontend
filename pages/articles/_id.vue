@@ -57,6 +57,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.interested-wrapper{
+  margin-top: 42px;
+}
 .wrapper {
   padding-bottom: 40px;
 }
