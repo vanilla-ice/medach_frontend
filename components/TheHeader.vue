@@ -1,16 +1,15 @@
 <template lang="pug">
 .header
-  .container
+  .container.container-desctop
     .left
       nuxt-link.logo(to="/")
         | MEDACH
-
     .right
       .categories(:class="{visible: isOpen}")
         .category
           nuxt-link.category-name(to="/categories/cases") Кейсы
         .category
-          nuxt-link.category-name(to="/categories/guides") Руководства 
+          nuxt-link.category-name(to="/categories/guides") Руководства
         .category
           nuxt-link.category-name(to="/categories/longread") Авторские статьи
         .category
@@ -27,21 +26,40 @@
               .search-icon
               input(type="text" class="search" name="search" autocomplete="off" placeholder = "поиск..." v-model="query")
           .search-buffer
+  the-mobile-header(:menuHandler="menuHandler" :searchHandler="searchHandler" :isOpenMenu="isOpenMenu" :isOpenSearch="isOpenSearch")
+  .overlay(v-if="isOpenMenu || isOpenSearch" @click="overlayHandler")
 </template>
 
 <script>
+ import TheMobileHeader from "~/components/TheMobileHeader"
+
 export default {
   name: 'TheHeader',
+  components: {TheMobileHeader},
   data () {
     return {
       query: '',
-      isOpen: true
+      isOpen: true,
+      isOpenMenu: false,
+      isOpenSearch: false
     }
   },
   methods: {
     search() {
       this.$router.push(`/search?query=${this.query}`)
     },
+    menuHandler() {
+      this.isOpenSearch = false
+      this.isOpenMenu = !this.isOpenMenu
+    },
+    searchHandler() {
+      this.isOpenMenu = false;
+      this.isOpenSearch = !this.isOpenSearch
+    },
+    overlayHandler() {
+      this.isOpenMenu = false;
+      this.isOpenSearch = false
+    }
   }
 }
 </script>
@@ -65,7 +83,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  
+
   .nuxt-link-active {
     color: #7198BA;
 
@@ -135,6 +153,29 @@ export default {
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
+}
+
+.overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 50;
+  background: #000000;
+  opacity: 0.6;
+}
+
+@media (max-width: 1110px) {
+  .category-name {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .container-desctop {
+    display: none;
+  }
 }
 
 </style>

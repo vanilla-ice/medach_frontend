@@ -39,6 +39,7 @@ export default {
     }
   },
   mounted() {
+    console.log(this.slides)
     this.showCarousel = true
   },
   methods: {
@@ -74,7 +75,7 @@ export default {
     background: #ffffff !important;
     opacity: .3;
   }
-  
+
 
   &--active .VueCarousel-dot-button {
     background: #ffffff !important;

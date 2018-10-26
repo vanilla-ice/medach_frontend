@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <title>Page 1</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0 -0.00025 15.643 -0.00025 15.643 15.6435 0 15.6435"></polygon>
+    </defs>
+    <g id="Mobile" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="главная-поиск" transform="translate(-343.000000, -12.000000)">
+            <g id="Page-1" transform="translate(343.000000, 12.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="Clip-2"></g>
+                <path d="M8.8826,7.8215 L15.4236,1.2805 C15.7166,0.9875 15.7166,0.5125 15.4236,0.2195 C15.1306,-0.0735 14.6556,-0.0735 14.3626,0.2195 L7.8216,6.7605 L1.2806,0.2205 C0.9876,-0.0725 0.5126,-0.0725 0.2196,0.2205 C-0.0734,0.5135 -0.0734,0.9885 0.2196,1.2815 L6.7606,7.8225 L0.2206,14.3635 C-0.0724,14.6555 -0.0724,15.1305 0.2206,15.4235 C0.3676,15.5705 0.5586,15.6435 0.7506,15.6435 C0.9426,15.6435 1.1346,15.5715 1.2806,15.4235 L7.8216,8.8825 L14.3626,15.4235 C14.5096,15.5705 14.7006,15.6435 14.8926,15.6435 C15.0846,15.6435 15.2776,15.5715 15.4226,15.4235 C15.7156,15.1305 15.7156,14.6555 15.4226,14.3635 L8.8826,7.8215 Z" id="Fill-1" fill="#AFB09A" mask="url(#mask-2)"></path>
+            </g>
+        </g>
+    </g>
+</svg>
