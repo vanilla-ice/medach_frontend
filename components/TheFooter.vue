@@ -24,7 +24,7 @@
             | Контент
           .link
             | Семинары
-    
+
     .right
       .social-items
         .social.social-youtube
@@ -63,7 +63,7 @@ export default {
   height: 40px;
   display: block;
   cursor: pointer;
-  
+
   &-youtube {
     background: url('~/assets/images/youtube.svg') no-repeat center / contain;
   }
@@ -111,5 +111,39 @@ export default {
   color: #7198BA;
   letter-spacing: 0;
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .footer .container {
+    flex-flow: column nowrap;
+  }
+
+  .title {
+    padding-bottom: 8px;
+
+    font-size: 14px;
+  }
+
+  .link {
+    margin-top: 4px;
+
+    font-size: 14px;
+  }
+
+  .social-items {
+    margin-top: 24px;
+  }
+
+  .social {
+    width: 24px;
+    height: 24px;
+    &:not(:first-child) {
+      margin-left: 8px;
+    }
+  }
+
+  .footer-item:not(:first-child) {
+    margin-left: 32px;
+  }
 }
 </style>

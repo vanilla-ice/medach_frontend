@@ -88,4 +88,50 @@ export default {
   letter-spacing: 0;
   margin-top: 25px;
 }
+
+@media (max-width: 768px) {
+  .wrapper {
+    background: #ffffff;
+  }
+
+  .inner {
+    padding: 0 32px;
+    background: #FDFDFD;
+    box-shadow: 0 2px 2px 0 rgba(219,219,219,0.50);
+    border-radius: 8px;
+  }
+
+  .news-item {
+    padding: 12px 0;
+  }
+
+  .head {
+    padding-left: 32px;
+    margin-bottom: 4px;
+  }
+
+  .title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #5B5B5B;
+  }
+
+  .name {
+    font-size: 14px;
+    color: #5B5B5B;
+  }
+
+  .date {
+    margin-top: 8px;
+
+    font-size: 12px;
+    color: #A3A3A3;
+  }
+
+  .flag {
+    width: 20px;
+    height: 16px;
+  }
+
+}
 </style>

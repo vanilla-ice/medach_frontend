@@ -1,5 +1,5 @@
 <template lang="pug">
-.wrapper(v-if="showCarousel")
+.wrapper.desctop(v-if="showCarousel")
   carousel.slider(
     :perPage="1"
   )
@@ -39,7 +39,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.slides)
     this.showCarousel = true
   },
   methods: {

@@ -4,9 +4,10 @@
   .slider-section
     .slider-wrapper
       the-slider(:slides="slides")
+      the-mobile-slider(:slides="slides")
     .news-wrapper
       the-hot-news(:news="news")
-  
+
   .container
     .top-articles
       nuxt-link.article(
@@ -21,10 +22,10 @@
           .tag
             span(v-if="article.tags[0] && article.tags[0] !== ''")
               | {{ article.tags[0] }}
-          
+
           .name
             | {{article.title}}
-    
+
     .blogs-section
       the-blogs(:articles="blogs")
 
@@ -36,7 +37,7 @@
           :image="article.coverImage.url"
           :id="article.id"
         )
-    
+
     .promoted-articles
       .promoted-article(v-for="article in promotedPosts" :key="article.id")
         article-card(
@@ -47,7 +48,7 @@
           :publicationDate="article.pubslish_on"
           :isBigCard="false"
         )
-    
+
     .subscribe-section
       .inner
         .left
@@ -72,6 +73,7 @@ import TheBlogs from '~/components/TheBlogs'
 import MediaCard from '~/components/cards/MediaCard'
 import ArticleCard from '~/components/cards/ArticleCard'
 import TheHeader from '~/components/TheHeader'
+import TheMobileSlider from '~/components/TheMobileSlider'
 
 import { mapGetters } from 'vuex'
 
@@ -82,7 +84,8 @@ export default {
     TheBlogs,
     MediaCard,
     ArticleCard,
-    TheHeader
+    TheHeader,
+    TheMobileSlider
   },
 
   async fetch({store}) {
@@ -101,6 +104,23 @@ export default {
   }
 }
 </script>
+
+<style>
+   .mobile {
+      display: none;
+    }
+
+  @media (max-width: 768px) {
+    .desctop {
+      display: none;
+    }
+
+    .mobile {
+      display: block
+    }
+  }
+</style>
+
 
 <style scoped lang="scss">
 .slider-section {
@@ -175,7 +195,7 @@ export default {
 
 .middle-articles {
   display: flex;
-  flex-flow: row wrap; 
+  flex-flow: row wrap;
   margin-top: 20px;
 }
 
@@ -288,6 +308,74 @@ export default {
   height: 18px;
   cursor: pointer;
   background: url('~/assets/images/send.svg') no-repeat center / contain;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .slider-section {
+    display: flex;
+    flex-flow: column nowrap;
+  }
+
+  .slider-wrapper {
+    order: 2;
+  }
+
+  .news-wrapper {
+    position: relative;
+    order: 1;
+    width: 100%;
+  }
+
+  .promoted-articles {
+    flex-direction: column;
+  }
+
+  .promoted-article {
+    border-radius: 3px;
+    padding-left: 32px;
+    padding-right: 32px;
+
+    &:nth-child(2) {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  .inner {
+    flex-flow: column nowrap;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .left {
+    margin-bottom: 16px;
+  }
+
+  .right {
+    margin-left: 0;
+  }
+
+  .title {
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  .text {
+    font-size: 14px;
+  }
+
+  .input-wrapper {
+    padding: 8px 12px;
+
+    input {
+      font-size: 14px;
+    }
+  }
 }
 </style>
 

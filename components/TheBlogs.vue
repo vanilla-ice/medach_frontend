@@ -12,7 +12,7 @@
             | {{ firstArticle.shortDescription }}
         .footer
           .date
-            | {{ currentDate(firstArticle.publish_on) }}  
+            | {{ currentDate(firstArticle.publish_on) }}
           .author
             | Автор:
             span
@@ -20,7 +20,7 @@
       .blogs__articles-min-wrapper
         nuxt-link(
           v-for="(article, id) in otherArticles"
-          :key="article.id" 
+          :key="article.id"
           :to=" 'articles/' + article.id "
         ).blogs__articles-min-item
           .blogs__articles-min-item-text
@@ -287,7 +287,7 @@ export default {
 
   .blogs__articles-min-item-text {
     margin-bottom: 20px;
-    
+
     font-size: 17px;
     font-family: Montserrat-Regular;
   }
@@ -296,6 +296,57 @@ export default {
   .blogs__articles-min-item-date {
     font-family: Montserrat-Regular;
     font-size: 12px;;
+  }
+}
+
+@media(max-width: 768px) {
+  .blogs__wrapper {
+    width: 100%;
+    padding-left: 32px;
+    padding-right: 32px;
+
+    border-top: none;
+  }
+
+  .blogs-tag {
+    display: inline-block;
+    align-self: flex-start;
+
+    font-weight: 500;
+    font-size: 16px;
+    color: #AFB09A;
+    letter-spacing: 0;
+    border: 2px solid #AFB09A;
+    border-radius: 3px;
+    padding: 4px 8px;
+  }
+
+  .blogs__articles-big {
+    border: none;
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .blogs__articles-min-item {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .blogs__articles-big-text {
+    font-size: 14px;
+  }
+
+  .blogs__container {
+    border-radius: 8px;
+  }
+
+  .blogs__articles-min-item-text {
+    font-size: 14px;
+    font-weight: normal;
+  }
+
+  .blogs__articles-min-wrapper {
+    min-height: auto;
   }
 }
 
