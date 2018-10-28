@@ -310,6 +310,13 @@ export default {
   background: url('~/assets/images/send.svg') no-repeat center / contain;
 }
 
+
+@media (max-width: 1024px) {
+  .promoted-articles {
+    flex-direction: column;
+  }
+}
+
 @media (max-width: 768px) {
   .container {
     padding-left: 0;
@@ -329,10 +336,6 @@ export default {
     position: relative;
     order: 1;
     width: 100%;
-  }
-
-  .promoted-articles {
-    flex-direction: column;
   }
 
   .promoted-article {

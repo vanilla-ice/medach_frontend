@@ -26,7 +26,7 @@
     form.search(@submit.prevent="search" :class="{'search-visible': isOpenSearch}")
       input(type="text" name="search" autocomplete="off" placeholder = "поиск..." v-model="query")
       .search-buffer
-      .search-arrow
+      .search-arrow(@click="search")
 </template>
 
 <script>
