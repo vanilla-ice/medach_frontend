@@ -4,7 +4,6 @@
   .list
     div(v-for="(blogger, id) in bloggers" :key="id")
       | {{blogger}}
-
   .promo-wrapper
     the-popular-authors(:articles="dummyAuthors")
 
