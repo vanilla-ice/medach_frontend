@@ -113,8 +113,8 @@ export default {
 }
 
 .article-wrapper {
-  flex: 1 1 calc(50% - 20px);
-  max-width: 50%;
+  flex: 1 1 auto;
+  max-width: 49.26%;
   margin-top: 20px;
 
   &:nth-child(3n) {

@@ -6,7 +6,7 @@
 
     )
       nuxt-link.content(:to="`/articles/${slide.id}`")
-        .image(:style="{background: `url(${BASE_URL + slide.coverImage.url}) no-repeat center / cover`}")
+        .image(:style="{background: `url(http://medach.pro${slide.coverImage.url}) no-repeat center / cover`}")
         .item-wrapper
           .title
             | {{ slide.title }}

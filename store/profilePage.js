@@ -1,11 +1,14 @@
 import {
-  getUserProfile
+  getUserProfile,
+  getBloggersList
 } from '~/utils/requests'
 
 export const state = () => ({
   articles: [],
   user: {},
-  nextPage: null
+  nextPage: null,
+  bloggers: [],
+  bloggersNextPage: null
 })
 
 export const mutations = {
@@ -18,6 +21,16 @@ export const mutations = {
     state.user = data
   },
 
+  setBloggers(state, data) {
+    state.bloggers = [...data.collection]
+    state.bloggersNextPage = data.meta.nextPage
+  },
+
+  updateBloggers(state, data) {
+    state.bloggers = [...state.bloggers, ...data.collection]
+    state.bloggersNextPage = data.meta.nextPage
+  },
+
   updateArticles(state, {articles, nextPage}) {
     state.articles = [...state.articles, ...articles]
     state.nextPage = nextPage
@@ -26,7 +39,8 @@ export const mutations = {
 
 export const getters = {
   articles: (store) => store.articles,
-  nextPage: (store) => store.nextPage
+  nextPage: (store) => store.nextPage,
+  bloggers: (store) => store.bloggers
 }
 
 export const actions = {
@@ -34,6 +48,20 @@ export const actions = {
     return getUserProfile(page, perPage, query).then(data => {
       commit('setUser', data)
     })
+  },
+
+  fetchBloggers({commit}, {page, perPage}) {
+    return getBloggersList(page, perPage).then(data => {
+      commit('setBloggers', data)
+    })
+  },
+
+  fetchNextBloggers({commit, state}, {perPage}) {
+    if (state.bloggersNextPage) {
+      return getBloggersList(state.bloggersNextPage, perPage).then(data => {
+        commit('updatśBloggers', data)
+      })
+    }
   },
 
   fetchNextPage({commit, state}, {perPage, query}) {

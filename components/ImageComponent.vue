@@ -1,6 +1,6 @@
 <template lang="pug">
 .wrapper
-  .image(v-if="src" :style="{background: `url(${BASE_URL + src}) no-repeat center / cover`}")
+  .image(v-if="src" :style="{background: `url(http://medach.pro${src}) no-repeat center / cover`}")
   .placeholder(v-else)
     span
       | MEDACH

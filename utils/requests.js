@@ -105,6 +105,15 @@ export const getLongreadPost = (id) => {
     .catch(error => console.log('getPost error', error))
 }
 
+export const getBloggersList = (page, per_page) => {
+  return get(`/api/bloggers`, {
+    page,
+    per_page
+  })
+    .then(response => response.data)
+    .catch(error => console.log('getBloggerList error', error))
+}
+
 export const getBlogPost = (id) => {
   return get(`/api/blogs/${id}`)
     .then(response => response.data)
