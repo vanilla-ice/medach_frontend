@@ -1,19 +1,13 @@
 <template lang="pug">
-.wrapper
+.wrapper-1
   the-header
   .list
-    div(v-for="(blogger, id) in bloggers" :key="id")
-      | {{blogger}}
-  .promo-wrapper
-    the-popular-authors(:articles="dummyAuthors")
+    .card-wrapper(v-for="blogger in bloggers" :key="blogger.id")
+      the-blogger-card(:profile="blogger")
 
   .load-more-wrapper
     .load-more(v-if="nextPage" @click="getNextPage")
       | Больше блоггеров
-
-  .interested-wrapper
-    .container
-      interested-articles(:articles="interested")
 </template>
 
 <script>
@@ -22,6 +16,7 @@ const BLOGGERS_PER_PAGE = 10
 import InterestedArticles from '~/components/InterestedArticles'
 import ThePopularAuthors from '~/components/ThePopularAuthors'
 import TheHeader from '~/components/TheHeader'
+import TheBloggerCard from '~/components/TheBloggerCard'
 
 import { mapGetters } from 'vuex'
 
@@ -29,7 +24,8 @@ export default {
   components: {
     InterestedArticles,
     ThePopularAuthors,
-    TheHeader
+    TheHeader,
+    TheBloggerCard
   },
   fetch({store}) {
     return store.dispatch('profilePage/fetchBloggers', {
@@ -80,99 +76,23 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.icon {
-  width: 16px;
-  height: 16px;
-
-  &-grid {
-    background: url('~/assets/images/grid-icon.svg') no-repeat center / contain;
-  }
-
-  &-list {
-    background: url('~/assets/images/list-icon.svg') no-repeat center / contain;
-  }
+.list {
+  padding: 100px 0;
+  max-width: 980px;
+  margin: 0 auto;
+  min-height: calc(100vh - 303px);
 }
 
-.articles {
-  max-width: 880px;
-  flex: 1 1 auto;
-}
-
-.switch-grid {
-  cursor: pointer;
-  user-select: none;
-}
-
-.bottom {
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 24px;
-}
-
-.heading {
-  margin-top: 24px;
-}
-
-.left {
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-}
-
-.sort-button {
-  font-size: 16px;
-  color: #5B5B5B;
-  letter-spacing: 0;
-  cursor: pointer;
-  border-bottom: 2px solid rgba(0,0,0,0);
-
-  &:not(:first-child) {
-    margin-left: 16px;
-  }
-
-  &.active {
-    font-weight: 600;
-    color: #7198BA;
-    letter-spacing: 0;
-    border-color: #7198BA;
-  }
-}
-
-.search-wrapper {
-  display: flex;
-
-  input {
-    flex: 1 1 auto;
-    border: 2px solid #DBDBDB;
-    border-radius: 3px;
-    padding: 8px 20px 6px 20px;
-    outline: none;
-
-    &::placeholder {
-      font-size: 16px;
-      color: #7198BA;
-      letter-spacing: 0;
-    }
-  }
-}
-
-.load-more-wrapper {
-  margin-top: 60px;
-}
-
-.load-more {
-  font-weight: 600;
-  font-size: 16px;
-  color: #FFFFFF;
-  background: #7198BA;
+.card-wrapper {
+  background: #F2F3EC;
   box-shadow: 0 2px 4px 0 rgba(184,184,184,0.50);
-  text-align: center;
-  cursor: pointer;
-  user-select: none;
-  padding: 24px;
+  border-radius: 3px;
+  padding: 15px;
+  &:not(:first-child) {
+    margin-top: 20px;
+  }
 }
+
 
 .interested-wrapper {
   padding: 40px 0;

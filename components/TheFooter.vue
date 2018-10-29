@@ -12,6 +12,7 @@
             | Контакты
           .link
             | Партнеры
+          nuxt-link.link(to="/bloggers") Блоггеры
       .footer-item
         .title
           | Услуги
@@ -24,6 +25,7 @@
             | Контент
           .link
             | Семинары
+          
 
     .right
       .social-items
@@ -106,10 +108,11 @@ export default {
 }
 
 .link {
-  margin-top: 16px;
-  font-size: 16px;
-  color: #7198BA;
-  letter-spacing: 0;
+  display: block;
+  margin-top: 16px !important;
+  font-size: 16px !important;
+  color: #7198BA !important;
+  letter-spacing: 0 !important;
   cursor: pointer;
 }
 
