@@ -1,6 +1,7 @@
 import {
   getUserProfile,
-  getBloggersList
+  getBloggersList,
+  getUserBlogs
 } from '~/utils/requests'
 
 export const state = () => ({
@@ -8,6 +9,8 @@ export const state = () => ({
   user: {},
   nextPage: null,
   bloggers: [],
+  blogPosts: [],
+  blogPostsNextPage: null,
   bloggersNextPage: null
 })
 
@@ -22,12 +25,18 @@ export const mutations = {
   },
 
   setBloggers(state, data) {
-    state.bloggers = [...data.collection]
+    state.articles = [...data.collection]
     state.bloggersNextPage = data.meta.nextPage
   },
 
+  setBlogPosts(state, data) {
+    console.log('set blogs', data)
+    state.articles = [...data.collection]
+    state.blogPostsNextPage = data.meta.nextPage
+  },
+
   updateBloggers(state, data) {
-    state.bloggers = [...state.bloggers, ...data.collection]
+    state.articles = [...state.articles, ...data.collection]
     state.bloggersNextPage = data.meta.nextPage
   },
 
@@ -58,10 +67,17 @@ export const actions = {
     })
   },
 
+  fetchBlogs({commit}, {id}) {
+    return getUserBlogs(id).then(data => {
+      console.log('fetch blogs', data)
+      commit('setBlogPosts', data)
+    })
+  },
+
   fetchNextBloggers({commit, state}, {perPage}) {
     if (state.bloggersNextPage) {
       return getBloggersList(state.bloggersNextPage, perPage).then(data => {
-        commit('updatśBloggers', data)
+        commit('updateBloggers', data)
       })
     }
   },

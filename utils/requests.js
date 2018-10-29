@@ -165,3 +165,9 @@ export const getUserProfile = (id) => {
     .then(response => response.data)
     .catch(error => console.log('getUserProfile error', error))
 }
+
+export const getUserBlogs = (id) => {
+  return get(`/api/users/${id}/blogs`)
+    .then(response => response.data)
+    .catch(error => console.log('getUserBlogs error', error))
+}

@@ -88,6 +88,7 @@ export default {
     return store.dispatch('profilePage/fetchProfile', {
       id: params.id
     })
+      .then(() => store.dispatch('profilePage/fetchBlogs', {id: params.id}))
       .then(() => store.dispatch('interestedArticles/fetchInterestedArticles'))
   },
   data() {
@@ -120,13 +121,13 @@ export default {
   },
   created() {
     this.debouncedSearch = debounce(this.getSearchResults, SEARCH_INTERVAL)
-    console.log("profile", this.profile)
+    console.log("profile", this.profile, this.articles)
   },
   computed: {
     ...mapGetters({
-      articles: 'categoryPage/articles',
+      articles: 'profilePage/articles',
       interested: 'interestedArticles/articles',
-      nextPage: 'categoryPage/nextPage',
+      nextPage: 'profilePage/nextPage',
       profile: 'profilePage/profile'
     }),
     perPage() {
