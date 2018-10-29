@@ -38,9 +38,9 @@ export default {
     TheHeader
   },
   fetch({store, query}) {
-    return store.dispatch('searchPage/search', { 
-      page: 1, 
-      perPage: ARTICLES_PER_PAGE, 
+    return store.dispatch('searchPage/search', {
+      page: 1,
+      perPage: ARTICLES_PER_PAGE,
       query: query.query
     })
   },
@@ -61,7 +61,7 @@ export default {
     getNextPage() {
       return this.$store.dispatch('searchPage/fetchNextPage', {
         page: this.nextPage,
-        perPage: ARTICLES_PER_PAGE, 
+        perPage: ARTICLES_PER_PAGE,
         query: this.searchQuery === '' ? null : this.searchQuery
       })
     },
@@ -69,9 +69,9 @@ export default {
 
   watch: {
     searchQuery: function(e) {
-      return this.$store.dispatch('searchPage/search', { 
-        page: 1, 
-        perPage: ARTICLES_PER_PAGE, 
+      return this.$store.dispatch('searchPage/search', {
+        page: 1,
+        perPage: ARTICLES_PER_PAGE,
         query: this.searchQuery
       })
     }
@@ -200,6 +200,13 @@ export default {
   max-width: 400px;
   flex: 1 1 auto;
   margin-top: 24px;
+}
+
+
+@media (max-width: 1024px) {
+  .promo-wrapper {
+    display: none;
+  }
 }
 </style>
 

@@ -17,7 +17,7 @@
         | On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.
       .right-text
         | On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.
-  
+
   .container.row
     .articles
       .heading
@@ -38,7 +38,7 @@
       .articles-view
         list-articles-view(v-if="isList" :articles="articles" key="list-view")
         grid-articles-view(v-else :articles="articles" key="grid-view")
-    
+
     .promo-wrapper
       the-popular-authors(:articles="dummyAuthors")
 
@@ -76,7 +76,7 @@ export default {
     TheHeader
   },
   fetch({store, params}) {
-    return store.dispatch('profilePage/fetchProfile', { 
+    return store.dispatch('profilePage/fetchProfile', {
       id: params.id
     })
       .then(() => store.dispatch('interestedArticles/fetchInterestedArticles'))
@@ -128,9 +128,9 @@ export default {
     switchView() {
       this.isList = !this.isList
 
-      return this.$store.dispatch('categoryPage/fetchCategory', { 
-        page: 1, 
-        perPage: this.perPage, 
+      return this.$store.dispatch('categoryPage/fetchCategory', {
+        page: 1,
+        perPage: this.perPage,
         isSortByPopular: this.isPopular,
         category: this.currentCategory
       })
@@ -141,9 +141,9 @@ export default {
       if (this.isPopular) {
         this.isPopular = false
 
-        return this.$store.dispatch('categoryPage/fetchCategory', { 
-          page: 1, 
-          perPage: this.perPage, 
+        return this.$store.dispatch('categoryPage/fetchCategory', {
+          page: 1,
+          perPage: this.perPage,
           isSortByPopular: this.isPopular,
           category: this.currentCategory
         })
@@ -155,9 +155,9 @@ export default {
       if (!this.isPopular) {
         this.isPopular = true
 
-        return this.$store.dispatch('categoryPage/fetchCategory', { 
-          page: 1, 
-          perPage: this.perPage, 
+        return this.$store.dispatch('categoryPage/fetchCategory', {
+          page: 1,
+          perPage: this.perPage,
           isSortByPopular: this.isPopular,
           category: this.currentCategory
         })
@@ -167,7 +167,7 @@ export default {
     getNextPage() {
       return this.$store.dispatch('categoryPage/fetchNextPage', {
         page: this.nextPage,
-        perPage: this.perPage, 
+        perPage: this.perPage,
         category: this.currentCategory,
         isSortByPopular: this.isPopular,
         query: this.searchQuery === '' ? null : this.searchQuery
@@ -175,9 +175,9 @@ export default {
     },
 
     getSearchResults() {
-      return this.$store.dispatch('categoryPage/fetchCategory', { 
-        page: 1, 
-        perPage: this.perPage, 
+      return this.$store.dispatch('categoryPage/fetchCategory', {
+        page: 1,
+        perPage: this.perPage,
         isSortByPopular: this.isPopular,
         category: this.currentCategory,
         query: this.searchQuery === '' ? null : this.searchQuery
@@ -191,9 +191,9 @@ export default {
         this.debouncedSearch()
       }
       else {
-        return this.$store.dispatch('categoryPage/fetchCategory', { 
-          page: 1, 
-          perPage: this.perPage, 
+        return this.$store.dispatch('categoryPage/fetchCategory', {
+          page: 1,
+          perPage: this.perPage,
           isSortByPopular: this.isPopular,
           category: this.currentCategory
         })
@@ -318,6 +318,12 @@ export default {
 .profile-img {
   min-height: 320px;
   background: url('~/assets/images/profile.jpg') no-repeat center / cover;
+}
+
+@media (max-width: 1024px) {
+  .promo-wrapper {
+    display: none;
+  }
 }
 </style>
 

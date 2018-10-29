@@ -32,7 +32,7 @@
             | Смотрите наши видеолекции на YouTube
   .container.row
     .articles
-    
+
       .heading
         .top
           .search-wrapper
@@ -51,7 +51,7 @@
       .articles-view
         list-articles-view(v-if="isList" :articles="articles" key="list-view")
         grid-articles-view(v-else :articles="articles" key="grid-view")
-    
+
     .promo-wrapper
       the-popular-authors(:articles="dummyAuthors")
 
@@ -89,7 +89,7 @@ export default {
     TheHeader
   },
   fetch({store, params}) {
-    
+
     return store.dispatch('mediaPage/fetchMedia', {
       page: 1,
       perPage: ARTICLES_PER_PAGE_LIST,
@@ -144,9 +144,9 @@ export default {
     switchView() {
       this.isList = !this.isList
 
-      return this.$store.dispatch('mediaPage/fetchMedia', { 
-        page: 1, 
-        perPage: this.perPage, 
+      return this.$store.dispatch('mediaPage/fetchMedia', {
+        page: 1,
+        perPage: this.perPage,
         isSortByPopular: this.isPopular,
         category: this.currentCategory
       })
@@ -157,9 +157,9 @@ export default {
       if (this.isPopular) {
         this.isPopular = false
 
-        return this.$store.dispatch('mediaPage/fetchMedia', { 
-          page: 1, 
-          perPage: this.perPage, 
+        return this.$store.dispatch('mediaPage/fetchMedia', {
+          page: 1,
+          perPage: this.perPage,
           isSortByPopular: this.isPopular,
           category: this.currentCategory
         })
@@ -171,9 +171,9 @@ export default {
       if (!this.isPopular) {
         this.isPopular = true
 
-        return this.$store.dispatch('mediaPage/fetchMedia', { 
-          page: 1, 
-          perPage: this.perPage, 
+        return this.$store.dispatch('mediaPage/fetchMedia', {
+          page: 1,
+          perPage: this.perPage,
           isSortByPopular: this.isPopular,
           category: this.currentCategory
         })
@@ -183,7 +183,7 @@ export default {
     getNextPage() {
       return this.$store.dispatch('mediaPage/fetchMedia', {
         page: this.nextPage,
-        perPage: this.perPage, 
+        perPage: this.perPage,
         category: this.currentCategory,
         isSortByPopular: this.isPopular,
         query: this.searchQuery === '' ? null : this.searchQuery
@@ -191,9 +191,9 @@ export default {
     },
 
     getSearchResults() {
-      return this.$store.dispatch('mediaPage/fetchMedia', { 
-        page: 1, 
-        perPage: this.perPage, 
+      return this.$store.dispatch('mediaPage/fetchMedia', {
+        page: 1,
+        perPage: this.perPage,
         isSortByPopular: this.isPopular,
         category: this.currentCategory,
         query: this.searchQuery === '' ? null : this.searchQuery
@@ -207,9 +207,9 @@ export default {
         this.debouncedSearch()
       }
       else {
-        return this.$store.dispatch('categoryPage/fetchCategory', { 
-          page: 1, 
-          perPage: this.perPage, 
+        return this.$store.dispatch('categoryPage/fetchCategory', {
+          page: 1,
+          perPage: this.perPage,
           isSortByPopular: this.isPopular,
           category: this.currentCategory
         })
@@ -399,7 +399,7 @@ export default {
     right: -19px;
     top: 0;
     transform: rotate(45deg);
-  
+
   }
 
   span {
@@ -432,6 +432,12 @@ export default {
 
 .text {
   margin-left: 24px;
+}
+
+@media (max-width: 1024px) {
+  .promo-wrapper {
+    display: none;
+  }
 }
 </style>
 
