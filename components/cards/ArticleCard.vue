@@ -176,8 +176,9 @@ export default {
   }
 
 
-  .image-wrapper {
+  .list-card-wrapper .image-wrapper {
     height: 64vw !important;
+    border-radius: 0;
   }
 
   .content {

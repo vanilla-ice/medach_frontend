@@ -9,14 +9,17 @@
       .info
         .name
           | Dental Jedi
-        .social
-          | social
-
+        .social-items
+          .social.social-facebook
+          .social.social-telegram
+          .social.social-instagram
     .about
-      .left-text
+      .about-text
         | On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.
-      .right-text
+      .about-text
         | On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.
+    .autor-articles
+      | Статьи Автора
 
   .container.row
     .articles
@@ -227,6 +230,11 @@ export default {
   user-select: none;
 }
 
+.container {
+  position: relative;
+  z-index: 4;
+}
+
 .bottom {
   display: flex;
   flex-flow: row nowrap;
@@ -315,9 +323,110 @@ export default {
   margin-top: 24px;
 }
 
+.profile-info {
+  margin-bottom: 54px;
+}
+
 .profile-img {
+  position: relative;
+  z-index: 2;
+
   min-height: 320px;
   background: url('~/assets/images/profile.jpg') no-repeat center / cover;
+}
+
+.avatar {
+  position: absolute;
+  left: 30px;
+  top: -32px;
+  width: 160px;
+  height: 160px;
+
+  background: url('~/assets/images/profile.jpg') no-repeat center / cover;
+  border: 4px solid #FFFFFF;
+  border-radius: 50%;
+}
+
+.info {
+  padding-top: 24px;
+  padding-left: 184px;
+}
+
+.name {
+  margin-bottom: 16px;
+
+  font-size: 24px;
+  font-weight: bold;
+  color: #5B5B5B;
+}
+
+.social-items {
+  position: relative;
+
+  display: flex;
+  flex-flow: row wrap;
+  padding-bottom: 17px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    display: block;
+    width: 120px;
+    height: 1px;
+    background: #AFB09A;
+  }
+}
+
+.social {
+  width: 24px;
+  height: 24px;
+  display: block;
+  cursor: pointer;
+
+  &-youtube {
+    background: url('~/assets/images/youtube.svg') no-repeat center / contain;
+  }
+  &-vk {
+    background: url('~/assets/images/vk.svg') no-repeat center / contain;
+  }
+  &-telegram {
+    background: url('~/assets/images/telegram.svg') no-repeat center / contain;
+  }
+  &-instagram {
+    background: url('~/assets/images/instagram.svg') no-repeat center / contain;
+  }
+  &-twitter {
+    background: url('~/assets/images/twitter.svg') no-repeat center / contain;
+  }
+  &-facebook {
+    background: url('~/assets/images/facebook.svg') no-repeat center / contain;
+  }
+
+  &:not(:first-child) {
+    margin-left: 10px;
+  }
+}
+
+.about {
+  display: flex;
+  flex: 1 1 50%;
+}
+
+.about-text:nth-child(1) {
+  padding-right: 40px;
+}
+
+.about-text:nth-child(2) {
+  padding-left: 40px;
+}
+
+.autor-articles {
+  margin-top: 60px;
+
+  font-size: 24px;
 }
 
 @media (max-width: 1024px) {
@@ -341,6 +450,27 @@ export default {
   .interested-wrapper {
     padding-top: 16px;
     padding-bottom: 0;
+  }
+
+  .avatar {
+    width: 100px;
+    height: 100px;
+    border: 2px solid #FFFFFF;
+    top: -16px;
+  }
+
+  .info {
+    padding-top: 16px;
+    padding-left: 112px;
+  }
+
+  .name {
+    margin-bottom: 8px;
+    font-size: 16px;
+  }
+
+  .social-items {
+    padding-bottom: 8px;
   }
 }
 </style>

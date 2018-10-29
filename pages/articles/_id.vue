@@ -13,7 +13,7 @@
     .article-wrapper
       .article.content-article-wrapper(v-html="article.body")
       .promo
-       
+
 
 
     .interested-wrapper
@@ -129,6 +129,12 @@ export default {
     letter-spacing: 0;
     line-height: 29px;
     margin-top: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .article-wrapper {
+    margin-top: 16px;
   }
 }
 </style>

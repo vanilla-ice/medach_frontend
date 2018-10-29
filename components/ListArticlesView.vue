@@ -31,4 +31,10 @@ export default {
 .article-wrapper {
   margin-top: 40px;
 }
+
+@media(max-width: 768px) {
+  .article-wrapper {
+    margin-top: 16px;
+  }
+}
 </style>
