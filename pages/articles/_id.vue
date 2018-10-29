@@ -119,6 +119,12 @@ export default {
   margin-left: 80px;
 }
 
+@media (max-width: 768px) {
+  .article-wrapper {
+    margin-top: 16px;
+  }
+}
+
 </style>
 
 <style lang="scss">
@@ -133,8 +139,26 @@ export default {
 }
 
 @media (max-width: 768px) {
-  .article-wrapper {
+  .image-wrapper img {
+    width: 100%;
+  }
+
+  .content-article-wrapper {
+    margin-left: 0 !important;
+  }
+
+  .content-article-wrapper img {
+    width: 100% !important;
+    height: auto !important;
+  }
+  .promo {
+    display: none;
+  }
+
+  .content-article-wrapper p {
     margin-top: 16px;
+    font-size: 14px;
+    line-height: 20px;
   }
 }
 </style>
