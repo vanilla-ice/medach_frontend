@@ -88,6 +88,17 @@ export const getLongreadArticles = (page, per_page, isSortByPopular, query) => {
     .catch(error => console.log('get articles error', error))
 }
 
+export const getCasesArticles = (page, per_page, isSortByPopular, query) => {
+  return get(`/api/cases`, {
+    page,
+    per_page,
+    'sort[col]': isSortByPopular ? 'impressions_count' : 'publish_on',
+    query
+  })
+    .then(response => response.data)
+    .catch(error => console.log('get articles error', error))
+}
+
 export const getLongreadPost = (id) => {
   return get(`/api/articles/${id}`)
     .then(response => response.data)

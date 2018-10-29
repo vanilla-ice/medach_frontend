@@ -2,11 +2,11 @@ import {
   getBlogs,
   getNews,
   getLongreadArticles,
-  getPostsByTag
+  getPostsByTag,
+  getCasesArticles
 } from '~/utils/requests'
 
 const translatedCategories = {
-  cases: 'кейсы',
   guides: 'руководства',
   translated: 'переводы'
 }
@@ -62,6 +62,15 @@ export const actions = {
             nextPage: data.meta.nextPage
           })
         })
+
+      case 'cases':
+        return getCasesArticles(page, perPage, isSortByPopular, query).then(data => {
+          commit('setArticles', { 
+            articles: data.collection,
+            nextPage: data.meta.nextPage
+          })
+        })
+      
 
       default: 
         return getPostsByTag(translatedCategories[category], page, perPage, isSortByPopular, query).then(data => {
