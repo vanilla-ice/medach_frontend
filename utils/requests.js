@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const axiosInstance = axios.create({
-  baseURL: process.env.BASE_URL,
+  baseURL: 'http://142.93.13.232',
   timeout: 50000,
   headers: {},
   withCredentials: false
@@ -84,7 +84,10 @@ export const getLongreadArticles = (page, per_page, isSortByPopular, query) => {
     'sort[col]': isSortByPopular ? 'impressions_count' : 'publish_on',
     query
   })
-    .then(response => response.data)
+    .then(response => {
+      console.log('response', response)
+      response.data
+    })
     .catch(error => console.log('get articles error', error))
 }
 

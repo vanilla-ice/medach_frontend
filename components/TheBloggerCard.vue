@@ -1,6 +1,6 @@
 <template lang="pug">
 nuxt-link.wrapper(:to="`/profile/${profile.id}`")
-  .avatar(:style="{'background': `url(http://localhost:8080${profile.user_profile.avatar.url}) no-repeat center / cover`}")
+  .avatar(:style="{'background': `url(${BASE_URL}${profile.user_profile.avatar.url}) no-repeat center / cover`}")
   .info
     .title
       | {{ profile.full_name }}

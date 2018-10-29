@@ -69,7 +69,6 @@ export const actions = {
 
   fetchBlogs({commit}, {id}) {
     return getUserBlogs(id).then(data => {
-      console.log('fetch blogs', data)
       commit('setBlogPosts', data)
     })
   },

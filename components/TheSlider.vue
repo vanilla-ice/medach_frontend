@@ -6,7 +6,7 @@
     slide.slide(
       v-for="(slide, index) in slides",
       :key="slide.id",
-      :style="{background: `url(http://medach.pro${slide.coverImage.url}) no-repeat center / cover`}"
+      :style="{background: `url(${BASE_URL}${slide.coverImage.url}) no-repeat center / cover`}"
     )
       nuxt-link.content(:to="`/articles/${slide.id}`")
         .title

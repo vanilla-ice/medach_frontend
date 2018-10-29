@@ -1,7 +1,7 @@
 <template lang="pug">
 nuxt-link.card-wrapper(
   :to="`/articles/${id}`"
-  :style="{background: `url(http://medach.pro${image}) no-repeat center / cover`}"
+  :style="{background: `url(${BASE_URL}${image}) no-repeat center / cover`}"
 )
 
   .gradient
