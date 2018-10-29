@@ -91,4 +91,38 @@ export default {
     border: 2px solid #AFB09A;
   }
 }
+
+@media (max-width: 768px) {
+  .card-wrapper {
+    min-height: 80vw;
+  }
+}
+
+@media (max-width: 580px) {
+  .card-wrapper {
+    padding-bottom: 12px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .name {
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  .tags {
+    margin-bottom: 8px;
+  }
+
+  .tags .tag {
+    font-size: 12px;
+    border-width: 1px;
+  }
+
+  .tag {
+    &:not(:first-child) {
+      margin-left: 5px;
+    }
+  }
+}
 </style>

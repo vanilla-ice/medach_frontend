@@ -330,10 +330,19 @@ export default {
   .blogs__articles-min-item {
     padding-right: 0;
     padding-left: 0;
+
+    &:nth-child(even) {
+      margin-left: 0;
+    }
+
+    &:nth-child(n+3) {
+      margin-top: 0;
+    }
   }
 
   .blogs__articles-big-text {
     font-size: 14px;
+    line-height: 20px;
   }
 
   .blogs__container {

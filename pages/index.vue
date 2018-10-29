@@ -346,13 +346,14 @@ export default {
 
   .promoted-article {
     border-radius: 3px;
-    padding-left: 32px;
-    padding-right: 32px;
-
     &:nth-child(2) {
       margin-left: 0;
       margin-right: 0;
     }
+  }
+
+  .top-articles {
+    flex-flow: column nowrap;
   }
 
   .inner {
@@ -376,6 +377,7 @@ export default {
 
   .text {
     font-size: 14px;
+    line-height: 20px;
   }
 
   .input-wrapper {
@@ -384,6 +386,51 @@ export default {
     input {
       font-size: 14px;
     }
+  }
+
+  .article {
+    min-height: 80vw;
+
+    &:not(:last-child) {
+      margin-bottom: 16px;
+    }
+    &:not(:first-child) {
+      margin-left: 0;
+    }
+  }
+
+  .middle-articles {
+    flex-flow: column nowrap;
+  }
+
+  .article-wrapper:nth-child(2) {
+    margin-left: 0;
+  }
+
+  .article-wrapper:not(:first-child) {
+    margin-top: 16px;
+  }
+}
+
+@media (max-width: 580px) {
+  .content {
+    padding-bottom: 12px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .name {
+    margin-top: 8px;
+
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  .content .tag {
+    margin-top: auto;
+
+    font-size: 12px;
+    border-width: 1px;
   }
 }
 </style>

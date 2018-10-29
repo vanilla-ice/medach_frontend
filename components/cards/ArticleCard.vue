@@ -168,5 +168,27 @@ export default {
   }
 }
 
+@media (max-width: 768px) {
+  .content {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .name {
+    margin-top: 12px;
+
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: normal;
+  }
+
+  .bottom {
+    margin-top: 0px;
+  }
+
+  .tag {
+    margin-right: 4px;
+  }
+}
 
 </style>
