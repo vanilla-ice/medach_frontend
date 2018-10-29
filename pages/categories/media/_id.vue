@@ -105,20 +105,20 @@ export default {
       dummyAuthors: [
         {
           publicationDate: new Date(),
-          title: 'Владимир Владимирович',
-          author: 'Владимирович',
+          title: 'Круиз до фиджи',
+          author: 'Артем Соминов',
           id: 1
         },
         {
           publicationDate: new Date(),
-          title: 'Много Много',
-          author: 'Подливы',
+          title: 'Анти-VEGF-терапия',
+          author: 'Неизвестен',
           id: 2
         },
         {
           publicationDate: new Date(),
-          title: 'Владимирович Путин',
-          author: 'Владимир',
+          title: 'Дания практика в отделении торакальной хирургии',
+          author: 'Азат Музин',
           id: 3
         }
       ]

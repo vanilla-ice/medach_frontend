@@ -41,13 +41,13 @@ export const getters = {
   articles: (store) => store.articles,
   nextPage: (store) => store.nextPage,
   bloggersNextPage: (store) => store.bloggersNextPage,
-  bloggers: (store) => store.bloggers
-  
+  bloggers: (store) => store.bloggers,
+  profile: (store) => store.user
 }
 
 export const actions = {
-  fetchProfile({commit}, {page, perPage, query}) {
-    return getUserProfile(page, perPage, query).then(data => {
+  fetchProfile({commit}, {id}) {
+    return getUserProfile(id).then(data => {
       commit('setUser', data)
     })
   },

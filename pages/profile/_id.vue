@@ -5,21 +5,25 @@
 
   .container
     .profile-info
-      .avatar
+      .avatar(:style="{background: `url(http://localhost:8080${profile.user_profile.avatar.url})`}")
       .info
         .name
-          | Dental Jedi
+          | {{ profile.full_name }}
         .social-items
           a(href="#").social.social-facebook
           a(href="#").social.social-telegram
           a(href="#").social.social-instagram
     .about
       .about-text
+<<<<<<< HEAD
         | On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.
         .more(@click="isAboutText = !isAboutText" v-if="isAboutText")
           | Читать дальше...
       .about-text(:class="{visible: !isAboutText}")
         | On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.
+=======
+        | {{ profile.user_profile.about }}
+>>>>>>> Feature: blogger page improve
     .autor-articles
       | Статьи Автора
 
@@ -95,20 +99,20 @@ export default {
       dummyAuthors: [
         {
           publicationDate: new Date(),
-          title: 'Владимир Владимирович',
-          author: 'Владимирович',
+          title: 'Круиз до фиджи',
+          author: 'Артем Соминов',
           id: 1
         },
         {
           publicationDate: new Date(),
-          title: 'Много Много',
-          author: 'Подливы',
+          title: 'Анти-VEGF-терапия',
+          author: 'Неизвестен',
           id: 2
         },
         {
           publicationDate: new Date(),
-          title: 'Владимирович Путин',
-          author: 'Владимир',
+          title: 'Дания практика в отделении торакальной хирургии',
+          author: 'Азат Музин',
           id: 3
         }
       ]
@@ -116,12 +120,14 @@ export default {
   },
   created() {
     this.debouncedSearch = debounce(this.getSearchResults, SEARCH_INTERVAL)
+    console.log("profile", this.profile)
   },
   computed: {
     ...mapGetters({
       articles: 'categoryPage/articles',
       interested: 'interestedArticles/articles',
-      nextPage: 'categoryPage/nextPage'
+      nextPage: 'categoryPage/nextPage',
+      profile: 'profilePage/profile'
     }),
     perPage() {
       return this.isList ? ARTICLES_PER_PAGE_LIST : ARTICLES_PER_PAGE_GRID
