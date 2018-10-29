@@ -10,13 +10,15 @@
         .name
           | Dental Jedi
         .social-items
-          .social.social-facebook
-          .social.social-telegram
-          .social.social-instagram
+          a(href="#").social.social-facebook
+          a(href="#").social.social-telegram
+          a(href="#").social.social-instagram
     .about
       .about-text
         | On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.
-      .about-text
+        .more(@click="isAboutText = !isAboutText" v-if="isAboutText")
+          | Читать дальше...
+      .about-text(:class="{visible: !isAboutText}")
         | On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.
     .autor-articles
       | Статьи Автора
@@ -89,6 +91,7 @@ export default {
       isList: true,
       isPopular: false,
       searchQuery: '',
+      isAboutText: 'true',
       dummyAuthors: [
         {
           publicationDate: new Date(),
@@ -381,6 +384,7 @@ export default {
 }
 
 .social {
+  display: block;
   width: 24px;
   height: 24px;
   display: block;
@@ -420,6 +424,7 @@ export default {
 }
 
 .about-text:nth-child(2) {
+  display: block;
   padding-left: 40px;
 }
 
@@ -429,6 +434,12 @@ export default {
   font-size: 24px;
 }
 
+.more {
+  display: none;
+  font-size: 16px;
+  color: #7198BA;
+}
+
 @media (max-width: 1024px) {
   .promo-wrapper {
     display: none;
@@ -436,6 +447,10 @@ export default {
 }
 
 @media(max-width: 768px) {
+  .right {
+    display: none;
+  }
+
   .load-more-wrapper {
     margin-top: 24px;
     padding-bottom: 24px;
@@ -471,6 +486,35 @@ export default {
 
   .social-items {
     padding-bottom: 8px;
+  }
+
+  .about {
+    flex-flow: column nowrap;
+  }
+
+  .more {
+    display: block;
+    margin-top: 16px;
+
+    text-align: right;
+  }
+
+  .about-text:nth-child(1) {
+    padding-right: 0;
+    margin-bottom: 16px;
+  }
+
+  .about-text:nth-child(2) {
+    padding-left: 0;
+    display: none;
+  }
+
+  .about-text.visible {
+    display: block;
+  }
+
+  .autor-articles {
+    margin-top: 30px;
   }
 }
 </style>
