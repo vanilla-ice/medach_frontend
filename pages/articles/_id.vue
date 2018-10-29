@@ -11,7 +11,7 @@
       img(:src="`http://medach.pro${article.coverImage.url}`")
 
     .article-wrapper
-      .article.content-article-wrapper(v-html="article.body")
+      .article.content-article-wrapper(v-html="articleBody")
       .promo
 
 
@@ -50,7 +50,11 @@ export default {
     ...mapGetters({
       article: 'articlePage/article',
       interested: 'interestedArticles/articles',
-    })
+    }),
+
+    articleBody() {
+      return this.article.body.replace('<img src="', '<img src="http://medach.pro')
+    }
   },
   methods: {
   }
@@ -130,11 +134,45 @@ export default {
 <style lang="scss">
 .content-article-wrapper {
   p {
-    font-size: 20px;
-    color: #5B5B5B;
+    font-size: 18px;
+    color: #000000;
     letter-spacing: 0;
     line-height: 29px;
     margin-top: 24px;
+  }
+
+  .editor_img-title {
+    width: 100%;
+    color: #fff;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 18px;
+    background: #30312f;
+    border-top: 2px solid #000;
+    border-left: 2px solid #000;
+    border-right: 2px solid #000;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    padding: 10px 10px 10px 20px;
+    line-height: 20px;
+  }
+
+  .editor_img-content {
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #30312f;
+    border-left: 2px solid #000;
+    border-right: 2px solid #000;
+    border-bottom: 2px solid #000;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    padding: 10px 10px 10px 20px;
+    line-height: 20px;
+  }
+
+  li {
+    font-size: 16px;
+    padding: 10px;
   }
 }
 

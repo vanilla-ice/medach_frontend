@@ -40,7 +40,9 @@ export const mutations = {
 export const getters = {
   articles: (store) => store.articles,
   nextPage: (store) => store.nextPage,
+  bloggersNextPage: (store) => store.bloggersNextPage,
   bloggers: (store) => store.bloggers
+  
 }
 
 export const actions = {
