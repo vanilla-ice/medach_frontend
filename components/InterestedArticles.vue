@@ -1,9 +1,9 @@
 <template lang="pug">
-.wrapper 
+.wrapper
   .title
     | Вам будет интересно
-  
-  .inner 
+
+  .inner
     .article-wrapper(v-for="article in articles" :key="article.id")
       article-card(
         :name="article.title"
@@ -59,6 +59,36 @@ export default {
 
   &:nth-child(2) {
     margin: 0 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    padding-left: 32px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: left;
+
+    &::after {
+      left: 32px;
+      transform: translateX(0);
+    }
+  }
+
+  .article-wrapper {
+    width: 100%;
+    margin-bottom: 16px;
+
+    &:nth-child(2) {
+      margin-left: 0;
+      margin-right: 0;
+      margin-bottom: 16px;
+    }
+  }
+
+  .inner {
+    margin-top: 16px;
+    flex-flow: column nowrap;
   }
 }
 </style>

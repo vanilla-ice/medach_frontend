@@ -39,7 +39,7 @@
           :image="article.cover_image.url"
           :id="article.id"
         )
-    
+
   .load-more-wrapper
     .load-more(v-if="nextPage" @click="getNextPage")
       | Больше статей
@@ -201,7 +201,7 @@ export default {
     right: -19px;
     top: 0;
     transform: rotate(45deg);
-  
+
   }
 
   span {
@@ -234,6 +234,24 @@ export default {
 
 .text {
   margin-left: 24px;
+}
+
+@media(max-width: 768px) {
+  .load-more-wrapper {
+    margin-top: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #AFB09A;
+  }
+
+  .load-more {
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+
+  .interested-wrapper {
+    padding-top: 16px;
+    padding-bottom: 0;
+  }
 }
 </style>
 

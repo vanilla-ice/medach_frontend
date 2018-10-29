@@ -52,6 +52,9 @@
     background: #ffffff;
 
     display: none;
+
+    padding-top: 9px;
+    padding-bottom: 9px;
   }
 
   .mobile-menu {
@@ -179,6 +182,8 @@
 @media (max-width: 1024px) {
   .container-mobile {
     display: block;
+    padding-left: 16px;
+    padding-right: 16px;
   }
 }
 </style>

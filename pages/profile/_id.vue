@@ -325,5 +325,23 @@ export default {
     display: none;
   }
 }
+
+@media(max-width: 768px) {
+  .load-more-wrapper {
+    margin-top: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #AFB09A;
+  }
+
+  .load-more {
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+
+  .interested-wrapper {
+    padding-top: 16px;
+    padding-bottom: 0;
+  }
+}
 </style>
 

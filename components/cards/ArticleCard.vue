@@ -169,9 +169,21 @@ export default {
 }
 
 @media (max-width: 768px) {
+  .card-wrapper {
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    box-shadow: 0 2px 2px 0 rgba(219, 219, 219, .5);
+  }
+
+
+  .image-wrapper {
+    height: 64vw !important;
+  }
+
   .content {
     padding-left: 32px;
     padding-right: 32px;
+    padding-bottom: 12px;
   }
 
   .name {
@@ -188,6 +200,10 @@ export default {
 
   .tag {
     margin-right: 4px;
+  }
+
+  .footer {
+    display: none;
   }
 }
 

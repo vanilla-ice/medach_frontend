@@ -4,7 +4,7 @@
   .list
     div(v-for="(blogger, id) in bloggers" :key="id")
       | {{blogger}}
-  
+
   .promo-wrapper
     the-popular-authors(:articles="dummyAuthors")
 
@@ -33,7 +33,7 @@ export default {
     TheHeader
   },
   fetch({store}) {
-    return store.dispatch('profilePage/fetchBloggers', { 
+    return store.dispatch('profilePage/fetchBloggers', {
       page: 1,
       per_page: BLOGGERS_PER_PAGE
     })
@@ -195,6 +195,24 @@ export default {
 .profile-img {
   min-height: 320px;
   background: url('~/assets/images/profile.jpg') no-repeat center / cover;
+}
+
+@media(max-width: 768px) {
+  .load-more-wrapper {
+    margin-top: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #AFB09A;
+  }
+
+  .load-more {
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+
+  .interested-wrapper {
+    padding-top: 16px;
+    padding-bottom: 0;
+  }
 }
 </style>
 
