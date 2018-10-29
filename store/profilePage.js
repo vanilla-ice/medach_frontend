@@ -16,7 +16,6 @@ export const mutations = {
 
   setUser(state, data) {
     state.user = data
-    console.log('state', state.user)
   },
 
   updateArticles(state, {articles, nextPage}) {

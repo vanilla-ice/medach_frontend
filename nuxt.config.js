@@ -20,6 +20,9 @@ module.exports = {
   /*
   ** Build configuration
   */
+  env: {
+    BASE_URL: process.env.BASE_URL
+  },
   build: {
     /*
     ** Run ESLint on save

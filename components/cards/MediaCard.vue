@@ -1,7 +1,7 @@
 <template lang="pug">
 nuxt-link.card-wrapper(
   :to="`/articles/${id}`"
-  :style="{background: `url(http://localhost:8080${image}) no-repeat center / cover`}"
+  :style="{background: `url(${BASE_URL + image}) no-repeat center / cover`}"
 )
 
   .gradient
@@ -21,7 +21,12 @@ export default {
     image: String,
     id: [String, Number]
   },
-  name: 'MediaCard'
+  name: 'MediaCard',
+  data() {
+    return {
+      BASE_URL: process.env.BASE_URL
+    }
+  }
 }
 </script>
 

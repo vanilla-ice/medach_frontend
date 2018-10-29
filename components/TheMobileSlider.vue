@@ -6,7 +6,7 @@
 
     )
       nuxt-link.content(:to="`/articles/${slide.id}`")
-        .image(:style="{background: `url(http://localhost:8080${slide.coverImage.url}) no-repeat center / cover`}")
+        .image(:style="{background: `url(${BASE_URL + slide.coverImage.url}) no-repeat center / cover`}")
         .item-wrapper
           .title
             | {{ slide.title }}
@@ -29,8 +29,10 @@
         return format(date, 'MMMM DD, YYYY', {locale: ru})
       }
     },
-    mounted() {
-      console.log(this.slides)
+    data() {
+      return {
+        BASE_URL: process.env.BASE_URL
+      }
     }
   }
 </script>

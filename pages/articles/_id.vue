@@ -8,12 +8,12 @@
       .tag(v-for="tag in article.tags" :key="`${article.id}-${article.tag}`")
         | {{ tag }}
     .image-wrapper
-      img(:src="`http://localhost:8080${article.coverImage.url}`")
+      img(:src="`${BASE_URL + article.coverImage.url}`")
 
     .article-wrapper
       .article.content-article-wrapper(v-html="article.body")
       .promo
-        the-popular-authors
+       
 
 
     .interested-wrapper
@@ -43,6 +43,7 @@ export default {
   },
   data() {
     return {
+      BASE_URL: process.env.BASE_URL
     }
   },
   computed: {

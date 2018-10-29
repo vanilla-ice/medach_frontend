@@ -14,7 +14,7 @@
         v-for="article in topPosts"
         :to="`articles/${article.id}`"
         :key="article.id"
-        :style="{background: `url(${`http://localhost:8080${article.coverImage.url}`}) no-repeat center / cover`}"
+        :style="{background: `url(${`${BASE_URL + article.coverImage.url}`}) no-repeat center / cover`}"
       )
         .gradient
 
@@ -90,6 +90,12 @@ export default {
 
   async fetch({store}) {
     return store.dispatch('mainPage/fetchMainPageConfig')
+  },
+
+  data() {
+    return {
+      BASE_URL: process.env.BASE_URL
+    }
   },
 
   computed: {

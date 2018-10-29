@@ -43,7 +43,7 @@ export const actions = {
         return getBlogs(page, perPage, isSortByPopular, query).then(data => {
           commit('setArticles', {
             articles: data.collection,
-            nextPage: data.meta.next_page
+            nextPage: data.meta.nextPage
           })
         })
 
@@ -51,7 +51,7 @@ export const actions = {
         return getNews(page, perPage, isSortByPopular, query).then(data => {
           commit('setArticles', { 
             articles: data.collection,
-            nextPage: data.meta.next_page
+            nextPage: data.meta.nextPage
           })
         })
 
@@ -59,7 +59,7 @@ export const actions = {
         return getLongreadArticles(page, perPage, isSortByPopular, query).then(data => {
           commit('setArticles', { 
             articles: data.collection,
-            nextPage: data.meta.next_page
+            nextPage: data.meta.nextPage
           })
         })
 
@@ -67,7 +67,7 @@ export const actions = {
         return getPostsByTag(translatedCategories[category], page, perPage, isSortByPopular, query).then(data => {
           commit('setArticles', { 
             articles: data.collection,
-            nextPage: data.meta.next_page
+            nextPage: data.meta.nextPage
           })
         })
     }
@@ -81,7 +81,7 @@ export const actions = {
           return getBlogs(state.nextPage, perPage, isSortByPopular, query).then(data => {
             commit('updateArticles', {
               articles: data.collection,
-              nextPage: data.meta.next_page
+              nextPage: data.meta.nextPage
             })
           })
 
@@ -89,7 +89,7 @@ export const actions = {
           return getNews(state.nextPage, perPage, isSortByPopular, query).then(data => {
             commit('updateArticles', {
               articles: data.collection, 
-              nextPage: data.meta.next_page
+              nextPage: data.meta.nextPage
             })
           })
         
@@ -97,7 +97,7 @@ export const actions = {
           return getLongreadArticles(state.nextPage, perPage, isSortByPopular, query).then(data => {
             commit('updateArticles', { 
               articles: data.collection,
-              nextPage: data.meta.next_page
+              nextPage: data.meta.nextPage
             })
           })
 
@@ -105,7 +105,7 @@ export const actions = {
           return getPostsByTag(translatedCategories[category], state.nextPage, perPage, isSortByPopular, query).then(data => {
             commit('updateArticles', { 
               articles: data.collection,
-              nextPage: data.meta.next_page
+              nextPage: data.meta.nextPage
             })
           })
       }

@@ -1,6 +1,6 @@
 <template lang="pug">
 .wrapper
-  .image(v-if="src" :style="{background: `url(http://localhost:8080${src}) no-repeat center / cover`}")
+  .image(v-if="src" :style="{background: `url(${BASE_URL + src}) no-repeat center / cover`}")
   .placeholder(v-else)
     span
       | MEDACH
@@ -11,7 +11,12 @@ export default {
   props: {
     src: String
   },
-  name: 'ImageComponent'
+  name: 'ImageComponent',
+  data() {
+    return {
+      BASE_URL: process.env.BASE_URL
+    }
+  }
 }
 </script>
 
