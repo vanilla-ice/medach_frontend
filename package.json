@@ -7,12 +7,17 @@
   "scripts": {
     "dev": "BASE_URL=http://medach.pro nuxt",
     "build": "BASE_URL=http://medach.pro nuxt build",
-    "start": "nuxt start",
+    "start": "NUXT_PORT=1337 nuxt start",
     "generate": "nuxt generate",
     "generate-dev": "nuxt generate && cd ./dist/ && php -S localhost:8081 && cd ..",
     "prod": "pm2 start npm ecosystem.config.js --name nuxt -- start",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint"
+  },
+  "config": {
+    "nuxt": {
+      "port": "1337"
+    }
   },
   "dependencies": {
     "axios": "^0.18.0",
