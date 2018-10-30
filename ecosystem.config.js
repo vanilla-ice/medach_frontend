@@ -5,11 +5,10 @@ module.exports = {
       script: "./node_modules/nuxt/bin/nuxt-start",
       env: {
           "HOST": "142.93.13.232",
-          "PORT": 1337,
           "NODE_ENV": "production",
           "BASE_URL": 'http://medach.pro'
       }
     }
-]
+  ]
 }
 
