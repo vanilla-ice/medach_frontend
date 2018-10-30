@@ -1,11 +1,11 @@
 <template lang="pug">
 nuxt-link.wrapper(:to="`/profile/${profile.id}`")
-  .avatar(:style="{'background': `url(${BASE_URL}${profile.user_profile.avatar.url}) no-repeat center / cover`}")
+  .avatar(:style="{'background': `url(${BASE_URL}${profile.user_profile ? profile.user_profile.avatar.url : ''}) no-repeat center / cover`}")
   .info
     .title
       | {{ profile.full_name }}
     .about
-      | {{ profile.user_profile.about || описание }}
+      | {{ profile.user_profile ? profile.user_profile.about : 'описание' }}
   
 
   
@@ -15,11 +15,19 @@ nuxt-link.wrapper(:to="`/profile/${profile.id}`")
 import { format } from 'date-fns'
 import ru from 'date-fns/locale/ru'
 
+const BASE_URL = process.env.BASE_URL
+
 export default {
   name: 'TheBloggerCard',
 
   props: {
     profile: Object
+  },
+
+  data() {
+    return {
+      BASE_URL: BASE_URL
+    }
   },
 
   mounted() {

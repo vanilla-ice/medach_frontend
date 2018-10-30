@@ -65,6 +65,9 @@ export default {
       nextPage: 'profilePage/bloggersNextPage'
     }),
   },
+  mounted() {
+    console.log('bloggers', this.bloggers)
+  },
   methods: {
     getNextPage() {
       return this.$store.dispatch('categoryPage/fetchNextBloggers', {

@@ -25,18 +25,17 @@ export const mutations = {
   },
 
   setBloggers(state, data) {
-    state.articles = [...data.collection]
+    state.bloggers = [...data.collection]
     state.bloggersNextPage = data.meta.nextPage
   },
 
   setBlogPosts(state, data) {
-    console.log('set blogs', data)
     state.articles = [...data.collection]
     state.blogPostsNextPage = data.meta.nextPage
   },
 
   updateBloggers(state, data) {
-    state.articles = [...state.articles, ...data.collection]
+    state.bloggers = [...state.bloggers, ...data.collection]
     state.bloggersNextPage = data.meta.nextPage
   },
 
@@ -63,6 +62,7 @@ export const actions = {
 
   fetchBloggers({commit}, {page, perPage}) {
     return getBloggersList(page, perPage).then(data => {
+      console.log('bloggers data', data)
       commit('setBloggers', data)
     })
   },

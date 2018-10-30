@@ -5,7 +5,7 @@
 
   .container
     .profile-info
-      .avatar(:style="{background: `url(${BASE_URL}${profile.user_profile.avatar.url})`}")
+      .avatar(:style="{background: `url(${BASE_URL}${profile.user_profile ? profile.user_profile.avatar.url : ''})`}")
       .info
         .name
           | {{ profile.full_name }}
@@ -15,7 +15,7 @@
           a(href="#").social.social-instagram
     .about
       .about-text
-        | {{ profile.user_profile.about }}
+        | {{ profile.user_profile ? profile.user_profile.about : 'описание' }}
     .autor-articles
       | Статьи Автора
 
