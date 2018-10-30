@@ -57,6 +57,7 @@ export const actions = {
 
       case 'longread':
         return getLongreadArticles(page, perPage, isSortByPopular, query).then(data => {
+          console.log('data', data)
           commit('setArticles', { 
             articles: data.collection,
             nextPage: data.meta.nextPage

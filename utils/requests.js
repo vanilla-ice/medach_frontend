@@ -84,10 +84,7 @@ export const getLongreadArticles = (page, per_page, isSortByPopular, query) => {
     'sort[col]': isSortByPopular ? 'impressions_count' : 'publish_on',
     query
   })
-    .then(response => {
-      console.log('response', response)
-      response.data
-    })
+    .then(response => response.data)
     .catch(error => console.log('get articles error', error))
 }
 

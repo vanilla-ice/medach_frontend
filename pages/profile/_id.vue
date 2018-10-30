@@ -5,7 +5,7 @@
 
   .container
     .profile-info
-      .avatar(:style="{background: `url(http://localhost:8080${profile.user_profile.avatar.url})`}")
+      .avatar(:style="{background: `url(${BASE_URL}${profile.user_profile.avatar.url})`}")
       .info
         .name
           | {{ profile.full_name }}
@@ -15,15 +15,7 @@
           a(href="#").social.social-instagram
     .about
       .about-text
-<<<<<<< HEAD
-        | On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.
-        .more(@click="isAboutText = !isAboutText" v-if="isAboutText")
-          | Читать дальше...
-      .about-text(:class="{visible: !isAboutText}")
-        | On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.
-=======
         | {{ profile.user_profile.about }}
->>>>>>> Feature: blogger page improve
     .autor-articles
       | Статьи Автора
 
@@ -64,6 +56,8 @@
 const ARTICLES_PER_PAGE_LIST = 5
 const ARTICLES_PER_PAGE_GRID = 12
 
+const BASE_URL = process.env.BASE_URL
+
 const SEARCH_INTERVAL = 300
 
 import { debounce } from 'lodash'
@@ -97,6 +91,7 @@ export default {
       isPopular: false,
       searchQuery: '',
       isAboutText: 'true',
+      BASE_URL: BASE_URL,
       dummyAuthors: [
         {
           publicationDate: new Date(),
