@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "BASE_URL=http://medach.pro nuxt",
-    "build": "BASE_URL=http://medach.pro nuxt build && nuxt start",
+    "build": "BASE_URL=http://medach.pro nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
     "generate-dev": "nuxt generate && cd ./dist/ && php -S localhost:8081 && cd ..",
