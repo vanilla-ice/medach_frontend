@@ -40,6 +40,9 @@ module.exports = {
   },
   plugins: [
     { src: '~/plugins/vue-carousel', ssr: false }
-  ]
+  ],
+  server: {
+    port: 1337
+  }
 }
 
