@@ -42,7 +42,7 @@
 
   .load-more-wrapper
     .load-more(v-if="nextPage" @click="getNextPage")
-      | Больше статей
+      | Еще
 
   .container
     .interested-wrapper

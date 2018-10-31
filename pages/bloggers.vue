@@ -7,7 +7,7 @@
 
   .load-more-wrapper
     .load-more(v-if="nextPage" @click="getNextPage")
-      | Больше блоггеров
+      | Еще
 </template>
 
 <script>

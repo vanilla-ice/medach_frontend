@@ -7,7 +7,7 @@ nuxt-link.card-wrapper(
   .gradient
   .content
     .tags
-      .tag(v-for="tag in tags" :key="`${id}-${tag}`")
+      nuxt-link.tag(v-for="tag in tags" :key="`${id}-${tag}`" :to="`/search?query=${tag}`")
         | {{ tag }}
     .name
       | {{ name }}

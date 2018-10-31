@@ -57,7 +57,7 @@
 
   .load-more-wrapper
     .load-more(v-if="nextPage" @click="getNextPage")
-      | Больше статей
+      | Еще
 
   .interested-wrapper
     .container

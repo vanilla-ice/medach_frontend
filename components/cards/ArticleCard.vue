@@ -9,7 +9,7 @@
 
     .bottom
       .tags
-        nuxt-link.tag(v-for="tag in tags" :key="`${id}-${tag}`" :to="`/articles/${id}`")
+        nuxt-link.tag(v-for="tag in tags" :key="`${id}-${tag}`" :to="`/search?query=${tag}`")
           | {{ tag }}
       .footer(v-if="isMetaVisible")
         .author

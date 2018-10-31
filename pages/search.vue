@@ -4,14 +4,14 @@
   .container
     .title
       | Результаты по запросу "{{searchQuery}}":
-    .title(v-if="articles.length === 0")
+    .title(v-if="articles.length === 0 || !articles")
       | Ничего не найдено :(
     .articles-view
       grid-articles-view(:articles="articles")
 
   .load-more-wrapper
     .load-more(v-if="nextPage" @click="getNextPage")
-      | Больше статей
+      | Еще
 
 </template>
 
