@@ -139,6 +139,7 @@ export default {
   right: 0;
   width: 35%;
   height: 100%;
+  z-index: 5;
 }
 
 .top-articles {

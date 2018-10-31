@@ -102,6 +102,11 @@ export default {
 
 .image-wrapper {
   margin-top: 40px;
+  max-width: 980px;
+
+  img {
+    width: 100%;
+  }
 }
 
 .article-wrapper {
@@ -173,6 +178,15 @@ export default {
   li {
     font-size: 16px;
     padding: 10px;
+  }
+
+  img {
+    max-width: 100%;
+    margin: 22px 0;
+  }
+
+  h2, h3 {
+    margin: 25px 0 15px 0;
   }
 }
 

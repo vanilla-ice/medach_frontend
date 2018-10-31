@@ -1,24 +1,26 @@
 <template lang="pug">
 .wrapper.desctop(v-if="showCarousel")
-  carousel.slider(
-    :perPage="1"
-  )
-    slide.slide(
-      v-for="(slide, index) in slides",
-      :key="slide.id",
-      :style="{background: `url(${BASE_URL}${slide.coverImage.url}) no-repeat center / cover`}"
+  .inner
+    .opacity
+    carousel.slider(
+      :perPage="1"
     )
-      nuxt-link.content(:to="`/articles/${slide.id}`")
-        .title
-          | {{ slide.title }}
-        .bottom
-          .date
-            | {{ formatDate(slide.publicationDate) }}
+      slide.slide(
+        v-for="(slide, index) in slides",
+        :key="slide.id",
+        :style="{background: `url(${BASE_URL}${slide.coverImage.url}) no-repeat center / cover`}"
+      )
+        nuxt-link.content(:to="`/articles/${slide.id}`")
+          .title
+            | {{ slide.title }}
+          .bottom
+            .date
+              | {{ formatDate(slide.publicationDate) }}
 
-          .author
-            | Автор:
-            span
-              | {{ slide.author }}
+            .author
+              | Автор:
+              span
+                | {{ slide.author }}
 
 </template>
 
@@ -52,7 +54,8 @@ export default {
 
 <style lang="scss">
 .VueCarousel-wrapper {
-  height: 100%;
+  height: 680px;
+  position: relative;
 }
 
 .VueCarousel-inner {
@@ -64,6 +67,7 @@ export default {
   bottom: 20px;
   left: 40px;
   width: auto !important;
+  z-index: 5;
 
   li:first-child {
     padding-left: 0 !important;
@@ -85,12 +89,32 @@ export default {
 </style>
 
 <style scoped lang="scss">
+.inner {
+  position: relative;
+  height: 100%;
+}
+
+.opacity {
+  opacity: 0.54;
+  background: #5B5B5B;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+}
+
 .wrapper {
   height: 680px;
   position: relative;
 }
 .slider {
   height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
 .slide {
@@ -106,6 +130,8 @@ export default {
   flex-flow: column nowrap;
   justify-content: flex-end;
   padding-right: 50px;
+  z-index: 5;
+  position: relative;
 }
 
 .title {
