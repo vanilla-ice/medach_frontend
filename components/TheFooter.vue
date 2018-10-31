@@ -32,7 +32,7 @@ export default {
 
 <style scoped lang="scss">
 .footer {
-  background: #F9F7ED;
+  background: #000000;
   padding: 24px 0 40px 0;
 
   .container {
@@ -81,7 +81,7 @@ export default {
 
 .title {
   font-size: 16px;
-  color: #5B5B5B;
+  color: #EEDD;
   letter-spacing: 0;
   font-weight: 500;
   padding-bottom: 16px;
