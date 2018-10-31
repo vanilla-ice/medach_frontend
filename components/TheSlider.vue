@@ -97,7 +97,7 @@ export default {
 }
 
 .opacity {
-  opacity: 0.54;
+  opacity: 0.3;
   background: #5B5B5B;
   position: absolute;
   top: 0;

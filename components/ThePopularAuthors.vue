@@ -42,6 +42,7 @@ export default {
   padding: 24px 0;
   border-radius: 3px;
   box-shadow: 0 2px 4px 0 rgba(184,184,184,0.50);
+  display: none;
 }
 
 .head {
