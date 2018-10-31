@@ -1,7 +1,7 @@
 <template lang="pug">
 .wrapper
   .title
-    | Вам будет интересно
+    | Вам может быть интересно
 
   .inner
     .article-wrapper(v-for="article in articles" :key="article.id")

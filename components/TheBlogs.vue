@@ -25,6 +25,8 @@
         ).blogs__articles-min-item
           .blogs__articles-min-item-text
             | {{ article.title }}
+          .blogs__articles-min-item-text.min-descr
+            | {{ article.shortDescription }}
           .footer
             .date
               | {{ currentDate(article.publish_on) }}
@@ -51,6 +53,10 @@ export default {
       }
       return ""
     }
+  },
+
+  mounted() {
+    console.log('articles', this.articles)
   },
 
   computed: {
@@ -167,6 +173,11 @@ export default {
   letter-spacing: 0;
   line-height: 22px;
   font-weight: 600;
+}
+
+.min-descr {
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .blogs__articles-description {

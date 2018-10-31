@@ -7,8 +7,8 @@
     .tags
       .tag(v-for="tag in article.tags" :key="`${article.id}-${article.tag}`")
         | {{ tag }}
-    .image-wrapper
-      img(:src="`http://medach.pro${article.coverImage.url}`")
+    //- .image-wrapper
+    //-   img(:src="`http://medach.pro${article.coverImage.url}`")
 
     .article-wrapper
       .article.content-article-wrapper(v-html="articleBody")

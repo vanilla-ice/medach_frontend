@@ -13,19 +13,6 @@
           .link
             | Партнеры
           nuxt-link.link(to="/bloggers") Блоггеры
-      .footer-item
-        .title
-          | Услуги
-        .links
-          .link
-            | Реклама
-          .link
-            | Тарифы
-          .link
-            | Контент
-          .link
-            | Семинары
-          
 
     .right
       .social-items

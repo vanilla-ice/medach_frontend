@@ -78,6 +78,8 @@ export default {
   .VueCarousel-dot-button {
     background: #ffffff !important;
     opacity: .3;
+    width: 14px !important;
+    height: 14px !important;
   }
 
 
@@ -103,6 +105,7 @@ export default {
   bottom: 0;
   right: 0;
   z-index: 1;
+  pointer-events: none;
 }
 
 .wrapper {

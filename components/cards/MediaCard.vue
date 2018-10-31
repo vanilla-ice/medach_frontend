@@ -66,7 +66,7 @@ export default {
 
 .tags {
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   align-items: flex-start;
   margin-bottom: 25px;
 }
@@ -79,10 +79,7 @@ export default {
   padding: 4px 8px;
   border: 1px solid #7198BA;
   border-radius: 3px;
-
-  &:not(:first-child) {
-    margin-left: 10px;
-  }
+  margin: 5px;
 
   &:first-child {
     font-size: 16px;

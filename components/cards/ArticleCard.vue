@@ -70,7 +70,7 @@ export default {
 .tags {
   display: flex;
   flex-flow: row wrap;
-  max-height: 62px;
+  align-items: flex-start;
   justify-content: flex-start;
 }
 
@@ -113,7 +113,7 @@ export default {
   background: #F2F3EC;
 
   .content {
-    min-height: 226px;
+    min-height: 255px;
     padding: 0px 16px 16px 16px;
     display: flex;
     flex-flow: column nowrap;
