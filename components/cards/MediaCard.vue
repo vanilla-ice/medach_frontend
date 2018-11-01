@@ -9,7 +9,7 @@ nuxt-link.card-wrapper(
       nuxt-link.tag(v-for="tag in tags" :key="`${id}-${tag}`" :to="`/search?query=${tag}`")
         | {{ tag }}
     .name
-      | {{ name }}
+      | {{ name  }}
 </template>
 
 <script>
