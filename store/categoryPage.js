@@ -61,7 +61,7 @@ export const actions = {
 
       case 'longread':
         return getLongreadArticles(page, perPage, isSortByPopular, query).then(data => {
-          commit('setArticles', {
+          commit('setArticles', { 
             articles: data.collection,
             nextPage: data.meta.nextPage
           })
@@ -80,7 +80,50 @@ export const actions = {
         return getPostsByTag(translatedCategories[category], page, perPage, isSortByPopular, query).then(data => {
           commit('setArticles', {
             articles: data.collection,
-            nextPage: data.meta.nextPage
+            nextPage: data.meta.nextPage 
+          })
+        })
+    }
+  },
+
+  fetchPopularArticles({commit}, {category, query}) {
+    console.log('fetch popular articles action', category)
+    switch(category) {
+
+      case 'blogs':
+        return getBlogs(1, 3, true, query).then(data => {
+          commit('setPopularArticles', {
+            articles: data.collection,
+          })
+        })
+
+      case 'news':
+        return getNews(1, 3, true, query).then(data => {
+          commit('setPopularArticles', { 
+            articles: data.collection,
+          })
+        })
+
+      case 'longread':
+        return getLongreadArticles(1, 3, true, query).then(data => {
+          console.log('fetch articles', data.collection)
+          commit('setPopularArticles', { 
+            articles: data.collection,
+          })
+        })
+
+      case 'cases':
+        return getCasesArticles(1, 3, true, query).then(data => {
+          commit('setPopularArticles', { 
+            articles: data.collection,
+          })
+        })
+      
+
+      default: 
+        return getPostsByTag(translatedCategories[category], 1, 3, true, query).then(data => {
+          commit('setPopularArticles', { 
+            articles: data.collection,
           })
         })
     }

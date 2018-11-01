@@ -56,7 +56,7 @@ export default {
     GridArticlesView,
     InterestedArticles,
     ThePopularAuthors,
-    TheHeader
+    TheHeader 
   },
   fetch({store, params}) {
     return store.dispatch('categoryPage/fetchCategory', {
@@ -79,6 +79,9 @@ export default {
   },
   created() {
     this.debouncedSearch = debounce(this.getSearchResults, SEARCH_INTERVAL)
+  },
+  mounted() {
+    console.log('popularArticles', this.popularArticles)
   },
   computed: {
     ...mapGetters({
