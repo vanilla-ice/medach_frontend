@@ -5,8 +5,8 @@
   "author": "vanilla-ice <valeraerohin97@mail.ru>",
   "private": true,
   "scripts": {
-    "dev": "BASE_URL=http://medach.pro nuxt",
-    "build": "BASE_URL=http://medach.pro nuxt build",
+    "dev": "BASE_URL=http://142.93.13.232 nuxt",
+    "build": "BASE_URL=http://142.93.13.232 nuxt build",
     "start": "NUXT_PORT=1337 nuxt start",
     "generate": "BASE_URL=http://142.93.13.232 nuxt generate",
     "generate-dev": "nuxt generate && cd ./dist/ && php -S localhost:8081 && cd ..",

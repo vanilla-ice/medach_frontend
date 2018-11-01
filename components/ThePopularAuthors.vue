@@ -27,9 +27,6 @@ export default {
   props: {
     articles: Array
   },
-  mounted() {
-    console.log('articles popular', this.articles)
-  },
   methods: {
     formatDate(date) {
       return format(date, 'D MMMM YYYY', { locale: ru });
