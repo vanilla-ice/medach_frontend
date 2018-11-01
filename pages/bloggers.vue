@@ -36,26 +36,12 @@ export default {
   },
   data() {
     return {
-      dummyAuthors: [
-        {
-          publicationDate: new Date(),
-          title: 'Владимир Владимирович',
-          author: 'Владимирович',
-          id: 1
-        },
-        {
-          publicationDate: new Date(),
-          title: 'Много Много',
-          author: 'Подливы',
-          id: 2
-        },
-        {
-          publicationDate: new Date(),
-          title: 'Владимирович Путин',
-          author: 'Владимир',
-          id: 3
-        }
-      ]
+    
+    }
+  },
+  head() {
+    return {
+      title: 'Медач | Блоги'
     }
   },
   computed: {

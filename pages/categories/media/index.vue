@@ -87,6 +87,12 @@ export default {
     }
   },
 
+  head() {
+    return {
+      title: 'Медач | Медиа'
+    }
+  },
+
   methods: {
     getNextPage() {
       return this.$store.dispatch('mediaPage/fetchNextPage', {

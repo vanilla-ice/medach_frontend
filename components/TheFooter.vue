@@ -32,7 +32,7 @@ export default {
 
 <style scoped lang="scss">
 .footer {
-  background: #000000;
+  background: #2d3436;
   padding: 24px 0 40px 0;
 
   .container {

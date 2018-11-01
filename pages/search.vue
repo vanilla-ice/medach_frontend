@@ -59,6 +59,11 @@ export default {
       isList: true,
     }
   },
+  head() {
+    return {
+      title: 'Медач | Поиск'
+    }
+  },
   computed: {
     ...mapGetters({
       articles: 'searchPage/articles',

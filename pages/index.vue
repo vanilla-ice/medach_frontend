@@ -50,21 +50,6 @@
           :isBigCard="false"
         )
 
-    //- .subscribe-section
-    //-   .inner
-    //-     .left
-    //-       .title
-    //-         | Подпишитесь на новости
-    //-       .text
-    //-         |Оставьте ваш e-mail, чтобы получать наш научный дайджест
-    //-     .right
-    //-       .input-wrapper
-    //-         form.form
-    //-           input(placeholder="medach@gmail.com")
-    //-           .send
-    //-       .text
-    //-         | Предоставляя адрес электронной почты, вы принимаете условия соглашения о персональных данных.
-
 </template>
 
 <script>
@@ -92,7 +77,13 @@ export default {
   },
 
   async fetch({store}) {
-    return store.dispatch('mainPage/fetchMainPageConfig')
+    return await store.dispatch('mainPage/fetchMainPageConfig')
+  },
+
+  head() {
+    return {
+      title: 'Медач | Главная'
+    }
   },
 
   data() {

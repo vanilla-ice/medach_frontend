@@ -22,7 +22,7 @@
             img(src="~/assets/images/infographic.svg")
           .text
             | Сложные схемы простым языком
-      nuxt-link.button-wrapper(:to="`/categories/media/видео`")
+      nuxt-link.button-wrapper(:to="`/categories/media/видеоматериалы`")
         .flag
           span
             | Видеоматериалы
@@ -52,9 +52,7 @@
       .articles-view
         list-articles-view(v-if="isList" :articles="articles" key="list-view")
         grid-articles-view(v-else :articles="articles" key="grid-view")
-
-    .promo-wrapper
-      the-popular-authors(:articles="dummyAuthors")
+        .no-articles(v-if="articles.length < 0") Пока пусто... {{ articles.length }}
 
   .load-more-wrapper
     .load-more(v-if="nextPage" @click="getNextPage")
@@ -104,31 +102,19 @@ export default {
     return {
       isList: true,
       isPopular: false,
-      searchQuery: '',
-      dummyAuthors: [
-        {
-          publicationDate: new Date(),
-          title: 'Круиз до фиджи',
-          author: 'Артем Соминов',
-          id: 1
-        },
-        {
-          publicationDate: new Date(),
-          title: 'Анти-VEGF-терапия',
-          author: 'Неизвестен',
-          id: 2
-        },
-        {
-          publicationDate: new Date(),
-          title: 'Дания практика в отделении торакальной хирургии',
-          author: 'Азат Музин',
-          id: 3
-        }
-      ]
+      searchQuery: ''
+    }
+  },
+  head() {
+    return {
+      title: `Медач | ${this.currentCategory.charAt(0).toUpperCase() + this.currentCategory.slice(1)}`
     }
   },
   created() {
     this.debouncedSearch = debounce(this.getSearchResults, SEARCH_INTERVAL)
+  },
+  mounted() {
+    console.log('this.articles', this.articles)
   },
   computed: {
     ...mapGetters({

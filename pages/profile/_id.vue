@@ -117,6 +117,11 @@ export default {
   created() {
     this.debouncedSearch = debounce(this.getSearchResults, SEARCH_INTERVAL)
   },
+  head() {
+    return {
+      title: `Медач | ${this.profile.full_name}`
+    }
+  },
   computed: {
     ...mapGetters({
       articles: 'profilePage/articles',

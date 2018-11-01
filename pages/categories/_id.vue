@@ -22,6 +22,9 @@
       .articles-view
         list-articles-view(v-if="isList" :articles="articles" key="list-view")
         grid-articles-view(v-else :articles="articles" key="grid-view")
+        .no-articles(v-if="articles.length === 0") Здесь ещё ничего нет, но вы можете найти много крутых штук на 
+          nuxt-link(to="/")
+            | главной
 
     .promo-wrapper
       the-popular-authors(v-if="popularArticles.length > 0" :articles="popularArticles")
@@ -73,18 +76,30 @@ export default {
         store.dispatch('interestedArticles/fetchInterestedArticles')
       ]))
   },
+  head() {
+    const translatedCategories = {
+      longread: 'Авторские статьи',
+      media: 'Медиа',
+      blogs: 'Блоги',
+      cases: 'Кейсы',
+      news: 'Новости',
+      guides: 'Руководства',
+      'переводы': 'Переводы'
+    }
+
+    return {
+      title: `Медач | ${translatedCategories[this.currentCategory] || this.currentCategory}`
+    }
+  },
   data() {
     return {
       isList: true,
       isPopular: false,
-      searchQuery: ''
+      searchQuery: '',
     }
   },
   created() {
     this.debouncedSearch = debounce(this.getSearchResults, SEARCH_INTERVAL)
-  },
-  mounted() {
-    console.log('popularArticles', this.popularArticles)
   },
   computed: {
     ...mapGetters({
@@ -103,7 +118,6 @@ export default {
   methods: {
     switchView() {
       this.isList = !this.isList
-
       return this.$store.dispatch('categoryPage/fetchCategory', {
         page: 1,
         perPage: this.perPage,
@@ -180,6 +194,22 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.no-articles {
+  font-size: 24px;
+  color: #5B5B5B;
+  letter-spacing: 0;
+  text-decoration: none;
+  max-width: 520px;
+  margin: 150px 0;
+  line-height: 32px;
+
+  a {
+    font-weight: 600;
+    color: #7198BA;
+    letter-spacing: 0;
+    border-color: #7198BA;
+  }
+}
 .icon {
   width: 16px;
   height: 16px;

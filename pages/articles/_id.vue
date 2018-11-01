@@ -45,6 +45,11 @@ export default {
       BASE_URL: process.env.BASE_URL
     }
   },
+  head () {
+    return {
+      title: this.article.title
+    }
+  },
   computed: {
     ...mapGetters({
       article: 'articlePage/article',
