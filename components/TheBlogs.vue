@@ -55,10 +55,6 @@ export default {
     }
   },
 
-  mounted() {
-    console.log('articles', this.articles)
-  },
-
   computed: {
     firstArticle() {
       return this.articles[0]
@@ -195,6 +191,7 @@ export default {
   color: #A3A3A3;
   letter-spacing: 0;
   font-weight: 400;
+  white-space: nowrap;
 }
 
 .footer {

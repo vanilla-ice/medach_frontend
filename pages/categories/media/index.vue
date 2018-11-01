@@ -123,7 +123,7 @@ export default {
   }
 
   &:nth-child(3n - 1) {
-    margin-left: 20px;
+    margin-left: 1.46%;
   }
 }
 
@@ -267,6 +267,14 @@ export default {
       margin-left: 0;
       margin-right: 0;
       margin-bottom: 10px;
+    }
+  }
+
+  .article-wrapper {
+    max-width: 100%;
+
+    &:nth-child(3n - 1) {
+      margin-left: 0;
     }
   }
 }

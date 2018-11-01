@@ -21,9 +21,6 @@ export default {
   props: {
     articles: Array
   },
-  mounted() {
-    console.log('articles', this.articles);
-  },
   components: {
     ArticleCard
   }

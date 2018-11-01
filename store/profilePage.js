@@ -62,7 +62,6 @@ export const actions = {
 
   fetchBloggers({commit}, {page, perPage}) {
     return getBloggersList(page, perPage).then(data => {
-      console.log('bloggers data', data)
       commit('setBloggers', data)
     })
   },

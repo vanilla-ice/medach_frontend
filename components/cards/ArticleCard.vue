@@ -107,6 +107,7 @@ export default {
   font-size: 12px;
   color: #5B5B5B;
   letter-spacing: 0;
+  white-space: nowrap;
 }
 
 .grid-card-wrapper{
@@ -205,6 +206,10 @@ export default {
 
   .footer {
     display: none;
+  }
+
+  .grid-card-wrapper .content {
+    min-height: auto;
   }
 }
 

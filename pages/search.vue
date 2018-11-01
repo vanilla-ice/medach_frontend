@@ -3,11 +3,17 @@
   the-header
   .container
     .title
-      | Результаты по запросу "{{searchQuery}}":
+      .title-text
+        | Результаты по запросу "{{searchQuery}}":
+      .title-switch
+        .switch-grid(@click="switchView")
+          .icon.icon-grid(v-if="isList")
+          .icon.icon-list(v-else)
     .title(v-if="articles.length === 0 || !articles")
       | Ничего не найдено :(
     .articles-view
-      grid-articles-view(:articles="articles")
+      list-articles-view(v-if="isList" :articles="articles" key="list-view")
+      grid-articles-view(v-else :articles="articles" key="grid-view")
 
   .load-more-wrapper
     .load-more(v-if="nextPage" @click="getNextPage")
@@ -37,6 +43,7 @@ export default {
     ThePopularAuthors,
     TheHeader
   },
+
   fetch({store, query}) {
     return store.dispatch('searchPage/search', {
       page: 1,
@@ -46,6 +53,7 @@ export default {
   },
   data() {
     return {
+      isList: true,
     }
   },
   computed: {
@@ -63,6 +71,17 @@ export default {
         page: this.nextPage,
         perPage: ARTICLES_PER_PAGE,
         query: this.searchQuery === '' ? null : this.searchQuery
+      })
+    },
+
+    switchView() {
+      this.isList = !this.isList
+
+      return this.$store.dispatch('categoryPage/fetchCategory', {
+        page: 1,
+        perPage: this.perPage,
+        isSortByPopular: this.isPopular,
+        category: this.currentCategory
       })
     },
   },
@@ -98,10 +117,20 @@ export default {
 }
 
 .title {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: flex-start;
+
   font-size: 42px;
   color: #5B5B5B;
   letter-spacing: 2px;
   margin-top: 20px;
+}
+
+.title-switch {
+  margin-top: 20px;
+  margin-left: 20px;
 }
 
 .articles {
@@ -224,6 +253,15 @@ export default {
   .interested-wrapper {
     padding-top: 16px;
     padding-bottom: 0;
+  }
+
+  .title-text {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  .title-switch {
+    display: none;
   }
 }
 </style>

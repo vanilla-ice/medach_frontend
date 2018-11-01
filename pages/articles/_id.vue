@@ -199,6 +199,7 @@ export default {
 
   h2, h3 {
     margin: 25px 0 15px 0;
+    word-wrap: break-word;
   }
 }
 

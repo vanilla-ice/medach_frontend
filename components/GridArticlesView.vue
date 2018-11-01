@@ -48,4 +48,29 @@ export default {
     margin-top: 20px;
   }
 }
+
+@media (max-width: 768px) {
+  .article-wrapper {
+    width: 100%;
+    margin-bottom: 16px;
+
+    &:nth-child(3n - 1) {
+      margin-bottom: 16px;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    &:nth-child(n + 4) {
+      margin-top: 0;
+    }
+  }
+
+  .tags {
+    margin-top: 16px;
+  }
+
+  .tag {
+    margin-top: 4px;
+  }
+}
 </style>

@@ -6,9 +6,9 @@ nuxt-link.wrapper(:to="`/profile/${profile.id}`")
       | {{ profile.full_name }}
     .about
       | {{ profile.user_profile ? profile.user_profile.about : 'описание' }}
-  
 
-  
+
+
 </template>
 
 <script>
@@ -28,10 +28,6 @@ export default {
     return {
       BASE_URL: BASE_URL
     }
-  },
-
-  mounted() {
-    console.log('profile', this.profile)
   },
 
   methods: {

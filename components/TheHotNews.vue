@@ -13,12 +13,13 @@
       .name
         | {{ item.title }}
       .date
-        | {{ formatDate(item.publicationDate) }} назад
+        | {{ formatDate(item.publicationDate) }}
 </template>
 
 <script>
 import distanceInWords from 'date-fns/distance_in_words'
 import ru from 'date-fns/locale/ru'
+import { format } from 'date-fns'
 
 export default {
   name: 'TheHotNews',
@@ -27,8 +28,7 @@ export default {
   },
   methods: {
     formatDate(date) {
-      const currentDate = new Date()
-      return distanceInWords(date, currentDate, {locale: ru})
+      return format(date, 'D MMMM YYYY', { locale: ru })
     }
   }
 }
@@ -87,6 +87,7 @@ export default {
   color: #FFFFFF;
   letter-spacing: 0;
   margin-top: 25px;
+  white-space: nowrap;
 }
 
 @media (max-width: 768px) {

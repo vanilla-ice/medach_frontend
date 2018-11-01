@@ -116,7 +116,6 @@ export default {
   },
   created() {
     this.debouncedSearch = debounce(this.getSearchResults, SEARCH_INTERVAL)
-    console.log("profile", this.profile, this.articles)
   },
   computed: {
     ...mapGetters({

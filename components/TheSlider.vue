@@ -157,6 +157,7 @@ export default {
   color: #FFFFFF;
   letter-spacing: 0;
   text-transform: capitalize;
+  white-space: nowrap;
 }
 
 .author {
