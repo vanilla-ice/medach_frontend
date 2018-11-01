@@ -1,15 +1,18 @@
 <template lang="pug">
-nuxt-link.card-wrapper(
-  :to="`/articles/${id}`"
-  :style="{background: `url(${BASE_URL}${image}) no-repeat center / cover`}"
-)
-  .gradient
-  .content
-    .tags
-      nuxt-link.tag(v-for="tag in tags" :key="`${id}-${tag}`" :to="`/search?query=${tag}`")
-        | {{ tag }}
-    .name
-      | {{ name }}
+nuxt-link(:to="`/articles/${id}`")
+  .card-wrapper(
+    v-if="isBrowser"
+    :style="{background: `url(${BASE_URL}${image}) no-repeat center / cover`}"
+    :key="`media-card-${id}`"
+  )
+
+    .gradient
+    .content
+      .tags
+        nuxt-link.tag(v-for="tag in tags" :key="`${id}-${tag}`" :to="`/search?query=${tag}`")
+          | {{ tag }}
+      .name
+        | {{ name }}
 </template>
 
 <script>
@@ -23,7 +26,8 @@ export default {
   name: 'MediaCard',
   data() {
     return {
-      BASE_URL: process.env.BASE_URL
+      BASE_URL: process.env.BASE_URL,
+      isBrowser: process.browser
     }
   }
 }

@@ -23,7 +23,7 @@
         grid-articles-view(v-else :articles="articles" key="grid-view")
 
     .promo-wrapper
-      the-popular-authors(:articles="dummyAuthors")
+      the-popular-authors(:articles="popularArticles")
 
   .load-more-wrapper
     .load-more(v-if="nextPage" @click="getNextPage")
@@ -56,7 +56,7 @@ export default {
     GridArticlesView,
     InterestedArticles,
     ThePopularAuthors,
-    TheHeader
+    TheHeader 
   },
   fetch({store, params}) {
     return store.dispatch('categoryPage/fetchCategory', {
@@ -65,43 +65,30 @@ export default {
       isSortByPopular: false,
       category: params.id
     })
-      .then(() => store.dispatch('interestedArticles/fetchInterestedArticles'))
+      .then(() => Promise.all([
+        store.dispatch('categoryPage/fetchPopularArticles', {category: params.id}),
+        store.dispatch('interestedArticles/fetchInterestedArticles')
+      ]))
   },
   data() {
     return {
       isList: true,
       isPopular: false,
-      searchQuery: '',
-      dummyAuthors: [
-        {
-          publicationDate: new Date(),
-          title: 'Круиз до фиджи',
-          author: 'Артем Соминов',
-          id: 1
-        },
-        {
-          publicationDate: new Date(),
-          title: 'Анти-VEGF-терапия',
-          author: 'Неизвестен',
-          id: 2
-        },
-        {
-          publicationDate: new Date(),
-          title: 'Дания практика в отделении торакальной хирургии',
-          author: 'Азат Музин',
-          id: 3
-        }
-      ]
+      searchQuery: ''
     }
   },
   created() {
     this.debouncedSearch = debounce(this.getSearchResults, SEARCH_INTERVAL)
   },
+  mounted() {
+    console.log('popularArticles', this.popularArticles)
+  },
   computed: {
     ...mapGetters({
       articles: 'categoryPage/articles',
       interested: 'interestedArticles/articles',
-      nextPage: 'categoryPage/nextPage'
+      nextPage: 'categoryPage/nextPage',
+      popularArticles: 'categoryPage/popularArticles'
     }),
     perPage() {
       return this.isList ? ARTICLES_PER_PAGE_LIST : ARTICLES_PER_PAGE_GRID

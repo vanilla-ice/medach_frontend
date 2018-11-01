@@ -1,5 +1,5 @@
 <template lang="pug">
-.card-wrapper(:class="{'grid-card-wrapper': isGridCard, 'list-card-wrapper': isListCard}")
+.card-wrapper(:class="{'grid-card-wrapper': isGridCard, 'list-card-wrapper': isListCard}" key="article-card")
   nuxt-link.image-wrapper(:style="{height: isListCard ? '300px' : '240px'}" :to="`/articles/${id}`")
     image-component(:src="image")
   .content
