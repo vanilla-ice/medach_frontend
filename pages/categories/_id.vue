@@ -24,7 +24,7 @@
         grid-articles-view(v-else :articles="articles" key="grid-view")
 
     .promo-wrapper
-      the-popular-authors(:articles="popularArticles")
+      the-popular-authors(v-if="popularArticles.length > 0" :articles="popularArticles")
 
   .load-more-wrapper
     .load-more(v-if="nextPage" @click="getNextPage")

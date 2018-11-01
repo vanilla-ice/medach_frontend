@@ -1,8 +1,9 @@
 <template lang="pug">
 .header
   .container.container-desctop
-    .left
-      nuxt-link.logo(to="/")
+    nuxt-link.left(to="/")
+      .logo-icon
+      .logo
         | MEDACH
     .right
       .categories(:class="{visible: isOpen}")
@@ -106,6 +107,18 @@ export default {
   letter-spacing: 2px;
   font-weight: 700;
   text-decoration: none;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+}
+
+.logo-icon {
+  background: url('~/assets/images/logo.svg') no-repeat center / contain;
+  width: 36px;
+  height: 36px;
+  margin-right: 16px;
 }
 
 .category-name {

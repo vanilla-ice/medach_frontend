@@ -2,9 +2,10 @@
 .wrapper
   .head
     .title
-      | Популярные статьи
+      | Популярное
   .inner
-    .authors-item(
+    nuxt-link.authors-item(
+      :to="`/articles/${item.id}`"
       v-for="item in articles",
       :key="item.id"
     )
@@ -82,6 +83,7 @@ export default {
 
 .authors-item {
   padding: 24px 0;
+  display: block;
 
   &:not(:last-child) {
     border-bottom: 1px solid #fff;
