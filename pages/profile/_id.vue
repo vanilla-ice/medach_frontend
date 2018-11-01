@@ -39,9 +39,11 @@
       .articles-view
         list-articles-view(v-if="isList" :articles="articles" key="list-view")
         grid-articles-view(v-else :articles="articles" key="grid-view")
+        .no-articles(v-if="articles.length === 0") Здесь ещё ничего нет, но вы можете найти много крутых штук на 
+          nuxt-link(to="/")
+            | главной
 
     .promo-wrapper
-      the-popular-authors(:articles="dummyAuthors")
 
   .load-more-wrapper
     .load-more(v-if="nextPage" @click="getNextPage")
@@ -216,6 +218,22 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.no-articles {
+  font-size: 24px;
+  color: #5B5B5B;
+  letter-spacing: 0;
+  text-decoration: none;
+  max-width: 520px;
+  margin: 150px 0;
+  line-height: 32px;
+
+  a {
+    font-weight: 600;
+    color: #7198BA;
+    letter-spacing: 0;
+    border-color: #7198BA;
+  }
+}
 .icon {
   width: 16px;
   height: 16px;
