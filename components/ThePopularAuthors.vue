@@ -3,7 +3,6 @@
   .head
     .title
       | Популярные статьи
-    .flag
   .inner
     .authors-item(
       v-for="item in articles",
@@ -53,6 +52,8 @@ export default {
   align-items: center;
   justify-content: space-between;
   padding-left: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #fff;
 }
 
 .title {

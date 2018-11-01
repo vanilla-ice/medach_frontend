@@ -1,6 +1,7 @@
 <template lang="pug">
 .wrapper
   the-header
+  scroll-top
   .container
     .buttons
       nuxt-link.button-wrapper(:to="`/categories/media/подкасты`")
@@ -77,6 +78,7 @@ import GridArticlesView from '~/components/GridArticlesView'
 import InterestedArticles from '~/components/InterestedArticles'
 import ThePopularAuthors from '~/components/ThePopularAuthors'
 import TheHeader from '~/components/TheHeader'
+import ScrollTop from '~/components/ScrollTop'
 
 import { mapGetters } from 'vuex'
 
@@ -86,7 +88,8 @@ export default {
     GridArticlesView,
     InterestedArticles,
     ThePopularAuthors,
-    TheHeader
+    TheHeader,
+    ScrollTop
   },
   fetch({store, params}) {
 

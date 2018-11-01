@@ -1,9 +1,12 @@
 <template lang="pug">
 .wrapper
-  .head
+  nuxt-link.head(to="/categories/news")
     .title
       | Новости
-    .flag
+    .flag-wrapper
+      .flag-icon
+      .flag
+      
   .inner
     nuxt-link.news-item(
       v-for="item in news"
@@ -47,6 +50,14 @@ export default {
   align-items: center;
   justify-content: space-between;
   padding-left: 40px;
+  padding-bottom: 40px;
+  cursor: pointer;
+
+  &:hover {
+    .flag {
+      min-width: 70px;
+    }
+  }
 }
 
 .title {
@@ -55,10 +66,25 @@ export default {
   letter-spacing: 0;
 }
 
-.flag {
+.flag-wrapper {
+  display: flex;
+}
+
+.flag-icon {
   width: 36px;
   height: 29px;
   background: url('~/assets/images/news-flag.svg') no-repeat center / contain;
+}
+
+.flag {
+  display: inline-block;
+  min-width: 10px;
+  min-height: 27px;
+  position: relative;
+  z-index: 10;
+  background: #7198BA;
+  transition: min-width .2s ease;
+  will-change: min-width;
 }
 
 .inner {
@@ -71,6 +97,10 @@ export default {
 
   &:not(:last-child) {
     border-bottom: 1px solid rgba(151,151,151,0.4);
+  }
+
+  &:first-child {
+    padding-top: 0;
   }
 }
 

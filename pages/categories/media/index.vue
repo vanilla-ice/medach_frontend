@@ -1,6 +1,7 @@
 <template lang="pug">
 .wrapper
   the-header
+  scroll-top
   .container
     .buttons
       nuxt-link.button-wrapper(:to="`/categories/media/подкасты`")
@@ -55,6 +56,7 @@ const PER_PAGE = 12
 import MediaCard from '~/components/cards/MediaCard'
 import interestedArticles from '~/components/InterestedArticles'
 import TheHeader from '~/components/TheHeader'
+import ScrollTop from '~/components/ScrollTop'
 
 import { mapGetters } from 'vuex'
 
@@ -62,7 +64,8 @@ export default {
   components: {
     MediaCard,
     interestedArticles,
-    TheHeader
+    TheHeader,
+    ScrollTop
   },
 
   async fetch({store}) {

@@ -1,5 +1,6 @@
 <template lang="pug">
 .wrapper
+  scroll-top
   the-header
   .slider-section
     .slider-wrapper
@@ -74,6 +75,7 @@ import MediaCard from '~/components/cards/MediaCard'
 import ArticleCard from '~/components/cards/ArticleCard'
 import TheHeader from '~/components/TheHeader'
 import TheMobileSlider from '~/components/TheMobileSlider'
+import ScrollTop from '~/components/ScrollTop'
 
 import { mapGetters } from 'vuex'
 
@@ -85,7 +87,8 @@ export default {
     MediaCard,
     ArticleCard,
     TheHeader,
-    TheMobileSlider
+    TheMobileSlider,
+    ScrollTop
   },
 
   async fetch({store}) {

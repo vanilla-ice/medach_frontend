@@ -1,14 +1,13 @@
 <template lang="pug">
 .wrapper
   the-header
+  scroll-top
   .container
     .title
       | {{article.title}}
     .tags
       .tag(v-for="tag in article.tags" :key="`${article.id}-${article.tag}`")
         | {{ tag }}
-    //- .image-wrapper
-    //-   img(:src="`http://medach.pro${article.coverImage.url}`")
 
     .article-wrapper
       .article.content-article-wrapper(v-html="articleBody")
@@ -23,6 +22,7 @@ import InterestedArticles from '~/components/InterestedArticles'
 import ImageComponent from '~/components/ImageComponent'
 import ThePopularAuthors from '~/components/ThePopularAuthors'
 import TheHeader from '~/components/TheHeader'
+import ScrollTop from '~/components/ScrollTop'
 
 import { mapGetters } from 'vuex'
 
@@ -31,7 +31,8 @@ export default {
     InterestedArticles,
     ImageComponent,
     ThePopularAuthors,
-    TheHeader
+    TheHeader,
+    ScrollTop
   },
   fetch({store, params}) {
     return store.dispatch('articlePage/fetchArticle', {
