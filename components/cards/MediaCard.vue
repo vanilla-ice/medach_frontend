@@ -3,7 +3,6 @@ nuxt-link.card-wrapper(
   :to="`/articles/${id}`"
   :style="{background: `url(${BASE_URL}${image}) no-repeat center / cover`}"
 )
-
   .gradient
   .content
     .tags

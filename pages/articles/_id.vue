@@ -14,8 +14,6 @@
       .article.content-article-wrapper(v-html="articleBody")
       .promo
 
-
-
     .interested-wrapper
       interested-articles(:articles="interested")
 </template>
@@ -129,6 +127,20 @@ export default {
 }
 
 @media (max-width: 768px) {
+  .title {
+    font-size: 18px;
+    line-height: 26px;
+  }
+
+  .tags {
+    margin-top: 8px;
+  }
+
+  .tag {
+    margin-left: 4px;
+    margin-top: 8px;
+  }
+
   .article-wrapper {
     margin-top: 16px;
   }

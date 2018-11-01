@@ -65,7 +65,7 @@
   }
 
   .tags {
-    max-width: 250px;
+    max-width: 320px;
     width: 100%;
   }
 
@@ -79,5 +79,6 @@
       border-radius: 3px;
       padding: 4px 8px;
       margin-right: 4px;
+      margin-top: 4px;
     }
 </style>

@@ -252,6 +252,23 @@ export default {
     padding-top: 16px;
     padding-bottom: 0;
   }
+
+  .buttons {
+    flex-flow: column nowrap;
+    align-items: center;
+  }
+
+  .button-wrapper {
+    max-width: 500px;
+    width: 100%;
+    margin-bottom: 10px;
+
+    &:nth-child(2) {
+      margin-left: 0;
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+  }
 }
 </style>
 
