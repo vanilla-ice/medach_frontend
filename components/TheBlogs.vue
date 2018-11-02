@@ -1,7 +1,7 @@
 <template lang="pug">
 .blogs__container
   .blogs__wrapper
-    .blogs-tag
+    nuxt-link.blogs-tag(to="/categories/blogs")
       | Блоги
     .blogs__articles-wrapper
       nuxt-link(:to=" 'articles/' + firstArticle.id ").blogs__articles-big

@@ -8,7 +8,7 @@ import {
 
 const translatedCategories = {
   guides: 'руководства',
-  translated: 'переводы'
+  translated: 'перевод'
 }
 
 export const state = () => ({
@@ -41,6 +41,7 @@ export const getters = {
 
 export const actions = {
   fetchCategory({commit}, {perPage, category, isSortByPopular, page, query}) {
+    console.log('fetch category', category)
     switch(category) {
 
       case 'blogs':
@@ -87,7 +88,6 @@ export const actions = {
   },
 
   fetchPopularArticles({commit}, {category, query}) {
-    console.log('fetch popular articles action', category)
     switch(category) {
 
       case 'blogs':
@@ -106,7 +106,6 @@ export const actions = {
 
       case 'longread':
         return getLongreadArticles(1, 3, true, query).then(data => {
-          console.log('fetch articles', data.collection)
           commit('setPopularArticles', { 
             articles: data.collection,
           })

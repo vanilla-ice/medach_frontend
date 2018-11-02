@@ -1,5 +1,5 @@
 <template lang="pug">
-.wrapper
+.wrapper(v-if="article")
   the-header
   scroll-top
   .container
@@ -220,6 +220,7 @@ export default {
   }
 
   img {
+    display: block;
     max-width: 100%;
     margin: 22px 0;
   }

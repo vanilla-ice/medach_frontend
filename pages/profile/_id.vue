@@ -9,10 +9,10 @@
       .info
         .name
           | {{ profile.full_name }}
-        .social-items
-          a(href="#").social.social-facebook
-          a(href="#").social.social-telegram
-          a(href="#").social.social-instagram
+        .social-items(v-if="profile.user_profile")
+          a(:href="profile.user_profile.facebook_account" target="_blank").social.social-facebook
+          a(href="profile.user_profile.telegram_account" target="_blank").social.social-telegram
+          a(href="profile.user_profile.instagram_account" target="_blank").social.social-instagram
     .about
       .about-text
         | {{ profile.user_profile ? profile.user_profile.about : 'описание' }}
@@ -94,26 +94,6 @@ export default {
       searchQuery: '',
       isAboutText: 'true',
       BASE_URL: BASE_URL,
-      dummyAuthors: [
-        {
-          publicationDate: new Date(),
-          title: 'Круиз до фиджи',
-          author: 'Артем Соминов',
-          id: 1
-        },
-        {
-          publicationDate: new Date(),
-          title: 'Анти-VEGF-терапия',
-          author: 'Неизвестен',
-          id: 2
-        },
-        {
-          publicationDate: new Date(),
-          title: 'Дания практика в отделении торакальной хирургии',
-          author: 'Азат Музин',
-          id: 3
-        }
-      ]
     }
   },
   created() {
@@ -123,6 +103,9 @@ export default {
     return {
       title: `Медач | ${this.profile.full_name}`
     }
+  },
+  mounted() {
+    console.log(this.profile)
   },
   computed: {
     ...mapGetters({

@@ -14,7 +14,7 @@
         .category
           nuxt-link.category-name(to="/categories/longread") Cтатьи
         .category
-          nuxt-link.category-name(to="/categories/переводы") Переводы
+          nuxt-link.category-name(to="/categories/translated") Переводы
         .category
           nuxt-link.category-name(to="/categories/media") Медиа
         .category

@@ -133,6 +133,7 @@ export const getMediaPost = (id) => {
 }
 
 export const getPostsByTag = (tag, page, per_page, isSortByPopular, query) => {
+  console.log('get post by tag request', tag)
   return get(`/api/all_articles`, {
     tag,
     page,

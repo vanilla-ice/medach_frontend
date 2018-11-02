@@ -56,7 +56,7 @@ export default {
   },
   data() {
     return {
-      isList: true,
+      isList: false,
     }
   },
   head() {
@@ -107,6 +107,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.articles-view {
+  max-width: 1140px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
 .icon {
   width: 16px;
   height: 16px;
