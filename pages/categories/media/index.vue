@@ -12,7 +12,7 @@
           .icon
             img(src="~/assets/images/podcasts.svg")
           .text
-            | Слушайте наши подкасты на soundcloud
+            | Слушайте наши подкасты на SoundCloud
       nuxt-link.button-wrapper(:to="`/categories/media/инфографика`")
         .flag
           span

@@ -12,7 +12,7 @@
           .button-icon
             img(src="~/assets/images/podcasts.svg")
           .text
-            | Слушайте наши подкасты на soundcloud
+            | Слушайте наши подкасты на SoundCloud
       nuxt-link.button-wrapper(:to="`/categories/media/инфографика`")
         .flag
           span
@@ -90,7 +90,6 @@ export default {
     ScrollTop
   },
   fetch({store, params}) {
-
     return store.dispatch('mediaPage/fetchMedia', {
       page: 1,
       perPage: ARTICLES_PER_PAGE_LIST,
@@ -132,12 +131,11 @@ export default {
   methods: {
     switchView() {
       this.isList = !this.isList
-
       return this.$store.dispatch('mediaPage/fetchMedia', {
         page: 1,
         perPage: this.perPage,
         isSortByPopular: this.isPopular,
-        category: this.currentCategory
+        query: this.currentCategory
       })
     },
 
