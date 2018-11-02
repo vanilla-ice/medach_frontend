@@ -38,7 +38,7 @@
 
   .arrow-img {
     position: absolute;
-    top: 76px;
+    top: 40px;
     right: -27px;
     width: 15px;
     height: 15px;

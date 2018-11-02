@@ -56,6 +56,8 @@ export default {
 <style scoped lang="scss">
 .card-wrapper {
   overflow: hidden;
+  display: flex;
+  flex-flow: column nowrap;
 }
 .name {
   font-size: 16px;
@@ -112,6 +114,7 @@ export default {
 
 .grid-card-wrapper{
   background: #F2F3EC;
+  height: 100%;
 
   .content {
     min-height: 255px;
@@ -119,6 +122,7 @@ export default {
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
+    flex: 1;
   }
 
   .tag {
