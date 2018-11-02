@@ -245,7 +245,7 @@ export default {
   margin-left: 24px;
 }
 
-@media(max-width: 768px) {
+@media (max-width: 768px) {
   .load-more-wrapper {
     margin-top: 24px;
     padding-bottom: 24px;
@@ -268,7 +268,7 @@ export default {
   }
 
   .button-wrapper {
-    max-width: 500px;
+    min-height: 150px;
     width: 100%;
     margin-bottom: 10px;
 
