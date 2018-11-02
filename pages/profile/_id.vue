@@ -104,9 +104,6 @@ export default {
       title: `Медач | ${this.profile.full_name}`
     }
   },
-  mounted() {
-    console.log(this.profile)
-  },
   computed: {
     ...mapGetters({
       articles: 'profilePage/articles',

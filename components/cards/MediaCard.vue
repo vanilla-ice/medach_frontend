@@ -82,13 +82,6 @@ export default {
   border: 1px solid #7198BA;
   border-radius: 3px;
   margin: 5px;
-
-  &:first-child {
-    font-size: 16px;
-    color: #AFB09A;
-    letter-spacing: 0;
-    border: 2px solid #AFB09A;
-  }
 }
 
 @media (max-width: 768px) {

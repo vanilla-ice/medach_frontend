@@ -66,7 +66,7 @@ export default {
   padding: 100px 0;
   max-width: 980px;
   margin: 0 auto;
-  min-height: calc(100vh - 303px);
+  min-height: calc(100vh - 153px);
 }
 
 .card-wrapper {
