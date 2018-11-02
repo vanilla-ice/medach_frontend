@@ -78,7 +78,7 @@ export default {
   },
   head() {
     const translatedCategories = {
-      longread: 'Авторские статьи',
+      longread: 'Статьи',
       media: 'Медиа',
       blogs: 'Блоги',
       cases: 'Кейсы',

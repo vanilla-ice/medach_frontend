@@ -6,8 +6,19 @@
     .title
       | {{article.title}}
     .tags
-      .tag(v-for="tag in article.tags" :key="`${article.id}-${article.tag}`")
+      nuxt-link.tag(v-for="tag in article.tags" :key="`${article.id}-${tag}`" :to="`/search?query=${tag}`")
         | {{ tag }}
+    
+    .info
+      .info-item
+        span(v-if="article.author")
+         | Автор: {{article.author}}
+      .info-item
+        span
+         | Редакция: {{article.redaction}}
+      .info-item
+        span
+         | Оформление: {{article.infographic}}
 
     .article-wrapper
       .article.content-article-wrapper(v-html="articleBody")
@@ -45,6 +56,9 @@ export default {
       BASE_URL: process.env.BASE_URL
     }
   },
+  mounted() {
+    console.log('aritcle', this.article)
+  },
   head () {
     return {
       title: this.article.title
@@ -57,7 +71,7 @@ export default {
     }),
 
     articleBody() {
-      return this.article.body.replace('<img src="', '<img src="http://medach.pro')
+      return this.article.body.replace('<img src="', `<img src="${this.BASE_URL}`)
     }
   },
   methods: {
@@ -66,6 +80,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.info {
+  margin-top: 50px;
+}
+.info-item {
+  font-size: 16px;
+  color: #9b9b9b;
+  padding: 5px 0;
+}
 .interested-wrapper{
   margin-top: 42px;
 }
@@ -123,7 +145,6 @@ export default {
 .article {
   font-family: 'PTSerif', serif;
   max-width: 800px;
-  margin-left: 80px;
   width: 100%;
 }
 
@@ -157,11 +178,11 @@ export default {
 <style lang="scss">
 .content-article-wrapper {
   p {
-    font-size: 18px;
-    color: #000000;
+    font-size: 18px !important;
+    color: #000000 !important;
     letter-spacing: 0;
-    line-height: 29px;
-    margin-top: 24px;
+    line-height: 29px !important;
+    margin-top: 24px !important;
   }
 
   .editor_img-title {
@@ -207,7 +228,11 @@ export default {
     margin: 25px 0 15px 0;
     word-wrap: break-word;
   }
-}
+
+  a {
+    color: #7198BA !important;
+  }
+ }
 
 @media (max-width: 768px) {
   .image-wrapper img {

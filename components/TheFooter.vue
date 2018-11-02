@@ -3,24 +3,14 @@
   .container
     .left
       .footer-item
-        .title
-          | Информация
-        .links
-          .link
-            | О проекте
-          .link
-            | Контакты
-          .link
-            | Партнеры
-          nuxt-link.link(to="/bloggers") Блоггеры
+        nuxt-link.link(to="/bloggers") Блоггеры
 
     .right
       .social-items
-        .social.social-youtube
-        .social.social-vk
-        .social.social-telegram
-        .social.social-instagram
-        .social.social-twitter
+        a.social.social-vk(href="https://vk.com/medach" target="_blank")
+        a.social.social-facebook(href="https://www.facebook.com/medachofficial/" target="_blank")
+        a.social.social-telegram(href="https://t.me/medach" target="_blank")
+        a.social.social-youtube(href="https://www.youtube.com/channel/UCPbE0ZLynjRd-FziGZQsgsA" target="_blank")
 
 </template>
 
@@ -67,6 +57,9 @@ export default {
   }
   &-twitter {
     background: url('~/assets/images/twitter.svg') no-repeat center / contain;
+  }
+  &-facebook {
+    background: url('~/assets/images/facebook.svg') no-repeat center / contain;
   }
 
   &:not(:first-child) {

@@ -1,7 +1,6 @@
 <template lang="pug">
   .wrapper(@click="scrollTo")
-    .arrow
-      img.arrow-img(src="~/assets/images/arrow-to-top.svg")
+    img.arrow-img(src="~/static/arrow-to-top.svg")
 </template>
 
 <script>
@@ -39,10 +38,11 @@
 
   .arrow-img {
     position: absolute;
-    top: 34px;
+    top: 76px;
     right: -27px;
     width: 15px;
     height: 15px;
     transform: rotate(-90deg);
+    z-index: 999;
   }
 </style>

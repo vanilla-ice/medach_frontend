@@ -14,7 +14,7 @@
       .category
         nuxt-link.category-name(to="/categories/guides") Руководства
       .category
-        nuxt-link.category-name(to="/categories/longread") Авторские статьи
+        nuxt-link.category-name(to="/categories/longread") Статьи
       .category
         nuxt-link.category-name(to="/categories/translated") Переводы
       .category
