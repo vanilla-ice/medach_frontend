@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+///'http://localhost:8080'
 const axiosInstance = axios.create({
   baseURL: 'http://142.93.13.232',
   timeout: 50000,

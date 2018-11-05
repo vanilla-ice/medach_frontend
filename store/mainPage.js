@@ -51,6 +51,6 @@ export const actions = {
       commit('setBlogsArticles', data.blogs)
       commit('setPinnedArticles', data.pinned)
       commit('setPromotedArticles', data.promoted)
-    })
+    }).catch(error => console.log('get main page config error', error))
   }
 }

@@ -1,7 +1,7 @@
 <template lang="pug">
 .wrapper
   the-header
-  .profile-img
+  .profile-img(:style="{background: `url(${BASE_URL}${profile.user_profile ? profile.user_profile.cover_image.url : ''})`}")
 
   .container
     .profile-info
@@ -11,11 +11,11 @@
           | {{ profile.full_name }}
         .social-items(v-if="profile.user_profile")
           a(:href="profile.user_profile.facebook_account" target="_blank").social.social-facebook
-          a(href="profile.user_profile.telegram_account" target="_blank").social.social-telegram
-          a(href="profile.user_profile.instagram_account" target="_blank").social.social-instagram
+          a(:href="profile.user_profile.telegram_account" target="_blank").social.social-telegram
+          a(:href="profile.user_profile.instagram_account" target="_blank").social.social-instagram
     .about
       .about-text
-        | {{ profile.user_profile ? profile.user_profile.about : 'описание' }}
+        | {{ profile.user_profile ? profile.user_profile.about : 'описание автора' }}
     .autor-articles
       | Статьи Автора
 
@@ -103,6 +103,9 @@ export default {
     return {
       title: `Медач | ${this.profile.full_name}`
     }
+  },
+  mounted() {
+    console.log('profile', this.profile)
   },
   computed: {
     ...mapGetters({
@@ -339,7 +342,6 @@ export default {
   z-index: 2;
 
   min-height: 320px;
-  background: url('~/assets/images/profile.jpg') no-repeat center / cover;
 }
 
 .avatar {

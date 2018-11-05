@@ -64,6 +64,7 @@ export default {
   height: 90px;
   border-radius: 50%;
   margin-right: 26px;
+  min-width: 90px;
 }
 
 .title {
