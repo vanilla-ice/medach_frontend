@@ -40,6 +40,19 @@ module.exports = {
   },
   plugins: [
     { src: '~/plugins/vue-carousel', ssr: false }
-  ]
+  ],
+  router: {
+    extendRoutes (routes, resolve) {
+      routes.push({
+        name: 'post-id',
+        path: '/post/:id?',
+        component: resolve(__dirname, 'pages/articles/_id.vue')
+      }, {
+        name: 'news-post-id',
+        path: '/news-post/:id?',
+        component: resolve(__dirname, 'pages/articles/_id.vue')
+      })
+    }
+  }
 }
 
