@@ -10,7 +10,7 @@
         :key="slide.id",
         :style="{background: `url(${BASE_URL}${slide.coverImage.url}) no-repeat center / cover`}"
       )
-        nuxt-link.content(:to="`/articles/${slide.id}`")
+        nuxt-link.content(:to="`/posts/${slide.id}`")
           .title
             | {{ slide.title }}
           .bottom

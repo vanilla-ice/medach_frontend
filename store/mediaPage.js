@@ -1,5 +1,6 @@
 import {
-  getMedia
+  getMedia,
+  getPostsByTag
 } from '~/utils/requests'
 
 export const state = () => ({
@@ -25,10 +26,18 @@ export const getters = {
 }
 
 export const actions = {
-  fetchMedia({commit}, {page, perPage, query}) {
-    return getMedia(page, perPage, query).then(data => {
-      commit('setArticles', { articles: data.collection, nextPage: data.meta.nextPage })
-    })
+  fetchMedia({commit}, {page, perPage, query, category}) {
+    if (!category) {
+      return getMedia(page, perPage, query).then(data => {
+        commit('setArticles', { articles: data.collection, nextPage: data.meta.nextPage })
+      })
+    }
+    else {
+      return getPostsByTag(category, page, perPage, query).then(data => {
+        commit('setArticles', { articles: data.collection, nextPage: data.meta.nextPage })
+      })
+    }
+    
   },
 
   fetchNextPage({commit, state}, {perPage, query}) {

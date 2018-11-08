@@ -46,15 +46,11 @@ module.exports = {
       routes.push({
         name: 'post-id',
         path: '/post/:id?',
-        component: resolve(__dirname, 'pages/articles/_id.vue')
+        component: resolve(__dirname, 'pages/posts/_id.vue')
       }, {
         name: 'news-post-id',
         path: '/news-post/:id?',
-        component: resolve(__dirname, 'pages/articles/_id.vue')
-      },  {
-        name: 'blog-post-id',
-        path: '/blog-post/:id?',
-        component: resolve(__dirname, 'pages/articles/_id.vue')
+        component: resolve(__dirname, 'pages/posts/_id.vue')
       })
     }
   }

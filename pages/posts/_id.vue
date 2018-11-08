@@ -38,6 +38,7 @@ import ScrollTop from '~/components/ScrollTop'
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'Articles page',
   components: {
     InterestedArticles,
     ImageComponent,
@@ -51,6 +52,7 @@ export default {
     })
       .then(() => store.dispatch('interestedArticles/fetchInterestedArticles'))
   },
+  
   data() {
     return {
       BASE_URL: process.env.BASE_URL

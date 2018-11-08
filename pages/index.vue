@@ -13,7 +13,7 @@
     .top-articles
       nuxt-link.article(
         v-for="article in topPosts"
-        :to="`articles/${article.id}`"
+        :to="`posts/${article.id}`"
         :key="article.id"
         :style="{background: `url(${`http://medach.pro${article.coverImage.url}`}) no-repeat center / cover`}"
       )

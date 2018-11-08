@@ -95,7 +95,7 @@ export default {
     return store.dispatch('mediaPage/fetchMedia', {
       page: 1,
       perPage: ARTICLES_PER_PAGE_LIST,
-      query: params.id
+      category: params.id
     })
       .then(() => store.dispatch('interestedArticles/fetchInterestedArticles'))
   },
