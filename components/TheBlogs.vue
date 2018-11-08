@@ -4,7 +4,7 @@
     nuxt-link.blogs-tag(to="/categories/blogs")
       | Блоги
     .blogs__articles-wrapper
-      nuxt-link(:to=" 'articles/' + firstArticle.id ").blogs__articles-big
+      nuxt-link(:to=" 'post/' + firstArticle.id ").blogs__articles-big
         .top
           .blogs__articles-big-text
             | {{ firstArticle.title }}
