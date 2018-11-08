@@ -51,6 +51,10 @@ module.exports = {
         name: 'news-post-id',
         path: '/news-post/:id?',
         component: resolve(__dirname, 'pages/post/_id.vue')
+      }, {
+        name: 'blog-post-id',
+        path: '/blog-post/:id?',
+        component: resolve(__dirname, 'pages/post/_id.vue')
       })
     }
   }
