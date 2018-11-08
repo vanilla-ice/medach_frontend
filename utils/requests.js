@@ -67,10 +67,11 @@ export const getNews = (page, per_page, isSortByPopular, query) => {
     .catch(error => console.log('getNews error', error))
 }
 
-export const getMedia = (page, per_page, query) => {
+export const getMedia = (page, per_page, isSortByPopular, query) => {
   return get(`/api/media`, {
       page,
       per_page,
+      'sort[col]': isSortByPopular ? 'impressions_count' : 'publish_on',
       query
     })
     .then(response => response.data)
