@@ -10,9 +10,9 @@
         .name
           | {{ profile.full_name }}
         .social-items(v-if="profile.user_profile")
-          a(:href="profile.user_profile.facebook_account" target="_blank").social.social-facebook
-          a(:href="profile.user_profile.telegram_account" target="_blank").social.social-telegram
-          a(:href="profile.user_profile.instagram_account" target="_blank").social.social-instagram
+          a(:href="profile.user_profile.facebook_account" v-if="profile.user_profile.facebook_account" target="_blank").social.social-facebook
+          a(:href="profile.user_profile.telegram_account" v-if="profile.user_profile.telegram_account" target="_blank").social.social-telegram
+          a(:href="profile.user_profile.instagram_account" v-if="profile.user_profile.instagram_account" target="_blank").social.social-instagram
     .about
       .about-text
         | {{ profile.user_profile ? profile.user_profile.about : 'описание автора' }}
