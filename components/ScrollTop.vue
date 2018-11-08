@@ -19,17 +19,15 @@
   .wrapper {
     position: fixed;
     z-index: 999;
-    left: 0;
+    width: 70px;
+    height: 70px;
     bottom: 0;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 0 60px 60px 0;
-    border-color: transparent transparent rgba(91,91,91,0.9) transparent;
-    text-align: center;
-    opacity: .8;
-    transition: opacity .2s ease;
+    left: 0;
+    background: rgba(0,0,0,0.7);
+    opacity: 0.7;
     cursor: pointer;
+    transform: translateY(50%) rotate(45deg);
+    transition: opacity .2s ease;
 
     &:hover {
       opacity: 1;
@@ -38,11 +36,11 @@
 
   .arrow-img {
     position: absolute;
-    top: 40px;
-    right: -27px;
+    top: 0%;
+    left: 50%;
     width: 15px;
     height: 15px;
-    transform: rotate(-90deg);
+    transform: rotate(-135deg) translate(-5%, -156%);
     z-index: 999;
   }
 </style>
