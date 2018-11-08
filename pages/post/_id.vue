@@ -14,10 +14,10 @@
         span(v-if="article.author")
          | Автор: {{article.author}}
       .info-item
-        span
+        span(v-if="article.redaction")
          | Редакция: {{article.redaction}}
       .info-item
-        span
+        span(v-if="article.infographic")
          | Оформление: {{article.infographic}}
 
     .article-wrapper
