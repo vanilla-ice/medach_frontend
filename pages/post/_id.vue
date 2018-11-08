@@ -19,6 +19,12 @@
       .info-item
         span(v-if="article.infographic")
          | Оформление: {{article.infographic}}
+      .info-item
+        span(v-if="article.origin && article.origin !== ''")
+         | Оригинал: {{article.origin}}
+      .info-item
+        span(v-if="article.translate && article.translate !== ''")
+         | Перевод: {{article.translate}}
 
     .article-wrapper
       .article.content-article-wrapper(v-html="articleBody")
@@ -145,6 +151,7 @@ export default {
   flex-flow: row nowrap;
   align-items: flex-start;
   margin-top: 40px;
+  padding-left: 80px;
 }
 
 .article {
