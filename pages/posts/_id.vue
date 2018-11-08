@@ -63,7 +63,10 @@ export default {
   },
   head () {
     return {
-      title: this.article.title
+      title: this.article.title,
+      meta: [
+        {}
+      ]
     }
   },
   computed: {
@@ -183,7 +186,7 @@ export default {
     font-size: 18px !important;
     color: #000000 !important;
     letter-spacing: 0;
-    line-height: 29px !important;
+    line-height: 29px;
     margin-top: 24px !important;
   }
 
@@ -234,6 +237,12 @@ export default {
 
   a {
     color: #7198BA !important;
+  }
+
+  li {
+    p {
+      line-height: 1.3;
+    }
   }
  }
 
