@@ -233,7 +233,9 @@ export default {
 
   li {
     font-size: 16px;
-    padding: 6px;
+    padding: 2px;
+    line-height: 29px;
+    font-size: 18px;
   }
 
   img {
