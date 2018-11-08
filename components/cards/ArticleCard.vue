@@ -1,10 +1,10 @@
 <template lang="pug">
 .card-wrapper(:class="{'grid-card-wrapper': isGridCard, 'list-card-wrapper': isListCard}" key="article-card")
-  nuxt-link.image-wrapper(:style="{height: isListCard ? '300px' : '240px'}" :to="`/posts/${id}`")
+  nuxt-link.image-wrapper(:style="{height: isListCard ? '300px' : '240px'}" :to="`/post/${id}`")
     image-component(:src="image")
   .content
     .top
-      nuxt-link.name(:to="`/posts/${id}`")
+      nuxt-link.name(:to="`/post/${id}`")
         | {{ name }}
 
     .bottom

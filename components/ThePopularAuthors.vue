@@ -5,7 +5,7 @@
       | Популярное
   .inner
     nuxt-link.authors-item(
-      :to="`/posts/${item.id}`"
+      :to="`/post/${item.id}`"
       v-for="item in articles",
       :key="item.id"
     )

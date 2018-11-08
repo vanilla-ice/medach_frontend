@@ -10,7 +10,7 @@
     nuxt-link.news-item(
       v-for="(item, id) in news"
       :key="item.id"
-      :to="`/posts/${item.id}`"
+      :to="`/post/${item.id}`"
       v-if="id < 3"
     )
       .name
