@@ -21,7 +21,7 @@
         nuxt-link(
           v-for="(article, id) in otherArticles"
           :key="article.id"
-          :to=" 'articles/' + article.id "
+          :to=" 'post/' + article.id "
         ).blogs__articles-min-item
           .blogs__articles-min-item-text
             | {{ article.title }}
