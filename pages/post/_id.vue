@@ -8,7 +8,7 @@
     .tags
       nuxt-link.tag(v-for="tag in article.tags" :key="`${article.id}-${tag}`" :to="`/search?query=${tag}`")
         | {{ tag }}
-    
+
     .info
       .info-item
         span(v-if="article.author")
@@ -58,7 +58,7 @@ export default {
     })
       .then(() => store.dispatch('interestedArticles/fetchInterestedArticles'))
   },
-  
+
   data() {
     return {
       BASE_URL: process.env.BASE_URL
@@ -182,6 +182,7 @@ export default {
 
   .article-wrapper {
     margin-top: 16px;
+    padding-left: 0;
   }
 }
 
@@ -226,9 +227,13 @@ export default {
     line-height: 20px;
   }
 
+  ol, ul {
+    margin-top: 24px
+  }
+
   li {
     font-size: 16px;
-    padding: 10px;
+    padding: 6px;
   }
 
   img {
