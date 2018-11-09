@@ -19,7 +19,7 @@
       .info-item
         span(v-if="article.infographic")
          | Оформление: {{article.infographic}}
-      .info-item
+      .info-item.origin
         span(v-if="article.origin && article.origin !== ''")
          | Оригинал: {{article.origin}}
       .info-item
@@ -27,9 +27,12 @@
          | Перевод: {{article.translate}}
 
     .article-wrapper
-      .article.content-article-wrapper(v-html="articleBody")
-      .promo
-
+      .article.content-article-wrapper(v-html="articleBody" ref="articleData")
+    .preview(v-if="currentImg" @click="close")
+      .preview-wrapper
+        .opacity
+        .close(@click="close")
+        img(:src="currentImg")
     .interested-wrapper
       interested-articles(:articles="interested")
 </template>
@@ -61,7 +64,8 @@ export default {
 
   data() {
     return {
-      BASE_URL: process.env.BASE_URL
+      BASE_URL: process.env.BASE_URL,
+      currentImg: ''
     }
   },
   head () {
@@ -73,8 +77,16 @@ export default {
             content: this.BASE_URL+this.article.coverImage.url
           },
           {
-            property:"og:image:type",
+            property: "og:image:type",
             content: "image/jpeg"
+          },
+          {
+            property: "og:image:width",
+            content: "675"
+          },
+          {
+            property: "og:image:height",
+            content: "475"
           }
         ]
       } else {
@@ -93,11 +105,34 @@ export default {
     }),
 
     articleBody() {
-      console.log('this.article', this.BASE_URL + this.article.coverImage.url)
       return this.article.body.replace('<img src="', `<img src="${this.BASE_URL}`)
     }
   },
+
+  mounted() {
+    const images = Array.from(this.$refs.articleData.querySelectorAll('img'))
+    images.map(img => {
+      img.addEventListener('click', () => this.renderPreviewImage(img))
+    })
+  },
+
+  beforeDestroy() {
+    const images = Array.from(this.$refs.articleData.querySelectorAll('img'))
+    images.map(img => {
+      img.removeEventListener('click', () => this.renderPreviewImage(img))
+    })
+  },
+
   methods: {
+    renderPreviewImage(image) {
+      this.currentImg = image.getAttribute('src')
+      document.body.classList.add('scroll-del')
+    },
+
+    close() {
+      document.body.classList.remove('scroll-del')
+      this.currentImg = null;
+    },
   }
 }
 </script>
@@ -184,6 +219,37 @@ export default {
   margin-left: 80px;
 }
 
+.preview {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.7);
+  z-index: 3000;
+  overflow: auto;
+  img {
+    position: relative;
+    max-width: 92%;
+    display: block;
+    margin: 0 auto;
+    z-index: 5;
+  }
+}
+
+.preview-wrapper {
+  margin: 30px auto;
+}
+
+.opacity {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
 @media (max-width: 768px) {
   .title {
     font-size: 18px;
@@ -203,11 +269,25 @@ export default {
     margin-top: 16px;
     padding-left: 0;
   }
+
+  .info,
+  .tags,
+  .title {
+    padding-left: 0;
+  }
+
+  .info-item.origin {
+    word-wrap: break-word;
+  }
 }
 
 </style>
 
 <style lang="scss">
+.scroll-del {
+  overflow: hidden !important;
+}
+
 .content-article-wrapper {
   p {
     font-size: 18px !important;
@@ -261,6 +341,7 @@ export default {
     display: block;
     max-width: 100%;
     margin: 22px 0;
+    cursor: pointer;
   }
 
   h2, h3 {
