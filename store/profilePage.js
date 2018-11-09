@@ -66,8 +66,8 @@ export const actions = {
     })
   },
 
-  fetchBlogs({commit}, {id}) {
-    return getUserBlogs(id).then(data => {
+  fetchBlogs({commit}, {id, page, perPage, isSortByPopular, query}) {
+    return getUserBlogs(id, page, perPage, isSortByPopular, query).then(data => {
       commit('setBlogPosts', data)
     })
   },
