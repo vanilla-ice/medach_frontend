@@ -64,9 +64,6 @@ export default {
       BASE_URL: process.env.BASE_URL
     }
   },
-  mounted() {
-    console.log('aritcle', this.article)
-  },
   head () {
     return {
       title: this.article.title,
@@ -93,7 +90,13 @@ export default {
 <style scoped lang="scss">
 .info {
   margin-top: 50px;
+  padding-left: 80px;
 }
+
+.tags {
+  padding-left: 80px;
+}
+
 .info-item {
   font-size: 16px;
   color: #9b9b9b;
@@ -113,6 +116,7 @@ export default {
   letter-spacing: 0;
   margin-top: 36px;
   max-width: 900px;
+  padding-left: 80px;
 }
 
 .tags {

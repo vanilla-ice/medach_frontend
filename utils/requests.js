@@ -167,8 +167,13 @@ export const getUserProfile = (id) => {
     .catch(error => console.log('getUserProfile error', error))
 }
 
-export const getUserBlogs = (id) => {
-  return get(`/api/users/${id}/blogs`)
+export const getUserBlogs = (id, page, per_page, isSortByPopular, query)=> {
+  return get(`/api/users/${id}/blogs`, {
+    page,
+    per_page,
+    'sort[col]': isSortByPopular ? 'impressions_count' : 'publish_on',
+    query
+  })
     .then(response => response.data)
     .catch(error => console.log('getUserBlogs error', error))
 }

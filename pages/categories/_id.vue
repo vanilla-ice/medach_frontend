@@ -22,7 +22,7 @@
       .articles-view
         list-articles-view(v-if="isList" :articles="articles" key="list-view")
         grid-articles-view(v-else :articles="articles" key="grid-view")
-        .no-articles(v-if="articles.length === 0") Здесь ещё ничего нет, но вы можете найти много крутых штук на 
+        .no-articles(v-if="articles.length === 0") Здесь ещё ничего нет, но вы можете найти много крутых штук на
           nuxt-link(to="/")
             | главной
 
@@ -118,7 +118,6 @@ export default {
   methods: {
     switchView() {
       this.isList = !this.isList
-      console.log('current cat', this.currentCategory)
       return this.$store.dispatch('categoryPage/fetchCategory', {
         page: 1,
         perPage: this.perPage,
