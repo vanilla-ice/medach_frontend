@@ -65,11 +65,25 @@ export default {
     }
   },
   head () {
+    const meta = () => {
+      if (this.article.coverImage.url) {
+        return [
+          {
+            property: 'og:image',
+            content: this.BASE_URL+this.article.coverImage.url
+          },
+          {
+            property:"og:image:type",
+            content: "image/jpeg"
+          }
+        ]
+      } else {
+        return []
+      }
+    }
     return {
       title: this.article.title,
-      meta: [
-        {}
-      ]
+      meta: meta()
     }
   },
   computed: {
@@ -79,6 +93,7 @@ export default {
     }),
 
     articleBody() {
+      console.log('this.article', this.BASE_URL + this.article.coverImage.url)
       return this.article.body.replace('<img src="', `<img src="${this.BASE_URL}`)
     }
   },
