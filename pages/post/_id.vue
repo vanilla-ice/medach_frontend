@@ -72,33 +72,38 @@ export default {
     }
   },
   head () {
-    const meta = () => {
-      if (this.article.coverImage.url) {
-        return [
-          {
-            property: 'og:image',
-            content: this.BASE_URL+this.article.coverImage.url
-          },
-          {
-            property: "og:image:type",
-            content: "image/jpeg"
-          },
-          {
-            property: "og:image:width",
-            content: "675"
-          },
-          {
-            property: "og:image:height",
-            content: "475"
-          }
-        ]
-      } else {
-        return []
-      }
-    }
     return {
       title: this.article.title,
-      meta: meta()
+      meta: [
+        {
+          property: 'og:title',
+          content: this.article.title
+        },
+        {
+          property: 'og:url',
+          content: 'http://medach.pro'+this.$route.path
+        },
+        {
+          property: 'og:type',
+          content: 'article'
+        },
+        {
+          property: 'og:image',
+          content: this.article.coverImage.url ? this.BASE_URL+this.article.coverImage.url : ''
+        },
+        {
+          property: "og:image:type",
+          content: "image/jpeg"
+        },
+        {
+          property: "og:image:width",
+          content: "675"
+        },
+        {
+          property: 'og:description',
+          content: 'Medach'
+        }
+      ]
     }
   },
   computed: {
