@@ -21,16 +21,19 @@
          | Оформление: {{article.infographic}}
       .info-item.origin
         span(v-if="article.origin && article.origin !== ''")
-         | Оригинал: {{article.origin}}
+          | Оригинал:
+          |
+        a(:href="article.origin" target="_blank")
+          | {{article.origin}}
       .info-item
         span(v-if="article.translate && article.translate !== ''")
          | Перевод: {{article.translate}}
 
     .article-wrapper
       .article.content-article-wrapper(v-html="articleBody" ref="articleData")
-    .preview(v-if="currentImg" @click="close")
+    .preview(v-if="currentImg")
       .preview-wrapper
-        .opacity
+        .opacity(@click="close")
         .close(@click="close")
         img(:src="currentImg")
     .interested-wrapper
@@ -248,6 +251,50 @@ export default {
   width: 100%;
   height: 100%;
   z-index: 2;
+}
+
+.info-item.origin  a {
+  color: rgb(88, 88, 88);
+  text-decoration: underline;
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  width: 30px;
+  height: 30px;
+  z-index: 3;
+  cursor: pointer;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+
+    display: block;
+    width: 30px;
+    height: 3px;
+    background: rgb(88, 88, 88);
+
+    transform: rotate(45deg);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+
+    display: block;
+    width: 30px;
+    height: 3px;
+    background: rgb(88, 88, 88);
+
+    transform: rotate(-45deg);
+  }
 }
 
 @media (max-width: 768px) {
