@@ -73,6 +73,9 @@ export default {
   },
   head () {
     return {
+      htmlAttrs: {
+        prefix: "og: http://ogp.me/ns#"
+      },
       title: this.article.title,
       meta: [
         {
