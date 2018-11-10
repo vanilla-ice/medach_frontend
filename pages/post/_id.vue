@@ -76,32 +76,44 @@ export default {
       title: this.article.title,
       meta: [
         {
+          hid: 'ogtitle',
           property: 'og:title',
           content: this.article.title
         },
         {
+          hid: 'ogurl',
           property: 'og:url',
           content: 'http://medach.pro'+this.$route.path
         },
         {
+          hid: 'ogtype',
           property: 'og:type',
           content: 'article'
         },
         {
+          hid: 'ogimage',
           property: 'og:image',
           content: this.article.coverImage.url ? this.BASE_URL+this.article.coverImage.url : ''
         },
         {
+          hid: 'ogimagetype',
           property: "og:image:type",
           content: "image/jpeg"
         },
         {
+          hid: 'ogimagewidth',
           property: "og:image:width",
           content: "675"
         },
         {
+          hid: 'ogimageheight',
+          property: "og:image:height",
+          content: "475"
+        },
+        {
+          hid: 'ogdescription',
           property: 'og:description',
-          content: 'Medach'
+          content: this.article.title
         }
       ]
     }
