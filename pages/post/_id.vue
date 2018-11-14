@@ -31,11 +31,9 @@
 
     .article-wrapper
       .article.content-article-wrapper(v-html="articleBody" ref="articleData")
-    .preview(v-if="currentImg")
-      .preview-wrapper
-        .opacity(@click="close")
-        .close(@click="close")
-        img(:src="currentImg")
+
+    preview(v-if="currentImg" :close="close" :currentImg="currentImg")
+
     .interested-wrapper
       interested-articles(:articles="interested")
 </template>
@@ -44,8 +42,10 @@
 import InterestedArticles from '~/components/InterestedArticles'
 import ImageComponent from '~/components/ImageComponent'
 import ThePopularAuthors from '~/components/ThePopularAuthors'
+import Preview from '~/components/Preview'
 import TheHeader from '~/components/TheHeader'
 import ScrollTop from '~/components/ScrollTop'
+
 
 import { mapGetters } from 'vuex'
 
@@ -55,6 +55,7 @@ export default {
     InterestedArticles,
     ImageComponent,
     ThePopularAuthors,
+    Preview,
     TheHeader,
     ScrollTop
   },
@@ -242,79 +243,10 @@ export default {
   margin-left: 80px;
 }
 
-.preview {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: rgba(255, 255, 255, 0.7);
-  z-index: 3000;
-  overflow: auto;
-  img {
-    position: relative;
-    max-width: 92%;
-    display: block;
-    margin: 0 auto;
-    z-index: 5;
-  }
-}
-
-.preview-wrapper {
-  margin: 30px auto;
-}
-
-.opacity {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-}
 
 .info-item.origin  a {
   color: rgb(88, 88, 88);
   text-decoration: underline;
-}
-
-.close {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-
-  width: 30px;
-  height: 30px;
-  z-index: 3;
-  cursor: pointer;
-
-  &::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-
-    display: block;
-    width: 30px;
-    height: 3px;
-    background: rgb(88, 88, 88);
-
-    transform: rotate(45deg);
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-
-    display: block;
-    width: 30px;
-    height: 3px;
-    background: rgb(88, 88, 88);
-
-    transform: rotate(-45deg);
-  }
 }
 
 @media (max-width: 768px) {
@@ -418,6 +350,7 @@ export default {
 
   a {
     color: #7198BA !important;
+    word-wrap: break-word;
   }
 
   li {
