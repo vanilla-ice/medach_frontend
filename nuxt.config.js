@@ -39,7 +39,7 @@ module.exports = {
     }
   },
   plugins: [
-    { src: '~/plugins/vue-carousel', ssr: false }
+    { src: '~/plugins/vue-carousel', ssr: false },
   ],
   router: {
     extendRoutes (routes, resolve) {
@@ -57,6 +57,19 @@ module.exports = {
         component: resolve(__dirname, 'pages/post/_id.vue')
       })
     }
-  }
+  },
+
+  modules: [
+    [
+      '@nuxtjs/yandex-metrika',
+      {
+        id: '50175607',
+        webvisor: true,
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+      }
+    ],
+  ]
 }
 
