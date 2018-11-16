@@ -8,7 +8,7 @@
       slide.slide(
         v-for="(slide, index) in slides",
         :key="slide.id",
-        :style="{background: `url(${BASE_URL}${slide.coverImage.url}) no-repeat center / cover`}"
+        :style="{background: `url(${BASE_URL}${getSlideImageUrl(slide)}) no-repeat center / cover`}"
       )
         nuxt-link.content(:to="`/post/${slide.id}`")
           .title
@@ -27,6 +27,7 @@
 <script>
 import format from 'date-fns/format'
 import ru from 'date-fns/locale/ru'
+import _ from 'lodash'
 
 export default {
   name: 'TheSlider',
@@ -47,6 +48,10 @@ export default {
   methods: {
     formatDate(date) {
       return format(date, 'MMMM DD, YYYY', {locale: ru})
+    },
+
+    getSlideImageUrl(slide) {
+      return _.get(slide, slide.sliderImage.url, slide.coverImage.url)
     }
   }
 }
