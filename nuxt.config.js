@@ -7,7 +7,7 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Nuxt.js project' }
+      { hid: 'description', name: 'description', content: 'Medical Channel (www.medach.pro) – это портал для молодых врачей и студентов медицинских университетов, задачей которого является знакомство людей с достижениями современной медицины, обменом знаниями между участниками, а также выпуск материалов, облегчающих учебную и практическую деятельность.' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
