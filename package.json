@@ -20,8 +20,10 @@
     }
   },
   "dependencies": {
+    "@nuxtjs/yandex-metrika": "^0.1.0",
     "axios": "^0.18.0",
     "date-fns": "^1.29.0",
+    "lodash": "^4.17.11",
     "node-sass": "^4.9.3",
     "normalize.css": "^8.0.0",
     "nuxt": "^1.0.0",

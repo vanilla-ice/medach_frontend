@@ -8,7 +8,7 @@
     .tags
       nuxt-link.tag(v-for="tag in article.tags" :key="`${article.id}-${tag}`" :to="`/search?query=${tag}`")
         | {{ tag }}
-    
+
     .info
       .info-item
         span(v-if="article.author")
@@ -19,16 +19,20 @@
       .info-item
         span(v-if="article.infographic")
          | Оформление: {{article.infographic}}
-      .info-item
+      .info-item.origin
         span(v-if="article.origin && article.origin !== ''")
-         | Оригинал: {{article.origin}}
+          | Оригинал:
+          |
+        a(:href="article.origin" target="_blank")
+          | {{article.origin}}
       .info-item
         span(v-if="article.translate && article.translate !== ''")
          | Перевод: {{article.translate}}
 
     .article-wrapper
-      .article.content-article-wrapper(v-html="articleBody")
-      .promo
+      .article.content-article-wrapper(v-html="articleBody" ref="articleData")
+
+    preview(v-if="currentImg" :close="close" :currentImg="currentImg")
 
     .interested-wrapper
       interested-articles(:articles="interested")
@@ -38,8 +42,10 @@
 import InterestedArticles from '~/components/InterestedArticles'
 import ImageComponent from '~/components/ImageComponent'
 import ThePopularAuthors from '~/components/ThePopularAuthors'
+import Preview from '~/components/Preview'
 import TheHeader from '~/components/TheHeader'
 import ScrollTop from '~/components/ScrollTop'
+
 
 import { mapGetters } from 'vuex'
 
@@ -49,6 +55,7 @@ export default {
     InterestedArticles,
     ImageComponent,
     ThePopularAuthors,
+    Preview,
     TheHeader,
     ScrollTop
   },
@@ -58,17 +65,60 @@ export default {
     })
       .then(() => store.dispatch('interestedArticles/fetchInterestedArticles'))
   },
-  
+
   data() {
     return {
-      BASE_URL: process.env.BASE_URL
+      BASE_URL: process.env.BASE_URL,
+      currentImg: ''
     }
   },
   head () {
     return {
+      htmlAttrs: {
+        prefix: "og: http://ogp.me/ns#"
+      },
       title: this.article.title,
       meta: [
-        {}
+        {
+          hid: 'ogtitle',
+          property: 'og:title',
+          content: this.article.title
+        },
+        {
+          hid: 'ogurl',
+          property: 'og:url',
+          content: 'http://medach.pro'+this.$route.path
+        },
+        {
+          hid: 'ogtype',
+          property: 'og:type',
+          content: 'article'
+        },
+        {
+          hid: 'ogimage',
+          property: 'og:image',
+          content: this.article.coverImage.url ? this.BASE_URL+this.article.coverImage.url : ''
+        },
+        {
+          hid: 'ogimagetype',
+          property: "og:image:type",
+          content: "image/jpeg"
+        },
+        {
+          hid: 'ogimagewidth',
+          property: "og:image:width",
+          content: "675"
+        },
+        {
+          hid: 'ogimageheight',
+          property: "og:image:height",
+          content: "475"
+        },
+        {
+          hid: 'ogdescription',
+          property: 'og:description',
+          content: this.article.title
+        }
       ]
     }
   },
@@ -82,7 +132,31 @@ export default {
       return this.article.body.replace('<img src="', `<img src="${this.BASE_URL}`)
     }
   },
+
+  mounted() {
+    const images = Array.from(this.$refs.articleData.querySelectorAll('img'))
+    images.map(img => {
+      img.addEventListener('click', () => this.renderPreviewImage(img))
+    })
+  },
+
+  beforeDestroy() {
+    const images = Array.from(this.$refs.articleData.querySelectorAll('img'))
+    images.map(img => {
+      img.removeEventListener('click', () => this.renderPreviewImage(img))
+    })
+  },
+
   methods: {
+    renderPreviewImage(image) {
+      this.currentImg = image.getAttribute('src')
+      document.body.classList.add('scroll-del')
+    },
+
+    close() {
+      document.body.classList.remove('scroll-del')
+      this.currentImg = null;
+    },
   }
 }
 </script>
@@ -90,7 +164,13 @@ export default {
 <style scoped lang="scss">
 .info {
   margin-top: 50px;
+  padding-left: 80px;
 }
+
+.tags {
+  padding-left: 80px;
+}
+
 .info-item {
   font-size: 16px;
   color: #9b9b9b;
@@ -114,6 +194,7 @@ export default {
   letter-spacing: 0;
   margin-top: 36px;
   max-width: 900px;
+  padding-left: 80px;
 }
 
 .tags {
@@ -165,6 +246,12 @@ export default {
   margin-left: 80px;
 }
 
+
+.info-item.origin  a {
+  color: rgb(88, 88, 88);
+  text-decoration: underline;
+}
+
 @media (max-width: 768px) {
   .title {
     font-size: 18px;
@@ -182,12 +269,27 @@ export default {
 
   .article-wrapper {
     margin-top: 16px;
+    padding-left: 0;
+  }
+
+  .info,
+  .tags,
+  .title {
+    padding-left: 0;
+  }
+
+  .info-item.origin {
+    word-wrap: break-word;
   }
 }
 
 </style>
 
 <style lang="scss">
+.scroll-del {
+  overflow: hidden !important;
+}
+
 .content-article-wrapper {
   p {
     font-size: 18px !important;
@@ -226,15 +328,22 @@ export default {
     line-height: 20px;
   }
 
+  ol, ul {
+    margin-top: 24px
+  }
+
   li {
     font-size: 16px;
-    padding: 10px;
+    padding: 2px;
+    line-height: 29px;
+    font-size: 18px;
   }
 
   img {
     display: block;
     max-width: 100%;
     margin: 22px 0;
+    cursor: pointer;
   }
 
   h2, h3 {
@@ -244,6 +353,7 @@ export default {
 
   a {
     color: #7198BA !important;
+    word-wrap: break-word;
   }
 
   li {

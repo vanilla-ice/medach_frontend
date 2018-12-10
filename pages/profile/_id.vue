@@ -39,7 +39,7 @@
       .articles-view
         list-articles-view(v-if="isList" :articles="articles" key="list-view")
         grid-articles-view(v-else :articles="articles" key="grid-view")
-        .no-articles(v-if="articles.length === 0") Здесь ещё ничего нет, но вы можете найти много крутых штук на 
+        .no-articles(v-if="articles.length === 0") Здесь ещё ничего нет, но вы можете найти много крутых штук на
           nuxt-link(to="/")
             | главной
 
@@ -104,8 +104,6 @@ export default {
       title: `Медач | ${this.profile.full_name}`
     }
   },
-  mounted() {
-  },
   computed: {
     ...mapGetters({
       articles: 'profilePage/articles',
@@ -124,11 +122,11 @@ export default {
     switchView() {
       this.isList = !this.isList
 
-      return this.$store.dispatch('categoryPage/fetchCategory', {
+      return this.$store.dispatch('profilePage/fetchBlogs', {
+        id: this.currentCategory,
         page: 1,
         perPage: this.perPage,
-        isSortByPopular: this.isPopular,
-        category: this.currentCategory
+        isSortByPopular: this.isPopular
       })
     },
 
@@ -137,11 +135,11 @@ export default {
       if (this.isPopular) {
         this.isPopular = false
 
-        return this.$store.dispatch('categoryPage/fetchCategory', {
+        return this.$store.dispatch('profilePage/fetchBlogs', {
+          id: this.currentCategory,
           page: 1,
           perPage: this.perPage,
-          isSortByPopular: this.isPopular,
-          category: this.currentCategory
+          isSortByPopular: this.isPopular
         })
       }
     },
@@ -151,31 +149,31 @@ export default {
       if (!this.isPopular) {
         this.isPopular = true
 
-        return this.$store.dispatch('categoryPage/fetchCategory', {
+        return this.$store.dispatch('profilePage/fetchBlogs', {
+          id: this.currentCategory,
           page: 1,
           perPage: this.perPage,
-          isSortByPopular: this.isPopular,
-          category: this.currentCategory
+          isSortByPopular: this.isPopular
         })
       }
     },
 
     getNextPage() {
-      return this.$store.dispatch('categoryPage/fetchNextPage', {
+      return this.$store.dispatch('profilePage/fetchBlogs', {
+        id: this.currentCategory,
         page: this.nextPage,
         perPage: this.perPage,
-        category: this.currentCategory,
         isSortByPopular: this.isPopular,
         query: this.searchQuery === '' ? null : this.searchQuery
       })
     },
 
     getSearchResults() {
-      return this.$store.dispatch('categoryPage/fetchCategory', {
+      return this.$store.dispatch('profilePage/fetchBlogs', {
+        id: this.currentCategory,
         page: 1,
         perPage: this.perPage,
         isSortByPopular: this.isPopular,
-        category: this.currentCategory,
         query: this.searchQuery === '' ? null : this.searchQuery
       })
     }
@@ -187,11 +185,12 @@ export default {
         this.debouncedSearch()
       }
       else {
-        return this.$store.dispatch('categoryPage/fetchCategory', {
+        return this.$store.dispatch('profilePage/fetchBlogs', {
+          id: this.currentCategory,
           page: 1,
           perPage: this.perPage,
           isSortByPopular: this.isPopular,
-          category: this.currentCategory
+          query: this.searchQuery === '' ? null : this.searchQuery
         })
       }
     }
