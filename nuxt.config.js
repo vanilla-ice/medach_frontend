@@ -18,7 +18,7 @@ module.exports = {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
-    scripts: [
+    script: [
       {
         src: '//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
         async: true
