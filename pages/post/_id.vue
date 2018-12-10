@@ -64,9 +64,6 @@ export default {
       BASE_URL: process.env.BASE_URL
     }
   },
-  mounted() {
-    console.log('aritcle', this.article)
-  },
   head () {
     return {
       title: this.article.title,
@@ -104,6 +101,10 @@ export default {
 }
 .wrapper {
   padding-bottom: 40px;
+
+  .container {
+    padding-left: 80px;
+  }
 }
 
 .title {
@@ -151,7 +152,6 @@ export default {
   flex-flow: row nowrap;
   align-items: flex-start;
   margin-top: 40px;
-  padding-left: 80px;
 }
 
 .article {

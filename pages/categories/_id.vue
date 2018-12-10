@@ -118,7 +118,6 @@ export default {
   methods: {
     switchView() {
       this.isList = !this.isList
-      console.log('current cat', this.currentCategory)
       return this.$store.dispatch('categoryPage/fetchCategory', {
         page: 1,
         perPage: this.perPage,

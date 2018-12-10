@@ -1,3 +1,9 @@
+var script = `
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9039390016962020",
+    enable_page_level_ads: true
+  });
+`
 module.exports = {
   /*
   ** Headers of the page
@@ -11,6 +17,15 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    ],
+    scripts: [
+      {
+        src: '//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
+        async: true
+      },
+      {
+        innerHTML: script
+      }
     ]
   },
   /*
@@ -55,7 +70,12 @@ module.exports = {
         name: 'blog-post-id',
         path: '/blog-post/:id?',
         component: resolve(__dirname, 'pages/post/_id.vue')
-      })
+      }, {
+        name: 'article-post-id',
+        path: '/articles/:id?',
+        component: resolve(__dirname, 'pages/post/_id.vue')
+      }
+      )
     }
   }
 }

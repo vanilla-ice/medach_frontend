@@ -115,9 +115,6 @@ export default {
   created() {
     this.debouncedSearch = debounce(this.getSearchResults, SEARCH_INTERVAL)
   },
-  mounted() {
-    console.log('this.articles', this.articles)
-  },
   computed: {
     ...mapGetters({
       articles: 'mediaPage/articles',

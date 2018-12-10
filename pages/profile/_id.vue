@@ -105,7 +105,6 @@ export default {
     }
   },
   mounted() {
-    console.log('profile', this.profile)
   },
   computed: {
     ...mapGetters({

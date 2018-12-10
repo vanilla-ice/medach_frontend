@@ -41,7 +41,6 @@ export const getters = {
 
 export const actions = {
   fetchCategory({commit}, {perPage, category, isSortByPopular, page, query}) {
-    console.log('fetch category', category)
     switch(category) {
 
       case 'blogs':
