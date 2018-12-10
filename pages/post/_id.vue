@@ -164,11 +164,6 @@ export default {
 <style scoped lang="scss">
 .info {
   margin-top: 50px;
-  padding-left: 80px;
-}
-
-.tags {
-  padding-left: 80px;
 }
 
 .info-item {
@@ -194,7 +189,6 @@ export default {
   letter-spacing: 0;
   margin-top: 36px;
   max-width: 900px;
-  padding-left: 80px;
 }
 
 .tags {
