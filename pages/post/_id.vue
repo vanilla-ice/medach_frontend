@@ -50,7 +50,7 @@ import ScrollTop from '~/components/ScrollTop'
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'Articles page',
+  name: 'ArticlesPage',
   components: {
     InterestedArticles,
     ImageComponent,
