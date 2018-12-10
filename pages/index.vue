@@ -15,7 +15,7 @@
         v-for="article in topPosts"
         :to="`post/${article.id}`"
         :key="article.id"
-        :style="{background: `url(${`http://medach.pro${article.coverImage.url}`}) no-repeat center / cover`}"
+        :style="{background: `url(${`https://medach.pro${article.coverImage.url}`}) no-repeat center / cover`}"
       )
         .gradient
 

@@ -87,7 +87,7 @@ export default {
         {
           hid: 'ogurl',
           property: 'og:url',
-          content: 'http://medach.pro'+this.$route.path
+          content: 'https://medach.pro'+this.$route.path
         },
         {
           hid: 'ogtype',
