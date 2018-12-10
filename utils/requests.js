@@ -1,7 +1,7 @@
 import axios from 'axios'
 ///'http://localhost:8080'
 const axiosInstance = axios.create({
-  baseURL: 'https://medach.pro',
+  baseURL: process.browser ? 'https://medach.pro' : 'localhost:80',
   timeout: 50000,
   headers: {},
   withCredentials: false
