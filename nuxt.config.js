@@ -1,4 +1,3 @@
-var script = "(adsbygoogle = window.adsbygoogle || []).push({google_ad_client: 'ca-pub-9039390016962020'},enable_page_level_ads: true});"
 module.exports = {
   /*
   ** Headers of the page
@@ -12,15 +11,6 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ],
-    script: [
-      {
-        src: '//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
-        async: true
-      },
-      {
-        innerHTML: script
-      }
     ]
   },
   /*
@@ -85,6 +75,10 @@ module.exports = {
         accurateTrackBounce:true,
       }
     ],
+
+    ['@nuxtjs/google-adsense', {
+      id: 'ca-pub-9039390016962020',
+    }]
   ]
 }
 

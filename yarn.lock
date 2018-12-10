@@ -78,6 +78,10 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
+"@nuxtjs/google-adsense@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/google-adsense/-/google-adsense-1.1.3.tgz#cc8b83616e9cc19d9fb9ae77c7101137da532c16"
+
 "@nuxtjs/yandex-metrika@^0.1.0":
   version "0.1.0"
   resolved "http://registry.npmjs.org/@nuxtjs/yandex-metrika/-/yandex-metrika-0.1.0.tgz#e34e3a076f8022efc5373fe8f6c458ed2a74d951"
