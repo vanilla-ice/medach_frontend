@@ -55,6 +55,10 @@
         .no-articles(v-if="articles.length === 0") Здесь ещё ничего нет, но вы можете найти много крутых штук на
           nuxt-link(to="/")
             | главной
+    
+    .promo-wrapper
+      GoogleAd(adSlot="2334561718" styles="display: block; min-height: 1050px;")
+
 
   .load-more-wrapper
     .load-more(v-if="nextPage" @click="getNextPage")
@@ -80,6 +84,8 @@ import ThePopularAuthors from '~/components/ThePopularAuthors'
 import TheHeader from '~/components/TheHeader'
 import ScrollTop from '~/components/ScrollTop'
 
+import GoogleAd from '~/components/GoogleAd'
+
 import { mapGetters } from 'vuex'
 
 export default {
@@ -89,7 +95,8 @@ export default {
     InterestedArticles,
     ThePopularAuthors,
     TheHeader,
-    ScrollTop
+    ScrollTop,
+    GoogleAd,
   },
   fetch({store, params}) {
     return store.dispatch('mediaPage/fetchMedia', {
