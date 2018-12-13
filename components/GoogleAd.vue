@@ -51,6 +51,9 @@ export default {
   },
   mounted() {
     this.renderWidget()
+  },
+  beforeDestroy() {
+    this.$refs.slot.innerHTML = ''
   }
 }
 </script>
