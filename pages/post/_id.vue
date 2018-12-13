@@ -32,6 +32,9 @@
     .article-wrapper
       .article.content-article-wrapper(v-html="articleBody" ref="articleData")
 
+      .promo
+        GoogleAd(adSlot="2334561718" styles="display: block; min-height: 1050px;")
+
     preview(v-if="currentImg" :close="close" :currentImg="currentImg")
 
     .interested-wrapper
@@ -45,6 +48,7 @@ import ThePopularAuthors from '~/components/ThePopularAuthors'
 import Preview from '~/components/Preview'
 import TheHeader from '~/components/TheHeader'
 import ScrollTop from '~/components/ScrollTop'
+import GoogleAd from '~/components/GoogleAd'
 
 
 import { mapGetters } from 'vuex'
@@ -57,7 +61,8 @@ export default {
     ThePopularAuthors,
     Preview,
     TheHeader,
-    ScrollTop
+    ScrollTop,
+    GoogleAd,
   },
   fetch({store, params}) {
     return store.dispatch('articlePage/fetchArticle', {
