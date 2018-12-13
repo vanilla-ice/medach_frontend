@@ -1,10 +1,10 @@
 <template>
 <div>
-  <!-- <div class="banner" ref="slot"></div> -->
-  <adsbygoogle 
+  <div class="banner" ref="slot"></div>
+  <!-- <adsbygoogle 
     :ad-slot="adSlot" 
     :ad-style="{width: '400px', height: '1050px'}"
-  />
+  /> -->
 </div>
 </template>
 
@@ -50,7 +50,7 @@ export default {
     },
   },
   mounted() {
-    // this.renderWidget()
+    this.renderWidget()
   }
 }
 </script>
