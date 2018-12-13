@@ -28,7 +28,7 @@
 
     .promo-wrapper
       the-popular-authors(v-if="popularArticles.length > 0" :articles="popularArticles")
-      GoogleAd(adSlot="2334561718" styles="display: block; min-height: 1050px;")
+      //- GoogleAd(adSlot="2334561718" styles="display: block; min-height: 1050px;")
 
   .load-more-wrapper
     .load-more(v-if="nextPage" @click="getNextPage")
