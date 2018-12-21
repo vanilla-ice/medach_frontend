@@ -4,7 +4,7 @@
       .content-title
         | {{ name }}
       .content-description
-        | Представлены результаты CAMELLIA-TIMI, в котором продемонстрировано положительное влияние лоркасерина на ренальные исходы у пациентов с ожирением. Эффект на кардио-васкулярные нейтрален.
+        | {{ short_description }}
       .footer
         .avatar(:style="{background: `url(${BASE_URL}${profile.user_profile ? profile.user_profile.avatar.url : ''}) no-repeat center/cover`}")
         .blogger-name
