@@ -8,6 +8,7 @@
       :publicationDate="article.publication_date"
       :author="article.author"
       :tags="article.tags"
+      :link="getLink"
       isMetaVisible
       isListCard
     )
@@ -18,9 +19,29 @@ import ArticleCard from '~/components/cards/ArticleCard'
 
 export default {
   name: 'ListArticlesView',
+
   props: {
     articles: Array
   },
+
+  data() {
+    return {
+      link: null
+    }
+  },
+
+  computed: {
+    getLink() {
+      if (this.$router.currentRoute.params.id === 'news') {
+        return "news-post"
+      } else if (this.$router.currentRoute.params.id === 'blogs') {
+        return "blog-post"
+      } else {
+        return 'post'
+      }
+    }
+  },
+
   components: {
     ArticleCard
   }

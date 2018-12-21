@@ -1,5 +1,5 @@
 <template lang="pug">
-nuxt-link(:to="`/post/${id}`")
+nuxt-link(:to="`/media-post/${id}`")
   .card-wrapper(
     v-if="isBrowser"
     :style="{background: `url(${BASE_URL}${image}) no-repeat center / cover`}"
