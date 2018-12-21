@@ -5,6 +5,7 @@
         | {{ name }}
       .content-description
         | {{ short_description }}
+
       .footer
         .avatar(:style="{background: `url(${BASE_URL}${profile.user_profile ? profile.user_profile.avatar.url : ''}) no-repeat center/cover`}")
         .blogger-name
@@ -58,18 +59,23 @@ const BASE_URL = process.env.BASE_URL
   flex-flow: column nowrap;
   justify-content: flex-start;
 
+  width: 100%;
   padding: 15px 30px 15px 0;
 }
 
 .content-title {
-  margin-bottom: 18px;
+  margin-bottom: 12px;
 
-  font-size: 22px;
+  font-size: 24px;
+  color: #000000;
+  letter-spacing: 0;
   font-weight: 600;
 }
 .content-description {
-  line-height: 20px;
-  color: #A3A3A3;
+  font-size: 16px;
+  color: #A2A2A2;
+  letter-spacing: 0;
+  line-height: 24px;
 }
 
 .footer {
@@ -95,6 +101,9 @@ const BASE_URL = process.env.BASE_URL
 
   color: #A3A3A3;
   font-weight: 600;
+  font-size: 16px;
+  color: #A2A2A2;
+  line-height: 24px;
 }
 
 @media (max-width: 768px) {
