@@ -21,10 +21,6 @@ export default {
     profile: Object
   },
 
-  mounted() {
-    console.log('this.articles', this.articles)
-  },
-
   components: {
     ProfileCard
   }
