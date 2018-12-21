@@ -43,6 +43,7 @@ module.exports = {
     { src: '~/plugins/vue-carousel', ssr: false },
   ],
   router: {
+    middleware: 'redirects',
     extendRoutes (routes, resolve) {
       routes.push({
         name: 'post-id',

@@ -1,10 +1,10 @@
 <template lang="pug">
 .card-wrapper(:class="{'grid-card-wrapper': isGridCard, 'list-card-wrapper': isListCard}" key="article-card")
-  nuxt-link.image-wrapper(:style="{height: isListCard ? '300px' : '240px'}" :to="getLink")
+  nuxt-link.image-wrapper(:style="{height: isListCard ? '300px' : '240px'}" :to="`/post/${id}`")
     image-component(:src="image")
   .content
     .top
-      nuxt-link.name(:to="getLink")
+      nuxt-link.name(:to="`/post/${id}`")
         | {{ name }}
     .bottom
       .tags
@@ -42,10 +42,6 @@ export default {
   computed: {
     formattedDate() {
       return format(this.publicationDate, 'D MMMM YYYY', { locale: ru });
-    },
-
-    getLink() {
-      return this.link ? `/${this.link}/${this.id}` : `/post/${this.id}`
     }
   }
 }
