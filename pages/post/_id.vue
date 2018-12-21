@@ -294,7 +294,7 @@ export default {
     font-size: 18px !important;
     color: #000000 !important;
     letter-spacing: 0;
-    line-height: 29px;
+    line-height: 1.5;
     margin-top: 24px !important;
   }
 
@@ -324,7 +324,7 @@ export default {
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
     padding: 10px 10px 10px 20px;
-    line-height: 20px;
+    line-height: 1.5;
   }
 
   ol, ul {
@@ -334,7 +334,7 @@ export default {
   li {
     font-size: 16px;
     padding: 2px;
-    line-height: 29px;
+    line-height: 1.7;
     font-size: 18px;
   }
 
@@ -382,7 +382,7 @@ export default {
   .content-article-wrapper p {
     margin-top: 16px;
     font-size: 14px;
-    line-height: 20px;
+    line-height: 1.5;
   }
 }
 </style>
