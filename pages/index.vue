@@ -105,7 +105,8 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+
    .mobile {
       display: none;
     }
