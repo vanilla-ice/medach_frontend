@@ -47,7 +47,7 @@
 
   .text {
     font-size: 16px;
-    line-height: 19px;
+    line-height: 1.5;
     color: #474747;
     letter-spacing: 0;
   }
