@@ -40,7 +40,7 @@ export const getters = {
   blogs: (store) => store.blogs,
   topPosts: (store) => store.postsTop,
   postsBottom: (store) => store.postsBottom,
-  promoted: (store) => store.promoted
+  promoted: (store) => store.promoted.filter((_p, i) => i < 3)
 }
 
 export const actions = {
