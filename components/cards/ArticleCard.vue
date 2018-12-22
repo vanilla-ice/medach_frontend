@@ -32,8 +32,7 @@ export default {
     author: String,
     isGridCard: Boolean,
     isListCard: Boolean,
-    isMetaVisible: Boolean,
-    link: String
+    isMetaVisible: Boolean
   },
   name: 'ArticleCard',
   components: {
