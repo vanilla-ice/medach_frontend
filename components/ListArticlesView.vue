@@ -18,17 +18,9 @@ import ArticleCard from '~/components/cards/ArticleCard'
 
 export default {
   name: 'ListArticlesView',
-
   props: {
     articles: Array
   },
-
-  data() {
-    return {
-      link: null
-    }
-  },
-
   components: {
     ArticleCard
   }

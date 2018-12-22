@@ -3,7 +3,8 @@
   .container
     .left
       .footer-item
-        nuxt-link.link(to="/bloggers") Блоггеры
+        nuxt-link.link(to="/bloggers") Партнерские блоги
+        nuxt-link.link(to="/about-us") О нас
 
     .right
       .social-items
@@ -94,6 +95,10 @@ export default {
   color: #7198BA !important;
   letter-spacing: 0 !important;
   cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 @media (max-width: 768px) {

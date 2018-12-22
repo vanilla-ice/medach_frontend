@@ -7,8 +7,8 @@
         | {{ short_description }}
 
       .footer
-        .avatar(:style="{background: `url(${BASE_URL}${profile.user_profile ? profile.user_profile.avatar.url : ''}) no-repeat center/cover`}")
-        .blogger-name
+        .avatar(:style="{background: `url(${BASE_URL}${profile.user_profile ? profile.user_profile.avatar.url : ''}) no-repeat center/contain`}")
+        nuxt-link.blogger-name(:to="`/profile/${profile.id}`")
           | {{ profile.full_name }}
     .image
       image-component(:src="image")
