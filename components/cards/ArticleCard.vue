@@ -6,7 +6,6 @@
     .top
       nuxt-link.name(:to="`/post/${id}`")
         | {{ name }}
-
     .bottom
       .tags
         nuxt-link.tag(v-for="tag in tags" :key="`${id}-${tag}`" :to="`/search?query=${tag}`")
@@ -33,13 +32,12 @@ export default {
     author: String,
     isGridCard: Boolean,
     isListCard: Boolean,
-    isMetaVisible: Boolean
+    isMetaVisible: Boolean,
+    link: String
   },
   name: 'ArticleCard',
   components: {
     ImageComponent
-  },
-  mounted() {
   },
   computed: {
     formattedDate() {

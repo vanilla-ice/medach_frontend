@@ -21,7 +21,6 @@
 
     methods: {
       increase(evt) {
-        console.log('log')
         this.isIncrease = !this.isIncrease
       }
     }

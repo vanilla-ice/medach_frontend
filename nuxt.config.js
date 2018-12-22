@@ -43,6 +43,7 @@ module.exports = {
     { src: '~/plugins/vue-carousel', ssr: false },
   ],
   router: {
+    middleware: 'redirects',
     extendRoutes (routes, resolve) {
       routes.push({
         name: 'post-id',
@@ -59,6 +60,10 @@ module.exports = {
       }, {
         name: 'article-post-id',
         path: '/articles/:id?',
+        component: resolve(__dirname, 'pages/post/_id.vue')
+      }, {
+        name: 'media-post-id',
+        path: '/media-post/:id?',
         component: resolve(__dirname, 'pages/post/_id.vue')
       }
       )
