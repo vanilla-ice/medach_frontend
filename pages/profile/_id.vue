@@ -5,7 +5,7 @@
 
   .container
     .profile-info
-      .avatar(:style="{background: `url(${BASE_URL}${profile.user_profile ? profile.user_profile.avatar.url : ''})`}")
+      .avatar(:style="{background: `url(${BASE_URL}${profile.user_profile ? profile.user_profile.avatar.url : ''}) no-repeat center/contain`} ")
       .info
         .name
           | {{ profile.full_name }}
