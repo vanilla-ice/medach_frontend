@@ -280,6 +280,11 @@ export default {
   .info-item.origin {
     word-wrap: break-word;
   }
+
+  .wrapper .container {
+    padding-left: 30px;
+  }
+
 }
 
 </style>
