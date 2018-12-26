@@ -13,6 +13,9 @@
       .info-item
         span(v-if="article.author")
          | Автор: {{article.author}}
+         br
+         nuxt-link(v-if="bloggerId" :to="`/profile/${bloggerId}`" class="link-blogger")
+          | {{ bloggerFirstName || bloggerLastName }}
       .info-item
         span(v-if="article.redaction")
          | Редакция: {{article.redaction}}
@@ -50,6 +53,7 @@ import TheHeader from '~/components/TheHeader'
 import ScrollTop from '~/components/ScrollTop'
 import GoogleAd from '~/components/GoogleAd'
 
+import { get } from 'lodash'
 
 import { mapGetters } from 'vuex'
 
@@ -135,10 +139,20 @@ export default {
 
     articleBody() {
       return this.article.body.replace('<img src="', `<img src="${this.BASE_URL}`)
-    }
+    },
+    bloggerId() {
+      return get(this, 'article.user.id', null)
+    },
+    bloggerFirstName() {
+      return get(this, 'article.user.first_name', null)
+    },
+    bloggerLastName() {
+      return get(this, 'article.user.last_name', null)
+    },
   },
 
   mounted() {
+    console.log(this.article)
     const images = Array.from(this.$refs.articleData.querySelectorAll('img'))
     images.map(img => {
       img.addEventListener('click', () => this.renderPreviewImage(img))
@@ -169,6 +183,13 @@ export default {
 <style scoped lang="scss">
 .info {
   margin-top: 50px;
+}
+
+.link-blogger {
+  color: #7198BA;
+  text-decoration: underline;
+  display: inline-block;
+  margin-top: 12px;
 }
 
 .info-item {
