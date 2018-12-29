@@ -14,7 +14,7 @@
         span(v-if="article.author")
          | Автор: {{article.author}}
          br
-         nuxt-link(v-if="bloggerId" :to="`/profile/${bloggerId}`" class="link-blogger")
+         nuxt-link(v-if="bloggerId && !isAdmin" :to="`/profile/${bloggerId}`" class="link-blogger")
           | {{ bloggerFirstName || bloggerLastName }}
       .info-item
         span(v-if="article.redaction")
@@ -142,6 +142,9 @@ export default {
     },
     bloggerId() {
       return get(this, 'article.user.id', null)
+    },
+    isAdmin() {
+      return get(this, 'article.user.admin', false)
     },
     bloggerFirstName() {
       return get(this, 'article.user.first_name', null)
