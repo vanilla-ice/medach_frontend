@@ -12,9 +12,9 @@
     .info
       .info-item
         span(v-if="article.author")
-         | Автор: {{article.author}}
-         br
-         nuxt-link(v-if="bloggerId && !isAdmin" :to="`/profile/${bloggerId}`" class="link-blogger")
+          | Автор: {{article.author}}
+        br
+        nuxt-link(v-if="bloggerId && !isAdmin" :to="`/profile/${bloggerId}`" class="link-blogger")
           | {{ bloggerFirstName || bloggerLastName }}
       .info-item
         span(v-if="article.redaction")
