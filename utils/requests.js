@@ -145,8 +145,8 @@ export const getPostsByTag = (tag, page, per_page, isSortByPopular, query) => {
     .catch(error => console.log('get posts by tag error', error))
 }
 
-export const getInterestedArticles = () => {
-  return get(`/api/articles/show_random`)
+export const getInterestedArticles = (id) => {
+  return get(`/api/articles/${id}/show_related`)
     .then(response => response.data)
     .catch(error => console.log('getInterestedArticles error', error))
 }
