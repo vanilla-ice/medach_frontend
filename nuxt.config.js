@@ -10,7 +10,13 @@ module.exports = {
       { hid: 'description', name: 'description', content: 'Medical Channel (www.medach.pro) – это портал для молодых врачей и студентов медицинских университетов, задачей которого является знакомство людей с достижениями современной медицины, обменом знаниями между участниками, а также выпуск материалов, облегчающих учебную и практическую деятельность.' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/png', sizes: '32x32',  href: '/favicon-32x32.png' },
+      { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' },
+      { rel: 'manifest', href: '/site.webmanifest' },
+      { rel: 'mask-icon', href: '/safari-pinned-tab.svg', color: '#5bbad5' },
+      { rel: 'msapplication-TileColor', content: '#da532c' }
     ],
     __dangerouslyDisableSanitizers: ["script"],
   },
@@ -88,4 +94,3 @@ module.exports = {
     }]
   ]
 }
-
