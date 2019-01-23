@@ -39,7 +39,7 @@
         GoogleAd(adSlot="2334561718" styles="display: block; min-height: 1050px;")
 
     preview(v-if="currentImg" :close="close" :currentImg="currentImg")
-    
+
     .interested-wrapper
       interested-articles(:articles="interested")
 </template>
