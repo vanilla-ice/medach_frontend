@@ -7,7 +7,12 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Medical Channel (www.medach.pro) – это портал для молодых врачей и студентов медицинских университетов, задачей которого является знакомство людей с достижениями современной медицины, обменом знаниями между участниками, а также выпуск материалов, облегчающих учебную и практическую деятельность.' }
+      { hid: 'description', name: 'description', content: 'Medical Channel (www.medach.pro) – это портал для молодых врачей и студентов медицинских университетов, задачей которого является знакомство людей с достижениями современной медицины, обменом знаниями между участниками, а также выпуск материалов, облегчающих учебную и практическую деятельность.' },
+      {
+        hid: 'ogimage',
+        property: 'og:image',
+        content: 'https://medach.pro/favicon-32x32.png'
+      }
     ],
     link: [
       { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
