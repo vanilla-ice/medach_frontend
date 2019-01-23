@@ -72,7 +72,7 @@ export default {
     return store.dispatch('articlePage/fetchArticle', {
       id: params.id
     })
-      .then(() => store.dispatch('interestedArticles/fetchInterestedArticles'))
+      .then(() => store.dispatch('interestedArticles/fetchInterestedArticles', params.id))
   },
 
   data() {
@@ -155,7 +155,6 @@ export default {
   },
 
   mounted() {
-    console.log(this.article)
     const images = Array.from(this.$refs.articleData.querySelectorAll('img'))
     images.map(img => {
       img.addEventListener('click', () => this.renderPreviewImage(img))
@@ -415,4 +414,3 @@ export default {
   }
 }
 </style>
-
