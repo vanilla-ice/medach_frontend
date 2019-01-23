@@ -18,7 +18,6 @@ export const getters = {
 
 export const actions = {
   fetchRelatedArticles({commit}, id) {
-    console.log('id')
     return getRelatedArticles(id).then(data => {
       commit('setRelatedArticles', data)
     })
