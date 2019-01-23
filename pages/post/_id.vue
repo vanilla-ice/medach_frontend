@@ -72,7 +72,7 @@ export default {
     return store.dispatch('articlePage/fetchArticle', {
       id: params.id
     })
-      .then(() => store.dispatch('interestedArticles/fetchInterestedArticles', params.id))
+      .then(() => store.dispatch('relatedArticles/fetchRelatedArticles', params.id))
   },
 
   data() {
@@ -134,7 +134,7 @@ export default {
   computed: {
     ...mapGetters({
       article: 'articlePage/article',
-      interested: 'interestedArticles/articles',
+      interested: 'relatedArticles/articles',
     }),
 
     articleBody() {
