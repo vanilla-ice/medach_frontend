@@ -21,7 +21,6 @@
               | Автор:
               span
                 | {{ slide.author }}
-
 </template>
 
 <script>
@@ -132,7 +131,7 @@ export default {
 }
 
 .content {
-  max-width: 65%;
+  max-width: 62%;
   flex: 1 1 auto;
   display: flex;
   flex-flow: column nowrap;
@@ -140,21 +139,37 @@ export default {
   padding-right: 50px;
   z-index: 5;
   position: relative;
+  padding: 30px;
+  box-sizing: border-box;
+  &:after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 50%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+  }
 }
 
 .title {
+  position: relative;
   font-size: 54px;
   color: #FDFDFD;
   letter-spacing: 0;
   line-height: 66px;
+  z-index: 4;
 }
 
 .bottom {
+  position: relative;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
   justify-content: space-between;
   margin-top: 32px;
+  z-index: 4;
 }
 
 .date {
