@@ -87,7 +87,7 @@ export default {
       cases: 'Кейсы',
       news: 'Новости',
       guides: 'Руководства',
-      'переводы': 'Переводы'
+      translated: 'Переводы'
     }
 
     return {
@@ -368,4 +368,3 @@ export default {
   }
 }
 </style>
-
