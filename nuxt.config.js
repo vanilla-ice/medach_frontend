@@ -11,7 +11,7 @@ module.exports = {
       {
         hid: 'ogimage',
         property: 'og:image',
-        content: 'https://medach.pro/favicon-32x32.png'
+        content: 'https://medach.pro/android-chrome-512x512.png'
       }
     ],
     link: [
