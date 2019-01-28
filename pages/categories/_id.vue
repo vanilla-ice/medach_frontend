@@ -33,10 +33,6 @@
   .load-more-wrapper
     .load-more(v-if="nextPage" @click="getNextPage")
       | Еще
-
-  .interested-wrapper
-    .container
-      interested-articles(:articles="interested")
 </template>
 
 <script>
