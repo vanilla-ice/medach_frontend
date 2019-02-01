@@ -388,6 +388,13 @@ export default {
       line-height: 1.3;
     }
   }
+  blockquote{
+    margin: 10px 0;
+    padding-left: 20px;
+    font-style: italic;
+    border-left: 3px solid #a1a1a1;
+    box-sizing: border-box;
+  }
  }
 
 @media (max-width: 768px) {
