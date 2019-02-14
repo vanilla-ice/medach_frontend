@@ -32,7 +32,7 @@
         span(v-if="article.translate && article.translate !== ''")
          | Перевод: {{article.translate}}
 
-    .contents
+    .contents(v-if="false")
       TheArticleContents
 
     .article-wrapper
