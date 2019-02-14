@@ -32,6 +32,9 @@
         span(v-if="article.translate && article.translate !== ''")
          | Перевод: {{article.translate}}
 
+    .contents(v-if="false")
+      TheArticleContents
+
     .article-wrapper
       .article.content-article-wrapper(v-html="articleBody" ref="articleData")
 
@@ -52,6 +55,8 @@ import Preview from '~/components/Preview'
 import TheHeader from '~/components/TheHeader'
 import ScrollTop from '~/components/ScrollTop'
 import GoogleAd from '~/components/GoogleAd'
+import TheArticleContents from '~/components/TheArticleContents'
+
 
 import { get } from 'lodash'
 
@@ -67,6 +72,7 @@ export default {
     TheHeader,
     ScrollTop,
     GoogleAd,
+    TheArticleContents
   },
   fetch({store, params}) {
     return store.dispatch('articlePage/fetchArticle', {
@@ -177,7 +183,7 @@ export default {
     close() {
       document.body.classList.remove('scroll-del')
       this.currentImg = null;
-    },
+    }
   }
 }
 </script>
