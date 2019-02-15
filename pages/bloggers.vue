@@ -30,13 +30,13 @@ export default {
   fetch({store}) {
     return store.dispatch('profilePage/fetchBloggers', {
       page: 1,
-      per_page: BLOGGERS_PER_PAGE
+      perPage: BLOGGERS_PER_PAGE
     })
       .then(() => store.dispatch('interestedArticles/fetchInterestedArticles'))
   },
   data() {
     return {
-    
+
     }
   },
   head() {

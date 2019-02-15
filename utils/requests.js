@@ -107,7 +107,7 @@ export const getLongreadPost = (id) => {
 }
 
 export const getBloggersList = (page, per_page) => {
-  return get(`/api/bloggers`, {
+  return get(`/api/users/bloggers`, {
     page,
     per_page
   })
