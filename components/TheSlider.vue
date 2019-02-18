@@ -144,10 +144,10 @@ export default {
   &:after{
     content: "";
     position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 50%;
-    width: 100%;
+    bottom: -83px;
+    left: -40px;
+    height: 53%;
+    width: 120%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 2;
   }

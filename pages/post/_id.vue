@@ -240,7 +240,7 @@ export default {
 
 <style scoped lang="scss">
 .info {
-  margin-top: 50px;
+  margin-top: 13px;
 }
 
 .link-blogger {
@@ -276,7 +276,7 @@ export default {
 }
 
 .tags {
-  margin-top: 39px;
+  margin-top: 22px;
 }
 
 .tag {
@@ -310,7 +310,7 @@ export default {
   display: flex;
   flex-flow: row nowrap;
   align-items: flex-start;
-  margin-top: 40px;
+  margin-top: 0;
 }
 
 .article {
@@ -458,7 +458,7 @@ export default {
   img {
     display: block;
     max-width: 100%;
-    margin: 22px 0;
+    margin: 0;
     cursor: pointer;
   }
 
