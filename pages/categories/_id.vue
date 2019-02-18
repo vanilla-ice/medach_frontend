@@ -28,7 +28,6 @@
 
     .promo-wrapper
       the-popular-authors(v-if="popularArticles.length > 0" :articles="popularArticles")
-      //- GoogleAd(adSlot="2334561718" styles="display: block; min-height: 1050px;")
 
   .load-more-wrapper
     .load-more(v-if="nextPage" @click="getNextPage")
@@ -49,7 +48,6 @@ import InterestedArticles from '~/components/InterestedArticles'
 import ThePopularAuthors from '~/components/ThePopularAuthors'
 import TheHeader from '~/components/TheHeader'
 import ScrollTop from '~/components/ScrollTop'
-import GoogleAd from '~/components/GoogleAd'
 
 import { mapGetters } from 'vuex'
 
@@ -60,8 +58,7 @@ export default {
     InterestedArticles,
     ThePopularAuthors,
     TheHeader,
-    ScrollTop,
-    GoogleAd,
+    ScrollTop
   },
   fetch({store, params}) {
     return store.dispatch('categoryPage/fetchCategory', {

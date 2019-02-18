@@ -9,6 +9,9 @@
       nuxt-link.tag(v-for="tag in article.tags" :key="`${article.id}-${tag}`" :to="`/search?query=${tag}`")
         | {{ tag }}
 
+    .ad-top
+      Ad(position="adTop" type="google")
+
     .info
       .info-item
         span(v-if="article.author")
@@ -37,9 +40,10 @@
 
     .article-wrapper
       .article.content-article-wrapper(v-html="articleBody" ref="articleData")
-
       .promo
-        GoogleAd(adSlot="2334561718" styles="display: block; min-height: 1050px;")
+        Ad(position="adSidebar" type="google")
+    .ad-bottom
+      Ad(position="adBottom" type="google")
 
     preview(v-if="currentImg" :close="close" :currentImg="currentImg")
 
@@ -54,7 +58,7 @@ import ThePopularAuthors from '~/components/ThePopularAuthors'
 import Preview from '~/components/Preview'
 import TheHeader from '~/components/TheHeader'
 import ScrollTop from '~/components/ScrollTop'
-import GoogleAd from '~/components/GoogleAd'
+import Ad from '~/components/ads/Ad'
 import TheArticleContents from '~/components/TheArticleContents'
 
 
@@ -71,7 +75,7 @@ export default {
     Preview,
     TheHeader,
     ScrollTop,
-    GoogleAd,
+    Ad,
     TheArticleContents
   },
   fetch({store, params}) {
@@ -274,6 +278,14 @@ export default {
   margin-left: 80px;
 }
 
+.ad-top,
+.ad-bottom {
+  max-width: 800px;
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
 
 .info-item.origin  a {
   color: rgb(88, 88, 88);
@@ -312,6 +324,13 @@ export default {
 
   .wrapper .container {
     padding-left: 30px;
+  }
+
+  .ad-top,
+  .ad-bottom {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
   }
 
 }
