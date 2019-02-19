@@ -10,7 +10,7 @@
         | {{ tag }}
 
     .ad-top
-      Ad(position="adTop" type="google")
+      Ad(position="adTop" type="custom")
 
     .info
       .info-item

@@ -77,7 +77,6 @@
         // active contents
         this.contentsPositions.map((el, index) => {
           if (pageYOffset >= el && pageYOffset <= this.contentsPositions[index + 1]) {
-            console.log('this.contentIndex', this.contentIndex)
             this.contentIndex = index
           }
         })

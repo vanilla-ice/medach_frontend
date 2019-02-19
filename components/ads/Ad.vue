@@ -1,20 +1,34 @@
 <template lang="pug">
-  .ad(v-if="type === 'google'")
-     GoogleAd(adSlot="2334561718" :styles="getGoogleStyles()")
+  div
+    .ad(v-if="type === 'google'")
+      google-ad(adSlot="2334561718" :style="getGoogleStyles()")
+    .ad(v-if="type === 'custom'")
+      custom-ad(:position="position")
 </template>
 
 <script>
- import GoogleAd from '~/components/ads/GoogleAd'
-import { switchCase, breakStatement } from 'babel-types';
+  import GoogleAd from '~/components/ads/GoogleAd'
+  import CustomAd from '~/components/ads/CustomAd'
 
   export default {
     props: {
-      type: String,
-      position: String
+      type: {
+        type: String,
+        validator: (value) => {
+          return ['google', 'custom'].indexOf(value) !== -1
+        }
+      },
+      position: {
+        type: String,
+        validator: (value) => {
+          return ['adSidebar', 'adMiddle', 'adTop', 'adBottom'].indexOf(value) !== -1
+        }
+      }
     },
 
     components: {
-      GoogleAd
+      GoogleAd,
+      CustomAd
     },
 
     data() {
