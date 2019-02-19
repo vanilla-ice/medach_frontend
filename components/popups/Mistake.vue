@@ -1,20 +1,37 @@
 <template lang="pug">
   div.mistake
-    form
+    form(@submit.prevent="send")
       .title
         | Ошибка
       .text-mistake
         | {{ text }}
-      textarea.comment(placeholder="Ваш комментарий")
+      textarea.comment(v-model="textarea" placeholder="Ваш комментарий")
       button
         | Отправить
 
 </template>
 
 <script>
+  import { postMistakeArticle } from '~/utils/requests'
+
   export default {
     props: {
-      text: String
+      text: String,
+      popupVisible: Function
+    },
+
+    data() {
+      return {
+        textarea: ''
+      }
+    },
+
+    methods: {
+      send() {
+        if (this.textarea.length === 0) return
+        postMistakeArticle(this.$route.params.id, this.text, this.textarea).then()
+        this.popupVisible()
+      }
     }
   }
 </script>

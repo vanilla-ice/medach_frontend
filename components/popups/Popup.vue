@@ -3,7 +3,11 @@
     .overlay(@click="popupVisible")
     .content
       .close(@click="popupVisible")
-      mistake(v-if="type === 'mistake'" :text="text")
+      mistake(
+        v-if="type === 'mistake'"
+        :text="text"
+        :popupVisible="popupVisible"
+        )
 
 
 </template>

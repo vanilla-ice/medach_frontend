@@ -36,6 +36,7 @@ const get = (url, params = {}, headers = {}) => {
 }
 
 const post = (url, data, headers = {}) => {
+  console.log(url, data)
   return simpleRequest(url, "post", data, headers);
 }
 
@@ -184,8 +185,11 @@ export const getUserBlogs = (id, page, per_page, isSortByPopular, query) => {
     .catch(error => console.log('getUserBlogs error', error))
 }
 
-export const postMistakeArticle = (data) => {
-  return post('/api', {
-    text: data
+export const postMistakeArticle = (id, text, comment) => {
+  return post(`api/articles/${id}/add_typo`, {
+      typo_text: text,
+      commentary: comment
   })
+    .then(data => data)
+    .catch(err => console.log('postMistakeArticle', err))
 }
