@@ -17,7 +17,8 @@
   export default {
     props: {
       text: String,
-      popupVisible: Function
+      popupVisible: Function,
+      thanksForComment: Function
     },
 
     data() {
@@ -29,7 +30,9 @@
     methods: {
       send() {
         if (this.textarea.length === 0) return
-        postMistakeArticle(this.$route.params.id, this.text, this.textarea).then()
+        postMistakeArticle(this.$route.params.id, this.text, this.textarea)
+        .then(() => this.thanksForComment())
+        .catch((err) => console.log('err', err))
         this.popupVisible()
       }
     }

@@ -7,6 +7,7 @@
         v-if="type === 'mistake'"
         :text="text"
         :popupVisible="popupVisible"
+        :thanksForComment="thanksForComment"
         )
 
 
@@ -28,6 +29,7 @@
       },
       text: String,
       popupVisible: Function,
+      thanksForComment: Function
     }
   }
 </script>

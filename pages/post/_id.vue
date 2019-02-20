@@ -40,7 +40,8 @@
 
       .promo
         GoogleAd(adSlot="2334561718" styles="display: block; min-height: 1050px;")
-
+    .report-error
+      | Нашли опечатку? Выделите фрагмент и нажмите Ctrl+Enter.
     preview(v-if="currentImg" :close="closeImg" :currentImg="currentImg")
 
     .interested-wrapper
@@ -50,6 +51,7 @@
       v-if="openPopup===true"
       type="mistake"
       :popupVisible="popupVisible"
+      :thanksForComment="thanksForComment"
       :text="mistakeText"
     )
 
@@ -102,7 +104,7 @@ export default {
       currentImg: '',
       openPopup: false,
       mistakeText: '',
-      openThanks: true
+      openThanks: false
     }
   },
   head () {
@@ -224,6 +226,13 @@ export default {
         this.popupVisible()
         this.mistakeText = text
       }
+    },
+
+    thanksForComment() {
+      this.openThanks = !this.openThanks
+      setTimeout(() => {
+        this.openThanks = false
+      }, 4000)
     }
   }
 }
@@ -373,6 +382,14 @@ export default {
 .thanks-text {
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.report-error {
+  padding-top: 20px;
+
+  font-style: italic;
+  color: #aaa;
+  font-size: 15px;
 }
 
 .fade-enter-active, .fade-leave-active {
