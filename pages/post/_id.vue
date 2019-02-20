@@ -40,11 +40,27 @@
 
       .promo
         GoogleAd(adSlot="2334561718" styles="display: block; min-height: 1050px;")
-
-    preview(v-if="currentImg" :close="close" :currentImg="currentImg")
+    .report-error
+      | Нашли опечатку? Выделите фрагмент и нажмите Ctrl+Enter.
+    preview(v-if="currentImg" :close="closeImg" :currentImg="currentImg")
 
     .interested-wrapper
       interested-articles(:articles="interested")
+  transition(name="fade")
+    popup(
+      v-if="openPopup===true"
+      type="mistake"
+      :popupVisible="popupVisible"
+      :thanksForComment="thanksForComment"
+      :text="mistakeText"
+    )
+
+  transition(name="fade")
+    .thanks(v-if="openThanks===true")
+      .thanks-text
+        | Спасибо.
+      .thanks-text
+        | Опечатка отправлена нашим редакторам
 </template>
 
 <script>
@@ -56,7 +72,7 @@ import TheHeader from '~/components/TheHeader'
 import ScrollTop from '~/components/ScrollTop'
 import GoogleAd from '~/components/GoogleAd'
 import TheArticleContents from '~/components/TheArticleContents'
-
+import Popup from '~/components/popups/Popup'
 
 import { get } from 'lodash'
 
@@ -72,7 +88,8 @@ export default {
     TheHeader,
     ScrollTop,
     GoogleAd,
-    TheArticleContents
+    TheArticleContents,
+    Popup
   },
   fetch({store, params}) {
     return store.dispatch('articlePage/fetchArticle', {
@@ -84,7 +101,10 @@ export default {
   data() {
     return {
       BASE_URL: process.env.BASE_URL,
-      currentImg: ''
+      currentImg: '',
+      openPopup: false,
+      mistakeText: '',
+      openThanks: false
     }
   },
   head () {
@@ -165,6 +185,10 @@ export default {
     images.map(img => {
       img.addEventListener('click', () => this.renderPreviewImage(img))
     })
+
+    if (process.browser) {
+      window.addEventListener('keydown', this.openPopupHandler)
+    }
   },
 
   beforeDestroy() {
@@ -172,6 +196,8 @@ export default {
     images.map(img => {
       img.removeEventListener('click', () => this.renderPreviewImage(img))
     })
+
+    window.addEventListener('keydown', this.openPopupHandler)
   },
 
   methods: {
@@ -180,9 +206,33 @@ export default {
       document.body.classList.add('scroll-del')
     },
 
-    close() {
+    closeImg() {
       document.body.classList.remove('scroll-del')
       this.currentImg = null;
+    },
+
+    popupVisible() {
+      this.openPopup = !this.openPopup
+    },
+
+    openPopupHandler(evt) {
+      if (evt.ctrlKey && evt.keyCode == 13) {
+        const text = window.getSelection().toString()
+        if (text.length >= 200) {
+          this.mistakeText = text.slice(0, 150)
+          this.popupVisible()
+          return
+        }
+        this.popupVisible()
+        this.mistakeText = text
+      }
+    },
+
+    thanksForComment() {
+      this.openThanks = !this.openThanks
+      setTimeout(() => {
+        this.openThanks = false
+      }, 4000)
     }
   }
 }
@@ -314,6 +364,39 @@ export default {
     padding-left: 30px;
   }
 
+}
+
+.thanks {
+  position: fixed;
+  z-index: 20;
+  right: 20px;
+  top: 20px;
+  max-width: 250px;
+  width: 100%;
+  padding: 10px 20px;
+
+  border: 1px solid #000000;
+  background: #ffffff;
+}
+
+.thanks-text {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.report-error {
+  padding-top: 20px;
+
+  font-style: italic;
+  color: #aaa;
+  font-size: 15px;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+  opacity: 0;
 }
 
 </style>
