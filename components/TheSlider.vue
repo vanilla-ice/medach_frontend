@@ -10,17 +10,19 @@
         :key="slide.id",
         :style="{background: `url(${BASE_URL}${getSlideImageUrl(slide)}) no-repeat center / cover`}"
       )
-        nuxt-link.content(:to="`/post/${slide.id}`")
-          .title
-            | {{ slide.title }}
-          .bottom
-            .date
-              | {{ formatDate(slide.publicationDate) }}
+        .content-wrapper  
+          nuxt-link.content(:to="`/post/${slide.id}`")
+            .slide-article__wrapper  
+              .title
+                | {{ slide.title }}
+              .bottom
+                .date
+                  | {{ formatDate(slide.publicationDate) }}
 
-            .author
-              | Автор:
-              span
-                | {{ slide.author }}
+                .author
+                  | Автор:
+                  span
+                    | {{ slide.author }}
 </template>
 
 <script>
@@ -126,32 +128,47 @@ export default {
 
 .slide {
   height: 100%;
-  padding: 40px 40px 84px 40px;
+  // padding: 40px 40px 84px 40px;
+  display: flex;
+}
+// .content-wrapper {
+//   display: flex;
+//   width: 100%;
+// }
+.content-wrapper{
+  width: 65%;
   display: flex;
 }
 
+.slide-article__wrapper {
+  padding: 40px 40px 84px 40px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
 .content {
-  max-width: 62%;
+  // max-width: 1200px;
+  // width: 100%;
   flex: 1 1 auto;
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-end;
-  padding-right: 50px;
+  // padding-right: 50px;
   z-index: 5;
   position: relative;
-  padding: 30px;
+  // padding: 30px;
   box-sizing: border-box;
-  &:after{
-    content: "";
-    position: absolute;
-    bottom: -83px;
-    left: -40px;
-    height: 53%;
-    width: 120%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 2;
-  }
+  // &:after{
+  //   content: "";
+  //   position: absolute;
+  //   bottom: -83px;
+  //   left: -40px;
+  //   height: 53%;
+  //   width: 120%;
+  //   background-color: rgba(0, 0, 0, 0.5);
+  //   z-index: 2;
+  // }
 }
+
+
 
 .title {
   position: relative;
