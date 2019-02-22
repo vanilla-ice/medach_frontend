@@ -19,7 +19,7 @@
                 .date
                   | {{ formatDate(slide.publicationDate) }}
 
-                .author
+                .author(v-if="slide.author")
                   | Автор:
                   span
                     | {{ slide.author }}
