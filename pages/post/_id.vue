@@ -10,26 +10,26 @@
         | {{ tag }}
 
     .info
-      .info-item
-        span(v-if="article.author")
+      .info-item(v-if="article.author")
+        span
           | Автор: {{article.author}}
         br
         nuxt-link(v-if="bloggerId && !isAdmin" :to="`/profile/${bloggerId}`" class="link-blogger")
           | {{ bloggerFirstName || bloggerLastName }}
-      .info-item
-        span(v-if="article.redaction")
+      .info-item(v-if="article.redaction")
+        span
          | Редакция: {{article.redaction}}
-      .info-item
-        span(v-if="article.infographic")
+      .info-item(v-if="article.infographic")
+        span
          | Оформление: {{article.infographic}}
-      .info-item.origin
-        span(v-if="article.origin && article.origin !== ''")
+      .info-item.origin(v-if="article.origin && article.origin !== ''")
+        span
           | Оригинал:
           |
         a(:href="article.origin" target="_blank")
           | {{article.origin}}
-      .info-item
-        span(v-if="article.translate && article.translate !== ''")
+      .info-item(v-if="article.translate && article.translate !== ''")
+        span
          | Перевод: {{article.translate}}
 
     .contents(v-if="false")
@@ -489,6 +489,11 @@ export default {
 @media (max-width: 768px) {
   .image-wrapper img {
     width: 100%;
+  }
+
+  .article-wrapper iframe {
+    width: 100%;
+    height: 50vw;
   }
 
   .content-article-wrapper {
