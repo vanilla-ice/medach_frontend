@@ -408,11 +408,34 @@ export default {
 
 .content-article-wrapper {
   p {
-    font-size: 18px !important;
+    font-size: 16px;
     color: #000000 !important;
     letter-spacing: 0;
     line-height: 1.5;
     margin-top: 24px !important;
+  }
+
+  h1 {
+    font-family: Helvetica;
+    font-size: 20px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  h3 {
+    font-size: 16px;
+  }
+
+  h4 {
+    font-family: Helvetica;
+    font-size: 14px;
+  }
+
+  figcaption {
+    font-family: Helvetica;
+    font-size: 14px;
   }
 
   .editor_img-title {
