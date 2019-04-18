@@ -19,8 +19,9 @@ export const state = () => ({
 
 export const mutations = {
   setArticles(state, {articles, nextPage}) {
+
     state.nextPage = nextPage
-    state.articles = articles
+    state.articles = articles.filter(article => article.hidden === false)
   },
 
   updateArticles(state, {articles, nextPage}) {

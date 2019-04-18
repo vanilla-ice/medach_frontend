@@ -91,11 +91,17 @@ export default {
     TheArticleContents,
     Popup
   },
-  fetch({store, params}) {
+
+  fetch({store, params, redirect}) {
     return store.dispatch('articlePage/fetchArticle', {
       id: params.id
     })
-      .then(() => store.dispatch('relatedArticles/fetchRelatedArticles', params.id))
+      .then((data) => {
+        if (data.hidden) {
+          redirect('/')
+        }
+        store.dispatch('relatedArticles/fetchRelatedArticles', params.id)
+      })
   },
 
   data() {
@@ -157,6 +163,7 @@ export default {
       ]
     }
   },
+
   computed: {
     ...mapGetters({
       article: 'articlePage/article',
