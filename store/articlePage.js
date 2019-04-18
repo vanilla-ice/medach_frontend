@@ -20,9 +20,9 @@ export const getters = {
 }
 
 export const actions = {
-  fetchArticle({commit}, {id, type}) {
-    return getLongreadPost(id).then(data => {
-      commit('setArticle', data)
-    })
+  async fetchArticle({commit}, {id, type}) {
+    const data = await getLongreadPost(id)
+    commit('setArticle', data)
+    return data
   }
 }
