@@ -424,15 +424,16 @@ export default {
 
   h1 {
     font-family: Helvetica;
-    font-size: 20px;
+    font-size: 24px;
   }
 
   h2 {
-    font-size: 18px;
+    font-size: 20px;
   }
 
   h3 {
     font-size: 16px;
+    font-style: italic;
   }
 
   h4 {
