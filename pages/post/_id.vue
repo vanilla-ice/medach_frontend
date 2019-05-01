@@ -10,27 +10,24 @@
         | {{ tag }}
 
     .info
+      .info-item.origin(v-if="article.origin && article.origin !== ''")
+        a(:href="article.origin" target="_blank")
+          | Оригинал
       .info-item(v-if="article.author")
         span
           | Автор: {{article.author}}
         br
         nuxt-link(v-if="bloggerId && !isAdmin" :to="`/profile/${bloggerId}`" class="link-blogger")
           | {{ bloggerFirstName || bloggerLastName }}
+      .info-item(v-if="article.translate && article.translate !== ''")
+        span
+         | Перевод: {{article.translate}}
       .info-item(v-if="article.redaction")
         span
          | Редакция: {{article.redaction}}
       .info-item(v-if="article.infographic")
         span
          | Оформление: {{article.infographic}}
-      .info-item.origin(v-if="article.origin && article.origin !== ''")
-        span
-          | Оригинал:
-          |
-        a(:href="article.origin" target="_blank")
-          | {{article.origin}}
-      .info-item(v-if="article.translate && article.translate !== ''")
-        span
-         | Перевод: {{article.translate}}
 
     .contents(v-if="false")
       TheArticleContents
@@ -275,7 +272,7 @@ export default {
 
 .title {
   font-family: 'PTSerif', serif;
-  font-size: 54px;
+  font-size: 44px;
   color: #5B5B5B;
   letter-spacing: 0;
   margin-top: 36px;
@@ -317,7 +314,7 @@ export default {
   display: flex;
   flex-flow: row nowrap;
   align-items: flex-start;
-  margin-top: 0;
+  margin-top: 10px;
 }
 
 .article {
@@ -333,7 +330,7 @@ export default {
 
 
 .info-item.origin  a {
-  color: rgb(88, 88, 88);
+  color: #9b9b9b;
   text-decoration: underline;
 }
 
