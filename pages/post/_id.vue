@@ -1,5 +1,5 @@
 <template lang="pug">
-.wrapper(v-if="article")
+.wrapper(v-if="article" :class="contents.length === 0 ? null : 'is-contents'")
   the-header
   scroll-top
   .container
@@ -29,14 +29,15 @@
         span
          | Оформление: {{article.infographic}}
 
-    .contents(v-if="false")
-      TheArticleContents
+    //- .contents(v-if="contents.length !== 0")
+    //-   button.toggle-contents
+    //-   TheArticleContents(:contents="contents")
 
     .article-wrapper
       .article.content-article-wrapper(v-html="articleBody" ref="articleData")
 
-      .promo
-        GoogleAd(adSlot="2334561718" styles="display: block; min-height: 1050px;")
+      //- .promo
+      //-   GoogleAd(adSlot="2334561718" styles="display: block; min-height: 1050px;")
     .report-error
       | Нашли опечатку? Выделите фрагмент и нажмите Ctrl+Enter.
     preview(v-if="currentImg" :close="closeImg" :currentImg="currentImg")
@@ -89,16 +90,15 @@ export default {
     Popup
   },
 
-  fetch({store, params, redirect}) {
-    return store.dispatch('articlePage/fetchArticle', {
+  async fetch({store, params, redirect}) {
+    const article = await store.dispatch('articlePage/fetchArticle', {
       id: params.id
     })
-      .then((data) => {
-        if (data.hidden) {
-          redirect('/')
-        }
-        store.dispatch('relatedArticles/fetchRelatedArticles', params.id)
-      })
+    if (article.hidden) {
+      redirect('/')
+    }
+    await store.dispatch('relatedArticles/fetchRelatedArticles', params.id)
+
   },
 
   data() {
@@ -107,7 +107,9 @@ export default {
       currentImg: '',
       openPopup: false,
       mistakeText: '',
-      openThanks: false
+      openThanks: false,
+      contents: [],
+      isContents: true
     }
   },
   head () {
@@ -192,6 +194,8 @@ export default {
 
     if (process.browser) {
       window.addEventListener('keydown', this.openPopupHandler)
+
+      // this.contents = Array.from(this.$refs.articleData.querySelectorAll('h2, h3'))
     }
   },
 
@@ -262,6 +266,7 @@ export default {
 .interested-wrapper{
   margin-top: 42px;
 }
+
 .wrapper {
   padding-bottom: 40px;
 
@@ -270,10 +275,14 @@ export default {
   }
 }
 
+.is-contents .container {
+  padding-left: 400px;
+}
+
 .title {
   font-family: 'PTSerif', serif;
-  font-size: 44px;
-  color: #5B5B5B;
+  font-size: 40px;
+  color: #424242;
   letter-spacing: 0;
   margin-top: 36px;
   max-width: 900px;
@@ -331,7 +340,37 @@ export default {
 
 .info-item.origin  a {
   color: #9b9b9b;
-  text-decoration: underline;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.contents {
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.toggle-contents {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .toggle-contents {
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+
+    display: block;
+    width: 24px;
+    height: 24px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background: #FFFFFF;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  }
 }
 
 @media (max-width: 768px) {

@@ -8,6 +8,7 @@ export const state = () => ({
 
 export const mutations = {
   setRelatedArticles(state, articles) {
+    console.log('ARTICLES', articles)
     state.articles = articles
   }
 }

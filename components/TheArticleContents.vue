@@ -14,9 +14,12 @@
   import VueScrollTo from 'vue-scrollto'
 
   export default {
+    props: {
+      contents: Array
+    },
+
     data() {
       return {
-        contents: null,
         isBrowser: null,
         isSticky: false,
         stickyPosition: null,
@@ -29,15 +32,16 @@
 
     mounted() {
       if (process.browser) {
-        window.addEventListener('scroll', this.scrollHandler)
-        this.contents = Array.from(this.$parent.$refs.articleData.querySelectorAll('h2, h3'))
-        this.headerBottomPosition = document.querySelector('.header').offsetHeight
-        this.footerTopPosition = document.body.scrollHeight - (document.querySelector('.footer').offsetHeight + window.innerHeight)
-        this.stickyPosition = this.headerBottomPosition
+        setTimeout(() => {
+          window.addEventListener('scroll', this.scrollHandler)
+          this.headerBottomPosition = document.querySelector('.header').offsetHeight + 20
+          this.footerTopPosition = document.body.scrollHeight - (document.querySelector('.footer').offsetHeight + window.innerHeight)
+          this.stickyPosition = this.headerBottomPosition
 
-        this.contentsPositions = this.contents.map((el) => Number(el.getBoundingClientRect().top) + pageYOffset)
+          this.contentsPositions = this.contents.map((el) => Number(el.getBoundingClientRect().top) + pageYOffset)
 
-        this.isBrowser = true
+          this.isBrowser = true
+        }, 300)
       }
     },
 
@@ -62,22 +66,23 @@
 
       scrollHandler() {
         // sticky
-        if (pageYOffset >= this.headerBottomPosition && pageYOffset <= this.footerTopPosition) {
+        if (pageYOffset >= this.headerBottomPosition - 20 && pageYOffset <= this.footerTopPosition) {
           this.isSticky = true
-          this.stickyPosition = 0
+          this.stickyPosition = 20
         } else if (pageYOffset <= this.headerBottomPosition) {
           this.isSticky = false;
           this.stickyPosition = this.headerBottomPosition
-        }
-        else if (pageYOffset >= this.footerTopPosition) {
+        } else if (pageYOffset >= this.footerTopPosition) {
           this.isSticky = false
           this.stickyPosition = this.footerTopPosition
         }
 
         // active contents
-        this.contentsPositions.map((el, index) => {
-          if (pageYOffset >= el && pageYOffset <= this.contentsPositions[index + 1]) {
+        this.contentsPositions.map((elPosition, index) => {
+          if (pageYOffset >= elPosition) {
             this.contentIndex = index
+          } else if (this.contentsPositions[0] > pageYOffset) {
+            this.contentIndex = null
           }
         })
 
@@ -89,29 +94,35 @@
 <style scoped lang="scss">
 .contents {
   position: absolute;
-  left: 0;
+  left: 20px;
   z-index: 2;
+  overflow: auto;
 
-  width: 300px;
-  height: 100vh;
-  padding: 20px;
-  overflow: hidden;
+  width: 320px;
+  min-height: 360px;
+  max-height: 600px;
+  padding: 10px 17px 14px 20px;
+  background: #ffffff;
 
-  background: #f8f8f8;
+  border: 1px solid #DBDBDB;
+  border-radius: 6px;
+
 }
 
 .contents.stycky {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 20px;
+  left: 20px;
 }
 
 .contents ul {
+  overflow: auto;
   padding-left: 0;
   list-style: none;
 }
 
 .contents li {
+  position: relative;
   cursor: pointer;
 
   &:hover {
@@ -119,20 +130,63 @@
   }
 }
 
-.contents li.active {
-  text-decoration: underline;
-}
-
 .contents li.h2 {
   padding-top: 8px;
   padding-bottom: 8px;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .contents li.h3 {
   padding-top: 4px;
   padding-bottom: 4px;
-  padding-left: 8px;
-  font-size: 14px;
+  padding-left: 6px;
+  font-size: 16px;
+}
+
+.contents li.active {
+  color: #7198BA;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+
+    display: block;
+    height: 80%;
+    width: 1px;
+    background: #7198BA;
+  }
+}
+
+.contents li.h2.active {
+  padding-left: 10px;
+}
+
+.contents li.h3.active {
+  padding-left: 12px;
+}
+
+@media (max-width: 1024px) {
+  .contents {
+    top: 0 !important;
+    left: 0 !important;
+    border: 0;
+
+    width: 280px;
+    height: 100%;
+    min-height: 0;
+    max-height: 100%;
+  }
+
+  .contents li.h2 {
+    font-size: 16px;
+  }
+
+  .contents li.h3 {
+    font-size: 14px;
+  }
 }
 </style>
+
