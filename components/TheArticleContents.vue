@@ -74,12 +74,12 @@
           this.stickyPosition = this.headerBottomPosition
         } else if (pageYOffset >= this.footerTopPosition) {
           this.isSticky = false
-          this.stickyPosition = this.footerTopPosition
+          this.stickyPosition = -600
         }
 
         // active contents
         this.contentsPositions.map((elPosition, index) => {
-          if (pageYOffset >= elPosition) {
+          if (pageYOffset >= elPosition - 10) {
             this.contentIndex = index
           } else if (this.contentsPositions[0] > pageYOffset) {
             this.contentIndex = null
@@ -94,6 +94,7 @@
 <style scoped lang="scss">
 .contents {
   position: absolute;
+  z-index: 13;
   left: 20px;
   z-index: 2;
   overflow: auto;
@@ -107,6 +108,7 @@
   border: 1px solid #DBDBDB;
   border-radius: 6px;
 
+  transition: all 0.2s linear;
 }
 
 .contents.stycky {
@@ -172,7 +174,9 @@
   .contents {
     top: 0 !important;
     left: 0 !important;
+    z-index: 13;
     border: 0;
+    border-radius: 0;
 
     width: 280px;
     height: 100%;

@@ -29,9 +29,10 @@
         span
          | Оформление: {{article.infographic}}
 
-    //- .contents(v-if="contents.length !== 0")
-    //-   button.toggle-contents
-    //-   TheArticleContents(:contents="contents")
+    .contents-wrapper(v-if="contents.length !== 0" :class="isContentsMenuOpen ? 'open' : null")
+      button.toggle-contents(@click="toggleContents")
+      TheArticleContents(:contents="contents")
+      .overlay(@click="toggleContents")
 
     .article-wrapper
       .article.content-article-wrapper(v-html="articleBody" ref="articleData")
@@ -109,7 +110,8 @@ export default {
       mistakeText: '',
       openThanks: false,
       contents: [],
-      isContents: true
+      isContents: true,
+      isContentsMenuOpen: false
     }
   },
   head () {
@@ -195,7 +197,7 @@ export default {
     if (process.browser) {
       window.addEventListener('keydown', this.openPopupHandler)
 
-      // this.contents = Array.from(this.$refs.articleData.querySelectorAll('h2, h3'))
+      this.contents = Array.from(this.$refs.articleData.querySelectorAll('h2, h3'))
     }
   },
 
@@ -241,6 +243,10 @@ export default {
       setTimeout(() => {
         this.openThanks = false
       }, 4000)
+    },
+
+    toggleContents() {
+      this.isContentsMenuOpen = !this.isContentsMenuOpen
     }
   }
 }
@@ -346,10 +352,11 @@ export default {
   }
 }
 
-.contents {
+.contents-wrapper {
   position: fixed;
   left: 0;
   top: 0;
+  height: 100%;
 }
 
 .toggle-contents {
@@ -357,8 +364,41 @@ export default {
 }
 
 @media (max-width: 1024px) {
+  .contents-wrapper {
+    width: 280px;
+    height: 100%;
+    z-index: 12;
+
+    transform: translateX(-100%);
+
+    transition: transform 0.3s linear;
+  }
+
+  .contents-wrapper.open {
+    transform: translateX(0);
+  }
+
+  .overlay {
+    transform: translateX(-100%);
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.4);
+
+    transition: transform 0.3s linear;
+  }
+
+  .open .overlay {
+    transform: translateX(0)
+  }
+
   .toggle-contents {
     position: absolute;
+    z-index: 12;
     top: 50%;
     left: 100%;
     transform: translateY(-50%);
@@ -368,8 +408,33 @@ export default {
     height: 24px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+    border: none;
     background: #FFFFFF;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+
+    &::after,
+    &::before {
+      content: '';
+      position: absolute;
+      top: 4px;
+
+      width: 2px;
+      height: 16px;
+      border-radius: 3px;
+      background: #DBDBDB;
+    }
+
+    &::after, {
+      left: 12px;
+    }
+
+    &::before, {
+      left: 16px;
+    }
+  }
+
+  .is-contents .container {
+    padding-left: 80px;
   }
 }
 
