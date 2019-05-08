@@ -26,22 +26,25 @@
         headerBottomPosition: null,
         footerHeight: null,
         contentIndex: null,
-        contentsPositions: null
+        contentsPositions: null,
+
+        scrollToOffset: 0,
       }
     },
 
     mounted() {
       if (process.browser) {
         setTimeout(() => {
+          this.scrollToOffset = window.innerWidth > 768 ? 68 : 45
           window.addEventListener('scroll', this.scrollHandler)
           this.headerBottomPosition = document.querySelector('.header').offsetHeight + 20
-          this.footerTopPosition = document.body.scrollHeight - (document.querySelector('.footer').offsetHeight + window.innerHeight)
+          this.footerTopPosition = document.querySelector('.interested-wrapper').getBoundingClientRect().top + pageYOffset - window.innerHeight
           this.stickyPosition = this.headerBottomPosition
 
-          this.contentsPositions = this.contents.map((el) => Number(el.getBoundingClientRect().top) + pageYOffset)
+          this.contentsPositions = this.contents.map((el) => Number(el.getBoundingClientRect().top) + pageYOffset - this.scrollToOffset)
 
           this.isBrowser = true
-        }, 300)
+        }, 500)
       }
     },
 
@@ -60,7 +63,8 @@
 
       scrollTo(node) {
         VueScrollTo.scrollTo(node, 1000, {
-          easing: 'easeInOutQuart'
+          easing: 'easeInOutQuart',
+          offset: -this.scrollToOffset
         })
       },
 
@@ -68,7 +72,7 @@
         // sticky
         if (pageYOffset >= this.headerBottomPosition - 20 && pageYOffset <= this.footerTopPosition) {
           this.isSticky = true
-          this.stickyPosition = 20
+          this.stickyPosition = this.headerBottomPosition
         } else if (pageYOffset <= this.headerBottomPosition) {
           this.isSticky = false;
           this.stickyPosition = this.headerBottomPosition
@@ -81,7 +85,7 @@
         this.contentsPositions.map((elPosition, index) => {
           if (pageYOffset >= elPosition - 10) {
             this.contentIndex = index
-          } else if (this.contentsPositions[0] > pageYOffset) {
+          } else if (this.contentsPositions[0] - 10 > pageYOffset) {
             this.contentIndex = null
           }
         })
@@ -95,7 +99,7 @@
 .contents {
   position: absolute;
   z-index: 13;
-  left: 20px;
+  left: 55px;
   z-index: 2;
   overflow: auto;
 
@@ -114,7 +118,6 @@
 .contents.stycky {
   position: fixed;
   top: 20px;
-  left: 20px;
 }
 
 .contents ul {
@@ -135,14 +138,14 @@
 .contents li.h2 {
   padding-top: 8px;
   padding-bottom: 8px;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .contents li.h3 {
   padding-top: 4px;
   padding-bottom: 4px;
   padding-left: 6px;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .contents li.active {

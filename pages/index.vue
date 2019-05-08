@@ -1,6 +1,5 @@
 <template lang="pug">
 .wrapper
-  scroll-top
   the-header
   .slider-section
     .slider-wrapper

@@ -2,7 +2,7 @@
 .wrapper(v-if="article" :class="contents.length === 0 ? null : 'is-contents'")
   the-header
   scroll-top
-  .container
+  .container.article-container
     .title
       | {{article.title}}
     .tags
@@ -43,8 +43,8 @@
       | Нашли опечатку? Выделите фрагмент и нажмите Ctrl+Enter.
     preview(v-if="currentImg" :close="closeImg" :currentImg="currentImg")
 
-    .interested-wrapper
-      interested-articles(:articles="interested")
+  .interested-wrapper.container
+    interested-articles(:articles="interested")
   transition(name="fade")
     popup(
       v-if="openPopup===true"
@@ -281,7 +281,7 @@ export default {
   }
 }
 
-.is-contents .container {
+.is-contents .article-container {
   padding-left: 400px;
 }
 
