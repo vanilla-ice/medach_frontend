@@ -34,13 +34,13 @@
     height: 100%;
     bottom: 0;
     left: 0;
-    background: rgba(0,0,0,.2);
-    opacity: 0.7;
+    background: rgba(0,0,0,.1);
+    opacity: 0;
     cursor: pointer;
     transition: opacity .2s ease;
 
     &:hover {
-      opacity: 1;
+      opacity: 0.7;
     }
   }
 
