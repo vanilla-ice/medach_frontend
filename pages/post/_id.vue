@@ -1,8 +1,8 @@
 <template lang="pug">
-.wrapper(v-if="article")
+.wrapper(v-if="article" :class="contents.length === 0 ? null : 'is-contents'")
   the-header
   scroll-top
-  .container
+  .container.article-container
     .title
       | {{article.title}}
     .tags
@@ -10,42 +10,41 @@
         | {{ tag }}
 
     .info
+      .info-item.origin(v-if="article.origin && article.origin !== ''")
+        a(:href="article.origin" target="_blank")
+          | Оригинал
       .info-item(v-if="article.author")
         span
           | Автор: {{article.author}}
         br
         nuxt-link(v-if="bloggerId && !isAdmin" :to="`/profile/${bloggerId}`" class="link-blogger")
           | {{ bloggerFirstName || bloggerLastName }}
+      .info-item(v-if="article.translate && article.translate !== ''")
+        span
+         | Перевод: {{article.translate}}
       .info-item(v-if="article.redaction")
         span
          | Редакция: {{article.redaction}}
       .info-item(v-if="article.infographic")
         span
          | Оформление: {{article.infographic}}
-      .info-item.origin(v-if="article.origin && article.origin !== ''")
-        span
-          | Оригинал:
-          |
-        a(:href="article.origin" target="_blank")
-          | {{article.origin}}
-      .info-item(v-if="article.translate && article.translate !== ''")
-        span
-         | Перевод: {{article.translate}}
 
-    .contents(v-if="false")
-      TheArticleContents
+    .contents-wrapper(v-if="contents.length !== 0" :class="isContentsMenuOpen ? 'open' : null")
+      button.toggle-contents(@click="toggleContents")
+      TheArticleContents(:contents="contents")
+      .overlay(@click="toggleContents")
 
     .article-wrapper
       .article.content-article-wrapper(v-html="articleBody" ref="articleData")
 
-      .promo
-        GoogleAd(adSlot="2334561718" styles="display: block; min-height: 1050px;")
+      //- .promo
+      //-   GoogleAd(adSlot="2334561718" styles="display: block; min-height: 1050px;")
     .report-error
       | Нашли опечатку? Выделите фрагмент и нажмите Ctrl+Enter.
     preview(v-if="currentImg" :close="closeImg" :currentImg="currentImg")
 
-    .interested-wrapper
-      interested-articles(:articles="interested")
+  .interested-wrapper.container
+    interested-articles(:articles="interested")
   transition(name="fade")
     popup(
       v-if="openPopup===true"
@@ -92,16 +91,15 @@ export default {
     Popup
   },
 
-  fetch({store, params, redirect}) {
-    return store.dispatch('articlePage/fetchArticle', {
+  async fetch({store, params, redirect}) {
+    const article = await store.dispatch('articlePage/fetchArticle', {
       id: params.id
     })
-      .then((data) => {
-        if (data.hidden) {
-          redirect('/')
-        }
-        store.dispatch('relatedArticles/fetchRelatedArticles', params.id)
-      })
+    if (article.hidden) {
+      redirect('/')
+    }
+    await store.dispatch('relatedArticles/fetchRelatedArticles', params.id)
+
   },
 
   data() {
@@ -110,7 +108,10 @@ export default {
       currentImg: '',
       openPopup: false,
       mistakeText: '',
-      openThanks: false
+      openThanks: false,
+      contents: [],
+      isContents: true,
+      isContentsMenuOpen: false
     }
   },
   head () {
@@ -195,6 +196,8 @@ export default {
 
     if (process.browser) {
       window.addEventListener('keydown', this.openPopupHandler)
+
+      this.contents = Array.from(this.$refs.articleData.querySelectorAll('h2, h3'))
     }
   },
 
@@ -240,6 +243,10 @@ export default {
       setTimeout(() => {
         this.openThanks = false
       }, 4000)
+    },
+
+    toggleContents() {
+      this.isContentsMenuOpen = !this.isContentsMenuOpen
     }
   }
 }
@@ -265,6 +272,7 @@ export default {
 .interested-wrapper{
   margin-top: 42px;
 }
+
 .wrapper {
   padding-bottom: 40px;
 
@@ -273,10 +281,14 @@ export default {
   }
 }
 
+.is-contents .article-container {
+  padding-left: 400px;
+}
+
 .title {
   font-family: 'PTSerif', serif;
-  font-size: 54px;
-  color: #5B5B5B;
+  font-size: 40px;
+  color: #424242;
   letter-spacing: 0;
   margin-top: 36px;
   max-width: 900px;
@@ -317,7 +329,7 @@ export default {
   display: flex;
   flex-flow: row nowrap;
   align-items: flex-start;
-  margin-top: 0;
+  margin-top: 10px;
 }
 
 .article {
@@ -333,8 +345,97 @@ export default {
 
 
 .info-item.origin  a {
-  color: rgb(88, 88, 88);
-  text-decoration: underline;
+  color: #9b9b9b;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.contents-wrapper {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+}
+
+.toggle-contents {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .contents-wrapper {
+    width: 280px;
+    height: 100%;
+    z-index: 12;
+
+    transform: translateX(-100%);
+
+    transition: transform 0.3s linear;
+  }
+
+  .contents-wrapper.open {
+    transform: translateX(0);
+  }
+
+  .overlay {
+    transform: translateX(-100%);
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.4);
+
+    transition: transform 0.3s linear;
+  }
+
+  .open .overlay {
+    transform: translateX(0)
+  }
+
+  .toggle-contents {
+    position: absolute;
+    z-index: 12;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+
+    display: block;
+    width: 24px;
+    height: 24px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: none;
+    background: #FFFFFF;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+
+    &::after,
+    &::before {
+      content: '';
+      position: absolute;
+      top: 4px;
+
+      width: 2px;
+      height: 16px;
+      border-radius: 3px;
+      background: #DBDBDB;
+    }
+
+    &::after, {
+      left: 12px;
+    }
+
+    &::before, {
+      left: 16px;
+    }
+  }
+
+  .is-contents .container {
+    padding-left: 80px;
+  }
 }
 
 @media (max-width: 768px) {

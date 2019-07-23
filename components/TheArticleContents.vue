@@ -14,30 +14,37 @@
   import VueScrollTo from 'vue-scrollto'
 
   export default {
+    props: {
+      contents: Array
+    },
+
     data() {
       return {
-        contents: null,
         isBrowser: null,
         isSticky: false,
         stickyPosition: null,
         headerBottomPosition: null,
         footerHeight: null,
         contentIndex: null,
-        contentsPositions: null
+        contentsPositions: null,
+
+        scrollToOffset: 0,
       }
     },
 
     mounted() {
       if (process.browser) {
-        window.addEventListener('scroll', this.scrollHandler)
-        this.contents = Array.from(this.$parent.$refs.articleData.querySelectorAll('h2, h3'))
-        this.headerBottomPosition = document.querySelector('.header').offsetHeight
-        this.footerTopPosition = document.body.scrollHeight - (document.querySelector('.footer').offsetHeight + window.innerHeight)
-        this.stickyPosition = this.headerBottomPosition
+        setTimeout(() => {
+          this.scrollToOffset = window.innerWidth > 768 ? 68 : 45
+          window.addEventListener('scroll', this.scrollHandler)
+          this.headerBottomPosition = document.querySelector('.header').offsetHeight + 20
+          this.footerTopPosition = document.querySelector('.interested-wrapper').getBoundingClientRect().top + pageYOffset - window.innerHeight
+          this.stickyPosition = this.headerBottomPosition
 
-        this.contentsPositions = this.contents.map((el) => Number(el.getBoundingClientRect().top) + pageYOffset)
+          this.contentsPositions = this.contents.map((el) => Number(el.getBoundingClientRect().top) + pageYOffset - this.scrollToOffset)
 
-        this.isBrowser = true
+          this.isBrowser = true
+        }, 500)
       }
     },
 
@@ -56,28 +63,30 @@
 
       scrollTo(node) {
         VueScrollTo.scrollTo(node, 1000, {
-          easing: 'easeInOutQuart'
+          easing: 'easeInOutQuart',
+          offset: -this.scrollToOffset
         })
       },
 
       scrollHandler() {
         // sticky
-        if (pageYOffset >= this.headerBottomPosition && pageYOffset <= this.footerTopPosition) {
+        if (pageYOffset >= this.headerBottomPosition - 20 && pageYOffset <= this.footerTopPosition) {
           this.isSticky = true
-          this.stickyPosition = 0
+          this.stickyPosition = this.headerBottomPosition
         } else if (pageYOffset <= this.headerBottomPosition) {
           this.isSticky = false;
           this.stickyPosition = this.headerBottomPosition
-        }
-        else if (pageYOffset >= this.footerTopPosition) {
+        } else if (pageYOffset >= this.footerTopPosition) {
           this.isSticky = false
-          this.stickyPosition = this.footerTopPosition
+          this.stickyPosition = -600
         }
 
         // active contents
-        this.contentsPositions.map((el, index) => {
-          if (pageYOffset >= el && pageYOffset <= this.contentsPositions[index + 1]) {
+        this.contentsPositions.map((elPosition, index) => {
+          if (pageYOffset >= elPosition - 10) {
             this.contentIndex = index
+          } else if (this.contentsPositions[0] - 10 > pageYOffset) {
+            this.contentIndex = null
           }
         })
 
@@ -89,38 +98,41 @@
 <style scoped lang="scss">
 .contents {
   position: absolute;
-  left: 0;
+  z-index: 13;
+  left: 55px;
   z-index: 2;
+  overflow: auto;
 
-  width: 300px;
-  height: 100vh;
-  padding: 20px;
-  overflow: hidden;
+  width: 320px;
+  min-height: 360px;
+  max-height: 600px;
+  padding: 10px 17px 14px 20px;
+  background: #ffffff;
 
-  background: #f8f8f8;
+  border: 1px solid #DBDBDB;
+  border-radius: 6px;
+
+  transition: all 0.2s linear;
 }
 
 .contents.stycky {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 20px;
 }
 
 .contents ul {
+  overflow: auto;
   padding-left: 0;
   list-style: none;
 }
 
 .contents li {
+  position: relative;
   cursor: pointer;
 
   &:hover {
     text-decoration: underline;
   }
-}
-
-.contents li.active {
-  text-decoration: underline;
 }
 
 .contents li.h2 {
@@ -132,7 +144,56 @@
 .contents li.h3 {
   padding-top: 4px;
   padding-bottom: 4px;
-  padding-left: 8px;
+  padding-left: 6px;
   font-size: 14px;
 }
+
+.contents li.active {
+  color: #7198BA;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+
+    display: block;
+    height: 80%;
+    width: 1px;
+    background: #7198BA;
+  }
+}
+
+.contents li.h2.active {
+  padding-left: 10px;
+}
+
+.contents li.h3.active {
+  padding-left: 12px;
+}
+
+@media (max-width: 1024px) {
+  .contents {
+    top: 0 !important;
+    left: 0 !important;
+    z-index: 13;
+    border: 0;
+    border-radius: 0;
+
+    width: 280px;
+    height: 100%;
+    min-height: 0;
+    max-height: 100%;
+  }
+
+  .contents li.h2 {
+    font-size: 16px;
+  }
+
+  .contents li.h3 {
+    font-size: 14px;
+  }
+}
 </style>
+

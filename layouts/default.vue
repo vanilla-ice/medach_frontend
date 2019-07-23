@@ -1,5 +1,5 @@
 <template lang="pug">
-  .wrapper
+  .wrapper.wrapper-layout
     nuxt
     the-footer
 </template>
@@ -90,9 +90,19 @@ html {
   margin: 0 auto;
 }
 
+.wrapper-layout {
+  padding-top: 68px;
+}
+
 a {
 	text-decoration: none;
 	color: inherit;
+}
+
+@media(max-width: 1024px) {
+  .wrapper-layout {
+    padding-top: 45px;
+  }
 }
 </style>
 

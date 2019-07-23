@@ -1,5 +1,5 @@
 <template lang="pug">
-  .wrapper(@click="scrollTo")
+  .wrapper(@click="scrollTo" v-if="visible")
     img.arrow-img(src="~/static/arrow-to-top.svg")
 </template>
 
@@ -7,40 +7,56 @@
   import VueScrollTo from 'vue-scrollto'
 
   export default {
+    data() {
+      return {
+        visible: true,
+        footerPosition: 0
+      }
+    },
+
+    mounted() {
+    },
+
     methods: {
       scrollTo() {
         VueScrollTo.scrollTo(document.body, 400)
       }
-    }
+    },
+
   }
 </script>
 
 <style scoped lang="scss">
   .wrapper {
     position: fixed;
-    z-index: 999;
-    width: 70px;
-    height: 70px;
+    z-index: 9;
+    width: 30px;
+    height: 100%;
     bottom: 0;
     left: 0;
-    background: rgba(0,0,0,0.7);
-    opacity: 0.7;
+    background: rgba(0,0,0,.1);
+    opacity: 0;
     cursor: pointer;
-    transform: translateY(50%) rotate(45deg);
     transition: opacity .2s ease;
 
     &:hover {
-      opacity: 1;
+      opacity: 0.7;
     }
   }
 
   .arrow-img {
     position: absolute;
-    top: 0%;
-    left: 50%;
-    width: 15px;
-    height: 15px;
-    transform: rotate(-135deg) translate(-5%, -156%);
-    z-index: 999;
+    left: 5px;
+    bottom: 14px;
+    width: 18px;
+    height: 18px;
+    transform: rotate(-90deg);
+    z-index: 9;
+  }
+
+  @media(max-width: 768px) {
+    .wrapper {
+      display: none;
+    }
   }
 </style>

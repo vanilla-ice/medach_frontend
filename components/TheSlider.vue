@@ -141,7 +141,7 @@ export default {
 }
 
 .slide-article__wrapper {
-  padding: 40px 40px 84px 40px;
+  padding: 420px 40px 84px 40px;
   background-color: rgba(0, 0, 0, 0.5);
 }
 .content {
