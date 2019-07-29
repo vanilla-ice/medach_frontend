@@ -5,6 +5,7 @@
       .footer-item
         nuxt-link.link(to="/bloggers") Блоггеры
         nuxt-link.link(to="/about-us") О нас
+        a.link(href="https://forum.medach.pro/") Форум
 
     .right
       .social-items

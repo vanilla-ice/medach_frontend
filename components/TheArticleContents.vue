@@ -138,7 +138,7 @@
 .contents li.h2 {
   padding-top: 8px;
   padding-bottom: 8px;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .contents li.h3 {
