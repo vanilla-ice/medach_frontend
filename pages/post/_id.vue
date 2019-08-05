@@ -197,7 +197,7 @@ export default {
     if (process.browser) {
       window.addEventListener('keydown', this.openPopupHandler)
 
-      this.contents = Array.from(this.$refs.articleData.querySelectorAll('h2, h3'))
+      this.contents = Array.from(this.$refs.articleData.querySelectorAll('h1, h2'))
     }
   },
 
