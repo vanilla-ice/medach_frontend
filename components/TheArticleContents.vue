@@ -55,8 +55,8 @@
     methods: {
       getClass(el, index) {
         return {
+          'h1': el.tagName.toLowerCase() === 'h1',
           'h2': el.tagName.toLowerCase() === 'h2',
-          'h3': el.tagName.toLowerCase() === 'h3',
           'active': Number(index) === this.contentIndex
         }
       },
@@ -135,13 +135,13 @@
   }
 }
 
-.contents li.h2 {
+.contents li.h1 {
   padding-top: 8px;
   padding-bottom: 8px;
   font-size: 14px;
 }
 
-.contents li.h3 {
+.contents li.h2 {
   padding-top: 4px;
   padding-bottom: 4px;
   padding-left: 6px;
@@ -165,11 +165,11 @@
   }
 }
 
-.contents li.h2.active {
+.contents li.h1.active {
   padding-left: 10px;
 }
 
-.contents li.h3.active {
+.contents li.h2.active {
   padding-left: 12px;
 }
 
@@ -187,13 +187,12 @@
     max-height: 100%;
   }
 
-  .contents li.h2 {
+  .contents li.h1 {
     font-size: 16px;
   }
 
-  .contents li.h3 {
+  .contents li.h2 {
     font-size: 14px;
   }
 }
 </style>
-
