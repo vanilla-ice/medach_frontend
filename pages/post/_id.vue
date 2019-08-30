@@ -35,7 +35,11 @@
       TheArticleContents(:contents="contents")
      
       .overlay(@click="toggleContents")
-    .banner-wrapper__left
+    .banners-wrapper__left
+      template(v-for = "banner in bannersLeft")
+        img.banner-img(:src = "BASE_URL + banner.image.url")
+        .banner-description {{banner.description}}
+
       //- img(src="/assets/images/Frame2.png") 
 
     
@@ -78,9 +82,28 @@ import GoogleAd from '~/components/GoogleAd'
 import TheArticleContents from '~/components/TheArticleContents'
 import Popup from '~/components/popups/Popup'
 
-import { get } from 'lodash'
-
+import { get, maxBy } from 'lodash'
 import { mapGetters } from 'vuex'
+
+
+ 
+  function insertAd(content, adHtml) {
+  const tagsForSplitting = ['</div>', '</p>', '<br>']
+  const splittedContent = tagsForSplitting.map(tag => ({
+    tag,
+    content: content.split(tag)
+  }))
+  const result = maxBy(splittedContent, el => {
+    return el.content.length
+  })
+ 
+  result.content.splice(
+    Math.floor(result.content.length / 2),
+    0,
+    adHtml
+  )
+  return result.content.join(result.tag)
+}
 
 export default {
   name: 'ArticlesPage',
@@ -174,10 +197,20 @@ export default {
     ...mapGetters({
       article: 'articlePage/article',
       interested: 'relatedArticles/articles',
+      bannersLeft: 'articlePage/leftBanners',
+      bannersInText: 'articlePage/inTextBanners'
     }),
-
+    inTextBanners() {
+      let html = "<div class='in-text__banners'>"
+      this.bannersInText.forEach(elem => {
+        html = html + `<div class="banner-inText__wrapper"><img class="banner-intext__img" src="${this.BASE_URL + elem.image.url}"></img><div class="banner-inText__description">${elem.description}</div></div>`
+      })
+      
+      return html + "</div>"
+    },
     articleBody() {
-      return this.article.body.replace('<img src="', `<img src="${this.BASE_URL}`)
+      let content = insertAd(this.article.body.replace('<img src="', `<img src="${this.BASE_URL}`), this.inTextBanners); 
+      return content
     },
     bloggerId() {
       return get(this, 'article.user.id', null)
@@ -369,17 +402,36 @@ export default {
   display: none;
 }
 
-.banner-wrapper__left {
-  background: url("/assets/images/Frame2.png");
+.banners-wrapper__left {
+  // background: url("/assets/images/Frame2.png");
   width: 280px;
-  min-height: 160px;
-  position: fixed;
+  min-height: 260px;
+  position: absolute;
   left: 55px;
   top: 580px;
-  // img {
-  //   display: block;
-  //   width: 100%;
-  // }
+  img {
+    display: block;
+    width: 100%;
+  }
+}
+
+img.banner-img {
+  position: relative;
+  margin-top: 20px;
+}
+
+.banner-description {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 140%;
+
+
+color: #FFFFFF;
 }
 
 @media (max-width: 1024px) {

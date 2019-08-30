@@ -16,7 +16,14 @@ export const mutations = {
 }
 
 export const getters = {
-  article: (store) => store.article
+  article: (store) => store.article,
+  leftBanners (store) {
+    return store.article.banners.filter(elem => elem.position === "left");
+    
+  },
+  inTextBanners(store) {
+    return store.article.banners.filter(elem => elem.position === "in_text");
+  },
 }
 
 export const actions = {
