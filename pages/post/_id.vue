@@ -31,9 +31,14 @@
 
     .contents-wrapper(v-if="contents.length !== 0" :class="isContentsMenuOpen ? 'open' : null")
       button.toggle-contents(@click="toggleContents")
+      
       TheArticleContents(:contents="contents")
+     
       .overlay(@click="toggleContents")
+    .banner-wrapper__left
+      //- img(src="/assets/images/Frame2.png") 
 
+    
     .article-wrapper
       .article.content-article-wrapper(v-html="articleBody" ref="articleData")
 
@@ -189,6 +194,7 @@ export default {
   },
 
   mounted() {
+    console.log('article', this.article)
     const images = Array.from(this.$refs.articleData.querySelectorAll('img'))
     images.map(img => {
       img.addEventListener('click', () => this.renderPreviewImage(img))
@@ -363,6 +369,19 @@ export default {
   display: none;
 }
 
+.banner-wrapper__left {
+  background: url("/assets/images/Frame2.png");
+  width: 280px;
+  min-height: 160px;
+  position: fixed;
+  left: 55px;
+  top: 580px;
+  // img {
+  //   display: block;
+  //   width: 100%;
+  // }
+}
+
 @media (max-width: 1024px) {
   .contents-wrapper {
     width: 280px;
@@ -424,11 +443,11 @@ export default {
       background: #DBDBDB;
     }
 
-    &::after, {
+    &::after {
       left: 12px;
     }
 
-    &::before, {
+    &::before {
       left: 16px;
     }
   }
