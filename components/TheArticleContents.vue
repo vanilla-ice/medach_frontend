@@ -181,7 +181,7 @@
 
 .banner-intext__img {
  width: 100%;
- 
+ border-radius: 4px
 }
 
 .banner-inText__description {
