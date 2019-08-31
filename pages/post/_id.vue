@@ -37,8 +37,9 @@
       .overlay(@click="toggleContents")
     .banners-wrapper__left
       template(v-for = "banner in bannersLeft")
-        img.banner-img(:src = "BASE_URL + banner.image.url")
-        .banner-description {{banner.description}}
+        .banner-wrapper
+          img.banner-img(:src = "BASE_URL + banner.image.url")
+          .banner-description {{banner.description}}
 
       //- img(src="/assets/images/Frame2.png") 
 
@@ -333,6 +334,7 @@ export default {
   max-width: 900px;
 }
 
+
 .tags {
   margin-top: 22px;
 }
@@ -401,38 +403,48 @@ export default {
 .toggle-contents {
   display: none;
 }
-
-.banners-wrapper__left {
-  // background: url("/assets/images/Frame2.png");
-  width: 280px;
-  min-height: 260px;
-  position: absolute;
-  left: 55px;
-  top: 580px;
-  img {
-    display: block;
-    width: 100%;
-  }
+.banner-inText__description {
+  display: none;
 }
 
-img.banner-img {
+.banners-wrapper__left {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  width: 280px;
+  // min-height: 260px;
+  left: 55px;
+  bottom: 50px;
+  z-index: 1;
+}
+.banner-wrapper {
   position: relative;
   margin-top: 20px;
+  
+}
+img.banner-img {
+  width: 100%;
+  border-radius: 4px;
 }
 
 .banner-description {
+  max-width: 248px;
   position: absolute;
-  bottom: 0;
-  left: 0;
+  bottom: 10px;
+  left: 16px;
   font-family: Montserrat;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
   line-height: 140%;
-
-
-color: #FFFFFF;
+  color: #FFFFFF;
 }
+
+
+
+
+
+
 
 @media (max-width: 1024px) {
   .contents-wrapper {

@@ -168,7 +168,11 @@ export default {
     border-radius: 3px;
     overflow: hidden;
   }
+
+  
 }
+
+
 
 @media (max-width: 768px) {
   .card-wrapper {

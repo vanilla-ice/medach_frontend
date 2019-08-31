@@ -95,7 +95,7 @@
   }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .contents {
   position: absolute;
   z-index: 13;
@@ -171,6 +171,29 @@
 
 .contents li.h2.active {
   padding-left: 12px;
+}
+
+
+.banner-inText__wrapper {
+  width: 100%;
+  position: relative;
+}
+
+.banner-intext__img {
+ width: 100%;
+ 
+}
+
+.banner-inText__description {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 140%;
+  color: #FFFFFF;
 }
 
 @media (max-width: 1024px) {
