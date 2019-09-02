@@ -12,9 +12,10 @@
     //- .banners-wrapper__left-wrapper
     .banners-wrapper__left
       template(v-for = "banner in bannersLeft")
-        .banner-wrapper
+        a.banner-wrapper(:href="'https://' + banner.url") 
           img.banner-img(:src = "BASE_URL + banner.image.url")
           .banner-description {{banner.description}}
+
 </template>
 
 <script>
@@ -205,7 +206,9 @@
 }
 
 .banner-inText__description {
+  display: flex;
   position: absolute;
+  width: 100%;
   bottom: 10px;
   left: 10px;
   font-family: Montserrat;

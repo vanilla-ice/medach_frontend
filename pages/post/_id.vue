@@ -198,19 +198,18 @@ export default {
     ...mapGetters({
       article: 'articlePage/article',
       interested: 'relatedArticles/articles',
-      // bannersLeft: 'articlePage/leftBanners',
       bannersInText: 'articlePage/inTextBanners'
     }),
     inTextBanners() {
       let html = "<div class='in-text__banners'>"
       this.bannersInText.forEach(elem => {
-        html = html + `<div class="banner-inText__wrapper"><img class="banner-intext__img" src="${this.BASE_URL + elem.image.url}"></img><div class="banner-inText__description">${elem.description}</div></div>`
+        html = html + `<a href='${'https://' + elem.url}'><div class="banner-inText__wrapper"><img class="banner-intext__img" src="${this.BASE_URL + elem.image.url}"></img><div class="banner-inText__description">${elem.description}</div></div></a>`
       })
       
       return html + "</div>"
     },
     articleBody() {
-      let content = insertAd(this.article.body.replace('<img src="', `<img src="${this.BASE_URL}`), this.inTextBanners); 
+      let content = insertAd(this.article.body.replace('<img src=""', `<img src="${this.BASE_URL}`), (this.inTextBanners)); 
       return content
     },
     bloggerId() {
