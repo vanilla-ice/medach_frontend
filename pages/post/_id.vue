@@ -35,11 +35,11 @@
       TheArticleContents(:contents="contents")
      
       .overlay(@click="toggleContents")
-    .banners-wrapper__left
-      template(v-for = "banner in bannersLeft")
-        .banner-wrapper
-          img.banner-img(:src = "BASE_URL + banner.image.url")
-          .banner-description {{banner.description}}
+    //- .banners-wrapper__left
+    //-   template(v-for = "banner in bannersLeft")
+    //-     .banner-wrapper
+    //-       img.banner-img(:src = "BASE_URL + banner.image.url")
+    //-       .banner-description {{banner.description}}
 
       //- img(src="/assets/images/Frame2.png") 
 
@@ -198,7 +198,7 @@ export default {
     ...mapGetters({
       article: 'articlePage/article',
       interested: 'relatedArticles/articles',
-      bannersLeft: 'articlePage/leftBanners',
+      // bannersLeft: 'articlePage/leftBanners',
       bannersInText: 'articlePage/inTextBanners'
     }),
     inTextBanners() {
@@ -290,7 +290,10 @@ export default {
     }
   }
 }
+
 </script>
+
+
 
 <style scoped lang="scss">
 .info {
@@ -407,38 +410,7 @@ export default {
   display: none;
 }
 
-.banners-wrapper__left {
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  width: 280px;
-  // min-height: 260px;
-  left: 55px;
-  bottom: 50px;
-  z-index: 1;
-}
-.banner-wrapper {
-  position: relative;
-  margin-top: 20px;
-  
-}
-img.banner-img {
-  width: 100%;
-  border-radius: 4px;
-}
 
-.banner-description {
-  max-width: 248px;
-  position: absolute;
-  bottom: 10px;
-  left: 16px;
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 16px;
-  line-height: 140%;
-  color: #FFFFFF;
-}
 
 
 

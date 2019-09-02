@@ -5,13 +5,21 @@
     ref="contents"
     v-if="isBrowser && contents.length"
     )
-    ul
-      li(v-for="(content, index) in contents" @click="scrollTo(content)" :class="getClass(content, index)")
-        | {{ content.textContent }}
+    .ul-content__wrapper
+      ul
+        li(v-for="(content, index) in contents" @click="scrollTo(content)" :class="getClass(content, index)")
+          | {{ content.textContent }}
+    //- .banners-wrapper__left-wrapper
+    .banners-wrapper__left
+      template(v-for = "banner in bannersLeft")
+        .banner-wrapper
+          img.banner-img(:src = "BASE_URL + banner.image.url")
+          .banner-description {{banner.description}}
 </template>
 
 <script>
   import VueScrollTo from 'vue-scrollto'
+  import { mapGetters } from 'vuex'
 
   export default {
     props: {
@@ -20,6 +28,7 @@
 
     data() {
       return {
+        BASE_URL: process.env.BASE_URL,
         isBrowser: null,
         isSticky: false,
         stickyPosition: null,
@@ -50,6 +59,12 @@
 
     beforeDestroy() {
       window.removeEventListener('scroll', this.scrollHandler)
+    },
+
+    computed: {
+      ...mapGetters({
+        bannersLeft: 'articlePage/leftBanners'
+      })
     },
 
     methods: {
@@ -96,21 +111,26 @@
 </script>
 
 <style lang="scss">
+
+.ul-content__wrapper {
+  border: 1px solid #DBDBDB;
+  border-radius: 6px;
+  padding: 10px 17px 14px 20px;
+}
 .contents {
   position: absolute;
   z-index: 13;
   left: 55px;
   z-index: 2;
-  overflow: auto;
+  // overflow: auto;
 
   width: 320px;
   min-height: 360px;
   max-height: 600px;
-  padding: 10px 17px 14px 20px;
+  
   background: #ffffff;
 
-  border: 1px solid #DBDBDB;
-  border-radius: 6px;
+  
 
   transition: all 0.2s linear;
 }
@@ -188,6 +208,41 @@
   position: absolute;
   bottom: 10px;
   left: 10px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 140%;
+  color: #FFFFFF;
+}
+
+.banners-wrapper__left {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 100%;
+  // min-height: 260px;
+  
+  
+}
+
+
+
+.banner-wrapper {
+  position: relative;
+  margin-top: 20px;
+  
+}
+img.banner-img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.banner-description {
+  max-width: 248px;
+  position: absolute;
+  bottom: 10px;
+  left: 16px;
   font-family: Montserrat;
   font-style: normal;
   font-weight: normal;
