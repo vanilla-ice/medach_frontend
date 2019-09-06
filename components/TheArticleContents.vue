@@ -200,6 +200,18 @@
   position: relative;
 }
 
+.banner-inText__wrapper::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0px;
+  border-radius: 4px;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0px 0px 0px 190px rgba(0,0,0,0.31)inset;
+} 
+
 .banner-intext__img {
  width: 100%;
  border-radius: 4px
@@ -213,10 +225,11 @@
   left: 10px;
   font-family: Montserrat;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 600;
   font-size: 16px;
   line-height: 140%;
   color: #FFFFFF;
+  z-index: 1;
 }
 
 .banners-wrapper__left {
@@ -224,9 +237,9 @@
   flex-direction: column;
   position: absolute;
   width: 100%;
-  // min-height: 260px;
   
-  
+
+
 }
 
 
@@ -234,11 +247,28 @@
 .banner-wrapper {
   position: relative;
   margin-top: 20px;
+  width: 100%;
+  height: 100%;
+  
   
 }
+
+.banner-wrapper::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: -1px;
+  border-radius: 4px;
+  width: 100%;
+  height: 98%;
+  box-shadow: 0px 0px 0px 120px rgba(0,0,0,0.31)inset;
+
+} 
 img.banner-img {
   width: 100%;
   border-radius: 4px;
+  
 }
 
 .banner-description {
@@ -248,10 +278,11 @@ img.banner-img {
   left: 16px;
   font-family: Montserrat;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 600;
   font-size: 16px;
   line-height: 140%;
   color: #FFFFFF;
+  z-index: 1;
 }
 
 @media (max-width: 1024px) {
