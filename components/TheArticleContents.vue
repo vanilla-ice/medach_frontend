@@ -12,7 +12,7 @@
     //- .banners-wrapper__left-wrapper
     .banners-wrapper__left
       template(v-for = "banner in bannersLeft")
-        a.banner-wrapper(:href="'https://' + banner.url") 
+        a.banner-wrapper(:href="'https://' + banner.url" target="_blank") 
           img.banner-img(:src = "BASE_URL + banner.image.url")
           .banner-description {{banner.description}}
 
@@ -123,7 +123,6 @@
   z-index: 13;
   left: 55px;
   z-index: 2;
-  // overflow: auto;
 
   width: 320px;
   min-height: 360px;
@@ -209,7 +208,7 @@
   border-radius: 4px;
   width: 100%;
   height: 100%;
-  box-shadow: 0px 0px 0px 190px rgba(0,0,0,0.31)inset;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
 } 
 
 .banner-intext__img {
@@ -262,7 +261,7 @@
   border-radius: 4px;
   width: 100%;
   height: 98%;
-  box-shadow: 0px 0px 0px 120px rgba(0,0,0,0.31)inset;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
 
 } 
 img.banner-img {

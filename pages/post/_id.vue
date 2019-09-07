@@ -203,7 +203,7 @@ export default {
     inTextBanners() {
       let html = "<div class='in-text__banners'>"
       this.bannersInText.forEach(elem => {
-        html = html + `<a href='${'https://' + elem.url}'><div class="banner-inText__wrapper"><img class="banner-intext__img" src="${this.BASE_URL + elem.image.url}"></img><div class="banner-inText__description">${elem.description}</div></div></a>`
+        html = html + `<a href='${'https://' + elem.url}' target="_blank" ><div class="banner-inText__wrapper"><img class="banner-intext__img" src="${this.BASE_URL + elem.image.url}"></img><div class="banner-inText__description">${elem.description}</div></div></a>`
       })
       
       return html + "</div>"
