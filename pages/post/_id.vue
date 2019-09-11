@@ -1,5 +1,5 @@
 <template lang="pug">
-.wrapper(v-if="article" :class="contents.length === 0 ? null : 'is-contents'")
+.wrapper(v-if="article" class="is-contents")
   the-header
   scroll-top
   .container.article-container
@@ -29,19 +29,11 @@
         span
          | Оформление: {{article.infographic}}
 
-    .contents-wrapper(v-if="contents.length !== 0" :class="isContentsMenuOpen ? 'open' : null")
+    .contents-wrapper(:class="isContentsMenuOpen ? 'open' : null")
       button.toggle-contents(@click="toggleContents")
       
       TheArticleContents(:contents="contents")
      
-      .overlay(@click="toggleContents")
-    //- .banners-wrapper__left
-    //-   template(v-for = "banner in bannersLeft")
-    //-     .banner-wrapper
-    //-       img.banner-img(:src = "BASE_URL + banner.image.url")
-    //-       .banner-description {{banner.description}}
-
-      //- img(src="/assets/images/Frame2.png") 
 
     
     .article-wrapper
@@ -88,23 +80,23 @@ import { mapGetters } from 'vuex'
 
 
  
-  function insertAd(content, adHtml) {
-  const tagsForSplitting = ['</div>', '</p>', '<br>']
-  const splittedContent = tagsForSplitting.map(tag => ({
-    tag,
-    content: content.split(tag)
-  }))
-  const result = maxBy(splittedContent, el => {
-    return el.content.length
-  })
+//   function insertAd(content, adHtml) {
+//   const tagsForSplitting = ['</div>', '</p>', '<br>']
+//   const splittedContent = tagsForSplitting.map(tag => ({
+//     tag,
+//     content: content.split(tag)
+//   }))
+//   const result = maxBy(splittedContent, el => {
+//     return el.content.length
+//   })
  
-  result.content.splice(
-    Math.floor(result.content.length / 2),
-    0,
-    adHtml
-  )
-  return result.content.join(result.tag)
-}
+//   result.content.splice(
+//     Math.floor(result.content.length / 2),
+//     0,
+//     adHtml
+//   )
+//   return result.content.join(result.tag)
+// }
 
 export default {
   name: 'ArticlesPage',
@@ -203,13 +195,13 @@ export default {
     inTextBanners() {
       let html = "<div class='in-text__banners'>"
       this.bannersInText.forEach(elem => {
-        html = html + `<a href='${'https://' + elem.url}' target="_blank" ><div class="banner-inText__wrapper"><img class="banner-intext__img" src="${this.BASE_URL + elem.image.url}"></img><div class="banner-inText__description">${elem.description}</div></div></a>`
+        html = html + `<a href='${'https://' + elem.url}' target="_blank" ><div class="banner-inText__wrapper"><img class="banner-intext__img" src="${this.BASE_URL + elem.image.url}"></img><div class="banner-inText__text"><div class="banner-inText__title">${elem.title}</div><div class="banner-inText__description">${elem.description}</div></div></div></a>`
       })
       
       return html + "</div>"
     },
     articleBody() {
-      let content = insertAd(this.article.body.replace('<img src=""', `<img src="${this.BASE_URL}`), (this.inTextBanners)); 
+      let content = this.insertAd(this.article.body.replace('<img src=""', `<img src="${this.BASE_URL}`), (this.inTextBanners)); 
       return content
     },
     bloggerId() {
@@ -250,6 +242,24 @@ export default {
   },
 
   methods: {
+    insertAd(content, adHtml) {
+    const tagsForSplitting = ['</div>', '</p>', '<br>']
+    const splittedContent = tagsForSplitting.map(tag => ({
+    tag,
+    content: content.split(tag)
+  }))
+    const result = maxBy(splittedContent, el => {
+    return el.content.length
+  })
+ 
+  result.content.splice(
+    Math.floor(result.content.length / 2),
+    0,
+    adHtml
+  )
+  return result.content.join(result.tag)
+},
+
     renderPreviewImage(image) {
       this.currentImg = image.getAttribute('src')
       document.body.classList.add('scroll-del')

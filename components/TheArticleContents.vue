@@ -3,9 +3,9 @@
     :class="{'contents': true, 'stycky': isSticky}"
     :style="{'top': `${stickyPosition}px`}"
     ref="contents"
-    v-if="isBrowser && contents.length"
+    v-if="isBrowser"
     )
-    .ul-content__wrapper
+    .ul-content__wrapper(:class="{ 'hide-wrap': !contents.length }")
       ul
         li(v-for="(content, index) in contents" @click="scrollTo(content)" :class="getClass(content, index)")
           | {{ content.textContent }}
@@ -14,7 +14,9 @@
       template(v-for = "banner in bannersLeft")
         a.banner-wrapper(:href="'https://' + banner.url" target="_blank") 
           img.banner-img(:src = "BASE_URL + banner.image.url")
-          .banner-description {{banner.description}}
+          .banner-text
+            .banner-title {{banner.title}}
+            .banner-description {{banner.description}}
 
 </template>
 
@@ -37,7 +39,6 @@
         footerHeight: null,
         contentIndex: null,
         contentsPositions: null,
-
         scrollToOffset: 0,
       }
     },
@@ -216,20 +217,58 @@
  border-radius: 4px
 }
 
-.banner-inText__description {
-  display: flex;
+.banner-intext__img::after  {
+  content: "";
+  display: block;
   position: absolute;
+  left: 0;
+  top: 0px;
+  border-radius: 4px;
   width: 100%;
-  bottom: 10px;
-  left: 10px;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+}
+
+.banner-inText__text {
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  z-index: 1;
+  padding: 7px;
+}
+
+.banner-inText__title {
+  width: 100%;
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 16px;
+  color: #FFFFFF;
+}
+.banner-inText__description {
+  width: 100%;
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
-  line-height: 140%;
+  // line-height: 140%;
   color: #FFFFFF;
   z-index: 1;
 }
+// .banner-inText__description {
+//   display: flex;
+//   position: absolute;
+//   width: 100%;
+//   bottom: 10px;
+//   left: 10px;
+//   font-family: Montserrat;
+//   font-style: normal;
+//   font-weight: 600;
+//   font-size: 16px;
+//   line-height: 140%;
+//   color: #FFFFFF;
+//   z-index: 1;
+// }
 
 .banners-wrapper__left {
   display: flex;
@@ -239,6 +278,10 @@
   
 
 
+}
+
+.hide-wrap {
+  display: none;
 }
 
 
@@ -269,17 +312,29 @@ img.banner-img {
   border-radius: 4px;
   
 }
-
-.banner-description {
-  max-width: 248px;
+.banner-text {
+  
+  
+  width: 100%;
   position: absolute;
-  bottom: 10px;
-  left: 16px;
+  bottom: 0px;
+  left: 0px;
+  z-index: 1;
+  padding: 7px;
+}
+.banner-title {
+  width: 100%;
+  font-weight: 600;
+  font-size: 16px;
+  color: #FFFFFF;
+}
+.banner-description {
+  width: 100%;
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
-  line-height: 140%;
+  // line-height: 140%;
   color: #FFFFFF;
   z-index: 1;
 }

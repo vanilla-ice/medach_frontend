@@ -40,6 +40,7 @@ const post = (url, data, headers = {}) => {
   return simpleRequest(url, "post", data, headers);
 }
 
+
 export const getMainPageConfig = () => {
   return get(`/api/main_page_config`)
     .then(response => response.data)
