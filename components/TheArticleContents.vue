@@ -9,11 +9,11 @@
       ul
         li(v-for="(content, index) in contents" @click="scrollTo(content)" :class="getClass(content, index)")
           | {{ content.textContent }}
-    //- .banners-wrapper__left-wrapper
+    .banners-wrapper__left-wrapper
     .banners-wrapper__left
       template(v-for = "banner in bannersLeft")
         a.banner-wrapper(:href="banner.url" target="_blank") 
-          img.banner-img(:src = "BASE_URL + banner.image.url")
+          .banner-img(:style="{ background: `url(${BASE_URL}${banner.image.url}) no-repeat center / cover`}")
           .banner-text
             .banner-title {{banner.title}}
             .banner-description {{banner.description}}
@@ -45,6 +45,8 @@
 
     mounted() {
       if (process.browser) {
+        console.log('bannersLeft', this.bannersLeft)
+
         setTimeout(() => {
           this.scrollToOffset = window.innerWidth > 768 ? 68 : 45
           window.addEventListener('scroll', this.scrollHandler)
@@ -219,8 +221,10 @@
  width: 100%;
  height: auto;
  border-radius: 4px;
+ 
  left: 50%;
  top: 50%;
+
  transform: translate(-50%, -50%);
 }
 
@@ -285,12 +289,13 @@
   top: -1px;
   border-radius: 4px;
   width: 100%;
-  height: 98%;
+  height: 100%;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
 
 } 
-img.banner-img {
+.banner-img {
   width: 100%;
+  min-height: 160px;
   border-radius: 4px;
   
 }
@@ -341,6 +346,9 @@ img.banner-img {
 
   .contents li.h2 {
     font-size: 14px;
+  }
+  .banner-wrapper {
+    padding: 10px;
   }
 }
 </style>
