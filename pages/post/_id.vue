@@ -79,24 +79,7 @@ import { get, maxBy } from 'lodash'
 import { mapGetters } from 'vuex'
 
 
- 
-//   function insertAd(content, adHtml) {
-//   const tagsForSplitting = ['</div>', '</p>', '<br>']
-//   const splittedContent = tagsForSplitting.map(tag => ({
-//     tag,
-//     content: content.split(tag)
-//   }))
-//   const result = maxBy(splittedContent, el => {
-//     return el.content.length
-//   })
- 
-//   result.content.splice(
-//     Math.floor(result.content.length / 2),
-//     0,
-//     adHtml
-//   )
-//   return result.content.join(result.tag)
-// }
+
 
 export default {
   name: 'ArticlesPage',
@@ -195,7 +178,7 @@ export default {
     inTextBanners() {
       let html = "<div class='in-text__banners'>"
       this.bannersInText.forEach(elem => {
-        html = html + `<a href='${'https://' + elem.url}' target="_blank" ><div class="banner-inText__wrapper"><img class="banner-intext__img" src="${this.BASE_URL + elem.image.url}"></img><div class="banner-inText__text"><div class="banner-inText__title">${elem.title}</div><div class="banner-inText__description">${elem.description}</div></div></div></a>`
+        html = html + `<a href='${elem.url}' target="_blank" ><div class="banner-inText__wrapper"><img class="banner-intext__img" src="${this.BASE_URL + elem.image.url}"></img><div class="banner-inText__text"><div class="banner-inText__title">${elem.title}</div><div class="banner-inText__description">${elem.description}</div></div></div></a>`
       })
       
       return html + "</div>"
