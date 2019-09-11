@@ -3,15 +3,26 @@
     :class="{'contents': true, 'stycky': isSticky}"
     :style="{'top': `${stickyPosition}px`}"
     ref="contents"
-    v-if="isBrowser && contents.length"
+    v-if="isBrowser"
     )
-    ul
-      li(v-for="(content, index) in contents" @click="scrollTo(content)" :class="getClass(content, index)")
-        | {{ content.textContent }}
+    .ul-content__wrapper(:class="{ 'hide-wrap': !contents.length }")
+      ul
+        li(v-for="(content, index) in contents" @click="scrollTo(content)" :class="getClass(content, index)")
+          | {{ content.textContent }}
+    //- .banners-wrapper__left-wrapper
+    .banners-wrapper__left
+      template(v-for = "banner in bannersLeft")
+        a.banner-wrapper(:href="banner.url" target="_blank") 
+          img.banner-img(:src = "BASE_URL + banner.image.url")
+          .banner-text
+            .banner-title {{banner.title}}
+            .banner-description {{banner.description}}
+
 </template>
 
 <script>
   import VueScrollTo from 'vue-scrollto'
+  import { mapGetters } from 'vuex'
 
   export default {
     props: {
@@ -20,6 +31,7 @@
 
     data() {
       return {
+        BASE_URL: process.env.BASE_URL,
         isBrowser: null,
         isSticky: false,
         stickyPosition: null,
@@ -27,7 +39,6 @@
         footerHeight: null,
         contentIndex: null,
         contentsPositions: null,
-
         scrollToOffset: 0,
       }
     },
@@ -50,6 +61,12 @@
 
     beforeDestroy() {
       window.removeEventListener('scroll', this.scrollHandler)
+    },
+
+    computed: {
+      ...mapGetters({
+        bannersLeft: 'articlePage/leftBanners'
+      })
     },
 
     methods: {
@@ -95,22 +112,26 @@
   }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
+
+.ul-content__wrapper {
+  border: 1px solid #DBDBDB;
+  border-radius: 6px;
+  padding: 10px 17px 14px 20px;
+}
 .contents {
   position: absolute;
   z-index: 13;
   left: 55px;
   z-index: 2;
-  overflow: auto;
 
   width: 320px;
   min-height: 360px;
   max-height: 600px;
-  padding: 10px 17px 14px 20px;
+  
   background: #ffffff;
 
-  border: 1px solid #DBDBDB;
-  border-radius: 6px;
+  
 
   transition: all 0.2s linear;
 }
@@ -171,6 +192,133 @@
 
 .contents li.h2.active {
   padding-left: 12px;
+}
+
+
+.banner-inText__wrapper {
+  width: 100%;
+  position: relative;
+  height: 357px;
+  overflow: hidden;
+}
+
+.banner-inText__wrapper::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0px;
+  border-radius: 4px;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+} 
+
+.banner-intext__img {
+ position: absolute;
+ width: 100%;
+ height: auto;
+ border-radius: 4px;
+ left: 50%;
+ top: 50%;
+ transform: translate(-50%, -50%);
+}
+
+
+.banner-inText__text {
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  z-index: 1;
+  padding: 15px;
+}
+
+.banner-inText__title {
+  width: 100%;
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 22px;
+  color: #FFFFFF;
+  margin-bottom: 10px;
+}
+.banner-inText__description {
+  width: 100%;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  color: #FFFFFF;
+  z-index: 1;
+}
+
+.banners-wrapper__left {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 100%;
+  
+
+
+}
+
+.hide-wrap {
+  display: none;
+}
+
+
+
+.banner-wrapper {
+  position: relative;
+  margin-top: 20px;
+  width: 100%;
+  height: 100%;
+  
+  
+}
+
+.banner-wrapper::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: -1px;
+  border-radius: 4px;
+  width: 100%;
+  height: 98%;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+
+} 
+img.banner-img {
+  width: 100%;
+  border-radius: 4px;
+  
+}
+.banner-text {
+  
+  
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  z-index: 1;
+  padding: 15px;
+}
+.banner-title {
+  width: 100%;
+  font-weight: 700;
+  font-size: 22px;
+  color: #FFFFFF;
+  margin-bottom: 10px;
+}
+.banner-description {
+  width: 100%;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  color: #FFFFFF;
+  z-index: 1;
 }
 
 @media (max-width: 1024px) {

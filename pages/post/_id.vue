@@ -1,5 +1,5 @@
 <template lang="pug">
-.wrapper(v-if="article" :class="contents.length === 0 ? null : 'is-contents'")
+.wrapper(v-if="article" class="is-contents")
   the-header
   scroll-top
   .container.article-container
@@ -29,11 +29,13 @@
         span
          | Оформление: {{article.infographic}}
 
-    .contents-wrapper(v-if="contents.length !== 0" :class="isContentsMenuOpen ? 'open' : null")
+    .contents-wrapper(:class="isContentsMenuOpen ? 'open' : null")
       button.toggle-contents(@click="toggleContents")
+      
       TheArticleContents(:contents="contents")
-      .overlay(@click="toggleContents")
+     
 
+    
     .article-wrapper
       .article.content-article-wrapper(v-html="articleBody" ref="articleData")
 
@@ -73,9 +75,11 @@ import GoogleAd from '~/components/GoogleAd'
 import TheArticleContents from '~/components/TheArticleContents'
 import Popup from '~/components/popups/Popup'
 
-import { get } from 'lodash'
-
+import { get, maxBy } from 'lodash'
 import { mapGetters } from 'vuex'
+
+
+
 
 export default {
   name: 'ArticlesPage',
@@ -169,10 +173,19 @@ export default {
     ...mapGetters({
       article: 'articlePage/article',
       interested: 'relatedArticles/articles',
+      bannersInText: 'articlePage/inTextBanners'
     }),
-
+    inTextBanners() {
+      let html = "<div class='in-text__banners'>"
+      this.bannersInText.forEach(elem => {
+        html = html + `<a href='${elem.url}' target="_blank" ><div class="banner-inText__wrapper"><img class="banner-intext__img" src="${this.BASE_URL + elem.image.url}"></img><div class="banner-inText__text"><div class="banner-inText__title">${elem.title}</div><div class="banner-inText__description">${elem.description}</div></div></div></a>`
+      })
+      
+      return html + "</div>"
+    },
     articleBody() {
-      return this.article.body.replace('<img src="', `<img src="${this.BASE_URL}`)
+      let content = this.insertAd(this.article.body.replace('<img src=""', `<img src="${this.BASE_URL}`), (this.inTextBanners)); 
+      return content
     },
     bloggerId() {
       return get(this, 'article.user.id', null)
@@ -189,6 +202,7 @@ export default {
   },
 
   mounted() {
+    console.log('article', this.article)
     const images = Array.from(this.$refs.articleData.querySelectorAll('img'))
     images.map(img => {
       img.addEventListener('click', () => this.renderPreviewImage(img))
@@ -211,6 +225,24 @@ export default {
   },
 
   methods: {
+    insertAd(content, adHtml) {
+    const tagsForSplitting = ['</div>', '</p>', '<br>']
+    const splittedContent = tagsForSplitting.map(tag => ({
+    tag,
+    content: content.split(tag)
+  }))
+    const result = maxBy(splittedContent, el => {
+    return el.content.length
+  })
+ 
+  result.content.splice(
+    Math.floor(result.content.length / 2),
+    0,
+    adHtml
+  )
+  return result.content.join(result.tag)
+},
+
     renderPreviewImage(image) {
       this.currentImg = image.getAttribute('src')
       document.body.classList.add('scroll-del')
@@ -250,7 +282,10 @@ export default {
     }
   }
 }
+
 </script>
+
+
 
 <style scoped lang="scss">
 .info {
@@ -293,6 +328,7 @@ export default {
   margin-top: 36px;
   max-width: 900px;
 }
+
 
 .tags {
   margin-top: 22px;
@@ -362,6 +398,17 @@ export default {
 .toggle-contents {
   display: none;
 }
+.banner-inText__description {
+  display: none;
+}
+
+
+
+
+
+
+
+
 
 @media (max-width: 1024px) {
   .contents-wrapper {
@@ -424,11 +471,11 @@ export default {
       background: #DBDBDB;
     }
 
-    &::after, {
+    &::after {
       left: 12px;
     }
 
-    &::before, {
+    &::before {
       left: 16px;
     }
   }
