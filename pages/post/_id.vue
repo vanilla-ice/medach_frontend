@@ -178,7 +178,7 @@ export default {
     inTextBanners() {
       let html = "<div class='in-text__banners'>"
       this.bannersInText.forEach(elem => {
-        html = html + `<a href='${elem.url}' target="_blank" ><div class="banner-inText__wrapper"><img class="banner-intext__img" src="${this.BASE_URL + elem.image.url}"></img><div class="banner-inText__text"><div class="banner-inText__title">${elem.title}</div><div class="banner-inText__description">${elem.description}</div></div></div></a>`
+        html = html + `<a href='${elem.url}' target="_blank" ><div class="banner-inText__wrapper" style="background: url(${this.BASE_URL}${elem.image.url}) no-repeat center / cover"><div class="banner-inText__text"><div class="banner-inText__title">${elem.title}</div><div class="banner-inText__description">${elem.description}</div></div></div></a>`
       })
       
       return html + "</div>"
@@ -186,6 +186,7 @@ export default {
     articleBody() {
       let content = this.insertAd(this.article.body.replace('<img src=""', `<img src="${this.BASE_URL}`), (this.inTextBanners)); 
       return content
+      console.log("banner-inText__wrapper");
     },
     bloggerId() {
       return get(this, 'article.user.id', null)
