@@ -1,5 +1,5 @@
 <template lang="pug">
-.wrapper(v-if="article" class="is-contents")
+.wrapper(:class="{'is-contents': contents.length !== 0 || article.banners.length !== 0}" )
   the-header
   scroll-top
   .container.article-container
@@ -29,7 +29,7 @@
         span
          | Оформление: {{article.infographic}}
 
-    .contents-wrapper(:class="isContentsMenuOpen ? 'open' : null")
+    .contents-wrapper(v-if="contents.length !== 0 || article.banners.length !== 0" :class="isContentsMenuOpen ? 'open' : null")
       button.toggle-contents(@click="toggleContents")
       
       TheArticleContents(:contents="contents")
@@ -425,6 +425,10 @@ export default {
   .contents-wrapper.open {
     transform: translateX(0);
   }
+
+  .contents-wrapper.hide {
+    display: none;
+  } 
 
   .overlay {
     transform: translateX(-100%);
