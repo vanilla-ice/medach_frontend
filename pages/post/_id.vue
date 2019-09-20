@@ -1,5 +1,5 @@
 <template lang="pug">
-.wrapper(v-if="article" class="is-contents")
+.wrapper(:class="{'is-contents': contents.length !== 0 || article.banners.length !== 0}" )
   the-header
   scroll-top
   .container.article-container
@@ -29,7 +29,7 @@
         span
          | Оформление: {{article.infographic}}
 
-    .contents-wrapper(:class="isContentsMenuOpen ? 'open' : null")
+    .contents-wrapper(v-if="contents.length !== 0 || article.banners.length !== 0" :class="isContentsMenuOpen ? 'open' : null")
       button.toggle-contents(@click="toggleContents")
       
       TheArticleContents(:contents="contents")
@@ -65,24 +65,21 @@
 </template>
 
 <script>
-import InterestedArticles from '~/components/InterestedArticles'
-import ImageComponent from '~/components/ImageComponent'
-import ThePopularAuthors from '~/components/ThePopularAuthors'
-import Preview from '~/components/Preview'
-import TheHeader from '~/components/TheHeader'
-import ScrollTop from '~/components/ScrollTop'
-import GoogleAd from '~/components/GoogleAd'
-import TheArticleContents from '~/components/TheArticleContents'
-import Popup from '~/components/popups/Popup'
+import InterestedArticles from "~/components/InterestedArticles";
+import ImageComponent from "~/components/ImageComponent";
+import ThePopularAuthors from "~/components/ThePopularAuthors";
+import Preview from "~/components/Preview";
+import TheHeader from "~/components/TheHeader";
+import ScrollTop from "~/components/ScrollTop";
+import GoogleAd from "~/components/GoogleAd";
+import TheArticleContents from "~/components/TheArticleContents";
+import Popup from "~/components/popups/Popup";
 
-import { get, maxBy } from 'lodash'
-import { mapGetters } from 'vuex'
-
-
-
+import { get, maxBy } from "lodash";
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'ArticlesPage',
+  name: "ArticlesPage",
   components: {
     InterestedArticles,
     ImageComponent,
@@ -95,30 +92,29 @@ export default {
     Popup
   },
 
-  async fetch({store, params, redirect}) {
-    const article = await store.dispatch('articlePage/fetchArticle', {
+  async fetch({ store, params, redirect }) {
+    const article = await store.dispatch("articlePage/fetchArticle", {
       id: params.id
-    })
+    });
     if (article.hidden) {
-      redirect('/')
+      redirect("/");
     }
-    await store.dispatch('relatedArticles/fetchRelatedArticles', params.id)
-
+    await store.dispatch("relatedArticles/fetchRelatedArticles", params.id);
   },
 
   data() {
     return {
       BASE_URL: process.env.BASE_URL,
-      currentImg: '',
+      currentImg: "",
       openPopup: false,
-      mistakeText: '',
+      mistakeText: "",
       openThanks: false,
       contents: [],
       isContents: true,
       isContentsMenuOpen: false
-    }
+    };
   },
-  head () {
+  head() {
     return {
       htmlAttrs: {
         prefix: "og: http://ogp.me/ns#"
@@ -126,163 +122,166 @@ export default {
       title: this.article.title,
       meta: [
         {
-          hid: 'ogtitle',
-          property: 'og:title',
+          hid: "ogtitle",
+          property: "og:title",
           content: this.article.title
         },
         {
-          hid: 'ogurl',
-          property: 'og:url',
-          content: 'https://medach.pro'+this.$route.path
+          hid: "ogurl",
+          property: "og:url",
+          content: "https://medach.pro" + this.$route.path
         },
         {
-          hid: 'ogtype',
-          property: 'og:type',
-          content: 'article'
+          hid: "ogtype",
+          property: "og:type",
+          content: "article"
         },
         {
-          hid: 'ogimage',
-          property: 'og:image',
-          content: this.article.coverImage.url ? this.BASE_URL+this.article.coverImage.url : ''
+          hid: "ogimage",
+          property: "og:image",
+          content: this.article.coverImage.url
+            ? this.BASE_URL + this.article.coverImage.url
+            : ""
         },
         {
-          hid: 'ogimagetype',
+          hid: "ogimagetype",
           property: "og:image:type",
           content: "image/jpeg"
         },
         {
-          hid: 'ogimagewidth',
+          hid: "ogimagewidth",
           property: "og:image:width",
           content: "675"
         },
         {
-          hid: 'ogimageheight',
+          hid: "ogimageheight",
           property: "og:image:height",
           content: "475"
         },
         {
-          hid: 'ogdescription',
-          property: 'og:description',
+          hid: "ogdescription",
+          property: "og:description",
           content: this.article.title
         }
       ]
-    }
+    };
   },
 
   computed: {
     ...mapGetters({
-      article: 'articlePage/article',
-      interested: 'relatedArticles/articles',
-      bannersInText: 'articlePage/inTextBanners'
+      article: "articlePage/article",
+      interested: "relatedArticles/articles",
+      bannersInText: "articlePage/inTextBanners"
     }),
     inTextBanners() {
-      let html = "<div class='in-text__banners'>"
+      let html = "<div class='in-text__banners'>";
       this.bannersInText.forEach(elem => {
-        html = html + `<a href='${elem.url}' target="_blank" ><div class="banner-inText__wrapper"><img class="banner-intext__img" src="${this.BASE_URL + elem.image.url}"></img><div class="banner-inText__text"><div class="banner-inText__title">${elem.title}</div><div class="banner-inText__description">${elem.description}</div></div></div></a>`
-      })
-      
-      return html + "</div>"
+        html =
+          html +
+          `<a href='${elem.url}' target="_blank" ><div class="banner-inText__wrapper" style="background: url(${this.BASE_URL}${elem.image.url}) no-repeat center / cover"><div class="banner-inText__text"><div class="banner-inText__title">${elem.title}</div><div class="banner-inText__description">${elem.description}</div></div></div></a>`;
+      });
+
+      return html + "</div>";
     },
     articleBody() {
-      let content = this.insertAd(this.article.body.replace('<img src=""', `<img src="${this.BASE_URL}`), (this.inTextBanners)); 
-      return content
+      let content = this.insertAd(
+        this.article.body.replace('<img src=""', `<img src="${this.BASE_URL}`),
+        this.inTextBanners
+      );
+      return content;
     },
     bloggerId() {
-      return get(this, 'article.user.id', null)
+      return get(this, "article.user.id", null);
     },
     isAdmin() {
-      return get(this, 'article.user.admin', false)
+      return get(this, "article.user.admin", false);
     },
     bloggerFirstName() {
-      return get(this, 'article.user.first_name', null)
+      return get(this, "article.user.first_name", null);
     },
     bloggerLastName() {
-      return get(this, 'article.user.last_name', null)
-    },
+      return get(this, "article.user.last_name", null);
+    }
   },
 
   mounted() {
-    console.log('article', this.article)
-    const images = Array.from(this.$refs.articleData.querySelectorAll('img'))
+    const images = Array.from(this.$refs.articleData.querySelectorAll("img"));
     images.map(img => {
-      img.addEventListener('click', () => this.renderPreviewImage(img))
-    })
+      img.addEventListener("click", () => this.renderPreviewImage(img));
+    });
 
     if (process.browser) {
-      window.addEventListener('keydown', this.openPopupHandler)
+      window.addEventListener("keydown", this.openPopupHandler);
 
-      this.contents = Array.from(this.$refs.articleData.querySelectorAll('h1, h2'))
+      this.contents = Array.from(
+        this.$refs.articleData.querySelectorAll("h1, h2")
+      );
     }
   },
 
   beforeDestroy() {
-    const images = Array.from(this.$refs.articleData.querySelectorAll('img'))
+    const images = Array.from(this.$refs.articleData.querySelectorAll("img"));
     images.map(img => {
-      img.removeEventListener('click', () => this.renderPreviewImage(img))
-    })
+      img.removeEventListener("click", () => this.renderPreviewImage(img));
+    });
 
-    window.addEventListener('keydown', this.openPopupHandler)
+    window.addEventListener("keydown", this.openPopupHandler);
   },
 
   methods: {
     insertAd(content, adHtml) {
-    const tagsForSplitting = ['</div>', '</p>', '<br>']
-    const splittedContent = tagsForSplitting.map(tag => ({
-    tag,
-    content: content.split(tag)
-  }))
-    const result = maxBy(splittedContent, el => {
-    return el.content.length
-  })
- 
-  result.content.splice(
-    Math.floor(result.content.length / 2),
-    0,
-    adHtml
-  )
-  return result.content.join(result.tag)
-},
+      const tagsForSplitting = ["</div>", "</p>", "<br>"];
+      const splittedContent = tagsForSplitting.map(tag => ({
+        tag,
+        content: content.split(tag)
+      }));
+      const result = maxBy(splittedContent, el => {
+        return el.content.length;
+      });
+
+      result.content.splice(Math.floor(result.content.length / 2), 0, adHtml);
+      return result.content.join(result.tag);
+    },
 
     renderPreviewImage(image) {
-      this.currentImg = image.getAttribute('src')
-      document.body.classList.add('scroll-del')
+      this.currentImg = image.getAttribute("src");
+      document.body.classList.add("scroll-del");
     },
 
     closeImg() {
-      document.body.classList.remove('scroll-del')
+      document.body.classList.remove("scroll-del");
       this.currentImg = null;
     },
 
     popupVisible() {
-      this.openPopup = !this.openPopup
+      this.openPopup = !this.openPopup;
     },
 
     openPopupHandler(evt) {
       if (evt.ctrlKey && evt.keyCode == 13) {
-        const text = window.getSelection().toString()
+        const text = window.getSelection().toString();
         if (text.length >= 200) {
-          this.mistakeText = text.slice(0, 150)
-          this.popupVisible()
-          return
+          this.mistakeText = text.slice(0, 150);
+          this.popupVisible();
+          return;
         }
-        this.popupVisible()
-        this.mistakeText = text
+        this.popupVisible();
+        this.mistakeText = text;
       }
     },
 
     thanksForComment() {
-      this.openThanks = !this.openThanks
+      this.openThanks = !this.openThanks;
       setTimeout(() => {
-        this.openThanks = false
-      }, 4000)
+        this.openThanks = false;
+      }, 4000);
     },
 
     toggleContents() {
-      this.isContentsMenuOpen = !this.isContentsMenuOpen
+      this.isContentsMenuOpen = !this.isContentsMenuOpen;
     }
   }
-}
-
+};
 </script>
 
 
@@ -293,7 +292,7 @@ export default {
 }
 
 .link-blogger {
-  color: #7198BA;
+  color: #7198ba;
   text-decoration: underline;
   display: inline-block;
   margin-top: 12px;
@@ -304,7 +303,7 @@ export default {
   color: #9b9b9b;
   padding: 5px 0;
 }
-.interested-wrapper{
+.interested-wrapper {
   margin-top: 42px;
 }
 
@@ -321,7 +320,7 @@ export default {
 }
 
 .title {
-  font-family: 'PTSerif', serif;
+  font-family: "PTSerif", serif;
   font-size: 40px;
   color: #424242;
   letter-spacing: 0;
@@ -329,25 +328,24 @@ export default {
   max-width: 900px;
 }
 
-
 .tags {
   margin-top: 22px;
 }
 
 .tag {
   font-size: 12px;
-  color: #7198BA;
+  color: #7198ba;
   letter-spacing: 0;
   font-weight: 500;
-  border: 1px solid #7198BA;
+  border: 1px solid #7198ba;
   display: inline-block;
   padding: 4px 8px;
   border-radius: 3px;
   margin-left: 10px;
 
   &:first-child {
-    border-color: #A3A3A3;
-    color: #A3A3A3;
+    border-color: #a3a3a3;
+    color: #a3a3a3;
     margin: 0;
   }
 }
@@ -369,7 +367,7 @@ export default {
 }
 
 .article {
-  font-family: 'PTSerif', serif;
+  font-family: "PTSerif", serif;
   max-width: 800px;
   width: 100%;
 }
@@ -379,8 +377,7 @@ export default {
   margin-left: 80px;
 }
 
-
-.info-item.origin  a {
+.info-item.origin a {
   color: #9b9b9b;
 
   &:hover {
@@ -402,14 +399,6 @@ export default {
   display: none;
 }
 
-
-
-
-
-
-
-
-
 @media (max-width: 1024px) {
   .contents-wrapper {
     width: 280px;
@@ -423,6 +412,10 @@ export default {
 
   .contents-wrapper.open {
     transform: translateX(0);
+  }
+
+  .contents-wrapper.hide {
+    display: none;
   }
 
   .overlay {
@@ -440,7 +433,7 @@ export default {
   }
 
   .open .overlay {
-    transform: translateX(0)
+    transform: translateX(0);
   }
 
   .toggle-contents {
@@ -456,19 +449,19 @@ export default {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     border: none;
-    background: #FFFFFF;
+    background: #ffffff;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
 
     &::after,
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       top: 4px;
 
       width: 2px;
       height: 16px;
       border-radius: 3px;
-      background: #DBDBDB;
+      background: #dbdbdb;
     }
 
     &::after {
@@ -518,7 +511,6 @@ export default {
   .wrapper .container {
     padding-left: 30px;
   }
-
 }
 
 .thanks {
@@ -547,13 +539,13 @@ export default {
   font-size: 15px;
 }
 
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
   opacity: 0;
 }
-
 </style>
 
 <style lang="scss">
@@ -623,8 +615,9 @@ export default {
     line-height: 1.5;
   }
 
-  ol, ul {
-    margin-top: 24px
+  ol,
+  ul {
+    margin-top: 24px;
   }
 
   li {
@@ -639,13 +632,14 @@ export default {
     cursor: pointer;
   }
 
-  h2, h3 {
+  h2,
+  h3 {
     margin: 25px 0 15px 0;
     word-wrap: break-word;
   }
 
   a {
-    color: #7198BA !important;
+    color: #7198ba !important;
     word-wrap: break-word;
   }
 
@@ -654,14 +648,14 @@ export default {
       line-height: 1.3;
     }
   }
-  blockquote{
+  blockquote {
     margin: 10px 0;
     padding-left: 20px;
     font-style: italic;
     border-left: 3px solid #a1a1a1;
     box-sizing: border-box;
   }
- }
+}
 
 @media (max-width: 768px) {
   .image-wrapper img {
