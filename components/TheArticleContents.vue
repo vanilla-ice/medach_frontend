@@ -21,103 +21,112 @@
 </template>
 
 <script>
-  import VueScrollTo from 'vue-scrollto'
-  import { mapGetters } from 'vuex'
+import VueScrollTo from "vue-scrollto";
+import { mapGetters } from "vuex";
 
-  export default {
-    props: {
-      contents: Array
-    },
+export default {
+  props: {
+    contents: Array
+  },
 
-    data() {
+  data() {
+    return {
+      BASE_URL: process.env.BASE_URL,
+      isBrowser: null,
+      isSticky: false,
+      stickyPosition: null,
+      headerBottomPosition: null,
+      footerHeight: null,
+      contentIndex: null,
+      contentsPositions: null,
+      scrollToOffset: 0
+    };
+  },
+
+  mounted() {
+    if (process.browser) {
+      setTimeout(() => {
+        this.scrollToOffset = window.innerWidth > 768 ? 68 : 45;
+        window.addEventListener("scroll", this.scrollHandler);
+        this.headerBottomPosition =
+          document.querySelector(".header").offsetHeight + 20;
+        this.footerTopPosition =
+          document.querySelector(".interested-wrapper").getBoundingClientRect()
+            .top +
+          pageYOffset -
+          window.innerHeight;
+        this.stickyPosition = this.headerBottomPosition;
+
+        this.contentsPositions = this.contents.map(
+          el =>
+            Number(el.getBoundingClientRect().top) +
+            pageYOffset -
+            this.scrollToOffset
+        );
+
+        this.isBrowser = true;
+      }, 500);
+    }
+  },
+
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.scrollHandler);
+  },
+
+  computed: {
+    ...mapGetters({
+      bannersLeft: "articlePage/leftBanners"
+    })
+  },
+
+  methods: {
+    getClass(el, index) {
       return {
-        BASE_URL: process.env.BASE_URL,
-        isBrowser: null,
-        isSticky: false,
-        stickyPosition: null,
-        headerBottomPosition: null,
-        footerHeight: null,
-        contentIndex: null,
-        contentsPositions: null,
-        scrollToOffset: 0,
+        h1: el.tagName.toLowerCase() === "h1",
+        h2: el.tagName.toLowerCase() === "h2",
+        active: Number(index) === this.contentIndex
+      };
+    },
+
+    scrollTo(node) {
+      VueScrollTo.scrollTo(node, 1000, {
+        easing: "easeInOutQuart",
+        offset: -this.scrollToOffset
+      });
+    },
+
+    scrollHandler() {
+      // sticky
+      if (
+        pageYOffset >= this.headerBottomPosition - 20 &&
+        pageYOffset <= this.footerTopPosition
+      ) {
+        this.isSticky = true;
+        this.stickyPosition = this.headerBottomPosition;
+      } else if (pageYOffset <= this.headerBottomPosition) {
+        this.isSticky = false;
+        this.stickyPosition = this.headerBottomPosition;
+      } else if (pageYOffset >= this.footerTopPosition) {
+        this.isSticky = false;
+        this.stickyPosition = -600;
       }
-    },
 
-    mounted() {
-      if (process.browser) {
-        console.log('bannersLeft', this.bannersLeft)
-
-        setTimeout(() => {
-          this.scrollToOffset = window.innerWidth > 768 ? 68 : 45
-          window.addEventListener('scroll', this.scrollHandler)
-          this.headerBottomPosition = document.querySelector('.header').offsetHeight + 20
-          this.footerTopPosition = document.querySelector('.interested-wrapper').getBoundingClientRect().top + pageYOffset - window.innerHeight
-          this.stickyPosition = this.headerBottomPosition
-
-          this.contentsPositions = this.contents.map((el) => Number(el.getBoundingClientRect().top) + pageYOffset - this.scrollToOffset)
-
-          this.isBrowser = true
-        }, 500)
-      }
-    },
-
-    beforeDestroy() {
-      window.removeEventListener('scroll', this.scrollHandler)
-    },
-
-    computed: {
-      ...mapGetters({
-        bannersLeft: 'articlePage/leftBanners'
-      })
-    },
-
-    methods: {
-      getClass(el, index) {
-        return {
-          'h1': el.tagName.toLowerCase() === 'h1',
-          'h2': el.tagName.toLowerCase() === 'h2',
-          'active': Number(index) === this.contentIndex
+      // active contents
+      this.contentsPositions.map((elPosition, index) => {
+        if (pageYOffset >= elPosition - 10) {
+          this.contentIndex = index;
+        } else if (this.contentsPositions[0] - 10 > pageYOffset) {
+          this.contentIndex = null;
         }
-      },
-
-      scrollTo(node) {
-        VueScrollTo.scrollTo(node, 1000, {
-          easing: 'easeInOutQuart',
-          offset: -this.scrollToOffset
-        })
-      },
-
-      scrollHandler() {
-        // sticky
-        if (pageYOffset >= this.headerBottomPosition - 20 && pageYOffset <= this.footerTopPosition) {
-          this.isSticky = true
-          this.stickyPosition = this.headerBottomPosition
-        } else if (pageYOffset <= this.headerBottomPosition) {
-          this.isSticky = false;
-          this.stickyPosition = this.headerBottomPosition
-        } else if (pageYOffset >= this.footerTopPosition) {
-          this.isSticky = false
-          this.stickyPosition = -600
-        }
-
-        // active contents
-        this.contentsPositions.map((elPosition, index) => {
-          if (pageYOffset >= elPosition - 10) {
-            this.contentIndex = index
-          } else if (this.contentsPositions[0] - 10 > pageYOffset) {
-            this.contentIndex = null
-          }
-        })
-
-      }
+      });
     }
   }
+};
 </script>
 
 <style lang="scss">
-
 .ul-content__wrapper {
-  border: 1px solid #DBDBDB;
+  border: 1px solid #dbdbdb;
   border-radius: 6px;
   padding: 10px 17px 14px 20px;
 }
@@ -130,10 +139,8 @@
   width: 320px;
   min-height: 360px;
   max-height: 600px;
-  
-  background: #ffffff;
 
-  
+  background: #ffffff;
 
   transition: all 0.2s linear;
 }
@@ -172,10 +179,10 @@
 }
 
 .contents li.active {
-  color: #7198BA;
+  color: #7198ba;
 
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     top: 50%;
@@ -184,7 +191,7 @@
     display: block;
     height: 80%;
     width: 1px;
-    background: #7198BA;
+    background: #7198ba;
   }
 }
 
@@ -195,7 +202,6 @@
 .contents li.h2.active {
   padding-left: 12px;
 }
-
 
 .banner-inText__wrapper {
   width: 100%;
@@ -214,20 +220,19 @@
   width: 100%;
   height: 100%;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
-} 
-
-.banner-intext__img {
- position: absolute;
- width: 100%;
- height: auto;
- border-radius: 4px;
- 
- left: 50%;
- top: 50%;
-
- transform: translate(-50%, -50%);
 }
 
+.banner-intext__img {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+}
 
 .banner-inText__text {
   width: 100%;
@@ -243,7 +248,7 @@
   font-family: Montserrat;
   font-weight: 700;
   font-size: 22px;
-  color: #FFFFFF;
+  color: #ffffff;
   margin-bottom: 10px;
 }
 .banner-inText__description {
@@ -252,7 +257,7 @@
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
-  color: #FFFFFF;
+  color: #ffffff;
   z-index: 1;
 }
 
@@ -261,24 +266,17 @@
   flex-direction: column;
   position: absolute;
   width: 100%;
-  
-
-
 }
 
 .hide-wrap {
   display: none;
 }
 
-
-
 .banner-wrapper {
   position: relative;
   margin-top: 20px;
   width: 100%;
   height: 100%;
-  
-  
 }
 
 .banner-wrapper::after {
@@ -291,17 +289,13 @@
   width: 100%;
   height: 100%;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
-
-} 
+}
 .banner-img {
   width: 100%;
   min-height: 160px;
   border-radius: 4px;
-  
 }
 .banner-text {
-  
-  
   width: 100%;
   position: absolute;
   bottom: 0px;
@@ -313,7 +307,7 @@
   width: 100%;
   font-weight: 700;
   font-size: 22px;
-  color: #FFFFFF;
+  color: #ffffff;
   margin-bottom: 10px;
 }
 .banner-description {
@@ -322,7 +316,7 @@
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
-  color: #FFFFFF;
+  color: #ffffff;
   z-index: 1;
 }
 
