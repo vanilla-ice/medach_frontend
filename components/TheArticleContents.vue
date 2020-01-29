@@ -3,9 +3,9 @@
     :class="{'contents': true, 'stycky': isSticky}"
     :style="{'top': `${stickyPosition}px`}"
     ref="contents"
-    v-if="isBrowser"
+    v-if="isBrowser && bannersLeft.length !== 0"
     )
-    .ul-content__wrapper(:class="{ 'hide-wrap': !contents.length }")
+    .ul-content__wrapper(:class="{ 'hide-wrap': !contents.length}")
       ul
         li(v-for="(content, index) in contents" @click="scrollTo(content)" :class="getClass(content, index)")
           | {{ content.textContent }}

@@ -1,5 +1,5 @@
 <template lang="pug">
-.wrapper(:class="{'is-contents': contents.length !== 0 || article.banners.length !== 0}" )
+.wrapper(:class="{'is-contents': contents.length !== 0 || leftBanners.length !== 0}" )
   the-header
   scroll-top
   .container.article-container
@@ -171,7 +171,7 @@ export default {
     ...mapGetters({
       article: "articlePage/article",
       interested: "relatedArticles/articles",
-      bannersInText: "articlePage/inTextBanners"
+      bannersInText: "articlePage/inTextBanners",
     }),
     inTextBanners() {
       let html = "<div class='in-text__banners'>";
@@ -201,6 +201,9 @@ export default {
     },
     bloggerLastName() {
       return get(this, "article.user.last_name", null);
+    },
+    leftBanners() {
+      return this.article.banners.filter(elem => elem.position === "left")
     }
   },
 
@@ -317,6 +320,7 @@ export default {
 
 .is-contents .article-container {
   padding-left: 400px;
+  margin: 0 auto 0 0;
 }
 
 .title {
