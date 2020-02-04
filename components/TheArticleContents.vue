@@ -3,7 +3,7 @@
     :class="{'contents': true, 'stycky': isSticky}"
     :style="{'top': `${stickyPosition}px`}"
     ref="contents"
-    v-if="isBrowser && bannersLeft.length !== 0"
+    v-if="isBrowser && (contents.length > 0 || bannersLeft.length > 0)"
     )
     .ul-content__wrapper(:class="{ 'hide-wrap': !contents.length}")
       ul
