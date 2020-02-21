@@ -394,6 +394,7 @@ export default {
   left: 0;
   top: 0;
   height: 100%;
+  z-index: 12;
 }
 
 .toggle-contents {
