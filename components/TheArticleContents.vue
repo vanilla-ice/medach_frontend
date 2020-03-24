@@ -1,11 +1,11 @@
 <template lang="pug">
   div(
     :class="{'contents': true, 'stycky': isSticky}"
-    :style="{'top': `${stickyPosition}px`}"
+    :style="{'top': `${stickyPosition}`}"
     ref="contents"
-    v-if="isBrowser"
+    v-if="isBrowser && (contents.length > 0 || bannersLeft.length > 0)"
     )
-    .ul-content__wrapper(:class="{ 'hide-wrap': !contents.length }")
+    .ul-content__wrapper(:class="{ 'hide-wrap': !contents.length}")
       ul
         li(v-for="(content, index) in contents" @click="scrollTo(content)" :class="getClass(content, index)")
           | {{ content.textContent }}
@@ -102,13 +102,13 @@ export default {
         pageYOffset <= this.footerTopPosition
       ) {
         this.isSticky = true;
-        this.stickyPosition = this.headerBottomPosition;
+        this.stickyPosition = this.headerBottomPosition + 'px';
       } else if (pageYOffset <= this.headerBottomPosition) {
         this.isSticky = false;
-        this.stickyPosition = this.headerBottomPosition;
-      } else if (pageYOffset >= this.footerTopPosition) {
+        this.stickyPosition = this.headerBottomPosition  + 'px';
+      } else if (pageYOffset >= this.footerTopPosition ) {
         this.isSticky = false;
-        this.stickyPosition = -600;
+        this.stickyPosition = '-100%';
       }
 
       // active contents
@@ -126,8 +126,6 @@ export default {
 
 <style lang="scss">
 .ul-content__wrapper {
-  border: 1px solid #dbdbdb;
-  border-radius: 6px;
   padding: 10px 17px 14px 20px;
 }
 .contents {
@@ -135,10 +133,14 @@ export default {
   z-index: 13;
   left: 55px;
   z-index: 2;
+  top: 88px;
 
   width: 320px;
   min-height: 360px;
-  max-height: 600px;
+  max-height: calc(100vh - 108px);
+  overflow-y: auto;
+  border: 1px solid #dbdbdb;
+  border-radius: 6px;
 
   background: #ffffff;
 
