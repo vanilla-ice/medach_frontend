@@ -28,14 +28,20 @@
       .info-item(v-if="article.infographic")
         span
          | Оформление: {{article.infographic}}
+      .info-item(v-if="article.createdAt")
+        span
+         | Публикация: {{publishDate}}
+      .info-item(v-if="article.updatedAt")
+        span
+         | Последнее обновление: {{updateDate}}
 
     .contents-wrapper(v-if="contents.length !== 0 || article.banners.length !== 0" :class="isContentsMenuOpen ? 'open' : null")
       button.toggle-contents(@click="toggleContents")
-      
-      TheArticleContents(:contents="contents")
-     
 
-    
+      TheArticleContents(:contents="contents")
+
+
+
     .article-wrapper
       .article.content-article-wrapper(v-html="articleBody" ref="articleData")
 
@@ -77,6 +83,7 @@ import Popup from "~/components/popups/Popup";
 
 import { get, maxBy } from "lodash";
 import { mapGetters } from "vuex";
+import { format } from 'date-fns'
 
 export default {
   name: "ArticlesPage",
@@ -201,6 +208,12 @@ export default {
     },
     bloggerLastName() {
       return get(this, "article.user.last_name", null);
+    },
+    publishDate() {
+      return format(this.article.createdAt, 'DD.MM.YYYY')
+    },
+    updateDate() {
+      return format(this.article.updatedAt, 'DD.MM.YYYY')
     },
     leftBanners() {
       return this.article.banners.filter(elem => elem.position === "left")
