@@ -45,8 +45,10 @@
     .article-wrapper
       .article.content-article-wrapper(v-html="articleBody" ref="articleData")
 
-      //- .promo
-      //-   GoogleAd(adSlot="2334561718" styles="display: block; min-height: 1050px;")
+      .promo.desktop
+        GoogleAd(adSlot="2334561718" styles="display: block; min-height: 600px; max-width: 300px; width: 100%;")
+      .promo.mobile
+        GoogleAd(adSlot="2334561718" styles="display: block; height: 250px; width: 300px;")
     .report-error
       | Нашли опечатку? Выделите фрагмент и нажмите Ctrl+Enter.
     preview(v-if="currentImg" :close="closeImg" :currentImg="currentImg")
@@ -392,6 +394,14 @@ export default {
 .promo {
   flex: 1 1 auto;
   margin-left: 80px;
+
+  &.desktop {
+    display: block;
+  }
+
+  &.mobile {
+    display: none;
+  }
 }
 
 .info-item.origin a {
@@ -512,6 +522,7 @@ export default {
   }
 
   .article-wrapper {
+    flex-flow: column nowrap;
     margin-top: 16px;
     padding-left: 0;
   }
@@ -528,6 +539,19 @@ export default {
 
   .wrapper .container {
     padding-left: 30px;
+  }
+
+    .promo {
+    &.desktop {
+      display: none;
+    }
+
+    &.mobile {
+      display: block !important;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 15px;
+    }
   }
 }
 
@@ -692,9 +716,6 @@ export default {
   .content-article-wrapper img {
     width: 100% !important;
     height: auto !important;
-  }
-  .promo {
-    display: none;
   }
 
   .content-article-wrapper p {
