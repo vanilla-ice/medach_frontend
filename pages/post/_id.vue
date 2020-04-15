@@ -37,11 +37,7 @@
 
     .contents-wrapper(v-if="contents.length !== 0 || article.banners.length !== 0" :class="isContentsMenuOpen ? 'open' : null")
       button.toggle-contents(@click="toggleContents")
-
       TheArticleContents(:contents="contents")
-
-
-
     .article-wrapper
       .article.content-article-wrapper(v-html="articleBody" ref="articleData")
 
