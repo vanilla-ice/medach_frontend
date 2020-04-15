@@ -99,6 +99,27 @@ a {
 	color: inherit;
 }
 
+.tags {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 12px;
+  color: #A3A3A3;
+  letter-spacing: 0;
+  font-weight: 500;
+  border: 1px solid #A3A3A3;
+  border-radius: 3px;
+  padding: 4px 8px;
+  margin-top: 8px;
+  margin-right: 8px;
+  text-align: center;
+}
+
 @media(max-width: 1024px) {
   .wrapper-layout {
     padding-top: 45px;
