@@ -6,7 +6,7 @@
 
     .apply-content__wrapper
       .apply-block__wrapper
-        .apply-left
+        .apply-left.empty
         .apply-right
           .apply-title
             | Откликнуться на вакансию 
@@ -55,7 +55,7 @@
           .info-left_subtitle
             | Расскажите, почему вы хотите работать у нас
         .apply-right
-          <textarea rows="40" cols="45" name="text"></textarea>
+          <textarea name="text"></textarea>
 
           <input type="submit" class="apply-submit">    
           
@@ -92,8 +92,10 @@ import TheHeader from "~/components/TheHeader";
   margin-top: 40px;
 
   textarea {
+    display: block;
     padding: 29px 36px 48px 32px;
     width: 811px;
+    height: 600px;
     background: #ffffff;
     border: 1px solid rgba(151, 151, 151, 0.4);
     border-radius: 3px;
@@ -156,7 +158,7 @@ import TheHeader from "~/components/TheHeader";
 }
 
 .input_item {
-  width: 385px;
+  max-width: 385px;
 }
 .input_item:nth-child(2n) {
   margin-left: 41px;
@@ -195,10 +197,12 @@ input.apply-submit {
 }
 
 .input__wrapper {
-  width: 100%;
   position: relative;
   margin: 15px 0;
   text-align: center;
+  input {
+    width: 50%;
+  }
 }
 
 .input__file {
@@ -239,8 +243,7 @@ input.apply-submit {
 }
 
 .input__file-button {
-  width: 100%;
-  max-width: 290px;
+  width: 290px;
   height: 60px;
   background: #7198ba;
   box-shadow: 0px 2px 4px rgba(184, 184, 184, 0.5);
@@ -258,5 +261,67 @@ input.apply-submit {
   -ms-flex-pack: start;
   justify-content: flex-start;
   cursor: pointer;
+}
+
+@media (max-width: 1200px) {
+  .apply-left.empty {
+    display: none;
+  }
+
+  .apply-content__wrapper {
+    margin-left: 0;
+  }
+
+  .input_item:nth-child(2n) {
+    margin-left: 0;
+  }
+
+  .apply-right {
+    max-width: 811px;
+    textarea {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .apply-block__wrapper {
+    display: block;
+    width: 100%;
+  }
+  .apply-left {
+    width: inherit;
+  }
+  .apply-right {
+    margin-left: 0;
+    margin-top: 10px;
+    display: block;
+  }
+
+  .input_item {
+    margin-top: 10px;
+    max-width: 100%;
+  }
+
+  .apply-right {
+    width: 100%;
+  }
+  .apply-right.human-info {
+    input {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .apply-title {
+    font-size: 30px;
+    span {
+      font-size: 20px;
+    }
+  }
+  .input__file-button {
+    width: 238px;
+  }
 }
 </style>
