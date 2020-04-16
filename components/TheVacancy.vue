@@ -1,23 +1,23 @@
 <template lang="pug">
   .vacancy
     .employer
-      | НЦЗД РАМН
-    a(href="#").title
-      | Врач-рентгенолог
-    .tags
-      a.tag(href="#")
-        | Текст хештега
-      a.tag(href="#")
-        | Текст хештега
+      | {{vacancy.employer}}
+    .title
+      | {{vacancy.title}}
+    //- .tags
+    //-   a.tag(href="#")
+    //-     | Текст хештега
+    //-   a.tag(href="#")
+    //-     | Текст хештега
     .vacancy__footer
       .vacancy__footer-text
         .vacancy__footer-top
           .location
-            | Москва
+            | {{vacancy.location}}
           .experience
-            | Стаж от 3-х лет
+            | {{vacancy.experience}}
         .salary
-          | От 100 000 на руки
+          | {{vacancy.salary}}
       .vacancy__footer-button
         TheButton(type="base" text="Подробнее" link="#")
           | Подробнее
@@ -29,6 +29,10 @@ import TheButton from '~/components/TheButton'
 export default {
   components: {
     TheButton
+  },
+
+  props: {
+    vacancy: Object
   }
 }
 </script>
