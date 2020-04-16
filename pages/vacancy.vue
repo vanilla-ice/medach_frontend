@@ -13,39 +13,94 @@
           form(@submit.prevent="apply")
             .apply__input-wrapper
               .apply__icon
-              input(type="email" class="apply__input" name="apply" autocomplete="off" placeholder="medach@gmail.com" v-model="query" required )
+              input(type="email" class="apply__input" name="apply" autocomplete="off" placeholder="medach@gmail.com" v-model="subscribeQuery" required )
             button.apply__button
               | Подписаться
         .vacancies__wrapper
           .vacancies__title
             | Вакансии
-          .vacancies
-            TheVacancy
-            TheVacancy
-
+          .vacancies(v-if="vacancies.length !== 0")
+            TheVacancy(
+              v-for="vacancy in vacancies",
+              :key="vacancy.id",
+              :vacancy="vacancy"
+            )
+            .load-more
+              button(v-if="nextPage" @click="getNextPage")
+                | Загрузить еще
+          .not-vacancies(v-else)
+            | Нет вакансий
+    transition(name="fade")
+      Popup(
+        v-if="openPopup"
+        type="subscribe",
+        text="Вы подписаны",
+        :popupVisible="popupVisible"
+      )
 </template>
 
 <script>
 import TheHeader from '~/components/TheHeader'
 import TheVacancy from '~/components/TheVacancy'
 import TheButton from '~/components/TheButton'
+import Popup from '~/components/popups/Popup'
+
+import { mapGetters } from 'vuex'
+import { postSubscribe } from '~/utils/requests'
+
+const VACANCIES_PER_PAGE = 3
 
 export default {
   components: {
     TheHeader,
     TheVacancy,
-    TheButton
+    TheButton,
+    Popup
+  },
+
+  fetch({store}) {
+    return store.dispatch('vacansyPage/getVacancies', {
+      page: 1,
+      perPage: VACANCIES_PER_PAGE
+    })
   },
 
   data() {
     return {
-      query: ""
+      subscribeQuery: "",
+      openPopup: false
     }
   },
 
+  computed: {
+    ...mapGetters({
+      vacancies: 'vacansyPage/vacancies',
+      nextPage: 'vacansyPage/nextPage'
+    }),
+  },
   methods: {
-    apply() {
-      console.log('apply')
+    apply(event) {
+      postSubscribe(this.subscribeQuery)
+        .then(response => {
+          if (response.data.is_subscribed) {
+            this.subscribeMessage = "Вы подписаны"
+            this.popupVisible()
+          }
+        })
+        .catch(err => {
+          console.log('err', err)
+          this.popupVisible()
+        })
+    },
+
+    popupVisible() {
+      this.openPopup = !this.openPopup;
+    },
+
+    getNextPage() {
+      return this.$store.dispatch('vacansyPage/fetchNextPage', {
+        perPage: VACANCIES_PER_PAGE
+      })
     }
   }
 }
@@ -84,6 +139,7 @@ export default {
   display: grid;
   grid-template-columns: minmax(200px, 348px) minmax(400px, 972px);
   grid-column-gap: 40px;
+  padding-bottom: 100px;
 }
 
 .apply__title {
@@ -149,6 +205,27 @@ export default {
   flex-flow: row wrap;
   align-items: flex-start;
   justify-content: flex-start;
+}
+
+.load-more button {
+  display: block;
+  max-width: 348px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+  padding: 15px 10px;
+
+  background: #7198BA;
+  box-shadow: 0px 2px 4px rgba(184, 184, 184, 0.5);
+  border: none;
+  border-radius: 3px;
+
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  cursor: pointer;
 }
 
 </style>

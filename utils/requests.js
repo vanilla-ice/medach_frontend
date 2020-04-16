@@ -1,7 +1,8 @@
 import axios from 'axios'
 ///'http://localhost:8080'
 const axiosInstance = axios.create({
-  baseURL: 'https://medach.pro',
+  // baseURL: 'https://medach.pro',
+  baseURL: 'http://localhost:3000',
   timeout: 50000,
   headers: {},
   withCredentials: false
@@ -193,4 +194,19 @@ export const postMistakeArticle = (id, text, comment) => {
   })
     .then(data => data)
     .catch(err => console.log('postMistakeArticle', err))
+}
+
+export const getVacancies = (page, per_page) => {
+  return get('/api/vacancies', {
+    page,
+    per_page
+  })
+    .then(response => response.data)
+    .catch(error => console.log('getVacancies error', error))
+}
+
+export const postSubscribe = (email) => {
+  return post(`/api/vacancies/subscribe`, {
+    email
+  })
 }
