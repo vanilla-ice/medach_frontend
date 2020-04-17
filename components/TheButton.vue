@@ -47,4 +47,13 @@ export default {
     font-size: 18px;
     line-height: 22px;
   }
+
+  @media (max-width: 768px) {
+    .success {
+      padding: 13px 7px;
+
+      font-size: 18px;
+      line-height: 24px;
+    }
+  }
 </style>

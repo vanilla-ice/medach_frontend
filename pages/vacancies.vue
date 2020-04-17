@@ -2,10 +2,7 @@
   .wrapper
     the-header
     .container
-      .post-vacancy__wrapper
-        .post-vacancy__text
-          | Размещение на 45 дней + посты в социальных сетях
-        TheButton(text="Разместить вакансию", link="#", type="success")
+      ThePostVacancy
       .content
         .apply__wrapper
           .apply__title
@@ -44,6 +41,7 @@ import TheHeader from '~/components/TheHeader'
 import TheVacancy from '~/components/TheVacancy'
 import TheButton from '~/components/TheButton'
 import Popup from '~/components/popups/Popup'
+import ThePostVacancy from '~/components/ThePostVacancy'
 
 import { mapGetters } from 'vuex'
 import { postSubscribe } from '~/utils/requests'
@@ -55,7 +53,8 @@ export default {
     TheHeader,
     TheVacancy,
     TheButton,
-    Popup
+    Popup,
+    ThePostVacancy
   },
 
   fetch({store}) {
@@ -112,29 +111,6 @@ export default {
   color: #5B5B5B;
 }
 
-.post-vacancy__wrapper {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  align-items: center;
-
-  width: 100%;
-  padding: 32px 24px 24px 24px;
-  margin-bottom: 40px;
-
-  border: 1px solid #DCDCDC;
-  box-shadow: 0px 2px 4px rgba(184, 184, 184, 0.5);
-  border-radius: 3px;
-}
-
-.post-vacancy__text {
-  margin-right: 20px;
-
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 29px;
-}
-
 .content {
   display: grid;
   grid-template-columns: minmax(200px, 348px) minmax(400px, 972px);
@@ -189,6 +165,7 @@ export default {
 
   background: #7198BA;
   border: none;
+  cursor: pointer;
 }
 
 .vacancies__title {
@@ -226,6 +203,26 @@ export default {
   font-size: 20px;
   line-height: 24px;
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .content {
+    grid-template-columns: auto;
+    grid-row-gap: 40px;
+  }
+
+  .apply__wrapper {
+    order: 2;
+  }
+
+  .vacancies__wrapper {
+    order: 1;
+  }
+
+  .apply__title {
+    max-width: 100%;
+    text-align: center;
+  }
 }
 
 </style>
