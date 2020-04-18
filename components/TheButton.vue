@@ -1,6 +1,6 @@
 <template lang="pug">
   .button
-    a(:href="link" :class="type")
+    nuxt-link(:to="link" :class="type")
       | {{ text }}
 
 </template>

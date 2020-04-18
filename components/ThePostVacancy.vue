@@ -23,7 +23,7 @@ export default {
   align-items: center;
 
   width: 100%;
-  padding: 32px 24px 24px 24px;
+  padding: 24px;
   margin-bottom: 40px;
 
   border: 1px solid #DCDCDC;

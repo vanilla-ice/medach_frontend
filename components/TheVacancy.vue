@@ -19,7 +19,7 @@
         .salary
           | {{vacancy.salary}}
       .vacancy__footer-button
-        TheButton(type="base" text="Подробнее" link="#")
+        TheButton(type="base" text="Подробнее" :link="`/vacancy/${vacancy.id}`")
           | Подробнее
 </template>
 

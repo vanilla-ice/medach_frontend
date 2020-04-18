@@ -205,8 +205,15 @@ export const getVacancies = (page, per_page) => {
     .catch(error => console.log('getVacancies error', error))
 }
 
+export const getVacancy = id => {
+  return get(`/api/vacancies/${id}`)
+    .then(response => response.data)
+    .catch(error => console.log('getVacancy error', error))
+}
+
 export const postSubscribe = (email) => {
   return post(`/api/vacancies/subscribe`, {
     email
   })
 }
+

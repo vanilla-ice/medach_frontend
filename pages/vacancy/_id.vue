@@ -1,51 +1,75 @@
 <template lang="pug">
+  .wrapper
+    the-header
+    .container
+      .breadcrumb
+        ul
+          li
+            nuxt-link(to='/vacancies') Вакансии
+          li.active
+            | Врач-рентгенолог
 
-  .container
-    .breadcrumb
-      ul
-        li
-          a(href='#') Вакансии
-          |  >      
-        li.active 
-          | Врач-рентгенолог
 
-
-    .vacancy_description__wrapper
-      .vacancy_description-left 
-        .vacancy-info-block__title
-          | НЦЗД РАМН
-        .vacancy-info_item
-          .vacancy-info_question
-            | Занятость:
-          .vacancy-info_answer
-            | полный день       
-        .vacancy-info_item
-          .vacancy-info_question
-            | Локация:
-          .vacancy-info_answer
-            | Москва       
-        .vacancy-info_item
-          .vacancy-info_question
-            | Требуемый стаж:
-          .vacancy-info_answer
-            | от 3-х лет       
-        .vacancy-info_item
-          .vacancy-info_question
-            | Контакты работодателя:
-          .vacancy-info_answer
-            a(href="contact@gmail.com")  
-              | contact@gmail.com  
-        .vacancy-posting-date
-          | Вакансия размещена: 21 января 2020       
-      .vacancy_description-right
-        .vacancy_description__title
-          | Врач - рентгенолог 
-        .vacancy_description-text
-          | fsjfaksjgfjasdgfa
-        .vacancy_description-btn
-          | Откликнуться     
+      .vacancy_description__wrapper
+        .vacancy_description-left
+          .vacancy-info-block__title
+            | {{ vacancy.employer }}
+          .vacancy-info_item
+            //- .vacancy-info_question
+            //-   | Занятость:
+            //- .vacancy-info_answer
+            //-   | {{ vacancy.experience }}
+          .vacancy-info_item
+            .vacancy-info_question
+              | Локация:
+            .vacancy-info_answer
+              | {{ vacancy.location }}
+          .vacancy-info_item
+            .vacancy-info_question
+              | Требуемый стаж:
+            .vacancy-info_answer
+              | {{ vacancy.experience }}
+          .vacancy-info_item
+            .vacancy-info_question
+              | Контакты работодателя:
+            .vacancy-info_answer
+              a(:href="`mailto:${vacancy.contacts}`")
+                | {{ vacancy.contacts }}
+          .vacancy-posting-date
+            | Вакансия размещена: 21 января 2020
+        .vacancy_description-right
+          .vacancy_description__title
+            | {{ vacancy.title }}
+          .vacancy_description-text.content-article-wrapper(v-html="vacancy.content")
+          .vacancy_description-btn
+            | Откликнуться
 
 </template>
+<script>
+import TheHeader from '~/components/TheHeader'
+
+import { mapGetters } from 'vuex'
+
+export default {
+  components: {
+    TheHeader
+  },
+
+  fetch({store, params}) {
+    return store.dispatch('vacansyPage/getVacancy', {
+      id: params.id
+    })
+  },
+
+  computed: {
+    ...mapGetters({
+      vacancy: 'vacansyPage/vacancy'
+    })
+  },
+}
+</script>
+
+
 
 
 <style scoped lang="scss">
@@ -56,6 +80,8 @@
     align-items: center;
     padding-left: 0;
     li {
+      position: relative;
+
       text-decoration: none;
       list-style-type: none;
       font-style: normal;
@@ -63,6 +89,18 @@
       font-size: 20px;
       line-height: 24px;
       color: #7198ba;
+
+      &:not(:first-child) {
+        margin-left: 33px;
+      }
+
+      &:not(:first-child)::after {
+        content: '>';
+        display: block;
+        position: absolute;
+        left: -21px;
+        top: 0;
+      }
     }
   }
 }
@@ -74,7 +112,6 @@
 
 .vacancy_description-left {
   width: 400px;
-  height: 476px;
   background: #ffffff;
   border: 1px solid #dcdcdc;
   box-sizing: border-box;

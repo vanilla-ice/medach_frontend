@@ -46,7 +46,7 @@ import ThePostVacancy from '~/components/ThePostVacancy'
 import { mapGetters } from 'vuex'
 import { postSubscribe } from '~/utils/requests'
 
-const VACANCIES_PER_PAGE = 3
+const VACANCIES_PER_PAGE = 10
 
 export default {
   components: {
