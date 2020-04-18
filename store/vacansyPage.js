@@ -35,7 +35,9 @@ export const getters = {
 export const actions = {
   getVacancies({commit}, {page, perPage}) {
     return getVacancies(page, perPage).then(data => {
-      commit('setVacancies', { vacancies: data.collection, nextPage: data.meta.nextPage })
+      if (data.meta) {
+        commit('setVacancies', { vacancies: data.collection, nextPage: data.meta.nextPage })
+      }
     })
   },
 
