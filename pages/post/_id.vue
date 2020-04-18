@@ -37,11 +37,7 @@
 
     .contents-wrapper(v-if="contents.length !== 0 || article.banners.length !== 0" :class="isContentsMenuOpen ? 'open' : null")
       button.toggle-contents(@click="toggleContents")
-
       TheArticleContents(:contents="contents")
-
-
-
     .article-wrapper
       .article.content-article-wrapper(v-html="articleBody" ref="articleData")
 
@@ -580,148 +576,10 @@ export default {
   color: #aaa;
   font-size: 15px;
 }
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
-  opacity: 0;
-}
 </style>
 
 <style lang="scss">
 .scroll-del {
   overflow: hidden !important;
-}
-
-.content-article-wrapper {
-  p {
-    font-size: 16px;
-    color: #000000 !important;
-    letter-spacing: 0;
-    line-height: 1.5;
-    margin-top: 24px !important;
-  }
-
-  h1 {
-    font-family: Helvetica;
-    font-size: 24px;
-  }
-
-  h2 {
-    font-size: 20px;
-  }
-
-  h3 {
-    font-size: 16px;
-    font-style: italic;
-  }
-
-  h4 {
-    font-family: Helvetica;
-    font-size: 14px;
-  }
-
-  figcaption {
-    font-family: Helvetica;
-    font-size: 14px;
-  }
-
-  .editor_img-title {
-    width: 100%;
-    color: #fff;
-    font-family: inherit;
-    font-weight: 700;
-    font-size: 18px;
-    background: #30312f;
-    border-top: 2px solid #000;
-    border-left: 2px solid #000;
-    border-right: 2px solid #000;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    padding: 10px 10px 10px 20px;
-    line-height: 20px;
-  }
-
-  .editor_img-content {
-    margin-bottom: 20px;
-    font-size: 14px;
-    color: #30312f;
-    border-left: 2px solid #000;
-    border-right: 2px solid #000;
-    border-bottom: 2px solid #000;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-    padding: 10px 10px 10px 20px;
-    line-height: 1.5;
-  }
-
-  ol,
-  ul {
-    margin-top: 24px;
-  }
-
-  li {
-    padding: 2px;
-    line-height: 1.7;
-  }
-
-  img {
-    display: block;
-    max-width: 100%;
-    margin: 0;
-    cursor: pointer;
-  }
-
-  h2,
-  h3 {
-    margin: 25px 0 15px 0;
-    word-wrap: break-word;
-  }
-
-  a {
-    color: #7198ba !important;
-    word-wrap: break-word;
-  }
-
-  li {
-    p {
-      line-height: 1.3;
-    }
-  }
-  blockquote {
-    margin: 10px 0;
-    padding-left: 20px;
-    font-style: italic;
-    border-left: 3px solid #a1a1a1;
-    box-sizing: border-box;
-  }
-}
-
-@media (max-width: 768px) {
-  .image-wrapper img {
-    width: 100%;
-  }
-
-  .article-wrapper iframe {
-    width: 100%;
-    height: 50vw;
-  }
-
-  .content-article-wrapper {
-    margin-left: 0 !important;
-  }
-
-  .content-article-wrapper img {
-    width: 100% !important;
-    height: auto !important;
-  }
-
-  .content-article-wrapper p {
-    margin-top: 16px;
-    font-size: 14px;
-    line-height: 1.5;
-  }
 }
 </style>
