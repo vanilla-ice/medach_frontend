@@ -9,22 +9,29 @@
         :popupVisible="popupVisible"
         :thanksForComment="thanksForComment"
         )
+      subscribe(
+        v-if="type === 'subscribe'"
+        :text="text"
+      )
 
 
 </template>
 
 <script>
   import Mistake from '~/components/popups/Mistake'
+  import Subscribe from '~/components/popups/Subscribe'
+
   export default {
     components: {
-      Mistake
+      Mistake,
+      Subscribe
     },
 
     props: {
       type: {
         type: String,
         validator: (value) => {
-          return ['mistake'].indexOf(value) !== -1
+          return ['mistake', 'subscribe'].indexOf(value) !== -1
         }
       },
       text: String,
@@ -69,7 +76,7 @@
     width: 100%;
     min-height: 200px;
     padding: 16px;
-    margin: 30px auto;
+    margin: 78px auto;
 
     background: #ffffff;
     border-radius: 4px;
