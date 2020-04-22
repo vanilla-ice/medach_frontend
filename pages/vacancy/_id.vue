@@ -14,11 +14,11 @@
         .vacancy_description-left
           .vacancy-info-block__title
             | {{ vacancy.employer }}
-          .vacancy-info_item
-            //- .vacancy-info_question
-            //-   | Занятость:
-            //- .vacancy-info_answer
-            //-   | {{ vacancy.experience }}
+          .vacancy-info_item(v-if="vacancy.employment")
+            .vacancy-info_question
+              | Занятость:
+            .vacancy-info_answer
+              | {{ vacancy.employment }}
           .vacancy-info_item
             .vacancy-info_question
               | Локация:
@@ -35,8 +35,8 @@
             .vacancy-info_answer
               a(:href="`mailto:${vacancy.contacts}`")
                 | {{ vacancy.contacts }}
-          //- .vacancy-posting-date
-          //-   | Вакансия размещена: {{publishDate}}
+          .vacancy-posting-date
+            | Вакансия размещена: {{publishDate}}
         .vacancy_description-right
           .vacancy_description__title
             | {{ vacancy.title }}
@@ -67,9 +67,9 @@ export default {
       vacancy: 'vacancyPage/vacancy'
     }),
 
-    // publishDate() {
-    //   return format(this.vacancy.createdAt, 'DD.MM.YYYY')
-    // },
+    publishDate() {
+      return format(this.vacancy.updated_at, 'DD.MM.YYYY')
+    },
   },
 }
 </script>
@@ -116,6 +116,8 @@ export default {
 }
 
 .vacancy_description-left {
+  align-self: flex-start;
+
   width: 400px;
   background: #ffffff;
   border: 1px solid #dcdcdc;
