@@ -35,8 +35,8 @@
             .vacancy-info_answer
               a(:href="`mailto:${vacancy.contacts}`")
                 | {{ vacancy.contacts }}
-          .vacancy-posting-date
-            | Вакансия размещена: 21 января 2020
+          //- .vacancy-posting-date
+          //-   | Вакансия размещена: {{publishDate}}
         .vacancy_description-right
           .vacancy_description__title
             | {{ vacancy.title }}
@@ -47,6 +47,7 @@
 </template>
 <script>
 import TheHeader from '~/components/TheHeader'
+import { format } from 'date-fns';
 
 import { mapGetters } from 'vuex'
 
@@ -56,15 +57,19 @@ export default {
   },
 
   fetch({store, params}) {
-    return store.dispatch('vacansyPage/getVacancy', {
+    return store.dispatch('vacancyPage/getVacancy', {
       id: params.id
     })
   },
 
   computed: {
     ...mapGetters({
-      vacancy: 'vacansyPage/vacancy'
-    })
+      vacancy: 'vacancyPage/vacancy'
+    }),
+
+    // publishDate() {
+    //   return format(this.vacancy.createdAt, 'DD.MM.YYYY')
+    // },
   },
 }
 </script>
