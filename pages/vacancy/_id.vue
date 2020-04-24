@@ -14,11 +14,11 @@
         .vacancy_description-left
           .vacancy-info-block__title
             | {{ vacancy.employer }}
-          .vacancy-info_item
-            //- .vacancy-info_question
-            //-   | Занятость:
-            //- .vacancy-info_answer
-            //-   | {{ vacancy.experience }}
+          .vacancy-info_item(v-if="vacancy.employment")
+            .vacancy-info_question
+              | Занятость:
+            .vacancy-info_answer
+              | {{ vacancy.employment }}
           .vacancy-info_item
             .vacancy-info_question
               | Локация:
@@ -36,7 +36,7 @@
               a(:href="`mailto:${vacancy.contacts}`")
                 | {{ vacancy.contacts }}
           .vacancy-posting-date
-            | Вакансия размещена: 21 января 2020
+            | Вакансия размещена: {{publishDate}}
         .vacancy_description-right
           .vacancy_description__title
             | {{ vacancy.title }}
@@ -47,6 +47,7 @@
 </template>
 <script>
 import TheHeader from '~/components/TheHeader'
+import { format } from 'date-fns';
 
 import { mapGetters } from 'vuex'
 
@@ -56,15 +57,19 @@ export default {
   },
 
   fetch({store, params}) {
-    return store.dispatch('vacansyPage/getVacancy', {
+    return store.dispatch('vacancyPage/getVacancy', {
       id: params.id
     })
   },
 
   computed: {
     ...mapGetters({
-      vacancy: 'vacansyPage/vacancy'
-    })
+      vacancy: 'vacancyPage/vacancy'
+    }),
+
+    publishDate() {
+      return format(this.vacancy.updated_at, 'DD.MM.YYYY')
+    },
   },
 }
 </script>
@@ -111,6 +116,8 @@ export default {
 }
 
 .vacancy_description-left {
+  align-self: flex-start;
+
   width: 400px;
   background: #ffffff;
   border: 1px solid #dcdcdc;

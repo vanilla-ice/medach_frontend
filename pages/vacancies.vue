@@ -58,7 +58,7 @@ export default {
   },
 
   fetch({store}) {
-    return store.dispatch('vacansyPage/getVacancies', {
+    return store.dispatch('vacancyPage/getVacancies', {
       page: 1,
       perPage: VACANCIES_PER_PAGE
     })
@@ -73,8 +73,8 @@ export default {
 
   computed: {
     ...mapGetters({
-      vacancies: 'vacansyPage/vacancies',
-      nextPage: 'vacansyPage/nextPage'
+      vacancies: 'vacancyPage/vacancies',
+      nextPage: 'vacancyPage/nextPage'
     }),
   },
   methods: {
@@ -97,7 +97,7 @@ export default {
     },
 
     getNextPage() {
-      return this.$store.dispatch('vacansyPage/fetchNextPage', {
+      return this.$store.dispatch('vacancyPage/fetchNextPage', {
         perPage: VACANCIES_PER_PAGE
       })
     }
