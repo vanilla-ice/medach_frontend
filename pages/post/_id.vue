@@ -81,7 +81,7 @@ import Popup from "~/components/popups/Popup";
 
 import { get, maxBy } from "lodash";
 import { mapGetters } from "vuex";
-import { format } from 'date-fns'
+import { format } from 'date-fns';
 
 export default {
   name: "ArticlesPage",

@@ -58,7 +58,7 @@ export default {
   },
 
   fetch({store}) {
-    return store.dispatch('vacansyPage/getVacancies', {
+    return store.dispatch('vacancyPage/getVacancies', {
       page: 1,
       perPage: VACANCIES_PER_PAGE
     })
@@ -73,8 +73,8 @@ export default {
 
   computed: {
     ...mapGetters({
-      vacancies: 'vacansyPage/vacancies',
-      nextPage: 'vacansyPage/nextPage'
+      vacancies: 'vacancyPage/vacancies',
+      nextPage: 'vacancyPage/nextPage'
     }),
   },
   methods: {
@@ -97,7 +97,7 @@ export default {
     },
 
     getNextPage() {
-      return this.$store.dispatch('vacansyPage/fetchNextPage', {
+      return this.$store.dispatch('vacancyPage/fetchNextPage', {
         perPage: VACANCIES_PER_PAGE
       })
     }
@@ -177,11 +177,26 @@ export default {
   line-height: 39px;
 }
 
+
 .tags {
   display: flex;
   flex-flow: row wrap;
   align-items: flex-start;
   justify-content: flex-start;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 12px;
+  color: #A3A3A3;
+  letter-spacing: 0;
+  font-weight: 500;
+  border: 1px solid #A3A3A3;
+  border-radius: 3px;
+  padding: 4px 8px;
+  margin-top: 8px;
+  margin-right: 8px;
+  text-align: center;
 }
 
 .load-more button {
