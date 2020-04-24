@@ -42,8 +42,10 @@
       .article.content-article-wrapper(v-html="articleBody" ref="articleData")
 
       .promo.desktop
+        iframe.help-widget( frameborder='0' width='300' height='250' src='//widgets.planeta.ru/widgets/affiliate-campaign-widget.html?name=CAMPAIGN_300X250&campaign-id=137342&affiliate-id=0&background=WHITE&font-color=BLACK&share-id=460741')
         GoogleAd(adSlot="2334561718" styles="display: block; min-height: 600px; max-width: 300px; width: 100%;")
       .promo.mobile
+        iframe.help-widget(frameborder='0' width='200' height='200' src='//widgets.planeta.ru/widgets/affiliate-campaign-widget.html?name=CAMPAIGN_200X200&campaign-id=137342&affiliate-id=0&background=WHITE&font-color=BLACK&share-id=460741')
         GoogleAd(adSlot="2334561718" styles="display: block; height: 250px; width: 300px;")
     .report-error
       | Нашли опечатку? Выделите фрагмент и нажмите Ctrl+Enter.
@@ -423,6 +425,12 @@ export default {
   display: none;
 }
 
+.article-wrapper .help-widget {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+}
+
 @media (max-width: 1024px) {
   .contents-wrapper {
     width: 280px;
@@ -548,6 +556,13 @@ export default {
       margin-right: auto;
       margin-top: 15px;
     }
+  }
+
+  .article-wrapper .help-widget {
+    display: block;
+    max-width: 250px;
+    width: 100%;
+    height: 200px;
   }
 }
 
