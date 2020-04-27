@@ -2,7 +2,7 @@
   .wrapper
     the-header
     .container
-      ThePostVacancy
+      //- ThePostVacancy
       .content
         .apply__wrapper
           .apply__title
