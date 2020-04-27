@@ -7,9 +7,7 @@
           li
             nuxt-link(to='/vacancies') Вакансии
           li.active
-            | Врач-рентгенолог
-
-
+            | {{vacancy.title}}
       .vacancy_description__wrapper
         .vacancy_description-left
           .vacancy-info-block__title
@@ -41,7 +39,7 @@
           .vacancy_description__title
             | {{ vacancy.title }}
           .vacancy_description-text.content-article-wrapper(v-html="vacancy.content")
-          .vacancy_description-btn
+          nuxt-link(:to="`/vacancy/apply/${vacancy.id}`").vacancy_description-btn
             | Откликнуться
 
 </template>

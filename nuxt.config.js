@@ -52,6 +52,7 @@ module.exports = {
   },
   plugins: [
     { src: '~/plugins/vue-carousel', ssr: false },
+    { src: '~/plugins/vue-the-mask', ssr: false }
   ],
   router: {
     middleware: 'redirects',
