@@ -1,67 +1,134 @@
 <template lang="pug">
   .container
-    a.back-link(href="javascript:history.back()")
-      img.back-arrow(src='~/assets/images/back-arrow.svg')
-      | Назад
+    form.form(@submit.prevent="apply")
+      a.back-link(href="javascript:history.back()")
+        img.back-arrow(src='~/assets/images/back-arrow.svg')
+        | Назад
+      .apply-content__wrapper
+        .apply-block__wrapper
+          .apply-left.empty
+          .apply-right
+            .apply-title
+              | Откликнуться на вакансию
+              span
+                | {{ vacancy.title }}
+      .apply-content__wrapper
+        .apply-block__wrapper
+          .apply-left
+            .info-left_title
+              | Общая информация
+            .info-left_subtitle
+              | Расскажите о себе
 
-    .apply-content__wrapper
-      .apply-block__wrapper
-        .apply-left.empty
-        .apply-right
-          .apply-title
-            | Откликнуться на вакансию
-            span
-              | Врач-рентгенолог
-    .apply-content__wrapper
-      .apply-block__wrapper
-        .apply-left
-          .info-left_title
-            | Общая информация
-          .info-left_subtitle
-            | Расскажите о себе
+          .apply-right.human-info
+            .input_item
+              .info-label
+                | Имя и фамилия
+              input(type="text" name="name" autocomplete="off" v-model="name" required)
+            .input_item
+              .info-label
+                | Номер телефона
+              input(type="tel"
+                name="phone"
+                autocomplete="off"
+                v-mask="'+7 (###) ###-##-##'"
+                pattern="[\\+]\\d{1}\\s[\\(]\\d{3}[\\)]\\s\\d{3}[\\-]\\d{2}[\\-]\\d{2}"
+                v-model="phone"
+                placeholder="+7 (***) ***-**-**"
+                required)
+            .input_item
+              .info-label
+                | Контактный e-mail
+              input(type="email" name="email" autocomplete="off" v-model="email" required)
 
-        .apply-right.human-info
-          .input_item
-            .info-label
-              | Имя и фамилия
-            input(type="text" name="name" autocomplete="off")
-          .input_item
-            .info-label
-              | Номер телефона
-            input(type="tel" name="phone" autocomplete="off")
-          .input_item
-            .info-label
-              | Контактный e-mail
-            input(type="email" name="email" autocomplete="off")
+        .apply-block__wrapper.resume
+          .apply-left
+            .info-left_title
+              | Резюме
+            .info-left_subtitle
+              | Загрузите файл резюме
+          .apply-right
+            .input__wrapper
+              <input type="file" name="file" id="input__file" @change="handleFileChange" class="input input__file" required>
+              <label for="input__file" class="input__file-button">
+                span.input__file-button-text
+                  | Добавить файл
+              </label>
+              .input__file-name
+                | {{ file.name }}
 
-      .apply-block__wrapper.resume
-        .apply-left
-          .info-left_title
-            | Резюме
-          .info-left_subtitle
-            | Загрузите файл резюме
-        .apply-right
-          .input__wrapper
-            <input type="file" name="file" id="input__file" class="input input__file">
-            <label for="input__file" class="input__file-button">
-              span.input__file-button-text
-                | Добавить файл
-            </label>
+        .apply-block__wrapper.letter
+          .apply-left
+            .info-left_title
+              | Сопроводительное письмо
+            .info-left_subtitle
+              | Расскажите, почему вы хотите работать у нас
+          .apply-right
+            <textarea name="text"></textarea>
 
-      .apply-block__wrapper.letter
-        .apply-left
-          .info-left_title
-            | Сопроводительное письмо
-          .info-left_subtitle
-            | Расскажите, почему вы хотите работать у нас
-        .apply-right
-          <textarea name="text"></textarea>
-
-          <input type="submit" class="apply-submit">
+            <input type="submit" class="apply-submit">
 
 </template>
 <script>
+import axios from 'axios'
+
 import TheHeader from "~/components/TheHeader";
+
+import { mapGetters } from "vuex";
+import { mask } from 'vue-the-mask'
+
+export default {
+  fetch({store, params}) {
+    return store.dispatch('vacancyPage/getVacancy', {
+      id: params.id
+    })
+  },
+
+  directives: {
+    mask
+  },
+
+  computed: {
+    ...mapGetters({
+      vacancy: "vacancyPage/vacancy",
+    }),
+  },
+
+  data() {
+    return {
+      phone: '',
+      email: '',
+      name: '',
+      file: {name: 'Файл не выбран'}
+    }
+  },
+
+  methods: {
+    apply(event) {
+      let formData = new FormData();
+      formData.append('file', this.file);
+      console.log('this.file', this.file)
+      axios.post( 'http://localhost:3000/api/documents', formData, {
+          headers: {
+              'Content-Type': 'multipart/form-data'
+          }
+        }
+      ).then((res) => {
+        console.log('SUCCESS!!', res);
+
+
+      })
+      .catch((err) => {
+        console.log('FAILURE!!', err);
+      });
+    },
+
+    handleFileChange(e) {
+      this.file = e.target.files[0]
+    }
+  }
+}
+
 </script>
 
 <style scoped lang="scss">
@@ -166,6 +233,16 @@ import TheHeader from "~/components/TheHeader";
   line-height: 130%;
   color: #5b5b5b;
 }
+
+.input__file-name {
+  overflow: hidden;
+
+  margin-left: 10px;
+  max-width: 200px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 input.apply-submit {
   display: block;
   margin-left: auto;
@@ -187,6 +264,10 @@ input.apply-submit {
   color: #ffffff;
 }
 .input__wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+
   position: relative;
   margin: 15px 0;
   text-align: center;
@@ -196,7 +277,7 @@ input.apply-submit {
 }
 .input__file {
   opacity: 0;
-  visibility: hidden;
+  // visibility: hidden;
   position: absolute;
 }
 .input__file-icon-wrapper {
