@@ -55,7 +55,7 @@
                   | Добавить файл
               </label>
               .input__file-name
-                | {{ file.name }}
+                | {{ fileName }}
 
         .apply-block__wrapper.letter
           .apply-left
@@ -64,24 +64,38 @@
             .info-left_subtitle
               | Расскажите, почему вы хотите работать у нас
           .apply-right
-            <textarea name="text"></textarea>
+            <textarea v-model="covering_letter" name="text"></textarea>
 
             <input type="submit" class="apply-submit">
-
+    transition(name="fade")
+      Popup(
+        v-if="openPopup"
+        type="subscribe",
+        :text="vacansyResponse",
+        :popupVisible="popupVisible"
+      )
 </template>
 <script>
 import axios from 'axios'
 
 import TheHeader from "~/components/TheHeader";
+import Popup from '~/components/popups/Popup'
 
 import { mapGetters } from "vuex";
 import { mask } from 'vue-the-mask'
+
+const BASE_URL = 'https://medach.pro'
+// const BASE_URL = 'http://localhost:3000'
 
 export default {
   fetch({store, params}) {
     return store.dispatch('vacancyPage/getVacancy', {
       id: params.id
     })
+  },
+
+  components: {
+    Popup
   },
 
   directives: {
@@ -96,35 +110,66 @@ export default {
 
   data() {
     return {
+      openPopup: false,
       phone: '',
       email: '',
       name: '',
-      file: {name: 'Файл не выбран'}
+      covering_letter: '',
+      file: '',
+      fileName: 'Файл не выбран',
+      fileId: '',
+      vacansyResponse: 'Отклик отправлен'
     }
   },
 
   methods: {
     apply(event) {
-      let formData = new FormData();
-      formData.append('file', this.file);
-      console.log('this.file', this.file)
-      axios.post( 'http://localhost:3000/api/documents', formData, {
-          headers: {
+      if (this.file) {
+        let formData = new FormData();
+        formData.append('file', this.file);
+        axios.post(`${BASE_URL}/api/documents`, formData, {
+            headers: {
               'Content-Type': 'multipart/form-data'
+            }
           }
-        }
-      ).then((res) => {
-        console.log('SUCCESS!!', res);
+        ).then(({data}) => {
+          this.fileId = data.file.id
+          this.sendRespond()
+        })
+        .catch((err) => {
+          console.log('err', err)
+        });
+      } else {
+        this.sendRespond()
+      }
+    },
 
+    sendRespond() {
+      const phone = this.phone.replace(/[\s\(\).,\-]/g, '')
 
+      axios.post(`${BASE_URL}/api/vacancies/${this.vacancy.id}/respond`, {
+        "full_name": this.name,
+        "phone": phone,
+        "email": this.email,
+        "covering_letter": this.covering_letter,
+        "document_id": this.fileId
+      }).then(res => {
+        console.log('Success', res)
+        this.vacansyResponse = "Отклик отправлен"
+        this.popupVisible()
+      }).catch(err => {
+        this.vacansyResponse = "Не удалось отправить отклик"
+        console.log('err', err)
       })
-      .catch((err) => {
-        console.log('FAILURE!!', err);
-      });
+    },
+
+    popupVisible() {
+      this.openPopup = !this.openPopup;
     },
 
     handleFileChange(e) {
       this.file = e.target.files[0]
+      this.fileName = e.target.files[0].name
     }
   }
 }
