@@ -1,8 +1,8 @@
 <template>
 <div>
   <div class="banner" ref="slot"></div>
-  <!-- <adsbygoogle 
-    :ad-slot="adSlot" 
+  <!-- <adsbygoogle
+    :ad-slot="adSlot"
     :ad-style="{width: '400px', height: '1050px'}"
   /> -->
 </div>
@@ -36,7 +36,7 @@ export default {
              style="${this.styles}"
              data-ad-client="${adKey}"
              data-ad-slot="${this.adSlot}"></ins>
-          
+
           <script type="text/javascript"
             src="//pagead2.googlesyndication.com/pagead/show_ads.js">
           ${'<'}/script>
@@ -50,7 +50,9 @@ export default {
     },
   },
   mounted() {
-    this.renderWidget()
+    if (this.$route.params.id !== '2347') {
+      this.renderWidget()
+    }
   },
   beforeDestroy() {
     this.$refs.slot.innerHTML = ''
