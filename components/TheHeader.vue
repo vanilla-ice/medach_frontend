@@ -21,6 +21,8 @@
           nuxt-link.category-name(to="/categories/blogs") Блоги
         .category
           nuxt-link.category-name(to="/categories/news") Новости
+        //- .category
+        //-   nuxt-link.category-name(to="/vacancies") Вакансии
         .search-wrapper
           label
             form(@submit.prevent="search")
@@ -191,7 +193,7 @@ export default {
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
   .container-desctop {
     display: none;
   }
