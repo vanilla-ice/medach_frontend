@@ -12,22 +12,27 @@
         .vacancy_description-left
           .vacancy-info-block__title
             | {{ vacancy.employer }}
+          .vacancy-info_item(v-if="vacancy.salary")
+            .vacancy-info_question
+              | Зарплата:
+            .vacancy-info_answer
+              | {{ vacancy.salary }}
           .vacancy-info_item(v-if="vacancy.employment")
             .vacancy-info_question
               | Занятость:
             .vacancy-info_answer
               | {{ vacancy.employment }}
-          .vacancy-info_item
+          .vacancy-info_item(v-if="vacancy.location")
             .vacancy-info_question
               | Локация:
             .vacancy-info_answer
               | {{ vacancy.location }}
-          .vacancy-info_item
+          .vacancy-info_item(v-if="vacancy.experience")
             .vacancy-info_question
               | Требуемый стаж:
             .vacancy-info_answer
               | {{ vacancy.experience }}
-          .vacancy-info_item
+          .vacancy-info_item(v-if="vacancy.contacts")
             .vacancy-info_question
               | Контакты работодателя:
             .vacancy-info_answer
@@ -39,9 +44,10 @@
           .vacancy_description__title
             | {{ vacancy.title }}
           .vacancy_description-text.content-article-wrapper(v-html="vacancy.content")
-          nuxt-link(:to="`/vacancy/apply/${vacancy.id}`").vacancy_description-btn
+          a(v-if="vacancy.external_url" :href="vacancy.external_url" target="_blank").vacancy_description-btn
             | Откликнуться
-
+          nuxt-link(v-else :to="`/vacancy/apply/${vacancy.id}`").vacancy_description-btn
+            | Откликнуться
 </template>
 <script>
 import TheHeader from '~/components/TheHeader'

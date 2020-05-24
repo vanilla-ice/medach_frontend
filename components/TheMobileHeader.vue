@@ -23,6 +23,8 @@
         nuxt-link.category-name(to="/categories/blogs") Блоги
       .category
         nuxt-link.category-name(to="/categories/news") Новости
+      //- .category
+      //-   nuxt-link.category-name(to="/vacancies") Вакансии
     form.search(@submit.prevent="search" :class="{'search-visible': isOpenSearch}")
       input(type="text" name="search" autocomplete="off" placeholder = "поиск..." v-model="query")
       .search-buffer
@@ -179,7 +181,7 @@
     background: url('~/assets/images/close.svg') no-repeat center / contain;
   }
 
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
   .container-mobile {
     display: block;
     padding-left: 16px;

@@ -226,6 +226,11 @@ export default {
     grid-row-gap: 40px;
   }
 
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
   .apply__wrapper {
     order: 2;
   }
