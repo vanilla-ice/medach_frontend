@@ -12,9 +12,10 @@
     .vacancy__footer
       .vacancy__footer-text
         .vacancy__footer-top
-          .location
+          .location(v-if="vacancy.location")
             | {{vacancy.location}}
-          .experience
+          .dot(v-if="vacancy.location && vacancy.experience")
+          .experience(v-if="vacancy.experience")
             | {{vacancy.experience}}
         .salary
           | {{vacancy.salary}}
@@ -99,22 +100,16 @@ export default {
 
 .location {
   position: relative;
-  margin-right: 35px;
+}
 
+.dot {
+  display: block;
+  width: 3px;
+  height: 3px;
+  margin: 0 16px;
 
-  &:after {
-    content: '';
-    position: absolute;
-    top: 11px;
-    right: -19px;
-
-    display: block;
-    width: 3px;
-    height: 3px;
-
-    border-radius: 50%;
-    background: #5B5B5B;
-  }
+  border-radius: 50%;
+  background: #5B5B5B;
 }
 
 @media (max-width: 580px) {
