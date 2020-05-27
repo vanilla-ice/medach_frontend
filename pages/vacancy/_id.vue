@@ -86,7 +86,6 @@ export default {
   margin-top: 20px;
   ul {
     display: flex;
-    align-items: center;
     padding-left: 0;
     li {
       position: relative;
@@ -240,9 +239,17 @@ export default {
 }
 
 @media (max-width: 768px) {
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
   .vacancy_description__title {
     font-size: 28px;
+    line-height: 35px;
   }
+
+
 }
 
 @media (max-width: 576px) {
